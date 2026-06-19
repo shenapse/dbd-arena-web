@@ -30,7 +30,7 @@ export default defineConfig({
       // so a specific killer's balancing is reachable in one step.
       sidebar: [
         { label: 'Home', link: '/' },
-        { label: 'Why DBD Arena', slug: 'why' },
+        { label: 'The Arena Difference', slug: 'why' },
         { label: 'Start Playing', slug: 'start' },
         {
           label: 'Regulation',
