@@ -8,20 +8,14 @@ description: >-
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-Prove yourself in custom matches built to mean more.
+DBD Arena is rated matchmaking for custom Dead by Daylight games. Every match follows published rules: the participants, killer, map, restrictions, and win conditions are known before play begins.
 
-DBD Arena gives killers and survivor teams a repeatable place to compete under
-published rules, against rated opponents, in conditions defined before the
-match starts.
-
-It is not perfect proof of skill. Dead by Daylight is too complex for that. But
-it produces clearer evidence than a random public match by reducing unrelated
-variables and tracking results in the context that actually matters.
+Ratings are tracked separately for each player–killer combination and for each fixed four-survivor team facing that killer. Results therefore show, over repeated matches, how each competitor performs against similarly rated opposition under defined conditions.
+This removes enough uncertainty to make wins and losses more useful for judging competitive performance.
 
 ## The Arena difference
 
-DBD Arena adds a competitive layer that normal public matchmaking does not
-provide.
+Four design choices make this possible:
 
 - **Controlled formats.** Every match belongs to a named regulation with
   published rules, declared participants, known match conditions, and explicit
@@ -124,7 +118,7 @@ All three forms of play are valuable, but they answer different questions.
 | | Public matches | Tournaments | DBD Arena |
 |---|---|---|---|
 | Primary purpose | Accessible practice, variety, progression, and casual competition | Determine which complete team wins an event | Build repeated evidence for specific killers and survivor teams |
-| Match context | Variable opponents, teammates, maps, builds, and expectations | Defined event rules, opponents, and often mirrored matches | Published regulations, declared participants, known conditions, and per-killer balancing |
+| Match setting | A standalone match formed by official matchmaking | Part of a bounded event or series, often using mirrored games and team-level scoring | A standalone match under a persistent regulation, repeatable across opponents and over time |
 | Competitor represented | Individual players under official matchmaking | The tournament team: killer player and survivor roster together | A killer player on a specific killer, or a fixed survivor team in that killer context |
 | Evidence produced | A high volume of results with many uncontrolled variables | Strong short-term evidence about team performance in one event | Finer-grained evidence accumulated across repeatable matches over time |
 
