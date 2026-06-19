@@ -1,0 +1,52 @@
+---
+title: Start Playing
+description: >-
+  What you need, what a match looks like, and how to get into Discord and
+  register — everything to start playing.
+---
+
+import { LinkButton } from '@astrojs/starlight/components';
+import { DISCORD_INVITE } from '../../../constants.ts';
+
+The live service runs in Discord. This website only explains how it works — the
+actual playing happens there. Here is what you need, what a match looks like,
+and how to get in.
+
+## What you need
+
+A **Discord account**. That is the only prerequisite to read about and join the
+service. You will of course also need Dead by Daylight and the ability to play
+custom (private) games, since that is where matches happen.
+
+## What happens in a match
+
+So you know what you are getting into, the normal match loop looks like this:
+
+- You join the queue for the active regulation.
+- The matchmaker pairs you with eligible opponents.
+- A match thread is created. All parties confirm readiness.
+- You play the match in-game.
+- Both sides submit and agree on the result.
+- Ratings are updated automatically.
+
+That is the full loop. The [Handbook](/handbook/how-matchmaking-works/) covers
+each step in detail, and [Regulations](/regulations/) lists every format you can
+play.
+
+## Join Discord, then register
+
+The live service runs in Discord. This is an external handoff — registering,
+queueing, readying up, and reporting results all happen there.
+
+<LinkButton href={DISCORD_INVITE} icon="discord" target="_blank">Join Discord</LinkButton>
+
+**Your first action there is to register.** Registering creates your player
+profile: you give a display name and your in-game player id, and the service
+links the profile to your Discord account automatically. It is a one-time step,
+and you cannot queue until it is done. Full detail is in
+[Player Profile](/handbook/player-profile/).
+
+:::note[A reminder before you go]
+This is a community service for custom matches. It is not official Dead by
+Daylight, and it does not affect your in-game rank or progression.
+:::

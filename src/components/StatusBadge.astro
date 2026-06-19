@@ -1,0 +1,20 @@
+---
+// Status is conveyed with TEXT and a glyph, never color alone — survives color-blindness and grayscale.
+interface Props {
+  status: "active" | "upcoming" | "archived";
+}
+const { status } = Astro.props;
+
+const LABELS = {
+  active:   { text: "Active",   glyph: "●", title: "Currently playable"          },
+  upcoming: { text: "Upcoming", glyph: "◓", title: "Announced, not yet playable" },
+  archived: { text: "Archived", glyph: "✕", title: "Retired, kept for reference" },
+} as const;
+
+const { text, glyph, title } = LABELS[status];
+---
+
+<span class={`status-badge status-badge--${status}`} title={title}>
+  <span aria-hidden="true">{glyph}</span>
+  {text}
+</span>

@@ -1,0 +1,12 @@
+---
+interface Props {
+  available?: string[];
+  upcoming?: string[];
+}
+const { available = [], upcoming = [] } = Astro.props;
+---
+
+<ul class="tag-list">
+  {available.map(k => <li class="tag--available">{k}</li>)}
+  {upcoming.map(k => <li>{k}</li>)}
+</ul>

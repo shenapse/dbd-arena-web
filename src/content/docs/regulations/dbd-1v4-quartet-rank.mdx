@@ -1,0 +1,104 @@
+---
+title: DBD 1v4 Quartet Ranked 
+description: >-
+  The classic competitive format: one killer faces a coordinated team of four
+  survivors in a custom trial, played under published rules and rated.
+handle: dbd.1v4.quartet.rank
+status: active
+version: "1.0"
+effectiveDate: "2026-06-15"
+changeHistory:
+  - version: "1.0"
+    date: "2026-06-15"
+    note: Initial public release of the 1v4 quartet ranked regulation.
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+import KillerPool from '../../../components/KillerPool.astro';
+import LifecycleMeta from '../../../components/LifecycleMeta.astro';
+
+<LifecycleMeta
+  status="active"
+  version="0.1"
+  effectiveDate="2026-06-15"
+  changeHistory={[{version: "0.1", date: "2026-06-15", note: "stub status to be updated"}]}
+/>
+
+## Game structure
+
+| Aspect | Value |
+|---|---|
+| Team structure | 1 × Killer vs 4 × Survivors |
+| Survivor team structure | 4 player full party |
+| Map selection | Fixed per killer character |
+| Voice comms | Yes — all four survivors are assumed to be in voice with one another. |
+| Pre-match killer reveal | Yes — the killer character is known to both sides before the match starts. |
+| Pre-match player reveal | Yes |
+
+## Killer pool
+
+<KillerPool
+  available={["Available", "Nurse", "Spirit", "Blight"]}
+  upcoming={["Upcoming", "Wraith", "Hillbilly", "Doctor", "Cannibal", "Nightmare",
+             "Pig", "Clown", "Ghostface", "Demogorgon", "Oni",
+             "Executioner", "Trickster", "Nemesis", "Cenobite", "Artist",
+             "Dredge", "Mastermind", "Xenomorph", "Unknown", "Lich", "Dracula"]}
+/>
+
+## Rule & balancing
+
+
+<LinkCard
+  title="General rule"
+  href="/regulations/rules/1v4-quartet-general/"
+  description="global rules that apply to every killer in this regulation."
+/>
+
+<LinkCard
+  title="Per-killer balancing"
+  href="/regulations/balancing/#1v4-quartet"
+  description="per-killer balancing that complement the general rule."
+/>
+
+## Queue requirement
+
+Survivors are expected to queue as a full four-player party.
+
+| Who | How they queue | Declares at queue time |
+|---|---|---|
+| Killer player | Queues solo. | One killer character. |
+| Survivor party | Queues as a group of four. | Nothing. |
+
+## Result facts
+
+| Fact | Notes |
+|---|---|
+| Winning side | Which side won — killers or survivors. Omitted on a draw. |
+| Draw | Marks a drawn match. Mutually exclusive with a winning side. |
+| Generators remaining | How many generators were left unrepaired at the end (0-5). |
+| Hooks | Total hooks performed by the killer during the match (0-12). |
+| Kills | How many survivors were killed (0-4). |
+
+## Ratings
+
+Strict per-killer rating within this regulation. A match affects
+
+- for Killer player: his rating for the killer character
+- for Survivor party: the **survivor group** rating for the killer character they face.
+
+e.g., suppose player K playing Nurse vs survivor team S=(s1, s2, s3, s4).
+affected ratings are:
+- (K, \{1v4 Quartet Rank regulation / role=killer / killer=Nurse\})
+- (S, \{1v4 Quartet Rank regulation / role=survivor / killer=Nurse\})
+- **NOT** (**s1**, \{1v4 Quartet Rank regulation / role=survivor / killer=Nurse\})
+- **NOT** (S, \{**some other  regulation** / role=survivor / killer=Nurse\})
+- **NOT** (S, \{some other  regulation / role=survivor / killer=**Blight**\})
+
+See the [Ratings](/handbook/ratings/) guide for how ratings work.
+
+## Trouble handling
+
+Disconnects, remakes, and result disputes for this regulation follow the
+shared Match Interruptions and Results and Disputes policies.
+
+See [Match Interruptions](/handbook/policies/match-interruptions/) and [Results and Disputes](/handbook/policies/results-and-disputes/).

@@ -1,0 +1,62 @@
+---
+title: Privacy and Public Data
+description: The sole canonical page for player-facing privacy and public-data policy.
+status: active
+version: "1.0"
+effectiveDate: "2026-06-15"
+changeHistory:
+  - version: "1.0"
+    date: "2026-06-15"
+    note: Initial policy.
+---
+
+import LifecycleMeta from '../../../../components/LifecycleMeta.astro';
+import StatusBadge from '../../../../components/StatusBadge.astro';
+
+<StatusBadge status={frontmatter.status} />
+
+<LifecycleMeta
+  status={frontmatter.status}
+  version={frontmatter.version}
+  effectiveDate={frontmatter.effectiveDate}
+  changeHistory={frontmatter.changeHistory}
+/>
+
+What information the service holds, what may be shown publicly, and what is kept private.
+
+This is the single canonical privacy policy for the service. Other pages link here rather than repeat it.
+
+## What the service holds
+
+To run matchmaking, the service keeps a small amount of information about you:
+
+- Your **profile**: display name, in-game player id, your linked Discord account, and any platform connections you add.
+- Your **match history**: the matches you took part in and their recorded results.
+- Your **ratings**, for the formats that are rated.
+
+This information is used to run matchmaking, record results, and keep your history accurate.
+
+## What stays private
+
+The day-to-day state of using the service is private. It is not published on this website and is not shown to other players beyond what a match requires. In particular, the following are never made public:
+
+- Your account and profile details.
+- Your group memberships.
+- Whether you are in the queue, and your queue or match state.
+- Match line-ups, readiness, and private match coordination.
+- Result proposals and any individual rating changes.
+- Staff cases, evidence, and moderation records.
+
+Some details are shared only with the people who need them — for example, the other players in your match see what they need to set up and play the game.
+
+## What may be public
+
+Only information suitable for public view is ever shown publicly. Your display name may be visible to people you play with. If the service later adds public features such as a leaderboard, they will only ever show data that is appropriate to publish, and will be clear about what they show. Private state — the items listed above — stays private regardless.
+
+## This website
+
+This website is public and is mostly a static handbook. It uses no advertising trackers and no behavioural profiling. Any usage measurement is kept aggregate and privacy-friendly, and the site only keeps the basic technical logs needed to operate and protect it. You do not need an account to read it.
+
+## Your data and contact
+
+If you leave the service, your account is deactivated and your records are kept so that past matches stay accurate; permanent deletion is a separate staff action (see [Player Profile](/handbook/player-profile/)). For any question about your data, contact staff in [Discord](/start/).

@@ -1,0 +1,33 @@
+---
+title: About This Service
+description: >-
+  What DBD Arena is, its unofficial status, custom-game scope, and relationship
+  to official Dead by Daylight services.
+---
+
+DBD Arena is a community-run matchmaking service for competitive, custom Dead by
+Daylight matches. It exists so that outcomes come down to skill rather than the
+luck of the public game: matches run under published regulations on fixed maps,
+players are paired by a per-killer skill rating, and that rating is something you
+build and can see.
+
+:::caution[Unofficial service]
+DBD Arena is **not** an official Dead by Daylight service and is not affiliated
+with or endorsed by the game's publisher.
+
+- Matches are played in **custom (private) games**, outside official matchmaking.
+- Service ratings are separate from, and do not affect, your official in-game
+  ratings or progression.
+:::
+
+## How it runs
+
+The live service runs in Discord — registering, finding a match, readying up, and
+reporting results all happen there. This website is the public handbook: it
+explains how everything works, but the actions themselves happen in Discord.
+
+## Your data
+
+For how the service handles your information and what may be shown publicly, see
+the [Privacy and Public Data](/handbook/policies/privacy-and-public-data/)
+policy. It is the canonical source for privacy and public-data rules.

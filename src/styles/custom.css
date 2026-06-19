@@ -1,0 +1,100 @@
+/* ---- Status badge ovals (StatusBadge.astro) ---- */
+:root {
+  --status-active:   #4ec07a;
+  --status-upcoming: #d9a441;
+  --status-archived: #8a8f9e;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+}
+.status-badge--active   { color: var(--status-active);   }
+.status-badge--upcoming { color: var(--status-upcoming); }
+.status-badge--archived { color: var(--status-archived); }
+
+/* ---- Lifecycle metadata block (LifecycleMeta.astro) ---- */
+.meta-grid {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  align-items: baseline;
+  gap: 0.3rem 1rem;
+  background: var(--sl-color-gray-6);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  padding: 0.9rem 1rem;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+/* Zero the flow margins Starlight's markdown content adds to dt/dd, so
+   every label and its value share one baseline instead of slipping apart. */
+.meta-grid dt,
+.meta-grid dd {
+  margin: 0;
+}
+.meta-grid dt {
+  color: var(--sl-color-gray-3);
+  font-weight: 600;
+}
+
+/* ---- Regulation cards (RegulationEntry.astro) ---- */
+.regulation-group-note {
+  color: var(--sl-color-gray-3);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+.regulation-card {
+  background: var(--sl-color-gray-6);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  padding: 1rem 1.1rem;
+  margin: 0.75rem 0;
+}
+.regulation-card--muted {
+  opacity: 0.7;
+}
+.regulation-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.regulation-card__header h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+.regulation-card__summary {
+  margin: 0.5rem 0 0;
+  color: var(--sl-color-gray-3);
+  font-size: 0.9rem;
+}
+
+/* ---- Killer pool ovals (KillerPool.astro) ---- */
+ul.tag-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-block: 0.75rem;
+}
+ul.tag-list li {
+  background: var(--sl-color-gray-6);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.85rem;
+}
+ul.tag-list li.tag--available {
+  background: transparent;
+  border-color: var(--status-active);
+  color: var(--status-active);
+}

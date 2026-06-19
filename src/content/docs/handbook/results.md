@@ -1,0 +1,71 @@
+---
+title: "Results"
+description: "Proposing, approving, correcting, and receiving an accepted outcome and rating status."
+---
+
+After you play, you report what happened. The result becomes official once the
+right players agree on it.
+
+## Goal
+
+Record the outcome of a played match so it counts. An accepted result is what
+updates ratings (where the format is rated) and is kept in match history.
+
+## How reporting works
+
+Reporting is a propose-and-approve flow. It exists so that both sides agree on
+the outcome before it is recorded.
+
+1. **One player proposes the result.** They fill in the result
+   facts for the match — who won, and the relevant details.
+1. **The required players approve it.** Who needs to approve
+   depends on the format (for example, the other side). Anyone who disagrees can
+   reject the proposal, and someone can propose a corrected one.
+1. **The agreed result is recorded.** Once enough players approve,
+   the outcome is final and saved, and everyone is told.
+
+A rejected proposal is not the end — it stays visible, and a new proposal can
+be made until one is agreed.
+
+## What you report
+
+The exact facts you report depend on the regulation, and they are listed on
+its regulation page. As an example, the
+[1v4 quartet format](/regulations/dbd-1v4-quartet-rank/) records
+which side won (or a draw) along with match details such as how the trial
+ended. For the authoritative list for any format, open its regulation page.
+
+## Rating status
+
+After a result is accepted, you are shown what happened to ratings:
+
+- **Rating applied** — ratings were updated from the result.
+- **Rating not required** — this format is not rated, so nothing changed.
+- **Rating failed** — the result was accepted, but the rating
+  update could not be completed; staff can look into it.
+
+Ratings themselves are explained in [Ratings](/handbook/ratings/).
+
+## When a match is not played
+
+Sometimes a match cannot be played — a technical problem before it starts, or a
+rule issue. In that case, instead of a result, the match is reported as
+**not played**, with a reason. This is treated differently from a
+real result: **every participant must agree** to it, and it does
+not change anyone's rating. This keeps "we did not play" clearly separate from
+a genuine win or loss. See also the
+[Match Interruptions](/handbook/policies/match-interruptions/)
+policy.
+
+## Corrections
+
+If a wrong result was recorded, it can be corrected. Corrections are a staff
+action: staff submit the right result, which supersedes the wrong one, and
+ratings are adjusted from the corrected record. See
+[Results and Disputes](/handbook/policies/results-and-disputes/)
+for how to raise this.
+
+## Trouble?
+
+See [Result and Dispute Troubleshooting](/help/result-and-dispute/)
+for reporting, approval, correction, and escalation problems.

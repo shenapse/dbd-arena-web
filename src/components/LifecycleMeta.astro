@@ -1,0 +1,50 @@
+---
+// Normative-page metadata block: status, public version, effective date, and
+// change history. Lets a visitor immediately identify what they are reading.
+import StatusBadge from "./StatusBadge.astro";
+
+interface ChangeEntry {
+  version: string;
+  date: string;
+  note: string;
+}
+interface Props {
+  status: "active" | "upcoming" | "archived";
+  version: string;
+  effectiveDate: string;
+  changeHistory: ChangeEntry[];
+}
+const { status, version, effectiveDate, changeHistory } = Astro.props;
+---
+
+<dl class="meta-grid">
+  <dt>Status</dt>
+  <dd><StatusBadge status={status} /></dd>
+  <dt>Version</dt>
+  <dd>{version}</dd>
+  <dt>Effective date</dt>
+  <dd>{effectiveDate}</dd>
+</dl>
+
+<details class="change-history">
+  <summary>Change history</summary>
+  <ul>
+    {changeHistory.map(c => (
+      <li><strong>{c.version}</strong> — <span>{c.date}</span>: {c.note}</li>
+    ))}
+  </ul>
+</details>
+
+<style>
+  .change-history {
+    margin: 0.5rem 0 1rem;
+    font-size: 0.9rem;
+  }
+  .change-history summary {
+    cursor: pointer;
+    color: var(--sl-color-gray-3);
+  }
+  .change-history ul {
+    margin: 0.5rem 0 0;
+  }
+</style>
