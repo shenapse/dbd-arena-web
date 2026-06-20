@@ -1,0 +1,66 @@
+---
+/**
+ * Override of Starlight's header SiteTitle (the brand link next to the search
+ * box). Renders the compact "DBDA" wordmark logo: the first word ("DBD") in
+ * white, then the initial of the remaining words ("A" from "Arena") in the
+ * crimson gradient — e.g. site title "DBD Arena" → DBD + A → "DBDA".
+ *
+ * Deriving from siteTitle (rather than hard-coding) keeps the mark in step with
+ * the configured title while producing the tight two-letter-block lockup. The
+ * wordmark uses Barlow Condensed (loaded in astro.config `head`) to match the
+ * approved logo; colors use Starlight tokens so the mark adapts to light/dark.
+ *
+ * Logo handling from Starlight's default component is intentionally omitted: no
+ * image `logo` is configured for this site. If a `logo` is ever added in
+ * astro.config, re-introduce the <img> block from node_modules/@astrojs/
+ * starlight/components/SiteTitle.astro (and its `virtual:starlight/user-images`
+ * import).
+ */
+const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
+
+const [firstWord, ...restWords] = siteTitle.split(' ');
+const accent = restWords.join(' ').charAt(0); // "Arena" → "A"
+---
+
+<a href={siteTitleHref} class="site-title sl-flex" aria-label={siteTitle}>
+	<span class="brand" translate="no">
+		<span class="brand-lead">{firstWord}</span>{accent && <span class="brand-arena">{accent}</span>}
+	</span>
+</a>
+
+<style>
+	/* Base .site-title styles, restored from Starlight's default component (which
+	   no longer applies once this component overrides it). Without these the link
+	   falls back to a default underlined, accent-colored link. Unlayered so it
+	   wins the cascade over Starlight's @layer starlight.core. */
+	.site-title {
+		align-items: center;
+		gap: var(--sl-nav-gap);
+		text-decoration: none;
+		white-space: nowrap;
+		min-width: 0;
+		line-height: 1;
+		/* Header wordmark size — bumped up from the default var(--sl-text-h4). */
+		font-size: 2rem; /* HEADER_TITLE_SIZE */
+	}
+	.brand {
+		overflow: hidden;
+		text-transform: uppercase;
+		/* Barlow Condensed (loaded in astro.config head) — matches the approved
+		   DBDA logo lockup; falls back to the system sans before swap. */
+		font-family: 'Barlow Condensed', var(--__sl-font, ui-sans-serif), sans-serif;
+		font-weight: 800;
+		letter-spacing: 0.005em;
+	}
+	.brand-lead {
+		color: var(--sl-color-white);
+	}
+	.brand-arena {
+		background: linear-gradient(177deg, #ff6a5a 0%, #d61f1f 55%, #8d1010 100%);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+		/* Smaller glow radius than the hero — keeps the small header text crisp. */
+		filter: drop-shadow(0 0 10px rgba(214, 31, 31, 0.35));
+	}
+</style>
