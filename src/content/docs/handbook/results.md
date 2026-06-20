@@ -44,7 +44,8 @@ After a result is accepted, you are shown what happened to ratings:
 - **Rating failed** — the result was accepted, but the rating
   update could not be completed; staff can look into it.
 
-Ratings themselves are explained in [Ratings](/handbook/ratings/).
+Ratings themselves are explained in the
+[Rating Guide](/handbook/concept/rating-guide/).
 
 ## When a match is not played
 

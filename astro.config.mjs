@@ -71,6 +71,7 @@ export default defineConfig({
         {
           label: 'Handbook',
           items: [
+            { label: 'Overview', slug: 'handbook' },
             { label: 'Matchmaking Journey', slug: 'handbook/matchmaking-journey' },
             { label: 'Player Profile', slug: 'handbook/player-profile' },
             { label: 'Groups', slug: 'handbook/groups' },

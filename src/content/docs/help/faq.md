@@ -17,4 +17,4 @@ You register in [Discord](/start/). Reading this site needs no account.
 
 ## Do service ratings affect my in-game rank?
 
-No. See [Ratings](/handbook/ratings/).
+No. See the [Rating Guide](/handbook/concept/rating-guide/).
