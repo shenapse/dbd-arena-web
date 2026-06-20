@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="DBD Arena">
+  <defs>
+    <linearGradient id="crim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff7a6a"/>
+      <stop offset="1" stop-color="#cf1a1a"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="32" fill="#0d0e12"/>
+  <path fill="url(#crim)" fill-rule="evenodd"
+    d="M26 13 L38 13 L52 51 L41 51 L38.2 42.5 L25.8 42.5 L23 51 L12 51 Z
+       M28.7 34 L35.3 34 L32 23.5 Z"/>
+</svg>

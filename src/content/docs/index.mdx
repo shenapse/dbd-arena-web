@@ -1,31 +1,29 @@
 ---
 title: DBD Arena
 description: >-
-  DBD Arena — win by skill, not luck. Community-run, unofficial competitive Dead
-  by Daylight matchmaking: balanced custom matches on fixed maps, paired by
-  per-killer skill rating.
+  DBD Arena — Serious matches. Stronger proof of skill.
 template: splash
 hero:
-  title: Serious matches. Stronger proof of skill.
-  tagline: >-
-    Build a record through rated Dead by Daylight matches under published rules,
-    known conditions, and skill-based matchmaking. Arena results give you performance evidence that is hard to get anywhere else.
-  actions:
-    - text: See what makes Arena different
-      link: /why/
-      icon: information
-      variant: primary
-    - text: Browse regulations
-      link: /regulations/
-      icon: open-book
-      variant: minimal
-    - text: Start Playing
-      link: /start/
-      icon: right-arrow
-      variant: minimal
+  title: |
+    <span class="hero-eyebrow">Competitive Dead by Daylight · Unofficial</span><span class="hero-mark">DBD <span class="hero-arena">Arena</span></span>
+  tagline: |
+    <span class="hero-lead">Serious matches. Stronger proof of skill.</span><span class="hero-sub">Build a record through rated Dead by Daylight matches under published rules, known conditions, and skill-based matchmaking. Arena results give you performance evidence that is hard to get anywhere else.</span>
+  # actions:
+  #   - text: See what makes Arena different
+  #     link: /what-is-arena/
+  #     icon: information
+  #     variant: primary
+  #   - text: Browse regulations
+  #     link: /regulations/
+  #     icon: open-book
+  #     variant: minimal
+  #   - text: Start Playing
+  #     link: /start/
+  #     icon: right-arrow
+  #     variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 {/* :::caution[Unofficial service]
 DBD Arena is a community-run service. It is **not** an official Dead by Daylight
@@ -34,25 +32,29 @@ service ratings do not affect your in-game ratings or progression.
 ::: */}
 
 <CardGrid>
-  <Card title="The Arena Difference" icon="information">
-    New to the idea? See what makes these matches worth playing, and why results
-    here mean something unique.
-    [See what makes Arena different →](/why/)
-  </Card>
-  <Card title="Start Playing" icon="rocket">
-    New here? Walk through what you need, pick a format, and join Discord
-    prepared to register. [Start playing →](/start/)
-  </Card>
-  <Card title="Active regulation" icon="approve-check">
-    **DBD 1v4 Quartet Ranked** is live and queueable.
-    [Open the reference →](/regulations/dbd-1v4-quartet-rank/)
-  </Card>
-  <Card title="How it works" icon="information">
-    A separate rating for every killer you play, used to pair you with opponents
-    at your level. [Read the handbook →](/handbook/how-matchmaking-works/)
-  </Card>
-  <Card title="Latest notice" icon="bars">
-    Service launch — 1v4 quartet ranked is now active.
-    [Read the notice →](/notices/2026-06-15-launch/)
-  </Card>
+  <LinkCard
+    title="What Is DBD Arena"
+    href="/what-is-arena/"
+    description="New to the idea? See what makes these matches worth playing, and why results here mean something unique."
+  />
+  <LinkCard
+    title="Start Playing"
+    href="/start/"
+    description="New here? Walk through what you need, pick a format, and join Discord prepared to register."
+  />
+  <LinkCard
+    title="Active regulation"
+    href="/regulations/"
+    description="DBD 1v4 Quartet Ranked is live and queueable."
+  />
+  <LinkCard
+    title="Handbook"
+    href="/handbook/"
+    description="A separate rating for every killer you play, used to pair you with opponents at your level."
+  />
+  <LinkCard
+    title="Latest notice"
+    href="/notices/2026-06-15-launch/"
+    description="Service launch — 1v4 quartet ranked is now active."
+  />
 </CardGrid>

@@ -17,47 +17,40 @@ your own service rating, but it is not a public scoreboard.
 
 ## Rating dimensions
 
-A format does not give you just one number. It tracks several
-**dimensions** — separate ratings for different parts of play —
-because being strong at one thing does not mean being strong at another.
+A rated format does not necessarily give a player or group just one number. It
+can track separate **dimensions** for different competitive contexts, because
+performance in one context does not automatically represent performance in
+another.
 
-In the 1v4 quartet format, your killer skill is tracked separately from your
-survivor skill. Killer rating can also be more specific than "killer overall":
-when you queue as killer, the killer you declare can have its own rating
-dimension. This matters because being strong with one killer does not always
-mean you are equally strong with another.
+In the 1v4 quartet format, a killer player's rating is specific to the killer
+they declare. A fixed survivor group's rating is also specific to the killer
+the group faces. The survivor rating belongs to the four-player group, not to
+each member individually.
 
-For example, a player may be very strong on Nurse but still learning Spirit. A
-single killer rating would blur those two skills together. Per-killer
-dimensions let the service treat those queue requests differently: when that
-player declares Nurse, the service can use Nurse-relevant rating; when they
-declare Spirit, it can use a rating that better reflects their Spirit matches.
-
-Broader dimensions can still exist. For example, the service may need to
-understand your general killer strength as well as your strength on the
-specific killer you declared. Keeping those dimensions separate lets the
-service use the rating that best fits the match being formed, instead of
-forcing every kind of skill into one overall number.
+For example, a killer player may be very strong on Nurse but still learning
+Spirit. A single killer rating would blur those two skills together. The same
+survivor group may also be well practised against Nurse but inexperienced
+against Spirit. Per-killer dimensions let the service represent those
+different records instead of forcing them into one overall number.
 
 ## How ratings shape matchmaking
 
 When you join the queue for a rated format, the service looks at the rating
-dimensions that matter for that request. In 1v4 quartet, that means the format,
-the side you are applying for, and, when you queue as killer, the killer you
-declared.
+dimensions that matter for that request. In 1v4 quartet, that means the
+regulation, side, killer character, and whether the competitor is the killer
+player or the fixed survivor group.
 
-The service then compares waiting players and groups using those relevant
-ratings. It tries to form a match where the expected skill level on each side
-is close enough for the game to be competitive. A survivor group should not be
-matched only by one player's rating, and a killer should not be judged only by
-an unrelated killer or survivor rating when a more relevant dimension exists.
+The service then compares waiting killer players and survivor groups using
+those relevant ratings. It tries to form a match where the expected skill
+level on each side is close enough for the game to be competitive. A survivor
+group is not represented by one member's rating, and a killer player is not
+represented by their rating on an unrelated killer character.
 
 For example, suppose a match is being formed around Nurse. The killer side has
 a Nurse-specific rating that reflects how that player performs when playing
-Nurse. The survivor side can also have Nurse-specific ratings that reflect how
-those survivors perform against Nurse. When the matchmaking engine evaluates
-that possible match, it resolves the Nurse-specific ratings for both sides and
-uses those values to judge whether the pairing is fair.
+Nurse. The fixed survivor group has its own Nurse-specific rating reflecting
+how that exact group performs against Nurse. The matchmaker uses those two
+ratings to judge whether the pairing is close enough.
 
 ## Which formats are rated
 
@@ -65,7 +58,7 @@ Not every format is rated. Whether playing a format affects your rating is part
 of that regulation, and it is shown in the
 [regulations list](/regulations/) and on each
 regulation page. For example, the
-[1v4 quartet format](/regulations/dbd-1v4-quartet-rank/) is rated.
+[1v4 quartet format](/regulations/1v4-quartet/) is rated.
 If a format is not rated, you can still play it — it just does not change your
 rating.
 

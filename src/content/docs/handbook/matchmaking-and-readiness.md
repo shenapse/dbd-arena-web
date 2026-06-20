@@ -26,7 +26,7 @@ requires. A declaration is a choice you commit to for the match. For example,
 in the 1v4 quartet format, a player on the killer side declares which killer
 they will play; the survivor side does not. Which declarations a format needs
 is listed on its
-[regulation page](/regulations/dbd-1v4-quartet-rank/).
+[regulation page](/regulations/1v4-quartet/).
 
 You are also matched within your **region**, so connections stay
 playable. A couple of regions can fall back to a neighbouring one if no nearby
