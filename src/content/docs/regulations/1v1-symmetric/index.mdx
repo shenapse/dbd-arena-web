@@ -1,7 +1,7 @@
 ---
 title: DBD 1v1 Symmetric Ranked
 description: >-
-  A symmetric duel where each player takes both the killer and survivor side,
+  The classical 1v1 format where each player takes both the killer and survivor side,
   competing on chase time. Announced for a future season.
 handle: dbd.1v1.symmetric.rank
 status: upcoming
@@ -13,7 +13,10 @@ changeHistory:
     note: Provisional announcement. Format and rules are not yet final.
 ---
 
+import { LinkCard } from '@astrojs/starlight/components';
+import KillerPool from '../../../../components/KillerPool.astro';
 import LifecycleMeta from '../../../../components/LifecycleMeta.astro';
+
 
 <LifecycleMeta
   status="upcoming"
@@ -28,37 +31,35 @@ This regulation is announced but cannot be queued. Content below is provisional.
 
 ## Game Structure
 
-A symmetric duel where each player takes both the killer and survivor side,
-competing on chase time. Announced for a future season.
+The classical 1v1 format where each player takes both the killer and survivor side, competing on chase time.
 
 | Attribute | Value |
 |---|---|
 | Team structure | 1 × Player A vs 1 × Player B |
 | Map selection | Provisional — to be confirmed before launch. |
 | Build restriction | Provisional — a restricted killer pool is planned. Rules not yet final. |
-| Rated | Yes |
+| Pre-match killer reveal | Yes — the killer character is known to both sides before the match starts. |
+| Pre-match player reveal | Yes |
+
+## Killer pool
+
+<KillerPool
+  available={["Available", "Trapper"]}
+  upcoming={["Upcoming", "Wraith", "Hillbilly", "Doctor", "Nurse", "Blight", "Cannibal", "Pig", "Demogorgon", "Mastermind", "Dracula"]}
+/>
+
 
 ## Queue requirement
 
-**Eligibility:** Planned for registered ranked players. Details to be confirmed.
-
-**Queue mode:** Ranked (planned)
-
-Role is decided by how you queue — you do not declare it separately.
-
 | Who | How they queue | Declares at queue time |
 |---|---|---|
-| Each player | Queues solo. (Provisional.) | One killer character from a restricted pool. (Provisional.) |
+| Each player | Queues solo | One killer character from a restricted pool |
 
 ## Result facts
 
-Players report these facts; the opponent approves the outcome.
-
-| Fact | Field | Notes |
-|---|---|---|
-| Winning player | `winning_team` | Which player won. Omitted on a draw. (Provisional.) |
-| Draw | `draw` | Marks a drawn duel. (Provisional.) |
-| Chase time | `chase_time_seconds` | Seconds survived while on the survivor side. (Provisional.) |
+| Fact | Notes |
+|---|---|
+| Round taken |  |
 
 ## Ratings
 
@@ -66,9 +67,3 @@ This regulation is rated. These are the player-facing rating dimensions
 (the website never publishes formulas or internal scores).
 
 See the [Ratings](/handbook/ratings/) guide for how ratings work.
-
-## Trouble handling
-
-Not yet playable. Rules below are provisional and may change before launch.
-
-See [Match Interruptions](/handbook/policies/match-interruptions/) and [Results and Disputes](/handbook/policies/results-and-disputes/).

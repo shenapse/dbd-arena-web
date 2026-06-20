@@ -31,7 +31,7 @@ be made until one is agreed.
 
 The exact facts you report depend on the regulation, and they are listed on
 its regulation page. As an example, the
-[1v4 quartet format](/regulations/dbd-1v4-quartet-rank/) records
+[1v4 quartet format](/regulations/1v4-quartet/) records
 which side won (or a draw) along with match details such as how the trial
 ended. For the authoritative list for any format, open its regulation page.
 
