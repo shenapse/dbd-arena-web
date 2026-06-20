@@ -42,15 +42,15 @@ export default defineConfig({
                 {
                   label: 'DBD 1v4 Quartet Ranked',
                   items: [
-                    { label: 'Overview', slug: 'regulations/dbd-1v4-quartet-rank' },
-                    { label: 'General Rule', slug: 'regulations/rules/1v4-quartet-general' },
+                    { label: 'Overview', slug: 'regulations/1v4-quartet' },
+                    { label: 'General Rule', slug: 'regulations/1v4-quartet/rules/general' },
                     {
                       label: 'Balancing',
                       items: [
-                        { label: 'Overview', slug: 'regulations/balancing' },
-                        { label: 'Nurse', slug: 'regulations/balancing/1v4-quartet-nurse' },
-                        { label: 'Blight', slug: 'regulations/balancing/1v4-quartet-blight' },
-                        { label: 'Spirit', slug: 'regulations/balancing/1v4-quartet-spirit' },
+                        { label: 'Overview', slug: 'regulations/1v4-quartet/balancing' },
+                        { label: 'Nurse', slug: 'regulations/1v4-quartet/balancing/nurse' },
+                        { label: 'Blight', slug: 'regulations/1v4-quartet/balancing/blight' },
+                        { label: 'Spirit', slug: 'regulations/1v4-quartet/balancing/spirit' },
                       ],
                     },
                   ],
@@ -62,7 +62,7 @@ export default defineConfig({
               items: [
                 {
                   label: 'DBD 1v1 Symmetric Ranked',
-                  slug: 'regulations/dbd-1v1-symmetric-rank',
+                  slug: 'regulations/1v1-symmetric',
                 },
               ],
             },
