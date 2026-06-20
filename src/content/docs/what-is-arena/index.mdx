@@ -5,7 +5,7 @@ description: >-
   record across repeated custom matches.
 ---
 
-import { Card, CardGrid, LinkButton } from '@astrojs/starlight/components';
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
 **Structured Dead by Daylight competition, built to be repeated.**
 
@@ -15,8 +15,6 @@ and build evidence of your performance across matches, opponents, and time.
 
 Each match stands on its own. You can compete seriously without entering a
 tournament bracket or committing to a complete event.
-
-<LinkButton href="/start/" icon="rocket">Start playing</LinkButton>
 
 ## Competition built for repeated play
 
@@ -30,19 +28,19 @@ competitive record, allowing evidence of performance to accumulate across
 opponents and over time.
 
 <CardGrid>
-  <Card title="Play repeatedly" icon="cycle">
+  <Card title="Play repeatedly" icon="random">
     Each match stands on its own. Return for another competitive match without
     committing to a bracket or series.
   </Card>
-  <Card title="Compete under strict rules" icon="approve-check">
+  <Card title="Compete under strict rules" icon="rocket">
     Published conditions and restrictions give both sides a known competitive
     setting before play begins.
   </Card>
-  <Card title="Face meaningful opposition" icon="seti:config">
+  <Card title="Face meaningful opposition" icon="sun">
     Arena uses the relevant competitive records to look for opponents close
     enough to provide a meaningful test.
   </Card>
-  <Card title="Build evidence over time" icon="chart">
+  <Card title="Build evidence over time" icon="analytics">
     Accepted results accumulate instead of asking one match or event to provide
     the final answer.
   </Card>
@@ -84,25 +82,15 @@ a normal custom game in Dead by Daylight.
 3. **Confirm the result.** Both sides report what happened. Once accepted, the
    result is recorded and the relevant ratings are updated.
 
-Arena coordinates the competition; it does not replace the game itself. The
-[Start Playing guide](/start/) explains what you need and how to join the live
-service.
+Arena coordinates the competition; it does not replace the game itself.
 
 ## Ready to compete?
 
-DBD Arena is a community-run service. It is not official Dead by Daylight, and
-its ratings do not affect your in-game grade, matchmaking rating, or
-progression.
-
 <CardGrid>
-  <Card title="Start Playing" icon="rocket">
-    See what you need, join the live service, and register for your first
-    match. [Start playing](/start/)
-  </Card>
-  <Card title="Review the active format" icon="approve-check">
-    Check the rules and match conditions before entering the queue.
-    [View DBD 1v4 Quartet Ranked](/regulations/1v4-quartet/)
-  </Card>
+  <LinkCard title="Start Playing" href="/start/" description="See what you need, join the live service, and register for your first match.">
+  </LinkCard>
+  <LinkCard title="Review the active format" href="/regulations/1v4-quartet/" description="Check the rules and match conditions before entering the queue.">
+  </LinkCard>
 </CardGrid>
 
 ## Curious about the design?
@@ -110,4 +98,7 @@ progression.
 You do not need to understand the rating model or competitive theory before
 playing. If you want to know why Arena identifies competitors this way, which
 sources of uncertainty it controls, and what its results can reasonably show,
-read [Competitive Design of DBD Arena](/handbook/concept/competitive-design/).
+read 
+
+<LinkCard title="Competitive Design of DBD Arena" href="/handbook/concept/competitive-design/" description="Understand why Arena uses controlled formats, per-killer ratings, fixed survivor teams, and repeated matches.">
+</LinkCard>
