@@ -1,3 +1,13 @@
+/* ---- Site-wide typography ----
+   Inter is the body + heading face for the whole site. Setting Starlight's
+   --sl-font swaps every surface (nav, sidebar, content, hero copy) in one
+   place; the loaded webfont is requested in astro.config `head`. The header
+   "DBDA" wordmark keeps Barlow Condensed via its own font-family in
+   SiteTitle.astro, so this does not affect the logo. */
+:root {
+  --sl-font: 'Inter', sans-serif;
+}
+
 /* ---- Status badge ovals (StatusBadge.astro) ---- */
 :root {
   --status-active:   #4ec07a;

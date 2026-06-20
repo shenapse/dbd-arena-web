@@ -31,8 +31,10 @@ export default defineConfig({
           tag: 'link',
           attrs: { rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon-180.png' },
         },
-        // Barlow Condensed powers the header "DBDA" wordmark (SiteTitle.astro),
-        // matching the approved condensed logo lockup. One weight, swap-loaded.
+        // Webfonts: Inter is the site-wide body/heading face (set via --sl-font
+        // in custom.css); Barlow Condensed powers the header "DBDA" wordmark
+        // (SiteTitle.astro), matching the approved condensed logo lockup. Both
+        // families are requested in one swap-loaded stylesheet.
         { tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.googleapis.com' } },
         {
           tag: 'link',
@@ -42,7 +44,7 @@ export default defineConfig({
           tag: 'link',
           attrs: {
             rel: 'stylesheet',
-            href: 'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&display=swap',
+            href: 'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=Inter:wght@400;500;600;700&display=swap',
           },
         },
       ],
