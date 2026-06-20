@@ -102,6 +102,10 @@ export default defineConfig({
             {
               label: 'Concept',
               items: [
+                {
+                  label: 'Competitive Design',
+                  slug: 'handbook/concept/competitive-design',
+                },
                 { label: 'Rating Guide', slug: 'handbook/concept/rating-guide' },
               ],
             },

@@ -1,0 +1,208 @@
+---
+title: Competitive Design of DBD Arena
+description: >-
+  Why Arena uses controlled formats, context-specific ratings, survivor team
+  rating units, and repeated matches to make competitive results more useful.
+---
+
+You do not need to understand Arena's competitive design to start playing.
+This page is for readers who want to know why the service is structured this
+way and what an Arena result can reasonably show.
+
+## The design objective
+
+DBD Arena is designed to make match results more useful for judging competitive
+performance. It does this by defining the competitors and match conditions,
+then accumulating results across repeated games against rated opposition.
+
+The goal is not to produce a perfect measurement of skill. No single match or
+rating can do that. The goal is to control enough surrounding uncertainty that
+a win or loss says more than it usually can in public play.
+
+## Why DBD results are difficult to interpret
+
+Dead by Daylight is asymmetric. Killers do not face killers, and survivors do
+not face survivors. The two sides perform different tasks, and a result joins
+their performance into one outcome.
+
+Killer performance is also character-specific. Nurse, Blight, Spirit, Doctor,
+and Huntress present different problems and test different skills, even when
+the same player is behind them.
+
+Survivor performance is strongly connected to the full team. Communication,
+rescues, resource use, pressure management, and risk decisions make it
+difficult to separate one player's contribution from the group's result.
+
+Finally, map context, builds, preparation, opponent strength, mistakes, and
+unusual events can all affect a game. A single result may be real without being
+very informative on its own.
+
+## Four core design choices
+
+Arena uses four related choices to make results easier to interpret:
+
+- **Controlled formats.** Every match belongs to a named regulation with
+  published rules, declared participants, known match conditions, and explicit
+  result requirements.
+- **Context-specific ratings.** A killer result belongs to the player and the
+  specific killer played. A survivor rating belongs to a persistent survivor
+  group, at minimum a duo, in the context of the killer it faced.
+- **Team-based survivor ratings.** Stable four-player parties receive the greatest emphasis because
+  repeated results from the same lineup produce the most reliable team-level
+  evidence.
+- **Rating-based matchmaking.** Results give the service memory. Relevant
+  ratings help form future matches against opponents close enough to provide a
+  meaningful test.
+
+These choices work together. Known conditions make matches more comparable;
+well-defined competitors make ratings more specific; repeated results build
+those ratings; and ratings help produce more relevant future matches.
+
+## Controlling noise without removing the game
+
+Arena cannot and should not remove every source of variation. It instead
+controls conditions that would otherwise make results harder to compare.
+
+| Source of uncertainty | Why it makes results harder to read | How Arena reduces it |
+|---|---|---|
+| Unknown opponent quality | A win over a much weaker opponent or a loss to a much stronger one says less about current competitive level. | Service ratings help form matches between opponents close enough to matter. |
+| Killer strength mixed together | A result on one killer can be mistaken for evidence about another, even though each killer tests different skills. | Killer rating is tracked per killer rather than as one blended killer number. |
+| Changing survivor teammates | A change in membership can dominate the outcome, making the group's established strength unclear. | Arena rates persistent survivor groups rather than individuals. A stable four-player party provides the clearest team-level evidence. |
+| Map and rule ambiguity | A result can look like a skill gap when it was partly caused by different expectations or match conditions. | Published regulations define the map context, restrictions, structure, and result conditions. |
+| Surprise information | One side may win because the other prepared for a different situation. | The killer, participants, and map selection are revealed before the match starts. |
+| Loadout or build outliers | An extreme or unexpected build can decide a match and make it difficult to compare with other results. | General rules and per-killer balancing define what is allowed. |
+| One-off randomness | Mistakes, clutch moments, or unusual events can swing a single match. | Ratings accumulate accepted results instead of treating one match as a final verdict. |
+
+Execution, adaptation, pressure, mistakes, and clutch decisions are not noise;
+they are the game. The controlled conditions create a clearer setting in which
+those decisions can matter.
+
+## Defining the competitor
+
+A useful rating must identify whose performance the result represents. Arena
+does not use one universal player rating for every role and situation.
+
+For the killer side, the competitor is a player using a specific killer within
+a regulation. For the survivor side, rating units are persistent groups of at
+least two players, evaluated in the context of the killer they faced. A duo is
+the smallest survivor rating unit; an individual survivor is not one.
+
+Suppose player K uses Nurse against survivor group S, made up of four players.
+That result affects K's Nurse rating and S's rating against Nurse. It does not
+become an individual survivor result for each member of S, and it does not say
+how K performs on Blight or Spirit.
+
+The [Rating Guide](/handbook/concept/rating-guide/) explains how players
+encounter these rating contexts during matchmaking.
+
+## Why killer ratings are character-specific
+
+A single blended killer rating would hide important differences. A player may
+be highly experienced on Nurse and still be learning Spirit. Treating both
+queue requests as equivalent would weaken matchmaking and make the resulting
+record harder to interpret.
+
+When a player queues as killer, they declare the killer they intend to play.
+The service can then use the rating relevant to that character and record the
+result in the same context.
+
+This changes the competitive question from only “How strong is this killer
+player?” to “How does this player perform with this killer against serious
+opposition?” It also gives practice a more specific target.
+
+Character-specific ratings do not imply that every killer is currently
+available. Each regulation defines its active killer pool and balancing.
+
+## Why survivor results are team results
+
+High-level survivor play is coordinated by nature. The team rotates pressure,
+uses resources, communicates information, manages risk, and makes shared
+decisions. Individual skill matters, but the match result cannot cleanly divide
+those connected contributions among four people.
+
+Arena therefore assigns survivor ratings to persistent groups rather than
+dividing the outcome into individual results. A duo is the smallest such unit.
+A fixed four-player party provides the strongest competitive identity: the same
+lineup can play repeatedly and accumulate a more reliable team-level record.
+A different membership does not inherit the original group's results.
+
+The group's rating is also specific to the killer context. A team's established
+performance against Nurse does not automatically show how it performs against
+Blight, because the matchup demands different preparation and decisions.
+
+## Why there is no solo-survivor rating
+
+An individual survivor's result is inseparable from the decisions and
+performance of their teammates. Updating an individual rating across changing
+team compositions would assign a shared outcome to the wrong competitor.
+
+Requiring a persistent survivor group, at minimum a duo, preserves some stable
+competitive identity across matches. A fixed four-player party provides the
+strongest version of that identity, which is why Arena places the greatest
+design emphasis on results accumulated by full parties.
+
+This does not require every possible regulation to exclude solo survivors. A
+future unrated regulation may admit solo survivors after the rated model has
+produced enough history to support reliable matchmaking projections from other
+rated contexts. Such a regulation would use those projections to form matches;
+its results would not create or update a solo-survivor rating. It would be
+intended for players with substantial existing rating history, not as the path
+for new players to establish a rating.
+
+## Why repeated matches matter
+
+One match can be decided by an unusual mistake, an exceptional play, or an
+event that is unlikely to recur. Arena records the result, but does not treat it
+as a complete judgment.
+
+Ratings accumulate information from repeated accepted results. As that record
+develops, it gives matchmaking a better basis for selecting opponents. Matches
+against appropriately rated opposition then provide more relevant new results.
+
+This is a feedback loop, not a claim of certainty: results inform ratings,
+ratings inform matchmaking, and future results refine the estimate.
+
+## Arena, public matches, and tournaments
+
+All three forms of play are valuable, but they answer different questions.
+
+| | Public matches | Tournaments | DBD Arena |
+|---|---|---|---|
+| Primary purpose | Accessible practice, variety, progression, and casual competition | Determine which complete team wins an event | Build repeated results for specific killers and persistent survivor groups, with the strongest emphasis on stable full parties |
+| Match setting | A standalone match formed by official matchmaking | Part of a bounded event or series, often using mirrored games and team-level scoring | A standalone match under a persistent regulation, repeatable across opponents and over time |
+| Competitor represented | Individual players under official matchmaking | The tournament team: killer player and survivor roster together | A killer player on a specific killer, or a persistent survivor group in that killer context |
+| Information produced | A high volume of results with many uncontrolled variables | Strong short-term evidence about team performance in one event | Finer-grained evidence accumulated across repeatable matches over time |
+
+Tournaments control many variables and are well suited to deciding who
+advances or wins. Their team-level structure is less suited to separating a
+player's performance on a particular killer from a survivor group's
+performance against that killer.
+
+Arena is designed around that separation and accumulation. This does not make
+Arena more competitive than tournament play; it gives Arena a different job.
+
+## Limits of the model
+
+Arena ratings are estimates and matchmaking infrastructure, not a final answer
+to who is best. They depend on the matches played, the active population, the
+regulation, and the contexts the service records.
+
+The regulations also shape what performance means. A result under one set of
+maps, restrictions, and win conditions should not automatically be treated as
+proof about a different format.
+
+Arena does not replace public matches or tournaments. It is a community-run
+service and is not official Dead by Daylight. Its results do not affect
+in-game rank, grade, matchmaking rating, or progression. A public leaderboard
+or ranked recognition system would be a separate product feature, not a
+substitute for the underlying rating model.
+
+## Related reading
+
+- [Rating Guide](/handbook/concept/rating-guide/) — what ratings mean and how
+  they shape matchmaking.
+- [DBD 1v4 Quartet Ranked](/regulations/1v4-quartet/) — the active regulation
+  and its current match conditions.
+- [Matchmaking Journey](/handbook/matchmaking-journey/) — the complete player
+  flow from registration to rating outcome.
+- [Results](/handbook/results/) — how a match result becomes accepted.

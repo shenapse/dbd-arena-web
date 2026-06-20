@@ -1,170 +1,139 @@
 ---
 title: What Makes DBD Arena Different
 description: >-
-  See how DBD Arena turns custom Dead by Daylight matches into serious,
-  repeatable competition through published rules, context-specific ratings,
-  coordinated teams, and skill-based matchmaking.
+  Play rated Dead by Daylight custom matches against opponents near your level,
+  under known rules and match conditions.
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-DBD Arena is rated matchmaking for custom Dead by Daylight games. Every match follows published rules: the participants, killer, map, restrictions, and win conditions are known before play begins.
+DBD Arena organizes competitive Dead by Daylight custom games. Killers queue
+alone with a chosen killer, while survivors queue as a team. Arena forms a match, gives both
+sides the match conditions, and updates their ratings after the result is
+confirmed.
 
-Ratings are tracked separately for each player–killer combination and for each fixed four-survivor team facing that killer. Results therefore show, over repeated matches, how each competitor performs against similarly rated opposition under defined conditions.
-This removes enough uncertainty to make wins and losses more useful for judging competitive performance.
+It is a way to play serious, repeatable matches without waiting for a
+tournament.
 
-## The Arena difference
+## What an Arena match looks like
 
-Four design choices make this possible:
+The live service runs in Discord, and the match itself is played as a normal
+custom game in Dead by Daylight.
 
-- **Controlled formats.** Every match belongs to a named regulation with
-  published rules, declared participants, known match conditions, and explicit
-  result requirements.
-- **Context-specific ratings.** A killer result belongs to the player and the
-  specific killer played. A survivor result belongs to the coordinated
-  four-player team in that killer context.
-- **Coordinated survivor teams.** Survivors enter as a full party, so the result
-  measures a team that deliberately plays and improves together rather than a
-  random collection of teammates.
-- **Rating-based matchmaking.** Results give the service memory. Ratings reflect
-  repeated performance and help form future matches against opponents close
-  enough to provide a meaningful test.
+1. **Join the queue.** A killer chooses an available killer character.
+   Survivors queue together as a team.
+2. **Get matched.** Arena looks for opponents whose relevant ratings are close
+   enough to make the match competitive.
+3. **Review the match.** Both sides see the participants, killer, map context,
+   rules, and win conditions before accepting.
+4. **Play the custom game.** The players create the lobby and play in Dead by
+   Daylight.
+5. **Confirm the result.** Both sides report and agree on what happened. The
+   service records the result and updates the relevant Arena records.
 
-Together, these choices create better matches, clearer expectations, and a
-rating-backed environment where wins and losses carry more weight than they
-usually do in public play.
+That is the complete loop. Arena coordinates the competition; it does not
+replace the game itself.
 
-## From noisy results to useful evidence
+## Why play in Arena?
 
-Public matches are useful for practice, variety, fast games, and casual play.
-They are less useful for answering one specific question:
+<CardGrid>
+  <Card title="Meet opponents near your level" icon="seti:config">
+    Matchmaking uses results from previous Arena games to look for a pairing
+    that should provide a meaningful test.
+  </Card>
+  <Card title="Know what you are preparing for" icon="approve-check">
+    The killer, players, map context, restrictions, and win conditions are
+    known before the match begins.
+  </Card>
+  <Card title="Build a competitive record" icon="chart">
+    Each accepted result contributes to ratings built across repeated matches
+    instead of treating one game as the final answer.
+  </Card>
+  <Card title="Play outside an event schedule" icon="calendar">
+    Arena offers standalone competitive games under a persistent format. You
+    do not need to enter a complete tournament bracket to take part.
+  </Card>
+</CardGrid>
 
-**How strong were you really?**
+## Choose how you compete
 
-A public result can be difficult to interpret. Was it caused by the map, tile
-generation, builds, killer choice, survivor coordination, one weak teammate, or
-the actual difference in skill?
+### Queue as killer
 
-Dead by Daylight is also asymmetric. Killers do not face killers, and survivors
-do not face survivors. A killer player's result depends heavily on which killer
-they played, while a survivor result depends heavily on the full team.
+Join alone and declare the killer you want to play. Your Arena record for that
+killer is kept separate from your record on other killers, because playing
+Nurse, Spirit, and Blight tests different skills.
 
-DBD Arena reduces that noise in layers:
+This gives your practice a clear target: improve with a specific killer and
+face survivor teams whose rating in that matchup is close enough to yours.
 
-| Noise source | Why it makes results harder to read | How DBD Arena reduces it |
-|---|---|---|
-| Unknown opponent quality | A win over a much weaker opponent or a loss to a much stronger one says less about your current level. | Service ratings help form matches against opponents close enough to matter. |
-| Killer strength mixed together | A result on one killer can be mistaken for proof about another, even though each killer tests different skills. | Killer rating is tracked per killer, not as one blended killer number. |
-| Random survivor teammates | One unfamiliar teammate can dominate the result, making the team's actual strength unclear. | Survivors queue as a full four-player party, and that group is the rated competitor. |
-| Map and rule ambiguity | A result can look like a skill gap when it was partly caused by the map, unclear win conditions, or different expectations. | Published regulations define the structure, map context, restrictions, and result conditions. |
-| Surprise information | A side may win because the other prepared for the wrong situation rather than because it performed better under known conditions. | The killer, map selection, and participants are revealed before the match starts. |
-| Loadout or build outliers | An extreme or unexpected build can decide a match and make it difficult to compare with other results. | General rules and per-killer balancing define what is allowed. |
-| One-off randomness | Mistakes, clutch moments, or unusual events can swing a single match. | Ratings build over repeated matches rather than treating one result as a final verdict. |
+### Queue as survivor
 
-The goal is not to make every result perfectly pure. Execution, adaptation,
-pressure, mistakes, and clutch decisions are not noise; they are the game. The
-goal is to control enough surrounding uncertainty that the result says more.
+Form a survivor team and join the queue together. Arena matches your team
+against a killer whose relevant rating is close enough to provide a
+competitive game.
 
-## Built for killers
+Playing repeatedly with the same team builds a record for that lineup and
+gives you a consistent way to measure performance and improvement together.
 
-Killer strength in Dead by Daylight is character-specific. Nurse, Blight,
-Spirit, Doctor, and Huntress present different problems and test different
-skills, even when the same player is behind them.
+## What makes an Arena result different?
 
-When you queue as killer, you declare the killer you are playing. Your result
-builds evidence for that specific killer against a rated survivor team under
-known rules. Your progress is not hidden inside one blended number that treats
-every killer as the same challenge.
+Public matches contain many unknowns. Arena makes several important conditions
+explicit:
 
-That creates a different competitive question: not only “am I a strong killer
-player?” but “how far can I push this killer against serious opposition?” Your
-Doctor can be understood in the context of other Doctor results without sharing
-one direct comparison space with Nurse or Blight.
+- Every match uses a published competitive format with known rules.
+- Both sides know who is playing and which killer they will face.
+- The format defines the map context, restrictions, and result conditions.
+- Matchmaking considers the relevant ratings for the killer and survivor team.
+- Accepted results build ratings across repeated matches over time.
 
-Published conditions and per-killer balancing also make a broader killer pool
-more viable. You know the killer, map context, restrictions, and result
-condition you are preparing for, giving practice a clearer target inside or
-outside Arena.
+These controls do not remove adaptation, mistakes, pressure, or clutch plays.
+Those are still part of Dead by Daylight. They make it easier to understand
+what a win or loss means and to prepare for the next match.
 
-## Built for survivor teams
+## What you can play now
 
-High-level survivor play is coordinated by nature. A serious result is not only
-about four separate players; it is about how the team rotates pressure, uses
-resources, manages risk, and makes decisions together.
+**DBD 1v4 Quartet Ranked** is the active format. It offers coordinated
+killer-versus-survivor-team matches. Nurse, Spirit, and Blight are currently
+available in its killer pool.
 
-DBD Arena therefore treats the fixed four-player survivor team as the
-competitor. Individual skill still matters, but a match result cannot cleanly
-separate one player's contribution from the team's communication, saves,
-mistakes, and shared decisions.
-
-The team queues together, plays together, and builds evidence together. It can
-compete against rated killers, compare its results with other survivor teams,
-and prepare for a known killer, map context, rule set, and result condition.
-
-Arena regulations can also demand strategies that differ from normal play.
-Restrictions on perks, items, or in-game actions and per-killer win conditions
-can change resource plans, risk choices, and team priorities. The target is not
-simply “play good survivor”; it is to solve a specific competitive problem as a
-team.
+The format has general rules and balancing for each available killer. Open the
+[active format](/regulations/1v4-quartet/) to see its maps, restrictions,
+win conditions, and full killer pool status.
 
 ## Arena, public matches, and tournaments
 
-All three forms of play are valuable, but they answer different questions.
+Each form of play has a different purpose.
 
-| | Public matches | Tournaments | DBD Arena |
-|---|---|---|---|
-| Primary purpose | Accessible practice, variety, progression, and casual competition | Determine which complete team wins an event | Build repeated evidence for specific killers and survivor teams |
-| Match setting | A standalone match formed by official matchmaking | Part of a bounded event or series, often using mirrored games and team-level scoring | A standalone match under a persistent regulation, repeatable across opponents and over time |
-| Competitor represented | Individual players under official matchmaking | The tournament team: killer player and survivor roster together | A killer player on a specific killer, or a fixed survivor team in that killer context |
-| Evidence produced | A high volume of results with many uncontrolled variables | Strong short-term evidence about team performance in one event | Finer-grained evidence accumulated across repeatable matches over time |
+| | Best suited for |
+|---|---|
+| Public matches | Accessible practice, variety, progression, and casual competition |
+| Tournaments | Event stakes and deciding which complete team wins a bracket or series |
+| DBD Arena | Repeatable, rated competition for specific killers and survivor teams |
 
-Tournaments are effective because they control many variables that make public
-matches difficult to read. Their team-level structure is well suited to deciding
-who advances or wins, but less suited to separating a player's strength on a
-particular killer from a survivor group's strength against that killer.
+Arena does not replace public matches or tournaments. It fills the space
+between them: structured matches that can be played repeatedly and contribute
+to an ongoing record.
 
-DBD Arena is designed around that separation and accumulation. This does not
-make Arena more competitive than tournament play; it gives Arena a different
-job:
+## Interested in the design?
 
-**Tournaments determine which complete team wins an event. DBD Arena builds
-repeated, finer-grained evidence about killers and survivor teams over time.**
+You do not need to understand the rating model or competitive theory before
+playing. If you want to know why Arena identifies competitors this way, which
+sources of uncertainty it controls, and what its results can and cannot show,
+read [Competitive Design of DBD Arena](/handbook/concept/competitive-design/).
 
-## What Arena does not claim
+## Start playing
 
-DBD Arena is a community-run service for custom matches. It is not official
-Dead by Daylight, and it does not affect your in-game rank, grade, MMR, or
+DBD Arena is a community-run service. It is not official Dead by Daylight, and
+its ratings do not affect your in-game grade, matchmaking rating, or
 progression.
-
-It does not replace public matches. Pubs remain useful for volume, practice,
-experimentation, and casual play.
-
-It does not replace tournaments. Tournaments provide event stakes, team-level
-competition, and a clear winner. Arena is intended to be more repeatable.
-
-It does not measure skill perfectly. Rating is useful evidence and matchmaking
-infrastructure, not a magic answer to who is best. A public leaderboard or
-ranked recognition layer may be added later, but that would be a separate
-product surface.
-
-See [About This Service](/about/) for the service's scope and relationship to
-official Dead by Daylight services.
-
-{/* ## Start playing
-
-If this is the kind of match you have been missing, start with the setup guide.
-
-The live service runs in Discord. This website explains the rules, ratings, and
-active formats so you know what you are entering before you queue. */}
-
 
 <CardGrid>
   <Card title="Start Playing" icon="rocket">
-    What you need, what a match looks like, and how to register.
+    See what you need, how to register, and where to join the live service.
     [Start playing](/start/)
   </Card>
-  <Card title="See the active regulation" icon="approve-check">
-    **DBD 1v4 Quartet Ranked** is live and queueable right now.
-    [Open the reference](/regulations/1v4-quartet/)
+  <Card title="Read the active rules" icon="approve-check">
+    Review DBD 1v4 Quartet Ranked before entering its queue.
+    [View the match rules](/regulations/1v4-quartet/)
   </Card>
 </CardGrid>
