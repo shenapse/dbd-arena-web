@@ -1,5 +1,5 @@
 ---
-title: DBD 1v4 Quartet Ranked 
+title: DBD 1v4 Duo+Duo Ranked 
 description: >-
   The classic competitive format: one killer faces a coordinated team of four
   survivors in a custom trial, played under published rules and rated.
@@ -10,7 +10,7 @@ effectiveDate: "2026-06-15"
 changeHistory:
   - version: "1.0"
     date: "2026-06-15"
-    note: Initial public release of the 1v4 quartet ranked regulation.
+    note: Initial public release of the 1v4 Duo+Duo ranked regulation.
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
@@ -18,7 +18,7 @@ import KillerPool from '../../../../components/KillerPool.astro';
 import LifecycleMeta from '../../../../components/LifecycleMeta.astro';
 
 <LifecycleMeta
-  status="active"
+  status="upcoming"
   version="0.1"
   effectiveDate="2026-06-15"
   changeHistory={[{version: "0.1", date: "2026-06-15", note: "stub status to be updated"}]}
@@ -29,17 +29,17 @@ import LifecycleMeta from '../../../../components/LifecycleMeta.astro';
 | Aspect | Value |
 |---|---|
 | Team structure | 1 × Killer vs 4 × Survivors |
-| Survivor team structure | 4 player full party |
+| Survivor team structure | 2 × Duos |
 | Map selection | Fixed per killer character |
-| Voice comms | Yes — all four survivors are assumed to be in voice with one another. |
+| Voice comms | Partially Yes — survivors are assumed to be in voice only within Duo pairs. |
 | Pre-match killer reveal | Yes — the killer character is known to both sides before the match starts. |
 | Pre-match player reveal | Yes |
 
 ## Killer pool
 
 <KillerPool
-  available={["Available", "Nurse", "Blight"]}
-  upcoming={["Upcoming", "Spirit", "Wraith", "Hillbilly", "Doctor", "Cannibal", "Nightmare",
+  available={["Available"]}
+  upcoming={["Upcoming", "Nurse", "Spirit", "Blight", "Wraith", "Hillbilly", "Doctor", "Cannibal", "Nightmare",
              "Pig", "Clown", "Ghostface", "Demogorgon", "Oni",
              "Executioner", "Trickster", "Nemesis", "Cenobite", "Artist",
              "Dredge", "Mastermind", "Xenomorph", "Unknown", "Lich", "Dracula"]}
@@ -51,7 +51,7 @@ import LifecycleMeta from '../../../../components/LifecycleMeta.astro';
 <LinkCard
   title="General rule"
   href="/regulations/1v4-quartet/rules/general/"
-  description="global rules that apply to every killer in this regulation."
+  description="General rule for Quartet Ranked also applies to this Duo+Duo regulation."
 />
 
 <LinkCard

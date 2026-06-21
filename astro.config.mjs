@@ -100,6 +100,10 @@ export default defineConfig({
                   label: 'DBD 1v1 Symmetric Ranked',
                   slug: 'regulations/1v1-symmetric',
                 },
+                {
+                  label: 'DBD 1v4 Duo+Duo Ranked',
+                  slug: 'regulations/1v4-duo',
+                },
               ],
             },
           ],
