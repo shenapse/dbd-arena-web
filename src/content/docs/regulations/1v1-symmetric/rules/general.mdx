@@ -7,20 +7,21 @@ description: >-
 handle: 1v1-symmetric-general
 status: active
 version: "1.0"
-effectiveDate: "2026-06-15"
+effectiveDate: "2026-06-21"
 changeHistory:
   - version: "1.0"
-    date: "2026-06-15"
+    date: "2026-06-21"
     note: Initial publication of the general 1v1 symmetric rule.
 ---
 
+import { Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
 import LifecycleMeta from '../../../../../components/LifecycleMeta.astro';
 
 <LifecycleMeta
-  status="upcoming"
-  version="0.1"
-  effectiveDate="2030-01-01"
-  changeHistory={[{version: "0.1", date: "2026-06-21", note: "stub status to be updated"}]}
+  status={frontmatter.status}
+  version={frontmatter.version}
+  effectiveDate={frontmatter.effectiveDate}
+  changeHistory={frontmatter.changeHistory}
 />
 
 The shared global rule for the 1v1 Symmetric format. It applies to every killer.
@@ -42,9 +43,58 @@ Persistent high ping or instability is handled as a remake.
     - in a map with shack: Annotated Blueprint — Make it spawn by the killer shack
     - in a map without shack: Vigo's Blueprint */}
 
+## Starting the chase timer
+
+<Aside type="note" title="Summary">
+  The round follows the common "crouch and response" starting convention at Killer Shack.
+</Aside>
+
+Each round must begin at Killer Shack. The survivor chooses one of the
+shack's two doorways and takes position there. The killer must take
+position at the opposite doorway.
+
+Once both players are in position, the survivor gives the start signal
+by performing one quick crouch. Upon seeing the signal, the killer must
+immediately perform the designated start response.
+
+The designated start response—such as missing a basic attack or using
+the killer's power—is specified in the applicable per-killer rule.
+
+The chase timer starts when the survivor performs the start signal. If
+the killer does not perform the designated response, or performs it
+noticeably late, the players must reset and repeat the starting
+procedure.
+
+The survivor has the right to choose which doorway they use before the
+round begins.
+
 ## Surrender
 
+The survivor may surrender at any time.
+
+The killer may surrender once achieving their applicable win condition
+is no longer possible.
+
+A surrender causes the surrendering player to lose the current round.
+It does not forfeit the entire match. A killer surrenders by
+disconnecting from the trial.
 
 ## Applies to
 
 - [DBD 1v1 Symmetric Ranked](/regulations/1v1-symmetric/)
+- DBD 1v1 Asymmetric Ranked
+
+
+<CardGrid>
+<LinkCard
+  title="Back to regulation overview"
+  href="/regulations/1v1-symmetric/"
+  description="1v1 Symmetric Ranked"
+/>
+
+<LinkCard
+  title="Proceed to per-killer balancing"
+  href="/regulations/1v1-symmetric/balancing"
+  description="1v1 Symmetric Ranked per-killer balancing overview"
+/>
+</CardGrid>

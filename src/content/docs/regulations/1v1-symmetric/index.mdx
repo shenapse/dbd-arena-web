@@ -2,15 +2,18 @@
 title: DBD 1v1 Symmetric Ranked
 description: >-
   The classical 1v1 format where each player takes both the killer and survivor side,
-  competing on chase time. Announced for a future season.
+  competing on chase time.
 handle: dbd.1v1.symmetric.rank
-status: upcoming
-version: "0.1"
-effectiveDate: "2026-06-15"
+status: active
+version: "1.0"
+effectiveDate: "2026-06-21"
 changeHistory:
   - version: "0.1"
     date: "2026-06-15"
     note: Provisional announcement. Format and rules are not yet final.
+  - version: "1.0"
+    date: "2026-06-21"
+    note: Regulation promoted to active. General rule and Trapper balancing finalized.
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
@@ -19,31 +22,30 @@ import LifecycleMeta from '../../../../components/LifecycleMeta.astro';
 
 
 <LifecycleMeta
-  status="upcoming"
-  version="0.1"
-  effectiveDate="2026-06-15"
-  changeHistory={[{version: "0.1", date: "2026-06-15", note: "Provisional announcement. Format and rules are not yet final."}]}
+  status="active"
+  version="1.0"
+  effectiveDate="2026-06-21"
+  changeHistory={[
+    {version: "0.1", date: "2026-06-15", note: "Provisional announcement. Format and rules are not yet final."},
+    {version: "1.0", date: "2026-06-21", note: "Regulation promoted to active. General rule and Trapper balancing finalized."},
+  ]}
 />
-
-:::note[Upcoming — not yet playable]
-This regulation is announced but cannot be queued. Content below is provisional.
-:::
 
 ## Game Structure
 
 The classical 1v1 format where each player takes both the killer and survivor side,
-competing in a best-of-X (BoX) series such as Bo3 or Bo5. In each round, both
+competing in best-of-3. In each round, both
 players record a chase time, and the player with the longer chase time takes the
 round.
 
 | Attribute | Value |
 |---|---|
 | Team structure | 1 × Player A vs 1 × Player B |
-| Map selection | Provisional — to be confirmed before launch. |
-| Build restriction | Provisional — a restricted killer pool is planned. Rules not yet final. |
+| Map selection | Fixed per killer character |
+| Build restriction | Yes — see per-killer balancing |
 | Pre-match killer reveal | Yes — the killer character is known to both sides before the match starts. |
 | Pre-match player reveal | Yes |
-| Number of rounds | Provisional — 3 or 5 |
+| Number of rounds | 3 |
 
 ## Killer pool
 
@@ -61,11 +63,11 @@ round.
   description="global rules that apply to every killer in this regulation."
 />
 
-{/* <LinkCard
+<LinkCard
   title="Per-killer balancing"
-  href="/regulations/1v4-quartet/balancing/"
+  href="/regulations/1v1-symmetric/balancing/"
   description="per-killer balancing that complement the general rule."
-/> */}
+/>
 
 ## Queue requirement
 

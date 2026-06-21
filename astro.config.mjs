@@ -91,15 +91,25 @@ export default defineConfig({
                     },
                   ],
                 },
+                {
+                  label: 'DBD 1v1 Symmetric Ranked',
+                  items: [
+                    { label: 'Overview', slug: 'regulations/1v1-symmetric' },
+                    { label: 'General Rule', slug: 'regulations/1v1-symmetric/rules/general' },
+                    {
+                      label: 'Balancing',
+                      items: [
+                        { label: 'Overview', slug: 'regulations/1v1-symmetric/balancing' },
+                        { label: 'Trapper', slug: 'regulations/1v1-symmetric/balancing/trapper' },
+                      ],
+                    },
+                  ],
+                },
               ],
             },
             {
               label: 'Upcoming',
               items: [
-                {
-                  label: 'DBD 1v1 Symmetric Ranked',
-                  slug: 'regulations/1v1-symmetric',
-                },
                 {
                   label: 'DBD 1v4 Duo+Duo Ranked',
                   slug: 'regulations/1v4-duo',
