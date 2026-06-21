@@ -15,19 +15,21 @@ interface Props {
   changeHistory: ChangeEntry[];
 }
 const { status, version, effectiveDate, changeHistory } = Astro.props;
+// Labels localized via Starlight i18n (src/content/i18n/*.json).
+const t = Astro.locals.t;
 ---
 
 <dl class="meta-grid">
-  <dt>Status</dt>
+  <dt>{t('lifecycle.status')}</dt>
   <dd><StatusBadge status={status} /></dd>
-  <dt>Version</dt>
+  <dt>{t('lifecycle.version')}</dt>
   <dd>{version}</dd>
-  <dt>Effective date</dt>
+  <dt>{t('lifecycle.effectiveDate')}</dt>
   <dd>{effectiveDate}</dd>
 </dl>
 
 <details class="change-history">
-  <summary>Change history</summary>
+  <summary>{t('lifecycle.changeHistory')}</summary>
   <ul>
     {changeHistory.map(c => (
       <li><strong>{c.version}</strong> — <span>{c.date}</span>: {c.note}</li>

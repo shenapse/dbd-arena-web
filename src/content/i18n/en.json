@@ -1,0 +1,12 @@
+{
+  "status.active": "Active",
+  "status.active.title": "Currently playable",
+  "status.upcoming": "Upcoming",
+  "status.upcoming.title": "Announced, not yet playable",
+  "status.archived": "Archived",
+  "status.archived.title": "Retired, kept for reference",
+  "lifecycle.status": "Status",
+  "lifecycle.version": "Version",
+  "lifecycle.effectiveDate": "Effective date",
+  "lifecycle.changeHistory": "Change history"
+}
