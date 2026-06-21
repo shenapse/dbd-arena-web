@@ -1,0 +1,12 @@
+{
+  "status.active": "稼働中",
+  "status.active.title": "現在プレイ可能",
+  "status.upcoming": "予定",
+  "status.upcoming.title": "発表済み、まだプレイ不可",
+  "status.archived": "終了",
+  "status.archived.title": "提供終了（参照用に保持）",
+  "lifecycle.status": "ステータス",
+  "lifecycle.version": "バージョン",
+  "lifecycle.effectiveDate": "発効日",
+  "lifecycle.changeHistory": "変更履歴"
+}

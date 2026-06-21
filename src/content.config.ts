@@ -1,7 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
-import { docsLoader } from '@astrojs/starlight/loaders';
-import { docsSchema } from '@astrojs/starlight/schema';
+import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
 // The content drafts (see ../../drafts/README.md) carry lifecycle and record
 // metadata beyond Starlight's built-in frontmatter. We extend the docs schema so
@@ -32,6 +32,26 @@ export const collections = {
         // Notice classification.
         type: z.string().optional(),
         date: z.string().optional(),
+      }),
+    }),
+  }),
+  // Localized UI strings for custom components (StatusBadge, LifecycleMeta).
+  // Built-in Starlight UI strings are translated automatically per locale; these
+  // custom keys are read via Astro.locals.t(). Files live in src/content/i18n/.
+  i18n: defineCollection({
+    loader: i18nLoader(),
+    schema: i18nSchema({
+      extend: z.object({
+        'status.active': z.string().optional(),
+        'status.active.title': z.string().optional(),
+        'status.upcoming': z.string().optional(),
+        'status.upcoming.title': z.string().optional(),
+        'status.archived': z.string().optional(),
+        'status.archived.title': z.string().optional(),
+        'lifecycle.status': z.string().optional(),
+        'lifecycle.version': z.string().optional(),
+        'lifecycle.effectiveDate': z.string().optional(),
+        'lifecycle.changeHistory': z.string().optional(),
       }),
     }),
   }),

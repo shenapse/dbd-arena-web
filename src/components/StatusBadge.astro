@@ -1,17 +1,22 @@
 ---
 // Status is conveyed with TEXT and a glyph, never color alone — survives color-blindness and grayscale.
+// Labels/tooltips are localized via Starlight's i18n (src/content/i18n/*.json); the
+// glyph is locale-independent.
 interface Props {
   status: "active" | "upcoming" | "archived";
 }
 const { status } = Astro.props;
+const t = Astro.locals.t;
 
-const LABELS = {
-  active:   { text: "Active",   glyph: "●", title: "Currently playable"          },
-  upcoming: { text: "Upcoming", glyph: "◓", title: "Announced, not yet playable" },
-  archived: { text: "Archived", glyph: "✕", title: "Retired, kept for reference" },
+const GLYPHS = {
+  active: "●",
+  upcoming: "◓",
+  archived: "✕",
 } as const;
 
-const { text, glyph, title } = LABELS[status];
+const glyph = GLYPHS[status];
+const text = t(`status.${status}` as Parameters<typeof t>[0]);
+const title = t(`status.${status}.title` as Parameters<typeof t>[0]);
 ---
 
 <span class={`status-badge status-badge--${status}`} title={title}>

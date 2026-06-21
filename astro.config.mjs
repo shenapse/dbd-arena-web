@@ -51,12 +51,15 @@ export default defineConfig({
       description:
         'Community-run, unofficial competitive Dead by Daylight matchmaking. ' +
         'Find opponents for custom matches under published regulations.',
-      // English-only today, but i18n-ready: the root locale keeps URLs clean
-      // (/handbook/... not /en/handbook/...). Adding a language later is
-      // config-only (UX §6 localization-readiness).
+      // English is the authoritative default and keeps clean URLs via the root
+      // locale (/handbook/... not /en/handbook/...). Japanese is served under
+      // /ja/...; pages without a ja translation fall back to the English content
+      // with Starlight's built-in untranslated-content notice (UX §6). Sidebar
+      // and custom-component labels are localized below / via src/content/i18n.
       defaultLocale: 'root',
       locales: {
         root: { label: 'English', lang: 'en' },
+        ja: { label: '日本語', lang: 'ja' },
       },
       // Outbound Discord handoff (UX §9). Header social icon.
       social: [{ icon: 'discord', label: 'Join Discord', href: DISCORD_INVITE }],
@@ -65,42 +68,48 @@ export default defineConfig({
       // (drafts/README.md). The Regulations branch is expanded all the way down
       // so a specific killer's balancing is reachable in one step.
       sidebar: [
-        { label: 'Home', link: '/' },
-        { label: 'What Is DBD Arena', slug: 'what-is-arena' },
-        { label: 'Start Playing', slug: 'start' },
+        { label: 'Home', translations: { ja: 'ホーム' }, link: '/' },
+        { label: 'What Is DBD Arena', translations: { ja: 'DBD Arena とは' }, slug: 'what-is-arena' },
+        { label: 'Start Playing', translations: { ja: 'はじめる' }, slug: 'start' },
         {
           label: 'Regulation',
+          translations: { ja: 'レギュレーション' },
           items: [
-            { label: 'Overview', slug: 'regulations' },
+            { label: 'Overview', translations: { ja: '概要' }, slug: 'regulations' },
             {
               label: 'Active',
+              translations: { ja: '稼働中' },
               items: [
                 {
                   label: 'DBD 1v4 Quartet Ranked',
+                  translations: { ja: 'DBD 1v4 カルテット ランク' },
                   items: [
-                    { label: 'Overview', slug: 'regulations/1v4-quartet' },
-                    { label: 'General Rule', slug: 'regulations/1v4-quartet/rules/general' },
+                    { label: 'Overview', translations: { ja: '概要' }, slug: 'regulations/1v4-quartet' },
+                    { label: 'General Rule', translations: { ja: '基本ルール' }, slug: 'regulations/1v4-quartet/rules/general' },
                     {
                       label: 'Balancing',
+                      translations: { ja: 'バランス調整' },
                       items: [
-                        { label: 'Overview', slug: 'regulations/1v4-quartet/balancing' },
-                        { label: 'Nurse', slug: 'regulations/1v4-quartet/balancing/nurse' },
-                        { label: 'Blight', slug: 'regulations/1v4-quartet/balancing/blight' },
-                        { label: 'Spirit', slug: 'regulations/1v4-quartet/balancing/spirit' },
+                        { label: 'Overview', translations: { ja: '概要' }, slug: 'regulations/1v4-quartet/balancing' },
+                        { label: 'Nurse', translations: { ja: 'ナース' }, slug: 'regulations/1v4-quartet/balancing/nurse' },
+                        { label: 'Blight', translations: { ja: 'ブライト' }, slug: 'regulations/1v4-quartet/balancing/blight' },
+                        { label: 'Spirit', translations: { ja: 'スピリット' }, slug: 'regulations/1v4-quartet/balancing/spirit' },
                       ],
                     },
                   ],
                 },
                 {
                   label: 'DBD 1v1 Symmetric Ranked',
+                  translations: { ja: 'DBD 1v1 シンメトリック ランク' },
                   items: [
-                    { label: 'Overview', slug: 'regulations/1v1-symmetric' },
-                    { label: 'General Rule', slug: 'regulations/1v1-symmetric/rules/general' },
+                    { label: 'Overview', translations: { ja: '概要' }, slug: 'regulations/1v1-symmetric' },
+                    { label: 'General Rule', translations: { ja: '基本ルール' }, slug: 'regulations/1v1-symmetric/rules/general' },
                     {
                       label: 'Balancing',
+                      translations: { ja: 'バランス調整' },
                       items: [
-                        { label: 'Overview', slug: 'regulations/1v1-symmetric/balancing' },
-                        { label: 'Trapper', slug: 'regulations/1v1-symmetric/balancing/trapper' },
+                        { label: 'Overview', translations: { ja: '概要' }, slug: 'regulations/1v1-symmetric/balancing' },
+                        { label: 'Trapper', translations: { ja: 'トラッパー' }, slug: 'regulations/1v1-symmetric/balancing/trapper' },
                       ],
                     },
                   ],
@@ -109,9 +118,11 @@ export default defineConfig({
             },
             {
               label: 'Upcoming',
+              translations: { ja: '予定' },
               items: [
                 {
                   label: 'DBD 1v4 Duo+Duo Ranked',
+                  translations: { ja: 'DBD 1v4 デュオ+デュオ ランク' },
                   slug: 'regulations/1v4-duo',
                 },
               ],
@@ -120,67 +131,77 @@ export default defineConfig({
         },
         {
           label: 'Handbook',
+          translations: { ja: 'ハンドブック' },
           items: [
-            { label: 'Overview', slug: 'handbook' },
-            { label: 'Matchmaking Journey', slug: 'handbook/matchmaking-journey' },
-            { label: 'Player Profile', slug: 'handbook/player-profile' },
-            { label: 'Groups', slug: 'handbook/groups' },
-            { label: 'Matchmaking and Readiness', slug: 'handbook/matchmaking-and-readiness' },
-            { label: 'Results', slug: 'handbook/results' },
+            { label: 'Overview', translations: { ja: '概要' }, slug: 'handbook' },
+            { label: 'Matchmaking Journey', translations: { ja: 'マッチメイキングの流れ' }, slug: 'handbook/matchmaking-journey' },
+            { label: 'Player Profile', translations: { ja: 'プレイヤープロフィール' }, slug: 'handbook/player-profile' },
+            { label: 'Groups', translations: { ja: 'グループ' }, slug: 'handbook/groups' },
+            { label: 'Matchmaking and Readiness', translations: { ja: 'マッチメイキングと準備状態' }, slug: 'handbook/matchmaking-and-readiness' },
+            { label: 'Results', translations: { ja: '結果' }, slug: 'handbook/results' },
             {
               label: 'Player Policies',
+              translations: { ja: 'プレイヤーポリシー' },
               items: [
-                { label: 'Overview', slug: 'handbook/policies' },
+                { label: 'Overview', translations: { ja: '概要' }, slug: 'handbook/policies' },
                 {
                   label: 'Participation and Conduct',
+                  translations: { ja: '参加と行動規範' },
                   slug: 'handbook/policies/participation-and-conduct',
                 },
                 {
                   label: 'Match Interruptions',
+                  translations: { ja: '試合の中断' },
                   slug: 'handbook/policies/match-interruptions',
                 },
                 {
                   label: 'Results and Disputes',
+                  translations: { ja: '結果と異議申し立て' },
                   slug: 'handbook/policies/results-and-disputes',
                 },
                 {
                   label: 'Privacy and Public Data',
+                  translations: { ja: 'プライバシーと公開データ' },
                   slug: 'handbook/policies/privacy-and-public-data',
                 },
               ],
             },
             {
               label: 'Concept',
+              translations: { ja: 'コンセプト' },
               items: [
                 {
                   label: 'Competitive Design',
+                  translations: { ja: '競技デザイン' },
                   slug: 'handbook/concept/competitive-design',
                 },
-                { label: 'Rating Guide', slug: 'handbook/concept/rating-guide' },
+                { label: 'Rating Guide', translations: { ja: 'レーティングガイド' }, slug: 'handbook/concept/rating-guide' },
               ],
             },
           ],
         },
         {
           label: 'Help',
+          translations: { ja: 'ヘルプ' },
           items: [
-            { label: 'Help', slug: 'help' },
-            { label: 'FAQ', slug: 'help/faq' },
-            { label: 'Account and Group', slug: 'help/account-and-group' },
-            { label: 'Queue and Readiness', slug: 'help/queue-and-readiness' },
-            { label: 'Result and Dispute', slug: 'help/result-and-dispute' },
+            { label: 'Help', translations: { ja: 'ヘルプ' }, slug: 'help' },
+            { label: 'FAQ', translations: { ja: 'よくある質問' }, slug: 'help/faq' },
+            { label: 'Account and Group', translations: { ja: 'アカウントとグループ' }, slug: 'help/account-and-group' },
+            { label: 'Queue and Readiness', translations: { ja: 'キューと準備状態' }, slug: 'help/queue-and-readiness' },
+            { label: 'Result and Dispute', translations: { ja: '結果と異議申し立て' }, slug: 'help/result-and-dispute' },
           ],
         },
         {
           label: 'Notices',
+          translations: { ja: 'お知らせ' },
           items: [
-            { label: 'Notices', slug: 'notices' },
-            { label: 'Scheduled maintenance window', slug: 'notices/2026-06-20-maintenance' },
-            { label: 'Service launch', slug: 'notices/2026-06-15-launch' },
+            { label: 'Notices', translations: { ja: 'お知らせ' }, slug: 'notices' },
+            { label: 'Scheduled maintenance window', translations: { ja: 'メンテナンス予定' }, slug: 'notices/2026-06-20-maintenance' },
+            { label: 'Service launch', translations: { ja: 'サービス開始' }, slug: 'notices/2026-06-15-launch' },
           ],
         },
-        { label: 'About This Service', slug: 'about' },
-        { label: 'Join Discord', link: DISCORD_INVITE, attrs: { target: '_blank' } },
+        { label: 'About This Service', translations: { ja: 'このサービスについて' }, slug: 'about' },
+        { label: 'Join Discord', translations: { ja: 'Discord に参加' }, link: DISCORD_INVITE, attrs: { target: '_blank' } },
       ],
     }),
   ],
