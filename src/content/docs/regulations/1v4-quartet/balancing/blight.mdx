@@ -14,6 +14,7 @@ format: 1v4-quartet
 ---
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
+import ImageRow from '@components/ImageRow.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
@@ -57,7 +58,10 @@ Allowed:
 
 ## Killer add-ons
 
-crow & rat
+<ImageRow label="Allowed add-ons:" images={[
+  { src: '/images/killers/blight/Blighted-Crow.webp', label: 'Blighted Crow' },
+  { src: '/images/killers/blight/Blighted-Rat.webp', label: 'Blighted Rat' },
+]} />
 
 ## Survivor perks
 
