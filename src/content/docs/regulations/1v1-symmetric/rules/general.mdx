@@ -15,7 +15,8 @@ changeHistory:
 ---
 
 import { Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
-import LifecycleMeta from '../../../../../components/LifecycleMeta.astro';
+import LifecycleMeta from '@components/LifecycleMeta.astro';
+import ImageRow from '@components/ImageRow.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
@@ -35,6 +36,10 @@ count.
 Persistent high ping or instability is handled as a remake.
 
 ## Required offerings
+
+<ImageRow label="Killer" images={[
+  { src: '/images/offerings/Cut-Coin.webp', label: 'Cut Coin' },
+]} />
 
 - Killer: Cut Coin
 {/* - Survivor:

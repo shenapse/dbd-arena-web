@@ -2,7 +2,7 @@
 title: DBD 1v4 Quartet・ランク
 description: >-
   キラー1人と連携するサバイバー4人が、公開されたルールに基づくカスタムマッチで対戦し、
-  レーティングを競うクラシックな競技形式です。
+  レーティングを競う標準的な競技形式。
 handle: dbd.1v4.quartet.rank
 status: active
 version: "1.0"
@@ -10,7 +10,7 @@ effectiveDate: "2026-06-15"
 changeHistory:
   - version: "1.0"
     date: "2026-06-15"
-    note: 1v4 Quartet・ランク レギュレーションの初版を公開。
+    note: 1v4 Quartet・ランク レギュレーションの初版を公開
 language: ja
 translationStatus: complete
 translatedVersion: "1.0"
@@ -19,11 +19,11 @@ authoritativeSource: /regulations/1v4-quartet/
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
-import KillerPool from '../../../../../components/KillerPool.astro';
-import LifecycleMeta from '../../../../../components/LifecycleMeta.astro';
+import KillerPool from '@components/KillerPool.astro';
+import LifecycleMeta from '@components/LifecycleMeta.astro';
 
 > **翻訳について:** このページは、読みやすさのために提供される非公式な日本語訳です。
-> 英語版との間に内容や解釈の相違がある場合は、[英語版のレギュレーション](/regulations/1v4-quartet/)が優先されます。  
+> 英語版との間に内容や解釈の相違がある場合は、[英語版](/regulations/1v4-quartet/)が優先されます。  
 > **翻訳ステータス:** 完全 · **対応英語版:** 1.0 · **翻訳日:** 2026-06-22
 
 <LifecycleMeta
@@ -59,18 +59,18 @@ import LifecycleMeta from '../../../../../components/LifecycleMeta.astro';
 <LinkCard
   title="基本ルール"
   href="/ja/regulations/1v4-quartet/rules/general/"
-  description="このレギュレーションの全キラーに共通して適用されるルールです。"
+  description="このレギュレーションの全キラーに共通して適用されるルール"
 />
 
 <LinkCard
   title="キラー別バランス調整"
   href="/regulations/1v4-quartet/balancing/"
-  description="基本ルールを補完するキラー別のバランス調整です。"
+  description="基本ルールを補完するキラー別バランス調整"
 />
 
 ## キュー参加条件
 
-サバイバーは4人のフルパーティでキューに参加する必要があります。
+サバイバーは4人のフルパーティでキューに参加する（=マッチメイキングリクエストを行う）。
 
 | 対象 | キューへの参加方法 | キュー参加時の申告内容 |
 |---|---|---|
@@ -89,14 +89,14 @@ import LifecycleMeta from '../../../../../components/LifecycleMeta.astro';
 
 ## レーティング
 
-キラーごとに厳密に分かれたレーティングを使用します。
-1試合によって変動するレーティングは次のとおりです。
+キラーごとに厳密に分かれたレーティングを使用する。
+1試合によって変動するレーティングは次の通り:
 
 - キラープレイヤー: 使用したキラーのレーティング
 - サバイバーパーティ: 対戦したキラーに対する**サバイバーグループ**のレーティング
 
 例として、プレイヤーKがナースを使用し、サバイバーチームS=(s1, s2, s3, s4)と対戦した場合、
-変動するレーティングは次のとおりです。
+変動するレーティングは次の通り:
 
 - (K, \{1v4 Quartet・ランク レギュレーション / ロール=キラー / キラー=ナース\})
 - (S, \{1v4 Quartet・ランク レギュレーション / ロール=サバイバー / キラー=ナース\})
@@ -107,6 +107,6 @@ import LifecycleMeta from '../../../../../components/LifecycleMeta.astro';
 ## トラブル対応
 
 このレギュレーションでの切断、再試合、リザルトに関する異議申し立てには、
-共通の「試合の中断」および「結果と異議申し立て」ポリシーが適用されます。
+共通の「試合の中断」および「結果と異議申し立て」ポリシーが適用される。
 
 [試合の中断](/handbook/policies/match-interruptions/)および[結果と異議申し立て](/handbook/policies/results-and-disputes/)を参照してください。
