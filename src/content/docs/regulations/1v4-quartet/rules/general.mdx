@@ -9,7 +9,7 @@ status: active
 version: "1.0"
 effectiveDate: "2026-06-15"
 changeHistory:
-  - version: "1.0"
+  - version: "0.1"
     date: "2026-06-15"
     note: Initial publication of the general 1v4 quartet rule.
 ---
@@ -20,7 +20,7 @@ import LifecycleMeta from '../../../../../components/LifecycleMeta.astro';
   status="active"
   version="0.1"
   effectiveDate="2026-06-15"
-  changeHistory={[{version: "0.1", date: "2026-06-15", note: "stub status to be updated"}]}
+  changeHistory={[{version: "0.1", date: "2026-06-15", note: "drafted"}]}
 />
 
 The shared global rule for the 1v4 quartet format. It applies to every killer.
@@ -32,6 +32,14 @@ the sibling per-killer balancing pages, which complement this rule.
 The killer must hold a stable connection below 60 ms for the trial to
 count.
 Persistent high ping or instability is handled as a remake.
+
+## Survivor character choice
+
+Each survivor must choose a different survivor character. Duplicate survivor
+characters are not allowed within the same trial.
+
+- Banned character:
+  - Ada Wong
 
 ## Required offerings
 
@@ -47,9 +55,6 @@ Persistent high ping or instability is handled as a remake.
 ### Hook and kill count
 
 The hook count increases each time a survivor reaches a new hook stage.
-Reaching second hook stage counts as one more hook. Reaching third hook
-stage, which sacrifices the survivor, also counts as one more hook.
-
 A dead survivor always counts as 3 hooks, no matter how that survivor died.
 
 If a survivor escapes through the hatch before all generators are completed,

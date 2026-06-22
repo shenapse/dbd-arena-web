@@ -246,7 +246,9 @@ The intended tone is competitive and clear:
 - Limited atmospheric accents that support, rather than obstruct, reference use.
 - Clear status, warning, and effective-date treatments.
 
-Use original service illustrations, flow diagrams, icons, and selectively maintained Discord UI examples. Do not make comprehension dependent on DBD artwork or in-game screenshots.
+Use original service illustrations, flow diagrams, icons, and selectively maintained Discord UI examples. Do not make comprehension dependent on in-game screenshots or DBD artwork used in a way that could suggest the site is an official service.
+
+In-game icons that identify specific game entities — perks, addons, items, offerings, killers, and maps — may be used as-is. These icons serve as precise references to well-known game content and do not carry official-service connotation on their own.
 
 ### 7.2 Responsive And Accessible Use
 
