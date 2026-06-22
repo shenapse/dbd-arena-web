@@ -1,0 +1,144 @@
+---
+/**
+ * Override of Starlight's site header. Based on a copy of
+ * node_modules/@astrojs/starlight/components/Header.astro (Starlight ^0.40).
+ *
+ * The upstream file imports its children via `virtual:starlight/components/*`
+ * (which honor user overrides). Those virtual specifiers aren't typed for
+ * consumer code, so `astro check` rejects them; instead we import the public,
+ * typed `@astrojs/starlight/components/*.astro` paths for the components we do
+ * NOT override, and import our own ./SiteTitle.astro directly so the crimson
+ * wordmark override still renders in the header.
+ *
+ * The only addition is a MOBILE-ONLY language switcher (`.mobile-lang-select`).
+ * Starlight keeps the language picker in `.right-group`, which is hidden below
+ * the 50rem nav breakpoint, so on phones the only way to switch language is to
+ * open the sidebar drawer and scroll to its footer — easy to miss. Surfacing
+ * the picker in the always-visible top bar makes switching a single, obvious
+ * tap. The desktop `.right-group` copy is untouched; our copy is `md:sl-hidden`,
+ * so exactly one language control is visible at any width.
+ *
+ * If Starlight's default Header.astro changes upstream, re-copy it and re-apply
+ * the `.mobile-lang-select` block plus the trailing <style> below.
+ */
+import config from 'virtual:starlight/user-config';
+
+import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro';
+import Search from '@astrojs/starlight/components/Search.astro';
+import SiteTitle from './SiteTitle.astro';
+import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
+import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
+
+/**
+ * Render the `Search` component if Pagefind is enabled or the default search component has been overridden.
+ */
+const shouldRenderSearch =
+	config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
+---
+
+<div class="header">
+	<div class="title-wrapper sl-flex">
+		<SiteTitle />
+	</div>
+	<div class="sl-flex print:hidden">
+		{shouldRenderSearch && <Search />}
+	</div>
+	<div class="sl-hidden md:sl-flex print:hidden right-group">
+		<div class="sl-flex social-icons">
+			<SocialIcons />
+		</div>
+		<ThemeSelect />
+		<LanguageSelect />
+	</div>
+	{/* Mobile-only language switcher — see file header. Hidden at >=50rem where
+	   the `.right-group` copy takes over. */}
+	<div class="mobile-lang-select md:sl-hidden print:hidden">
+		<LanguageSelect />
+	</div>
+</div>
+
+<style>
+	@layer starlight.core {
+		.header {
+			display: flex;
+			gap: var(--sl-nav-gap);
+			justify-content: space-between;
+			align-items: center;
+			height: 100%;
+		}
+
+		.title-wrapper {
+			/* Prevent long titles overflowing and covering the search and menu buttons on narrow viewports. */
+			overflow: clip;
+			/* Avoid clipping focus ring around link inside title wrapper. */
+			padding: 0.25rem;
+			margin: -0.25rem;
+			min-width: 0;
+		}
+
+		.right-group,
+		.social-icons {
+			gap: 1rem;
+			align-items: center;
+		}
+		.social-icons::after {
+			content: '';
+			height: 2rem;
+			border-inline-end: 1px solid var(--sl-color-gray-5);
+		}
+
+		@media (min-width: 50rem) {
+			:global(:root[data-has-sidebar]) {
+				--__sidebar-pad: calc(2 * var(--sl-nav-pad-x));
+			}
+			:global(:root:not([data-has-toc])) {
+				--__toc-width: 0rem;
+			}
+			.header {
+				--__sidebar-width: max(0rem, var(--sl-content-inline-start, 0rem) - var(--sl-nav-pad-x));
+				--__main-column-fr: calc(
+					(
+							100% + var(--__sidebar-pad, 0rem) - var(--__toc-width, var(--sl-sidebar-width)) -
+								(2 * var(--__toc-width, var(--sl-nav-pad-x))) - var(--sl-content-inline-start, 0rem) -
+								var(--sl-content-width)
+						) / 2
+				);
+				display: grid;
+				grid-template-columns:
+        /* 1 (site title): runs up until the main content column’s left edge or the width of the title, whichever is the largest  */
+					minmax(
+						calc(var(--__sidebar-width) + max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))),
+						auto
+					)
+					/* 2 (search box): all free space that is available. */
+					1fr
+					/* 3 (right items): use the space that these need. */
+					auto;
+				align-content: center;
+			}
+		}
+	}
+
+	/* --- Mobile language switcher placement (unlayered so it wins over
+	   @layer starlight.core). Only active below the 50rem nav breakpoint; at
+	   >=50rem `.mobile-lang-select` is `md:sl-hidden` (display:none) and the
+	   desktop grid above governs layout. --- */
+	@media (max-width: 49.999rem) {
+		/* Push the wordmark to the inline-start so search + language group at the
+		   inline-end. The parent header already reserves room for the fixed
+		   hamburger via padding-inline-end (PageFrame), so this control lands just
+		   left of it without manual spacing. */
+		.title-wrapper {
+			margin-inline-end: auto;
+		}
+		.header {
+			/* Tighter than the desktop --sl-nav-gap so the pill fits narrow phones. */
+			gap: 0.5rem;
+		}
+		.mobile-lang-select {
+			display: flex;
+			align-items: center;
+			min-width: 0; /* allow the pill to shrink rather than overflow the bar */
+		}
+	}
+</style>

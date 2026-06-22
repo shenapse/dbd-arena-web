@@ -13,8 +13,11 @@ export default defineConfig({
       customCss: ['./src/styles/custom.css'],
       // Header brand link rendered as a two-tone crimson wordmark (matches the
       // home-page hero). See src/components/SiteTitle.astro.
+      // Header override surfaces a mobile-only language switcher in the top bar
+      // (Starlight otherwise hides it below 50rem). See src/components/Header.astro.
       components: {
         SiteTitle: './src/components/SiteTitle.astro',
+        Header: './src/components/Header.astro',
       },
       title: SERVICE_NAME,
       // Brand favicon — bold crimson "A" mark on a dark circle (public/favicon.svg).
