@@ -1,0 +1,100 @@
+---
+title: DBD 1v4 Duo+Duo・ランク
+description: >-
+  キラー1人と連携するサバイバー4人が、公開されたルールに基づくカスタムマッチで対戦し、
+  レーティングを競うクラシックな競技形式です。
+handle: dbd.1v4.quartet.rank
+status: active
+version: "1.0"
+effectiveDate: "2026-06-15"
+changeHistory:
+  - version: "1.0"
+    date: "2026-06-15"
+    note: 1v4 Duo+Duo・ランク レギュレーションの初版を公開。
+language: ja
+translationStatus: complete
+translatedVersion: "1.0"
+translationDate: "2026-06-22"
+authoritativeSource: /regulations/1v4-duo/
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+import KillerPool from '../../../../../components/KillerPool.astro';
+import LifecycleMeta from '../../../../../components/LifecycleMeta.astro';
+
+> **翻訳について:** このページは、読みやすさのために提供される非公式な日本語訳です。
+> 英語版との間に内容や解釈の相違がある場合は、[英語版のレギュレーション](/regulations/1v4-duo/)が優先されます。  
+> **翻訳ステータス:** 完全 · **対応英語版:** 1.0 · **翻訳日:** 2026-06-22
+
+<LifecycleMeta
+  status="upcoming"
+  version="0.1"
+  effectiveDate="2026-06-15"
+  changeHistory={[{version: "0.1", date: "2026-06-15", note: "スタブ。今後更新予定"}]}
+/>
+
+## ゲーム構成
+
+| 項目 | 内容 |
+|---|---|
+| チーム構成 | キラー1人 vs サバイバー4人 |
+| サバイバーチーム構成 | 2組のデュオ  (2人1組のグループ) |
+| マップ選択 | キラーごとに固定 |
+| ボイスチャット | 一部あり — それぞれのデュオのパートナーとのみVC可能 |
+| 試合前のキラー公開 | あり |
+| 試合前のプレイヤー公開 | あり |
+
+## キラープール
+
+<KillerPool
+  available={["使用可能"]}
+  upcoming={["追加予定", "Nurse", "Spirit", "Blight", "Wraith", "Hillbilly", "Doctor", "Cannibal", "Nightmare",
+             "Pig", "Clown", "Ghostface", "Demogorgon", "Oni",
+             "Executioner", "Trickster", "Nemesis", "Cenobite", "Artist",
+             "Dredge", "Mastermind", "Xenomorph", "Unknown", "Lich", "Dracula"]}
+/>
+
+## ルールとバランス調整
+
+<LinkCard
+  title="基本ルール"
+  href="/ja/regulations/1v4-quartet/rules/general/"
+  description="Quartet ランクの基本ルールが、このDuo+Duoレギュレーションにも適用されます。"
+/>
+
+<LinkCard
+  title="キラー別バランス調整"
+  href="/regulations/1v4-duo/balancing/"
+  description="基本ルールを補完するキラー別のバランス調整です。"
+/>
+
+## キュー参加条件
+
+サバイバーはデュオとしてキューに参加する必要があります。
+
+| 対象 | キューへの参加方法 | キュー参加時の申告内容 |
+|---|---|---|
+| キラープレイヤー | 1人でキューに参加 | 使用するキラー1体 |
+| サバイバーパーティ | デュオ (2人1組のグループ) でキューに参加 | なし |
+
+## リザルト情報
+
+| 項目 | 説明 |
+|---|---|
+| 勝利陣営 | キラーまたはサバイバーのどちらが勝利したか。引き分けの場合は記録しません |
+| 引き分け | 試合が引き分けであることを示します。勝利陣営と同時に記録することはできません |
+| 残り発電機数 | 試合終了時に修理されていなかった発電機の数（0〜5） |
+| フック数 | 試合中にキラーが行ったフックの合計数（0〜12） |
+| キル数 | 死亡したサバイバーの数（0〜4） |
+
+## レーティング
+
+このレギュレーションでは、キラーごとに厳密に分かれたレーティングを使用します。
+詳しくは [1v4 Quartet Ranked](/ja/regulations/1v4-quartet/) のレーティング項目を参照.
+
+## トラブル対応
+
+このレギュレーションでの切断、再試合、リザルトに関する異議申し立てには、
+共通の「試合の中断」および「結果と異議申し立て」ポリシーが適用されます。
+
+[試合の中断](/handbook/policies/match-interruptions/)および[結果と異議申し立て](/handbook/policies/results-and-disputes/)を参照してください。

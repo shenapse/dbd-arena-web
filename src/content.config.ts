@@ -29,6 +29,13 @@ export const collections = {
         handle: z.string().optional(),
         killer: z.string().optional(),
         format: z.string().optional(),
+        // Translation provenance. English remains the authoritative edition;
+        // localized pages record which English version they cover.
+        language: z.string().optional(),
+        translationStatus: z.enum(['complete', 'incomplete', 'outdated']).optional(),
+        translatedVersion: z.string().optional(),
+        translationDate: z.string().optional(),
+        authoritativeSource: z.string().optional(),
         // Notice classification.
         type: z.string().optional(),
         date: z.string().optional(),

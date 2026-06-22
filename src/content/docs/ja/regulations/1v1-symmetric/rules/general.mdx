@@ -1,0 +1,93 @@
+---
+title: 1v1 Symmetric — 基本ルール
+description: >-
+  1v1 Symmetric形式で全キラーに共通して適用される基本ルールです。
+  マップ、勝利条件、パークやアドオンの制限など、キラーごとの詳細は、
+  このルールを補完する同階層のキラー別バランス調整ページに記載されています。
+handle: 1v1-symmetric-general
+status: active
+version: "1.0"
+effectiveDate: "2026-06-21"
+changeHistory:
+  - version: "1.0"
+    date: "2026-06-21"
+    note: 1v1 Symmetric基本ルールの初版を公開。
+language: ja
+translationStatus: complete
+translatedVersion: "1.0"
+translationDate: "2026-06-22"
+authoritativeSource: /regulations/1v1-symmetric/rules/general/
+---
+
+import { Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
+import LifecycleMeta from '../../../../../../components/LifecycleMeta.astro';
+
+> **翻訳について:** このページは、読みやすさのために提供される非公式な日本語訳です。
+> 英語版との間に内容や解釈の相違がある場合は、[英語版の基本ルール](/regulations/1v1-symmetric/rules/general/)が優先されます。  
+> **翻訳ステータス:** 完全 · **対応英語版:** 1.0 · **翻訳日:** 2026-06-22
+
+<LifecycleMeta
+  status={frontmatter.status}
+  version={frontmatter.version}
+  effectiveDate={frontmatter.effectiveDate}
+  changeHistory={frontmatter.changeHistory}
+/>
+
+1v1 Symmetric形式で全キラーに共通して適用される基本ルールです。
+マップ、勝利条件、パークやアドオンの制限など、キラーごとの詳細は、
+このルールを補完する同階層のキラー別バランス調整ページに記載されています。
+
+## キラーのPing
+
+試合を有効とするには、キラーのPingが60 ms未満で安定していなければなりません。
+高いPingや接続の不安定な状態が継続する場合は、再試合とします。
+
+## 必須オファリング
+
+- キラー: 割れたコイン
+
+## チェイスタイマーの開始
+
+<Aside type="note" title="概要">
+  各ラウンドは、殺人鬼の小屋で共通の「しゃがみ→反応」の開始手順に従います。
+</Aside>
+
+各ラウンドは殺人鬼の小屋で開始します。サバイバーは小屋にある
+2つの出入口のうち一方を選び、そこに位置取ります。キラーは反対側の出入口に位置取ります。
+
+両プレイヤーが所定の位置についたら、サバイバーは素早く1回しゃがんで開始の合図を出します。
+キラーはその合図を確認後、直ちに指定された開始応答を行わなければなりません。
+
+開始応答は、通常攻撃を空振りする、キラーの能力を空打ちするなど、キラー別ルールに記載されています。
+
+サバイバーが開始の合図を行った時点でチェイスタイマーを開始します。
+キラーが指定された応答を行わなかった場合、または明らかに遅れて行った場合は、
+開始位置に戻り、開始手順をやり直します。
+
+ラウンド開始前にどちらの出入口に立つかはサバイバーが決めることができます。
+
+## 降参
+降参は切断によって行います。
+
+サバイバーはいつでも降参できます。キラーは、勝利条件を達成できなくなった時点で降参できます。
+
+降参したプレイヤーは現在のラウンドに敗北します。マッチ全体の敗北にはなりません。
+
+## 適用対象
+
+- [DBD 1v1 Symmetric・ランク](/ja/regulations/1v1-symmetric/)
+- DBD 1v1 Asymmetric・ランク
+
+<CardGrid>
+<LinkCard
+  title="レギュレーション概要に戻る"
+  href="/ja/regulations/1v1-symmetric/"
+  description="1v1 Symmetric・ランク"
+/>
+
+<LinkCard
+  title="キラー別バランス調整に進む"
+  href="/regulations/1v1-symmetric/balancing"
+  description="1v1 Symmetric・ランクのキラー別バランス調整一覧"
+/>
+</CardGrid>

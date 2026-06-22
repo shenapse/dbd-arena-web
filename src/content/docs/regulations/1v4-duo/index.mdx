@@ -31,7 +31,7 @@ import LifecycleMeta from '../../../../components/LifecycleMeta.astro';
 | Team structure | 1 × Killer vs 4 × Survivors |
 | Survivor team structure | 2 × Duos |
 | Map selection | Fixed per killer character |
-| Voice comms | Partially Yes — survivors are assumed to be in voice only between Duo pairs. |
+| Voice comms | Partially Yes — survivors are assumed to be in voice only between their duo partners. |
 | Pre-match killer reveal | Yes — the killer character is known to both sides before the match starts. |
 | Pre-match player reveal | Yes |
 
@@ -62,7 +62,7 @@ import LifecycleMeta from '../../../../components/LifecycleMeta.astro';
 
 ## Queue requirement
 
-Survivors are expected to queue as a full four-player party.
+Survivors are expected to queue as a Duo.
 
 | Who | How they queue | Declares at queue time |
 |---|---|---|
@@ -81,18 +81,7 @@ Survivors are expected to queue as a full four-player party.
 
 ## Ratings
 
-Strict per-killer rating within this regulation. A match affects
-
-- for Killer player: his rating for the killer character
-- for Survivor party: the **survivor group** rating for the killer character they face.
-
-e.g., suppose player K playing Nurse vs survivor team S=(s1, s2, s3, s4).
-affected ratings are:
-- (K, \{1v4 Quartet Rank regulation / role=killer / killer=Nurse\})
-- (S, \{1v4 Quartet Rank regulation / role=survivor / killer=Nurse\})
-- **NOT** (**s1**, \{1v4 Quartet Rank regulation / role=survivor / killer=Nurse\})
-- **NOT** (S, \{**some other  regulation** / role=survivor / killer=Nurse\})
-- **NOT** (S, \{some other  regulation / role=survivor / killer=**Blight**\})
+Strict per-killer rating within this regulation. See Rating section for [1v4 Quartet Ranked](/regulations/1v4-quartet/).
 
 ## Trouble handling
 
