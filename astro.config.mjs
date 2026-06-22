@@ -82,7 +82,6 @@ export default defineConfig({
               items: [
                 {
                   label: 'DBD 1v4 Quartet Ranked',
-                  translations: { ja: 'DBD 1v4 カルテット ランク' },
                   items: [
                     { label: 'Overview', translations: { ja: '概要' }, slug: 'regulations/1v4-quartet' },
                     { label: 'General Rule', translations: { ja: '基本ルール' }, slug: 'regulations/1v4-quartet/rules/general' },
@@ -100,7 +99,6 @@ export default defineConfig({
                 },
                 {
                   label: 'DBD 1v1 Symmetric Ranked',
-                  translations: { ja: 'DBD 1v1 シンメトリック ランク' },
                   items: [
                     { label: 'Overview', translations: { ja: '概要' }, slug: 'regulations/1v1-symmetric' },
                     { label: 'General Rule', translations: { ja: '基本ルール' }, slug: 'regulations/1v1-symmetric/rules/general' },
@@ -122,7 +120,6 @@ export default defineConfig({
               items: [
                 {
                   label: 'DBD 1v4 Duo+Duo Ranked',
-                  translations: { ja: 'DBD 1v4 デュオ+デュオ ランク' },
                   slug: 'regulations/1v4-duo',
                 },
               ],
@@ -138,7 +135,7 @@ export default defineConfig({
             { label: 'Player Profile', translations: { ja: 'プレイヤープロフィール' }, slug: 'handbook/player-profile' },
             { label: 'Groups', translations: { ja: 'グループ' }, slug: 'handbook/groups' },
             { label: 'Matchmaking and Readiness', translations: { ja: 'マッチメイキングと準備状態' }, slug: 'handbook/matchmaking-and-readiness' },
-            { label: 'Results', translations: { ja: '結果' }, slug: 'handbook/results' },
+            { label: 'Results', translations: { ja: '結果報告' }, slug: 'handbook/results' },
             {
               label: 'Player Policies',
               translations: { ja: 'プレイヤーポリシー' },
@@ -146,7 +143,7 @@ export default defineConfig({
                 { label: 'Overview', translations: { ja: '概要' }, slug: 'handbook/policies' },
                 {
                   label: 'Participation and Conduct',
-                  translations: { ja: '参加と行動規範' },
+                  translations: { ja: '行動規範' },
                   slug: 'handbook/policies/participation-and-conduct',
                 },
                 {
@@ -196,8 +193,7 @@ export default defineConfig({
           translations: { ja: 'お知らせ' },
           items: [
             { label: 'Notices', translations: { ja: 'お知らせ' }, slug: 'notices' },
-            { label: 'Scheduled maintenance window', translations: { ja: 'メンテナンス予定' }, slug: 'notices/2026-06-20-maintenance' },
-            { label: 'Service launch', translations: { ja: 'サービス開始' }, slug: 'notices/2026-06-15-launch' },
+            { label: 'Website launch', translations: { ja: 'Website 公開' }, slug: 'notices/2026-06-15-launch' },
           ],
         },
         { label: 'About This Service', translations: { ja: 'このサービスについて' }, slug: 'about' },
