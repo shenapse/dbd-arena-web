@@ -15,6 +15,7 @@ changeHistory:
 ---
 
 import LifecycleMeta from '../../../../../components/LifecycleMeta.astro';
+import ImageRow from '../../../../../components/ImageRow.astro';
 
 <LifecycleMeta
   status="active"
@@ -45,10 +46,20 @@ characters are not allowed within the same trial.
 
 - Killer: Cut Coin
 - Survivor:
-  - Shroud of Binding — Causes all Survivors to spawn together in the same location.
+  - Shroud of Union — Causes all Survivors to spawn together in the same location.
   - one of Hatch control offerings:
     - in a map with shack: Annotated Blueprint — Make it spawn by the killer shack
     - in a map without shack: Vigo's Blueprint
+
+<ImageRow label="Killer" images={[
+  { src: '/images/offerings/Cut-Coin.webp', label: 'Cut Coin' },
+]} />
+
+<ImageRow label="Survivor" images={[
+  { src: '/images/offerings/Shroud-of-Union.webp', label: 'Shroud of Union' },
+  { src: '/images/offerings/Annotated-Blueprint.webp', label: 'Annotated Blueprint' },
+  { src: '/images/offerings/Vigo_S-Blueprint.webp', label: "Vigo's Blueprint" },
+]} />
 
 ## Result counting and surrender
 
