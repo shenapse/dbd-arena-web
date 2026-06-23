@@ -123,6 +123,13 @@ export default defineConfig({
                       items: [
                         { label: 'Overview', translations: { ja: '概要' }, slug: 'regulations/1v1-symmetric/balancing' },
                         { label: 'Trapper', translations: { ja: 'トラッパー' }, slug: 'regulations/1v1-symmetric/balancing/trapper' },
+                        { label: 'Wraith', translations: { ja: 'レイス' }, slug: 'regulations/1v1-symmetric/balancing/wraith' },
+                        { label: 'Hillbilly', translations: { ja: 'ヒルビリー' }, slug: 'regulations/1v1-symmetric/balancing/hillbilly' },
+                        { label: 'Doctor', translations: { ja: 'ドクター' }, slug: 'regulations/1v1-symmetric/balancing/doctor' },
+                        { label: 'Nightmare', translations: { ja: 'ナイトメア' }, slug: 'regulations/1v1-symmetric/balancing/nightmare' },
+                        { label: 'Pig', translations: { ja: 'ピッグ' }, slug: 'regulations/1v1-symmetric/balancing/pig' },
+                        { label: 'Wesker', translations: { ja: 'ウェスカー' }, slug: 'regulations/1v1-symmetric/balancing/wesker' },
+                        { label: 'Demogorgon', translations: { ja: 'デモゴルゴン' }, slug: 'regulations/1v1-symmetric/balancing/demogorgon' },
                       ],
                     },
                   ],
