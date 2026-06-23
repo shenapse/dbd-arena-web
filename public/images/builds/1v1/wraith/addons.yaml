@@ -1,0 +1,21 @@
+# Perk allow-list example: The Trapper
+# Run from the repo root:
+#   node utilities/perk-sheet-generator/perk-sheet-generator.js \
+#        utilities/perk-sheet-generator/examples/the-trapper.yaml \
+#        --out utilities/perk-sheet-generator/output \
+#        --preset utilities/perk-sheet-generator/output/test-preset.json
+
+killer: The Wraith
+balancing: DBD Arena - 1v1 Symmetric Rank v0.1
+# universe is optional; defaults to every perk in dbdperks.json for each side.
+# universe:
+#   killer: all
+#   survivor: all
+
+addons:
+  default: deny         # Start with every Trapper add-on allowed
+  allow:                 # allow wins on conflict — re-permit one iridescent
+    - {rarity: "Rare"}
+    - Windstorm - Blood
+    - Swift Hunt - Blood
+    - Shadow Dance - Blood
