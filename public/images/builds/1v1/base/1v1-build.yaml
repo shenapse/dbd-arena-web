@@ -1,0 +1,35 @@
+# Perk allow-list example: The Trapper
+# Run from the repo root:
+#   node utilities/perk-sheet-generator/perk-sheet-generator.js \
+#        utilities/perk-sheet-generator/examples/the-trapper.yaml \
+#        --out utilities/perk-sheet-generator/output \
+#        --preset utilities/perk-sheet-generator/output/test-preset.json
+
+killer: The Trapper
+balancing: DBD Arena - 1v1 Symmetric Rank v0.1
+# universe is optional; defaults to every perk in dbdperks.json for each side.
+# universe:
+#   killer: all
+#   survivor: all
+
+killerPerks:
+  default: deny          # Start with all killer perks allowed
+  allow:                 # Then deny these specific perks
+    - Bamboozle
+    - Brutal Strength
+    - Dark Arrogance
+
+survivorPerks:
+  default: deny          # Start with no survivor perks allowed
+  allow:                 # Then allow these specific perks and groups
+    - Balanced Landing
+    - Dramaturgy
+    - Finesse
+    - Five Moves Ahead
+    - Fixated
+    - Lithe
+    - Resilience
+    - Smash Hit
+    - Urban Evasion
+    - Windows of Opportunity
+  deny: []

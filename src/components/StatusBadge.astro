@@ -14,9 +14,21 @@ const GLYPHS = {
   archived: "✕",
 } as const;
 
+const TEXT_KEYS = {
+  active: 'status.active',
+  upcoming: 'status.upcoming',
+  archived: 'status.archived',
+} as const;
+
+const TITLE_KEYS = {
+  active: 'status.active.title',
+  upcoming: 'status.upcoming.title',
+  archived: 'status.archived.title',
+} as const;
+
 const glyph = GLYPHS[status];
-const text = t(`status.${status}` as Parameters<typeof t>[0]);
-const title = t(`status.${status}.title` as Parameters<typeof t>[0]);
+const text = t(TEXT_KEYS[status]);
+const title = t(TITLE_KEYS[status]);
 ---
 
 <span class={`status-badge status-badge--${status}`} title={title}>

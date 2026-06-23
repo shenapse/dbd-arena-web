@@ -6,6 +6,7 @@ description: >-
 ---
 
 import StatusBadge from '@components/StatusBadge.astro';
+import ImageRow from '@components/ImageRow.astro';
 
 Read the [general rule](/regulations/1v1-symmetric/rules/general/) first; these
 entries only cover per-killer balancing.
@@ -16,15 +17,16 @@ entries only cover per-killer balancing.
 
 | Killer | Map | Response | Killer Perk | Add-ons | Survivor Perk | Status |
 |--------|--------|--------|--------|--------|--------|--------|
-| [Trapper](/regulations/1v1-symmetric/balancing/trapper/) | Suffocation Pit | M1 swing | BS / Bamboozle | Trapper Sack | Lithe |  <StatusBadge status="active" /> |
-| Wraith | Cole Tower? | M1 swing | BS / Bamboozle | TBD | TBD |  <StatusBadge status="upcoming" /> |
-| Hillbilly | Wrecker's Yard | M1 swing | Bamboozle | TBD| TBD |  <StatusBadge status="upcoming" /> |
-| Doctor | Wrecker's Yard | M1 swing | BS / Bamboozle | TBD | TBD |  <StatusBadge status="upcoming" /> |
-| Blight | Suffocation Pit | Consume N token | TBD | TBD| TBD |  <StatusBadge status="upcoming" /> |
-| Cannibal | Wrecker's Yard | M1 swing | Bamboozle | TBD | TBD |  <StatusBadge status="upcoming" /> |
-| Pig | Wrecker's Yard | M1 swing | BS / Bamboozle | TBD | TBD |  <StatusBadge status="upcoming" /> |
-| Wesker | Cole Tower? | M1 swing | BS / Bamboozle | TBD | TBD |  <StatusBadge status="upcoming" /> |
-| Demogorgon | Wrecker's Yard | M1 swing | Bamboozle | TBD | TBD |  <StatusBadge status="upcoming" /> |
+| [Trapper](/regulations/1v1-symmetric/balancing/trapper/) | Suffocation Pit | M1 swing | pick one | Trapper Sack | Lithe |  <StatusBadge status="active" /> |
+| [Wraith](/regulations/1v1-symmetric/balancing/wraith/) | Cole Tower | M1 swing | pick one | TBD | pick two |  <StatusBadge status="upcoming" /> |
+| [Hillbilly](/regulations/1v1-symmetric/balancing/hillbilly/) | Wrecker's Yard | M1 swing | pick one | TBD | pick two |  <StatusBadge status="upcoming" /> |
+| [Doctor](/regulations/1v1-symmetric/balancing/doctor/) | Wrecker's Yard | M1 swing | pick one | TBD | pick two |  <StatusBadge status="upcoming" /> |
+| Blight | Suffocation Pit | Consume N token | TBD | Crow & Rat | TBD |  <StatusBadge status="upcoming" /> |
+| Cannibal | Wrecker's Yard | M1 swing | pick one | TBD | pick two |  <StatusBadge status="upcoming" /> |
+| [Nightmare](/regulations/1v1-symmetric/balancing/nightmare/) | Wrecker's Yard | M1 swing | pick one | TBD | pick two |  <StatusBadge status="upcoming" /> |
+| [Pig](/regulations/1v1-symmetric/balancing/pig/) | Wrecker's Yard | M1 swing | pick one | TBD | pick two |  <StatusBadge status="upcoming" /> |
+| [Wesker](/regulations/1v1-symmetric/balancing/wesker/) | Cole Tower | M1 swing | pick one | TBD | pick two |  <StatusBadge status="upcoming" /> |
+| [Demogorgon](/regulations/1v1-symmetric/balancing/demogorgon/) | Wrecker's Yard | M1 swing | pick one | TBD | pick two |  <StatusBadge status="upcoming" /> |
 {/* | Killer | Suffocation Pit | M1 swing | BS / Bamboozle | None | Lithe |  <StatusBadge status="upcoming" /> | */}
 {/* | Killer | Suffocation Pit | M1 swing | BS / Bamboozle | None | Lithe |  <StatusBadge status="upcoming" /> |
 | Killer | Suffocation Pit | M1 swing | BS / Bamboozle | None | Lithe |  <StatusBadge status="upcoming" /> |
@@ -33,3 +35,35 @@ entries only cover per-killer balancing.
 | Killer | Suffocation Pit | M1 swing | BS / Bamboozle | None | Lithe |  <StatusBadge status="upcoming" /> |
 | Killer | Suffocation Pit | M1 swing | BS / Bamboozle | None | Lithe |  <StatusBadge status="upcoming" /> | */}
 {/* | [Blight](/regulations/1v4-quartet/balancing/blight/) | Suffocation Pit | | <StatusBadge status="upcoming" /> | */}
+
+## Required offerings
+
+<ImageRow images={[
+  { src: '/images/offerings/Cut-Coin.webp', label: 'Cut Coin' },
+]} />
+
+## Killer perks
+
+Killer chooses one of:
+
+<ImageRow images={[
+  { src: '/images/builds/1v1/base/Bamboozle.webp', label: 'Bamboozle' },
+  { src: '/images/builds/1v1/base/Brutal-Strength.webp', label: 'Brutal Strength' },
+]} />
+
+## Survivor perks
+
+Survivor chooses one or two perk(s) from the list below.
+
+![Survivor Perks - 1v1](/images/builds/1v1/base/The-Trapper-survivor-perks.png)
+
+- Balanced Landing
+- Dramaturgy
+- Finesse
+- Five Moves Ahead
+- Fixated
+- Lithe
+- Resilience
+- Smash Hit
+- Urban Evasion
+- Windows of Opportunity
