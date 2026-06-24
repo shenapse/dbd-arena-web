@@ -1,50 +1,109 @@
 ---
 title: Start Playing
 description: >-
-  What you need, what a match looks like, and how to get into Discord and
-  register — everything to start playing.
+  Choose a queue path, prepare the right setup, and join Discord ready to enter
+  your first DBD Arena match.
 ---
 
-import { LinkButton } from '@astrojs/starlight/components';
+import { CardGrid, LinkButton, LinkCard, Steps } from '@astrojs/starlight/components';
 import { DISCORD_INVITE } from '../../../constants.ts';
 
-The live service runs in Discord. This website only explains how it works — the
-actual playing happens there. Here is what you need, what a match looks like,
-and how to get in.
+Use this page to choose a valid way into your first match. The website explains
+the formats and rules; the live service runs in Discord.
 
-## What you need
+## Choose how you want to play
 
-A **Discord account**. That is the only prerequisite to read about and join the
-service. You will of course also need Dead by Daylight and the ability to play
-custom (private) games, since that is where matches happen.
+Start with the path that matches how you want to compete.
 
-## What happens in a match
+<CardGrid>
+  <LinkCard
+    title="Play 1v1"
+    href="/regulations/1v1-symmetric/"
+    description="Queue solo for DBD 1v1 Symmetric Ranked. Both players take the killer and survivor side across a best-of-3."
+  />
+  <LinkCard
+    title="Play killer in 1v4"
+    href="/regulations/1v4-quartet/"
+    description="Queue solo for DBD 1v4 Quartet Ranked, choose an available killer, and face a full survivor team."
+  />
+  <LinkCard
+    title="Play survivor in 1v4"
+    href="/regulations/1v4-quartet/"
+    description="Queue as a fixed four-player survivor group. The format assumes the full team is in voice together."
+  />
+</CardGrid>
 
-So you know what you are getting into, the normal match loop looks like this:
+## Prepare for that path
 
-- You join the queue for the active regulation.
-- The matchmaker pairs you with eligible opponents.
-- A match thread is created. All parties confirm readiness.
-- You play the match in-game.
-- Both sides submit and agree on the result.
-- Ratings are updated automatically.
+Each path has a different setup. Do this before you submit a queue request.
 
-That is the full loop. The [Handbook](/handbook/) covers
-each step in detail, and [Regulations](/regulations/) lists every format you can
-play.
+| Path | Before queueing |
+|---|---|
+| 1v1 player | Review the [1v1 Symmetric Ranked regulation](/regulations/1v1-symmetric/), including its general rules and per-killer balancing. You queue solo and declare one available killer. |
+| 1v4 killer | Review the [1v4 Quartet Ranked regulation](/regulations/1v4-quartet/), including its general rules and the balancing for the killer you want to play. You queue solo and declare one available killer. |
+| 1v4 survivor | Gather a fixed four-player party, make sure every member is registered, create a [group](/handbook/groups/), and review the [1v4 Quartet Ranked regulation](/regulations/1v4-quartet/). |
 
-## Join Discord, then register
+:::note[Custom matches]
+DBD Arena coordinates rated custom matches. You still play the match in Dead by
+Daylight, so you need the game and the ability to join custom games.
+:::
 
-The live service runs in Discord. This is an external handoff — registering,
-queueing, readying up, and reporting results all happen there.
+## Join Discord and set up your profile
 
 <LinkButton href={DISCORD_INVITE} icon="discord" target="_blank">Join Discord</LinkButton>
 
-**Your first action there is to register.** Registering creates your player
-profile: you give a display name and your in-game player id, and the service
-links the profile to your Discord account automatically. It is a one-time step,
-and you cannot queue until it is done. Full detail is in
-[Player Profile](/handbook/player-profile/).
+Your first action in Discord is to register a [player profile](/handbook/player-profile/).
+Registration creates the identity Arena uses for matchmaking, results, and
+ratings.
+
+When you register, you provide:
+
+- A display name.
+- Your Dead by Daylight in-game player id.
+
+Your Discord account is linked automatically. You only register once, and you
+cannot queue until registration is complete.
+
+## Submit your first queue request
+
+Once your profile is ready, follow the path you chose.
+
+<Steps>
+1. **Open the queue for the regulation you want.**
+   Use the Discord interface for either 1v1 Symmetric Ranked or 1v4 Quartet
+   Ranked.
+
+2. **Choose solo or group entry.**
+   1v1 players and 1v4 killers queue solo. A 1v4 survivor team queues through
+   its four-player group.
+
+3. **Make any required declaration.**
+   Killer-side entries choose the killer they are committing to for the match.
+   The regulation page lists what each format requires.
+
+4. **Submit the request and wait.**
+   You can have only one active request at a time. If you want to switch
+   formats, cancel the current request first.
+
+5. **Respond to the ready check.**
+   When Arena finds a match, every participant must confirm readiness. If anyone
+   leaves or times out, the match is cancelled and everyone can queue again.
+
+6. **Play and confirm the result.**
+   After everyone is ready, set up the custom game, play under the selected
+   regulation, then report and approve the result in Discord.
+</Steps>
+
+For the complete flow, see the [Matchmaking Journey](/handbook/matchmaking-journey/).
+
+## If something blocks you
+
+- Registration, profile, or group problems:
+  [Account and Group Troubleshooting](/help/account-and-group/).
+- Queue, cancellation, timeout, or ready-check problems:
+  [Queue and Readiness Troubleshooting](/help/queue-and-readiness/).
+- Result reporting or disputes:
+  [Result and Dispute Troubleshooting](/help/result-and-dispute/).
 
 :::note[A reminder before you go]
 This is a community service for custom matches. It is not official Dead by
