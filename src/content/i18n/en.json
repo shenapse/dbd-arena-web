@@ -5,6 +5,8 @@
   "status.upcoming.title": "Announced, not yet playable",
   "status.archived": "Archived",
   "status.archived.title": "Retired, kept for reference",
+  "status.provisional": "Provisional",
+  "status.provisional.title": "Tentatively in effect, subject to change",
   "lifecycle.status": "Status",
   "lifecycle.version": "Version",
   "lifecycle.effectiveDate": "Effective date",

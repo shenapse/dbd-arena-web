@@ -3,7 +3,7 @@
 // Labels/tooltips are localized via Starlight's i18n (src/content/i18n/*.json); the
 // glyph is locale-independent.
 interface Props {
-  status: "active" | "upcoming" | "archived";
+  status: "active" | "upcoming" | "archived" | "provisional";
 }
 const { status } = Astro.props;
 const t = Astro.locals.t;
@@ -12,18 +12,21 @@ const GLYPHS = {
   active: "●",
   upcoming: "◓",
   archived: "✕",
+  provisional: "◐",
 } as const;
 
 const TEXT_KEYS = {
   active: 'status.active',
   upcoming: 'status.upcoming',
   archived: 'status.archived',
+  provisional: 'status.provisional',
 } as const;
 
 const TITLE_KEYS = {
   active: 'status.active.title',
   upcoming: 'status.upcoming.title',
   archived: 'status.archived.title',
+  provisional: 'status.provisional.title',
 } as const;
 
 const glyph = GLYPHS[status];
