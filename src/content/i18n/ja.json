@@ -5,6 +5,8 @@
   "status.upcoming.title": "実装待ち",
   "status.archived": "終了",
   "status.archived.title": "提供終了",
+  "status.provisional": "暫定",
+  "status.provisional.title": "暫定的に適用中、変更の可能性あり",
   "lifecycle.status": "ステータス",
   "lifecycle.version": "バージョン",
   "lifecycle.effectiveDate": "発効日",

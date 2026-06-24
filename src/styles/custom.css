@@ -10,9 +10,10 @@
 
 /* ---- Status badge ovals (StatusBadge.astro) ---- */
 :root {
-  --status-active:   #4ec07a;
-  --status-upcoming: #d9a441;
-  --status-archived: #8a8f9e;
+  --status-active:      #4ec07a;
+  --status-upcoming:    #d9a441;
+  --status-archived:    #8a8f9e;
+  --status-provisional: #a07bd4;
 }
 
 /* ---- Home hero wordmark (index.mdx) ----
@@ -84,9 +85,10 @@
   border-radius: 999px;
   border: 1px solid currentColor;
 }
-.status-badge--active   { color: var(--status-active);   }
-.status-badge--upcoming { color: var(--status-upcoming); }
-.status-badge--archived { color: var(--status-archived); }
+.status-badge--active      { color: var(--status-active);      }
+.status-badge--upcoming    { color: var(--status-upcoming);    }
+.status-badge--archived    { color: var(--status-archived);    }
+.status-badge--provisional { color: var(--status-provisional); }
 
 /* ---- Lifecycle metadata block (LifecycleMeta.astro) ---- */
 .meta-grid {

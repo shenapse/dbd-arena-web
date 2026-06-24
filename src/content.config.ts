@@ -13,7 +13,7 @@ export const collections = {
     schema: docsSchema({
       extend: z.object({
         // Lifecycle metadata on normative regulation / policy pages.
-        status: z.enum(['active', 'upcoming', 'archived']).optional(),
+        status: z.enum(['active', 'upcoming', 'archived', 'provisional']).optional(),
         version: z.string().optional(),
         effectiveDate: z.string().optional(),
         changeHistory: z
@@ -55,6 +55,8 @@ export const collections = {
         'status.upcoming.title': z.string().optional(),
         'status.archived': z.string().optional(),
         'status.archived.title': z.string().optional(),
+        'status.provisional': z.string().optional(),
+        'status.provisional.title': z.string().optional(),
         'lifecycle.status': z.string().optional(),
         'lifecycle.version': z.string().optional(),
         'lifecycle.effectiveDate': z.string().optional(),

@@ -9,7 +9,7 @@ interface ChangeEntry {
   note: string;
 }
 interface Props {
-  status: "active" | "upcoming" | "archived";
+  status: "active" | "upcoming" | "archived" | "provisional";
   version: string;
   effectiveDate: string;
   changeHistory: ChangeEntry[];
