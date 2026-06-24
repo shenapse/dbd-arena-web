@@ -19,23 +19,58 @@ The goal is not to produce a perfect measurement of skill. No single match or
 rating can do that. The goal is to control enough surrounding uncertainty that
 a win or loss says more than it usually can in public play.
 
+## Interpreting a result
+
+Interpreting a result means deciding what the result is evidence of. A match
+result tells us who won or lost, but competitive systems need to ask a harder
+question: whose performance does that result represent, under what conditions,
+and how much should future judgments rely on it?
+
+This matters whenever results are used as evidence beyond a single match.
+Matchmaking, ratings, rankings, practice goals, and recognition all depend on
+deciding what a result should count for. If the evidence is
+attached to the wrong competitor, mixed across incompatible contexts, or
+overread from too few games, the system can reward the wrong thing and produce
+weaker matches.
+
+A useful result does not need to prove everything. It only needs to be clear
+enough that players and the service can understand what question it helps
+answer. "This player won a match" is less useful than "this player performed
+well with this killer, under these rules, against this kind of opposition."
+The second statement gives the result a context.
+
+Arena takes this problem seriously. Its competitive design is built around
+making results easier to read: defining the competitors, controlling match
+conditions, recording the relevant context, and accumulating evidence across
+repeated games.
+
 ## Why DBD results are difficult to interpret
 
-Dead by Daylight is asymmetric. Killers do not face killers, and survivors do
-not face survivors. The two sides perform different tasks, and a result joins
-their performance into one outcome.
+Dead by Daylight makes result interpretation unusually hard because one match
+contains several different competitive questions at once.
+
+The game is asymmetric. Killers do not face killers, and survivors do not face
+survivors. Each side has different objectives, tools, responsibilities, and
+failure conditions. A single outcome joins those different performances
+together, so the result cannot be read as a direct comparison between two
+players doing the same task.
 
 Killer performance is also character-specific. Nurse, Blight, Spirit, Doctor,
-and Huntress present different problems and test different skills, even when
-the same player is behind them.
+and Huntress do not merely offer cosmetic variety; they create different
+matchups and test different skills. That makes a killer result difficult to
+interpret as general killer-player strength.
 
-Survivor performance is strongly connected to the full team. Communication,
-rescues, resource use, pressure management, and risk decisions make it
-difficult to separate one player's contribution from the group's result.
+Survivor performance is strongly team-dependent. Communication, rescues,
+resource use, pressure management, and risk decisions are shared across the
+group. One survivor's result is therefore not cleanly separable from the
+decisions and performance of the other three survivors. The match outcome may
+be meaningful, but it is meaningful as evidence about a team context, not as a
+simple individual survivor measurement.
 
-Finally, map context, builds, preparation, opponent strength, mistakes, and
-unusual events can all affect a game. A single result may be real without being
-very informative on its own.
+Other factors add more ambiguity. Map context, builds, preparation, opponent
+strength, mistakes, and unusual events can all affect a game. These factors do
+not make results useless, but they limit what a single result can responsibly
+show.
 
 ## Four core design choices
 
