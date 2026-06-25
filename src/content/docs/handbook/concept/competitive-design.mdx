@@ -56,9 +56,12 @@ together, so the result cannot be read as a direct comparison between two
 players doing the same task.
 
 Killer performance is also character-specific. Nurse, Blight, Spirit, Doctor,
-and Huntress do not merely offer cosmetic variety; they create different
-matchups and test different skills. That makes a killer result difficult to
-interpret as general killer-player strength.
+and Huntress do not merely offer cosmetic variety; they change the strategic
+problem both sides are trying to solve. The killer's character determines how
+pressure is created, what survivor actions are punished, what preparation
+matters, and what winning play looks like. Yet the match result surface is the
+same regardless of killer: who survived/died, number of gens remaining, etc. Without recording the
+killer context, the result hides the qualitative matchup that produced it.
 
 Survivor performance is strongly team-dependent. Communication, rescues,
 resource use, pressure management, and risk decisions are shared across the
@@ -85,8 +88,8 @@ Arena uses four related choices to make results easier to interpret:
   specific killer played. A survivor rating belongs to a persistent survivor
   group, at minimum a duo, in the context of the killer it faced. This prevents
   the system from treating different competitive questions as the same one,
-  such as reading a Nurse result as general killer strength or a result against
-  Nurse as proof of performance against every killer.
+  such as reading a Nurse result as proof of general killer strength or a
+  result against Nurse as proof of performance against every killer context.
 - **Team-based survivor ratings.** Stable four-player parties receive the
   greatest emphasis because repeated results from the same lineup produce the
   most reliable team-level evidence. This makes survivor results easier to
@@ -110,7 +113,7 @@ controls conditions that would otherwise make results harder to compare.
 | Source of uncertainty | Why it makes results harder to read | How Arena reduces it |
 |---|---|---|
 | Unknown opponent quality | A win over a much weaker opponent or a loss to a much stronger one says less about current competitive level. | Service ratings help form matches between opponents close enough to matter. |
-| Killer strength mixed together | A result on one killer can be mistaken for evidence about another, even though each killer tests different skills. | Killer rating is tracked per killer rather than as one blended killer number. |
+| Killer contexts mixed together | A result from one killer context can be mistaken for evidence about another, even though each killer creates a different strategic problem for both sides. | Killer rating is tracked per killer, and survivor group ratings are specific to the killer context faced. |
 | Changing survivor teammates | A change in membership can dominate the outcome, making the group's established strength unclear. | Arena rates persistent survivor groups rather than individuals. A stable four-player party provides the clearest team-level evidence. |
 | Map and rule ambiguity | A result can look like a skill gap when it was partly caused by different expectations or match conditions. | Published regulations define the map context, restrictions, structure, and result conditions. |
 | Surprise information | One side may win because the other prepared for a different situation. | The killer, participants, and map selection are revealed before the match starts. |

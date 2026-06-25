@@ -65,8 +65,3 @@ action: staff submit the right result, which supersedes the wrong one, and
 ratings are adjusted from the corrected record. See
 [Results and Disputes](/handbook/policies/results-and-disputes/)
 for how to raise this.
-
-## Trouble?
-
-See [Result and Dispute Troubleshooting](/help/result-and-dispute/)
-for reporting, approval, correction, and escalation problems.
