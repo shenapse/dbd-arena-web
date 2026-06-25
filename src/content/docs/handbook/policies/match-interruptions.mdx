@@ -1,12 +1,12 @@
 ---
 title: Match Interruptions
 description: Disconnect, remake, abandonment, and match-not-played handling.
-status: active
-version: "1.0"
-effectiveDate: "2026-06-15"
+status: provisional
+version: "0.1"
+effectiveDate: "2026-06-25"
 changeHistory:
-  - version: "1.0"
-    date: "2026-06-15"
+  - version: "0.1"
+    date: "2026-06-25"
     note: Initial policy.
 ---
 
@@ -24,32 +24,46 @@ import StatusBadge from '@components/StatusBadge.astro';
 
 What happens when a match cannot be played cleanly from start to finish.
 
-Matches are played in custom games, so things can occasionally go wrong: a connection drops, a lobby will not form, or someone does not show up. This policy explains how those situations are handled. The mechanics of reporting are in the [Results](/handbook/results/) guide.
+## Ready-up and leaving
 
-## Before the match starts
+- Queueing is a commitment: once a queue is formed, each player must confirm ready within the ready-up window, and failing to do so may result in a warning or penalty.
+- After a match starts, players may not leave except under the restart and remake rules below; by choosing to queue, players accept responsibility for staying until the match ends.
 
-If a problem stops the match before it really begins — for example, the custom game cannot be set up, or someone cannot connect — the match is reported as **not played** rather than as a win or loss. No rating changes.
 
-## Disconnects and crashes
+## Pre-match trouble
 
-If a player disconnects during a match, how it is treated depends on when it happened and its effect on the game. If the disconnect clearly decided the outcome, players are expected to report the situation honestly rather than record a result that misrepresents what happened. Repeated or deliberate disconnecting to avoid a loss is treated as a conduct issue under [Participation and Conduct](/handbook/policies/participation-and-conduct/).
-
-## Remakes
-
-If something goes wrong early and all participants agree to replay, they may remake the match. A remade match is played and reported as a fresh match. Only the result that was actually played and agreed is recorded.
-
-## Abandonment and no-shows
-
-If a player does not show up, or leaves before the match can be played, the match is reported as **not played**. Repeated no-shows or abandoning matches affects your standing and may lead to the remedies described in [Participation and Conduct](/handbook/policies/participation-and-conduct/).
-
-## Reporting a match as not played
-
-"Not played" is a distinct outcome, separate from a win, loss, or draw. To use it, **every participant must agree**, and a reason is given. A not-played match does **not** change anyone's rating. This keeps genuine results separate from matches that never really happened.
+If a problem stops the match before it really begins — for example, a player does not show up, the custom game cannot be set up, or someone cannot connect — report the match as **not played** rather than as a win or loss. No rating changes.
 
 :::note[Honesty matters here]
 Reporting a real loss as "not played" to dodge a rating change is result manipulation, and is handled as a conduct violation.
 :::
 
-## Staff discretion
+## Mid-match trouble
 
-Where participants cannot agree, or where an interruption is disputed, staff can step in to decide how the match is recorded. Staff weigh the evidence and context and hold final discretion. Raise these cases through [Results and Disputes](/handbook/policies/results-and-disputes/).
+### Remake
+
+If something goes wrong during a match and all participants still agree to play, they may remake the match. A remade match is played and reported as a fresh match.
+
+This is allowed even when one player caused the trouble, as long as every participant freely agrees to give that player another chance and the agreement does not violate [Participation and Conduct](/handbook/policies/participation-and-conduct/). The rules below define the default path when players do not all agree to remake.
+
+### Early disconnection
+
+Without full agreement to remake, players may disconnect and ask for a restart only during either of these early windows:
+
+- Within 30 seconds after the match starts.
+- Within 30 seconds after the first survivor is downed.
+
+Valid reasons include:
+
+- **Regulation violation:** wrong perks, add-ons, or offerings; wrong map; duplicate survivors; or another setup that violates the applicable regulation.
+- **Unusually high killer ping or wrong server.**
+- **Player disconnect caused by internet trouble or a game error.**
+
+For a regulation violation, opponent(s) may continue playing the match if they agree that the violation does not affect the ongoing match.
+
+In any early restart case:
+
+- Players may require evidence showing that the disconnect was valid.
+- Players may report the player who caused the trouble.
+- If a second disconnect happens, any player who did not cause trouble may refuse another restart. If restart is refused, report the match as **not played**.
+
