@@ -1,6 +1,7 @@
 ---
 title: Result and Dispute Troubleshooting
 description: Result-input, approval, correction, interruption, and escalation problems.
+draft: true
 ---
 
 Recover from result-reporting and dispute issues.
