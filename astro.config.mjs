@@ -173,11 +173,11 @@ export default defineConfig({
                   translations: { ja: '試合の中断' },
                   slug: 'handbook/policies/match-interruptions',
                 },
-                {
-                  label: 'Results and Disputes',
-                  translations: { ja: '結果と異議申し立て' },
-                  slug: 'handbook/policies/results-and-disputes',
-                },
+                // {
+                //   label: 'Results and Disputes',
+                //   translations: { ja: '結果と異議申し立て' },
+                //   slug: 'handbook/policies/results-and-disputes',
+                // },
                 {
                   label: 'Privacy and Public Data',
                   translations: { ja: 'プライバシーと公開データ' },
@@ -207,7 +207,7 @@ export default defineConfig({
             { label: 'FAQ', translations: { ja: 'よくある質問' }, slug: 'help/faq' },
             { label: 'Account and Group', translations: { ja: 'アカウントとグループ' }, slug: 'help/account-and-group' },
             { label: 'Queue and Readiness', translations: { ja: 'キューと準備状態' }, slug: 'help/queue-and-readiness' },
-            { label: 'Result and Dispute', translations: { ja: '結果と異議申し立て' }, slug: 'help/result-and-dispute' },
+            // { label: 'Result and Dispute', translations: { ja: '結果と異議申し立て' }, slug: 'help/result-and-dispute' },
           ],
         },
         {
