@@ -171,12 +171,12 @@ export default defineConfig({
                 { label: 'Overview', translations: { ja: '概要' }, slug: 'handbook/policies' },
                 {
                   label: 'Participation and Conduct',
-                  translations: { ja: '行動規範' },
+                  translations: { ja: '参加者の心得' },
                   slug: 'handbook/policies/participation-and-conduct',
                 },
                 {
-                  label: 'Match Problems and Remakes',
-                  translations: { ja: '試合のトラブルとやり直し' },
+                  label: 'Match Problems',
+                  translations: { ja: '試合関連のトラブル' },
                   slug: 'handbook/policies/match-problems-and-remakes',
                 },
                 // {
