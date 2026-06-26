@@ -55,7 +55,7 @@ rule issue. In that case, instead of a result, the match is reported as
 real result: **every participant must agree** to it, and it does
 not change anyone's rating. This keeps "we did not play" clearly separate from
 a genuine win or loss. See also the
-[Match Interruptions](/handbook/policies/match-interruptions/)
+[Match Problems and Remakes](/handbook/policies/match-problems-and-remakes/)
 policy.
 
 ## Corrections
