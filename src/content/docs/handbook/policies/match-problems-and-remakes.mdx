@@ -1,6 +1,6 @@
 ---
-title: Match Interruptions
-description: Disconnect, remake, abandonment, and match-not-played handling.
+title: Match Problems and Remakes
+description: Leaving, not-played reports, remakes, restarts, disconnects, and abandonment handling.
 status: provisional
 version: "0.1"
 effectiveDate: "2026-06-25"
@@ -12,6 +12,7 @@ changeHistory:
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 import StatusBadge from '@components/StatusBadge.astro';
+import {Aside} from '@astrojs/starlight/components';
 
 <StatusBadge status={frontmatter.status} />
 
@@ -27,17 +28,20 @@ What happens when a match cannot be played cleanly from start to finish.
 ## Ready-up and leaving
 
 - Queueing is a commitment: once a queue is formed, each player must confirm ready within the ready-up window, and failing to do so may result in a warning or penalty.
-- If it is clear that you cannot play the formed match for any reason, choose to leave during ready-up instead of confirming ready. Leaving is better than pretending to be ready and wasting other players' time.
 - After a match starts, players may not leave except under the restart and remake rules below; by choosing to queue, players accept responsibility for staying until the match ends.
 
+<Aside type="caution" title="Respect other players' time">
+  If it is clear that you cannot play the formed match for any reason, choose to leave during ready-up instead of confirming ready. Early leaving is better than pretending to be ready and then making delayed leave. 
+</Aside>
 
 ## Pre-match trouble
 
 If a problem stops the match before it really begins — for example, a player does not show up, the custom game cannot be set up, or someone cannot connect — report the match as **not played** rather than as a win or loss. No rating changes.
 
-:::note[Honesty matters here]
-Reporting a real loss as "not played" to dodge a rating change is result manipulation, and is handled as a conduct violation.
-:::
+<Aside type="caution" title="Honesty matters here">
+  Reporting a real loss as "not played" to dodge a rating change is result manipulation, and is handled as a conduct violation.
+</Aside>
+
 
 ## Mid-match trouble
 
@@ -77,8 +81,11 @@ For a regulation violation outside the mandatory early restart window, the innoc
 In any restart case:
 
 - If a second disconnect happens, any player who did not cause the troubles may refuse another restart. If restart is refused, report the match as **not played**.
-- If the applicable regulation separately allows surrender by disconnecting, that surrender rule is not treated as a match interruption or remake request.
 - Players may report the player who caused the trouble.
+
+<Aside type="note" title="Surrender vs Remake">
+  If the applicable regulation separately allows surrender by disconnecting, that surrender rule is not treated as a match interruption or remake request.
+</Aside>
 
 ### Leave without valid remake reason
 
@@ -92,4 +99,7 @@ Treat it as a problem about result validity.
 - If the match thread is still open and no result has been accepted yet, do not approve a normal win or loss until the issue is resolved. Players should preserve evidence.
 - If the innocent side agrees that the violation did not affect the match, players must accept the actual played result.
 - If the innocent side decides the violation did affect the match, and if it is not challenged (see note below), report the match as **not played** with the violation reason.
-- NOTE: The innocent-side decision rule: the violating side may challenge the decision only with evidence that disproves it, and cannot force **not played** when the innocent side is willing to accept the played result.
+
+<Aside type="note" title="NOTE: The innocent-side decision rule">
+  The violating side may challenge the innocent side decision only with evidence that disproves it, and cannot claim **not played** when the innocent side is willing to accept the played result.
+</Aside>

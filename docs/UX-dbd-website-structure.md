@@ -71,7 +71,7 @@ Handbook contains durable guidance and normative player policies:
 - **Ratings**: one conceptual guide to rated regulations, rating dimensions, rating-affecting outcomes, matchmaking influence, and separation from official DBD ratings.
 - **Player Policies**: index of all normative policy pages.
 - **Participation and Conduct**: eligibility, participation, fair play, violations, remedies, and possible consequences.
-- **Match Interruptions**: disconnect, remake, abandonment, and match-not-played handling.
+- **Match Problems and Remakes**: leaving, not-played reports, remakes, restarts, disconnects, and abandonment handling.
 - **Results and Disputes**: reporting, corrections, evidence preservation, disputes, and staff escalation.
 - **Privacy and Public Data**: the sole canonical page for player-facing privacy and public-data policy.
 

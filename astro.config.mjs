@@ -8,6 +8,12 @@ import { DISCORD_INVITE } from './src/constants.ts';
 const SERVICE_NAME = 'DBD Arena';
 
 export default defineConfig({
+  // Preserve old URLs after a page is renamed so external links/bookmarks
+  // don't 404. `match-interruptions` → `match-problems-and-remakes`.
+  redirects: {
+    '/handbook/policies/match-interruptions/': '/handbook/policies/match-problems-and-remakes/',
+    '/ja/handbook/policies/match-interruptions/': '/ja/handbook/policies/match-problems-and-remakes/',
+  },
   integrations: [
     starlight({
       customCss: ['./src/styles/custom.css'],
@@ -169,9 +175,9 @@ export default defineConfig({
                   slug: 'handbook/policies/participation-and-conduct',
                 },
                 {
-                  label: 'Match Interruptions',
-                  translations: { ja: '試合の中断' },
-                  slug: 'handbook/policies/match-interruptions',
+                  label: 'Match Problems and Remakes',
+                  translations: { ja: '試合のトラブルとやり直し' },
+                  slug: 'handbook/policies/match-problems-and-remakes',
                 },
                 // {
                 //   label: 'Results and Disputes',
