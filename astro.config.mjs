@@ -198,7 +198,32 @@ export default defineConfig({
                 {
                   label: 'Competitive Design',
                   translations: { ja: '競技デザイン' },
-                  slug: 'handbook/concept/competitive-design',
+                  items: [
+                    {
+                      label: 'Introduction',
+                      slug: 'handbook/concept/competitive-design',
+                    },
+                    {
+                      label: 'Controlled Formats',
+                      slug: 'handbook/concept/competitive-design/controlled-formats',
+                    },
+                    {
+                      label: 'Rating Dimensions',
+                      slug: 'handbook/concept/competitive-design/context-specific-rating-dimensions',
+                    },
+                    {
+                      label: 'Competitor Units',
+                      slug: 'handbook/concept/competitive-design/competitor-unit-attribution',
+                    },
+                    {
+                      label: 'Repeated Evidence',
+                      slug: 'handbook/concept/competitive-design/repeated-calibrated-evidence',
+                    },
+                    {
+                      label: 'Extra Context',
+                      slug: 'handbook/concept/competitive-design/extra',
+                    },
+                  ],
                 },
                 { label: 'Rating Guide', translations: { ja: 'レーティングガイド' }, slug: 'handbook/concept/rating-guide' },
               ],
