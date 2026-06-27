@@ -1,0 +1,78 @@
+---
+title: Competitor-Unit Attribution
+description: "How Arena decides whose performance a match result should represent."
+---
+
+## Defining the competitor
+
+Arena uses competitor to mean the stable unit whose performance a result can
+responsibly represent. This is not always the same thing as an individual
+account. The side, the format, and the killer context affect the rating
+dimension where that competitor's result belongs.
+
+Arena therefore does not use one universal player rating for every role and
+situation. It first asks what competitive question the result can answer, then
+places the result in the matching rating dimension and attributes it to the
+competitor unit whose performance answered that question.
+
+## Killer competitor
+
+For killer-side results, the competitor is the killer player. The result is
+attributed to that player within the format and killer-specific rating
+dimension for the declared killer.
+
+This matters because the killer changes the strategic problem of the match. A
+player may be highly experienced on Nurse and still be learning Spirit, and a
+survivor group that performs well against Nurse has not necessarily shown the
+same strength against Blight. Treating those results as the same competitive
+question would make the record harder to interpret.
+
+The killer competitor model changes the question from only "How strong is this
+killer player?" to "How does this player perform with this killer, under this
+format, against serious opposition?" It also gives killer players
+character-specific rivals: a Nurse player is competing not just against
+survivor groups, but against other Nurse players trying to prove stronger
+results in the same context.
+
+## Survivor competitor
+
+For survivor-side results, the competitor is a persistent survivor group. The
+result is attributed to that group within the format and killer-specific
+rating dimension for the killer it faced. A duo is the smallest survivor
+competitor unit; an individual survivor is not one.
+
+High-level survivor play is coordinated by nature. The team manages risk, uses
+resources, and makes shared decisions. Individual skill matters, but the match
+result cannot cleanly divide those connected contributions among four people.
+The result is strongest as evidence about the group that produced it.
+
+A fixed four-player party provides the clearest competitive identity: the same
+lineup can play repeatedly and accumulate a more reliable team-level record. A
+different membership does not inherit the original group's results. The group's
+record is also specific to the killer context, because each killer demands
+different preparation and decisions.
+
+## What Arena does not treat as a competitor
+
+Arena does not treat a universal player account, a blended killer record, or an
+individual solo survivor as the rated competitor.
+
+A universal player rating would mix killer and survivor roles, character
+contexts, and team contexts into one number. A blended killer rating would hide
+the difference between a player's killers. A solo-survivor rating would assign
+a shared team outcome to an individual.
+
+Requiring a persistent survivor group, at minimum a duo, preserves a stable
+competitive identity across matches. Full parties provide the strongest version
+of that identity, which is why Arena places the greatest design emphasis on
+results accumulated by stable four-player groups.
+
+## Solo survivors in unrated formats
+
+This does not require every possible format to exclude solo survivors. A
+future unrated format may admit solo survivors after the rated model has
+produced enough history to support reliable matchmaking projections from other
+rated contexts. Such a format would use those projections to form matches;
+its results would not create or update a solo-survivor rating. It would be
+intended for players with substantial existing rating history, not as the path
+for new players to establish a rating.
