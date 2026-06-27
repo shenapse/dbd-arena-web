@@ -149,11 +149,20 @@ Separate dimensions need their own history. A new killer dimension, or a
 survivor group's first matches against a killer, may be less certain until more
 accepted results exist.
 
-Arena accepts that tradeoff. A faster rating that mixes incompatible results
-would be easier to populate, but weaker for matchmaking and harder for players
-to interpret. A slower, more specific rating gives the service a clearer basis
-for future matches and gives players a clearer picture of what their record
-actually represents.
+Arena reduces that cold-start cost without collapsing the dimensions together.
+Related dimensions can be arranged into broader groups, and matchmaking can
+read a thin specific dimension through that hierarchy. When there is little
+direct evidence for the exact context, the MMR view can blend that specific
+rating with ratings from the same broader group. Result updates can also write
+through the configured hierarchy, so nearby context can help the system learn
+while the specific dimension remains distinct.
+
+Arena still accepts the underlying tradeoff. A faster rating that freely mixes
+incompatible results would be easier to populate, but weaker for matchmaking
+and harder for players to interpret. A more specific rating, supported by
+hierarchical reads and writes where configured, gives the service a clearer
+basis for future matches and gives players a clearer picture of what their
+record actually represents.
 
 Context-specific rating dimensions are therefore not a claim that Arena can
 measure every part of DBD perfectly. They are a boundary around what each
