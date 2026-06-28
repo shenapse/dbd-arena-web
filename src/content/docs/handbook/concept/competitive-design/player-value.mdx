@@ -8,77 +8,77 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 Arena's competitive design is not extra theory around the game. It is meant to
 make Arena matches more useful for the people playing them.
 
-Controlled formats, context-specific rating dimensions, competitor-unit
-attribution, and repeated calibrated evidence all support the same practical
-goal: a result should be easier to understand, easier to compare, and harder to
-overstate.
-
 ## At a glance
 
 | Player-facing value | What it means | Design choices behind it |
 |---|---|---|
-| Stable match environment | DRAFT | Controlled formats|
+| Stable match environment | Clearer, fixed match conditions. No OP loadouts. Less luck involved.  | Controlled formats|
 | Fairer comparison | Results are compared with other results from the same kind of competitive question. | Controlled formats, rating dimensions |
-| Killer-specific records | Killer players can build records on the killers they actually play. | Rating dimensions, competitor units |
-| Character-specific rivals | A killer player can compare results with other players proving strength on the same killer. | Rating dimensions, competitor units |
-| Team Competency | DRAFT | Competitor units |
-| Better practice feedback | Players can see which contexts are established strengths and which still need work. | Rating dimensions, repeated evidence |
-| Better matchmaking | DRAFT | Rating dimensions, repeated evidence |
-| More meaningful recognition | Recognition can attach to the context that was actually proven, such as a killer-specific record or a survivor group's record against a killer context. | Competitor units, repeated evidence |
+| Killer-specific records | Build visible records on the killers you actually play. | Rating dimensions, competitor units |
+| Character-specific rivals | Compare your results with players proving themselves on the same killer. | Rating dimensions, competitor units |
+| Survivor team Competency | Build a team record together without needing to enter a tournament. | Competitor units |
+| Better practice targets | See which match types, killers, you perform well in, and which ones you should practice next. | Rating dimensions, repeated evidence |
+| Better matchmaking | Balanced, exciting matches. It then produces better performance evidence. | Rating dimensions, repeated evidence |
+{/* | More meaningful recognition | TBD | */}
 
 ## For killer players
 
-Arena does not treat every killer result as proof of one general killer level.
-A player's Nurse results, Blight results, Spirit results, and other killer
-results can develop separately because those matches are not the same
-competitive problem.
+A killer player can build a record on the killers they actually bring into
+Arena.
 
-That gives killer players a more honest record. A strong result on one killer
-can be recognized as strength in that context without pretending it proves the
-same level everywhere else. It also makes comparison cleaner: a killer player
-is being compared through results from the killer and format being tested, not
-through a blended account-wide summary.
+If you play Nurse, your Nurse results can become their own history.
+If you also play Blight, Spirit, Huntress, or another killer, those records can
+develop in their own histories too. That makes your profile easier to read:
+players can see where you are already proven, where you are still building
+evidence, and which killer you are being tested on.
 
-It also creates character-specific rivalry. A Nurse player is competing not
-only against survivor groups, but also against other Nurse players trying to
-prove stronger results in the same context. The same idea can apply to any
-killer with enough repeated results to make that comparison meaningful.
+This also makes rivalry more specific. A strong Nurse record means you are
+measuring yourself against other Nurse players in the same kind of format, not only against the survivors you face. The comparison is
+narrower, but it is more useful: it shows what you have actually demonstrated
+with that killer.
 
 ## For survivor groups
 
-Arena treats high-level survivor results as team evidence. Survivors share
-rescues, risk, resources, pressure management, and endgame decisions, so a match
-result is strongest when it represents the group that produced it.
+A survivor group can build a record as a team.
 
-A persistent survivor group can build a clearer competitive identity over
-time. The group can see where it is established, where it is still untested,
-and which killer contexts need more work. A result against Nurse does not need
-to stand in for the same group's performance against Blight, Spirit, Huntress,
-or every other killer.
+Arena gives persistent groups a way to show what they can do together across
+repeated matches. That matters because survivor strength is not only four individual skill levels.
+A group has its own habits and coordination pattern. Arena
+lets that shared performance become visible as a group record.
+
+The result is a clearer competitive identity. A group can be known for the
+matchups it has actually played and proven, then keep expanding that record as
+it takes on more killer contexts.
 
 ## For matchmaking
 
-Better matchmaking needs evidence that matches the question being asked. If a
-match is being formed around a specific format and killer context, the useful
-history is not just "how good is this account?" It is closer to "what has this
-killer player shown on this killer, and what has this survivor group shown
-against this killer context?"
+Better evidence can make matchmaking more useful over time.
 
-Arena's design gives matchmaking more relevant input. Specific records help the
-service seek opposition close enough to make the next result informative.
-Those matches then create better evidence for future matchmaking.
+When Arena has repeated results in a specific format and context, it can build a
+clearer estimate of competitor performance. That helps place players
+against opponents closer to their current level, which should create more
+competitive and exciting matches.
+
+Those closer matches also produce better evidence. A balanced match says more
+about both sides than a mismatch, so improved matchmaking and improved rating
+evidence can reinforce each other.
+
 
 ## For practice
 
-One broad rating can hide the work players actually need to do. A killer player
-may need practice on one killer but not another. A survivor group may be stable
-against one pressure pattern and weak against a different one.
+A controlled format gives players a clear practice target. The match conditions
+are known, the restrictions are published, and the result belongs to a clear
+match type.
 
-Context-specific results make that visible. Players can treat their record as a
-map of where they have evidence, where they lack evidence, and where repeated
-matches would teach them the most.
+That helps players understand where their performance is actually strong or
+weak. A killer player can see which killers are established and which need more
+work. A survivor group can see whether it is stable against Nurse, Blight,
+Spirit, Huntress, or another killer.
 
-## For recognition
+The value is not just a number. It is knowing what kind of match to practice
+next.
+
+{/* ## For recognition
 
 Arena can support recognition that is tied to the context players actually
 proved. That matters because "best player" is usually too vague for Dead by
@@ -87,17 +87,7 @@ Daylight's asymmetric structure.
 A more useful recognition surface can be specific: a strong record with a
 declared killer, a survivor group's record against a killer context, or a
 history of results under a named format. The recognition is narrower, but it is
-also easier to understand.
-
-## What this does not promise
-
-Arena's design does not make one result definitive. It does not prove universal
-Dead by Daylight skill, remove all match variation, or replace tournaments.
-
-It also does not affect official Dead by Daylight rank, grade, matchmaking
-rating, progression, or account state. Arena results are community-run service
-records. They are useful because their context is explicit, not because they
-claim to be the final answer.
+also easier to understand. */}
 
 ## Read the design details
 
