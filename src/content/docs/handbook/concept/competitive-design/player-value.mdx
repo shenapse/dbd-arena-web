@@ -1,0 +1,125 @@
+---
+title: What Competitive Design Gives Players
+description: "The player-facing value behind Arena's controlled formats, context-specific ratings, competitor units, and repeated evidence."
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+Arena's competitive design is not extra theory around the game. It is meant to
+make Arena matches more useful for the people playing them.
+
+Controlled formats, context-specific rating dimensions, competitor-unit
+attribution, and repeated calibrated evidence all support the same practical
+goal: a result should be easier to understand, easier to compare, and harder to
+overstate.
+
+## At a glance
+
+| Player-facing value | What it means | Design choices behind it |
+|---|---|---|
+| Stable match environment | DRAFT | Controlled formats|
+| Fairer comparison | Results are compared with other results from the same kind of competitive question. | Controlled formats, rating dimensions |
+| Killer-specific records | Killer players can build records on the killers they actually play. | Rating dimensions, competitor units |
+| Character-specific rivals | A killer player can compare results with other players proving strength on the same killer. | Rating dimensions, competitor units |
+| Team Competency | DRAFT | Competitor units |
+| Better practice feedback | Players can see which contexts are established strengths and which still need work. | Rating dimensions, repeated evidence |
+| Better matchmaking | DRAFT | Rating dimensions, repeated evidence |
+| More meaningful recognition | Recognition can attach to the context that was actually proven, such as a killer-specific record or a survivor group's record against a killer context. | Competitor units, repeated evidence |
+
+## For killer players
+
+Arena does not treat every killer result as proof of one general killer level.
+A player's Nurse results, Blight results, Spirit results, and other killer
+results can develop separately because those matches are not the same
+competitive problem.
+
+That gives killer players a more honest record. A strong result on one killer
+can be recognized as strength in that context without pretending it proves the
+same level everywhere else. It also makes comparison cleaner: a killer player
+is being compared through results from the killer and format being tested, not
+through a blended account-wide summary.
+
+It also creates character-specific rivalry. A Nurse player is competing not
+only against survivor groups, but also against other Nurse players trying to
+prove stronger results in the same context. The same idea can apply to any
+killer with enough repeated results to make that comparison meaningful.
+
+## For survivor groups
+
+Arena treats high-level survivor results as team evidence. Survivors share
+rescues, risk, resources, pressure management, and endgame decisions, so a match
+result is strongest when it represents the group that produced it.
+
+A persistent survivor group can build a clearer competitive identity over
+time. The group can see where it is established, where it is still untested,
+and which killer contexts need more work. A result against Nurse does not need
+to stand in for the same group's performance against Blight, Spirit, Huntress,
+or every other killer.
+
+## For matchmaking
+
+Better matchmaking needs evidence that matches the question being asked. If a
+match is being formed around a specific format and killer context, the useful
+history is not just "how good is this account?" It is closer to "what has this
+killer player shown on this killer, and what has this survivor group shown
+against this killer context?"
+
+Arena's design gives matchmaking more relevant input. Specific records help the
+service seek opposition close enough to make the next result informative.
+Those matches then create better evidence for future matchmaking.
+
+## For practice
+
+One broad rating can hide the work players actually need to do. A killer player
+may need practice on one killer but not another. A survivor group may be stable
+against one pressure pattern and weak against a different one.
+
+Context-specific results make that visible. Players can treat their record as a
+map of where they have evidence, where they lack evidence, and where repeated
+matches would teach them the most.
+
+## For recognition
+
+Arena can support recognition that is tied to the context players actually
+proved. That matters because "best player" is usually too vague for Dead by
+Daylight's asymmetric structure.
+
+A more useful recognition surface can be specific: a strong record with a
+declared killer, a survivor group's record against a killer context, or a
+history of results under a named format. The recognition is narrower, but it is
+also easier to understand.
+
+## What this does not promise
+
+Arena's design does not make one result definitive. It does not prove universal
+Dead by Daylight skill, remove all match variation, or replace tournaments.
+
+It also does not affect official Dead by Daylight rank, grade, matchmaking
+rating, progression, or account state. Arena results are community-run service
+records. They are useful because their context is explicit, not because they
+claim to be the final answer.
+
+## Read the design details
+
+<CardGrid>
+  <LinkCard
+    title="Controlled Formats"
+    href="/handbook/concept/competitive-design/controlled-formats/"
+    description="How a format controls match conditions for comparability."
+  />
+  <LinkCard
+    title="Context-Specific Rating Dimensions"
+    href="/handbook/concept/competitive-design/context-specific-rating-dimensions/"
+    description="How and why ratings are context-scoped."
+  />
+  <LinkCard
+    title="Competitor-Unit Attribution"
+    href="/handbook/concept/competitive-design/competitor-unit-attribution/"
+    description="Who is recognized as one that produces a result, and why."
+  />
+  <LinkCard
+    title="Repeated Calibrated Evidence"
+    href="/handbook/concept/competitive-design/repeated-calibrated-evidence/"
+    description="Why repeated matches matter."
+  />
+</CardGrid>

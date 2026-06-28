@@ -204,6 +204,10 @@ export default defineConfig({
                       slug: 'handbook/concept/competitive-design',
                     },
                     {
+                      label: 'Player Value',
+                      slug: 'handbook/concept/competitive-design/player-value',
+                    },
+                    {
                       label: 'Controlled Formats',
                       slug: 'handbook/concept/competitive-design/controlled-formats',
                     },
