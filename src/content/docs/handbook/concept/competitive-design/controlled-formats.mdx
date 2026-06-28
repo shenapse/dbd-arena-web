@@ -1,119 +1,64 @@
 ---
 title: Controlled Formats
-description: "How and why Arena uses published match formats to make results easier to compare."
+description: "A format defines match conditions that decide what kind of test the match is supposed to be."
 ---
 
-Every Arena match belongs to a named format. The format makes the important
-conditions explicit, so the result is easier to compare with other results from
-the same format. Players are being judged under the same stated competitive
-frame, not under assumptions reconstructed after the fact.
+Players explicitly apply to and play a pre-defined Arena format. The format is the published
+competitive environment for the match: the frame that says what kind of test is
+being played.
 
-## Declaring what the result means
+A controlled format does not make every match equal. It makes the important
+conditions explicit enough that results from the same format can be treated as
+comparable evidence.
 
-A controlled format is Arena's way of declaring what a match result is allowed
-to mean.
+## What a format controls
 
-A raw Dead by Daylight result is ambiguous. Knowing that the killer won, the
-survivors escaped, or the match ended with a certain number of kills does not
-by itself explain what competitive question was tested. The match may have used
-different preparation assumptions, different team structure, different map
-expectations, different restrictions, or a different purpose entirely.
+A controlled format defines the match conditions that make a result better
+evidence for a specific competitive question. It decides what kind of test the
+match is supposed to be.
 
-Without a declared format, those assumptions have to be reconstructed after the
-match. That makes the result easier to overread. A player may treat the result
-as proof of general strength, while another may see it as evidence only under a
-specific matchup, rule set, or team arrangement.
+For example, if the question is performance in a standard 1v4 (full party with
+VC), the format treats survivors as a four-player party rather than four
+unrelated individuals, and defines other match conditions assuming that context.
+If the question depends on stable environmental conditions, the format can
+restrict map pools, limit luck-dependent perks or actions, define loadout rules.
 
-Arena avoids that by defining the format before the match is formed. The format
-does not make every match identical. It makes the important conditions explicit,
-so repeated results can be compared without guessing what the match was
-supposed to represent.
+A format also decides what not to remove. Strategy ih gameplay including tunneling/camping, coordination with or without VC, mindgame, and situational judgment may all matter
+to the competitive question. Those factors are part of the test. The format
+should reduce noise that blurs interpretation without removing the skills or
+decisions the match is meant to measure.
 
-## Defining the competitive question
-
-A format turns "a game happened" into "this specific competitive question was
-tested."
-
-The question may involve a coordinated survivor party, a particular killer
-context, a known preparation environment, a ranked or unrated purpose, or a
-specific way of deciding the result. Those details matter because they change
-what the match is evidence of.
-
-For example, a result from a strict ranked format should not be read the same
-way as a result from a casual format that allows wider variation. A result
-against a full survivor party should not be blended casually with a result
-against an improvised group. A match where the killer context is known before
-play answers a different question from one where players prepared under
-different assumptions.
-
-The point is not that one question is always better than another. The point is
-that Arena needs to know which question the result belongs to before it can use
-that result responsibly.
-
-## Narrowing interpretation
-
-Controlled formats reduce the number of plausible explanations competing for a
-result's meaning.
-
-They do not remove execution variance, matchup familiarity, ordinary mistakes,
-tile generation, or clutch decisions. Those are part of the game. What the
-format provides is the frame around those events: what kind of match the
-players agreed to play, what assumptions were shared, and what outcome facts
-the service is meant to record.
-
-That frame matters after the match. If the conditions are declared in advance,
-the result does not have to be rescued by memory, negotiation, or selective
-interpretation. Players and the service can treat the result as evidence from
-that format, with the limits of that format attached.
+Concretely,  format may define things such as team structure, queue unit, allowed killers,
+map selection, voice assumptions, pre-match reveals, loadout restrictions,
+result facts, win/draw conditions, and whether the format is rated.
 
 ## Creating comparability
 
-The main value of a controlled format is enhanced comparability.
+A controlled format contributes to enhanced comparability.
 
-Results from the same format belong in the same conversation because they were
-produced under the same stated competitive frame. A killer result in one format
-can be compared more responsibly with other killer results from that format. A
-survivor group's result in a killer context can be compared more responsibly
-with the same group, or other groups, in that same context.
+Results from the same format belong in the same conversation because they came
+from the same stated competitive environment. A killer result in one format can
+be compared more responsibly with other killer results from that format. A
+survivor group's result can be compared more responsibly with results from the
+same kind of survivor-group test.
 
 This is not perfect equality. Two matches in the same format can still differ
-in opponent strength, player form, and random variation.
-The format does not erase those differences. It gives the system a stable basis
-for saying that the results are comparable enough to accumulate together.
+in participants, opponent strength, random variation, and the details of how the
+game unfolded. The format does not erase those differences. It gives the
+system a stable basis for saying that the results are comparable enough to
+accumulate together.
 
 The opposite is also important. Results from different formats should not be
 treated as interchangeable just because they share a surface outcome. A 4-kill
 result, an escape, or a draw means less if the conditions that produced it are
 not part of the record.
 
-## Protecting rating meaning
-
-Ratings depend on stable input. If results from different competitive questions
-are mixed together, the rating becomes harder to interpret.
-
-Controlled formats give rating dimensions a clearer source of evidence. The
-rating is not receiving "some DBD result"; it is receiving a result from a known
-competitive frame. That helps the service keep a player's killer record, a
-survivor group's record, and each killer-specific context tied to the conditions
-that made the result meaningful.
-
-This does not mean every format must be rated. A format can be useful because it
-creates a known play environment even when its results do not update ratings.
-For rated formats, however, the declared format is what lets rating changes
-inherit a clear meaning instead of becoming a blend of incompatible match
-types.
-
 ## Limits
 
 A controlled format is not a claim that one match proves who is better. It is
 not a promise that the format is perfectly balanced, and it is not a way to
-remove all variation from Dead by Daylight.
+remove all variation.
 
 The format only answers a narrower design need: it makes the important match
 conditions explicit, attaches the result to that declared context, and keeps
 unlike results from being treated as the same kind of evidence.
-
-Formats define the competitive question. Rating dimensions keep different
-questions separate. Competitor-unit attribution decides whose performance
-answered the question. Repeated calibrated evidence keeps one answer from being
-treated as final.
