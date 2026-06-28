@@ -14,20 +14,22 @@ way and what an Arena result can reasonably show.
 
 ## The design objective
 
-DBD Arena is designed to make match results more useful for judging competitive
-performance. It does this by defining the competitors and match conditions,
-then accumulating results across repeated games against rated opposition.
+DBD Arena is designed to create clearer competitive match environments and make
+the results from those matches more useful for judging performance. It does
+this by defining the competitors, the match conditions, and the context each
+result belongs to, then accumulating results across repeated games against
+rated opposition.
 
 The goal is not to produce a perfect measurement of skill. No single match or
-rating can do that. The goal is to control enough surrounding uncertainty that
-a win or loss says more than it usually can in public play.
+rating can do that. The goal is to give players a better-defined competitive
+playground, so that wins and losses are easier to understand afterward.
 
 ## Interpreting a result
 
 Interpreting a result means deciding what the result is evidence of. A match
 result tells us who won or lost, but competitive systems need to ask a harder
-question: whose performance does that result represent, under what conditions,
-and how much should future judgments rely on it?
+question: whose performance does that result represent, inside what designed
+match environment, and how much should future judgments rely on it?
 
 This matters whenever results are used as evidence beyond a single match.
 Matchmaking, ratings, rankings, practice goals, and recognition all depend on
@@ -90,13 +92,17 @@ responsibly show.
 
 ## Four core design choices
 
-Arena uses four related choices to make results easier to interpret:
+Arena uses four related choices to make competitive results easier to interpret
+without treating interpretation as the only goal. The system first defines the
+kind of match players are entering, then records results in the context that
+makes those results meaningful:
 
-- **Controlled formats.** 
-  Players explicitly apply to and play a pre-defined Arena format, which defines the competitive question being tested, the match structure,
-  and the restrictions needed to make the outcome easier
-  to interpret. A format reduces noise that would blur the result while keeping
-  the skills and decisions that matter to that competitive context.
+- **Controlled formats.** Players explicitly apply to and play a pre-defined
+  Arena format: a designed match environment with a clear competitive intent.
+  The format defines the playground players compete inside, including the match
+  structure, assumptions, restrictions, and result conditions. This gives
+  players a clearer game to play now and gives Arena a clearer result to
+  interpret later.
 - **Context-specific rating dimensions.** Killer and survivor records are
   separated by the competitive context they actually represent. This prevents
   the system from treating different competitive questions as the same one,
@@ -113,10 +119,10 @@ Arena uses four related choices to make results easier to interpret:
   tool that supports this sampling loop, so future results can be more
   informative than badly mismatched games.
 
-These choices work together. Formats define match conditions; rating dimensions
-define the competitive context; competitor units define whose performance the
-result represents; and repeated calibrated results keep the system from
-overreading one match.
+These choices work together. Formats define the designed playground; rating
+dimensions define which competitive context the result belongs to; competitor
+units define whose performance the result represents; and repeated calibrated
+results keep the system from overreading one match.
 
 
 {/* ## Controlling noise without removing the game
