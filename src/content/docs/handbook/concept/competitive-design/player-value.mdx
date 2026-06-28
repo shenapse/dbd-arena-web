@@ -1,0 +1,138 @@
+---
+title: What Competitive Design Gives Players
+description: "The player-facing value behind Arena's controlled formats, context-specific ratings, competitor units, and repeated evidence."
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+Arena's competitive design is not extra theory around the game. It is meant to
+make Arena matches more useful for the people playing them.
+
+## At a glance
+
+| Player-facing value | What it means | Design choices behind it |
+|---|---|---|
+| Designed match environment | Play matches with clear competitive intent, with less surrounding noise and less avoidable luck. | Controlled formats |
+| Fairer comparison | Results are compared with other results from the same kind of competitive question. | Controlled formats, rating dimensions |
+| Killer-specific records | Build visible records on the killers you actually play. | Rating dimensions, competitor units |
+| Character-specific rivals | Compare your results with players proving themselves on the same killer. | Rating dimensions, competitor units |
+| Survivor team Competency | Build a team record together without needing to enter a tournament. | Competitor units |
+| Better practice targets | See which match types, killers, you perform well in, and which ones you should practice next. | Rating dimensions, repeated evidence |
+| Better matchmaking | Balanced, exciting matches. It then produces better performance evidence. | Rating dimensions, repeated evidence |
+{/* | More meaningful recognition | TBD | */}
+
+## Designed match environment
+
+Arena gives you a designed match environment.
+
+Each format publishes the conditions that matter for that queue: competitor
+type, rules, restrictions, scoring, and how the result is judged. Those
+conditions encode the kind of competitive test Arena wants the match to be.
+
+For players, the value is practical. You get a stable playground where both
+sides understand the intended challenge, avoidable luck is reduced, and the
+result depends more on the performance the format is meant to measure.
+
+## Fair comparison
+
+Arena makes comparison more useful by keeping results with the results they
+actually belong beside.
+
+A killer result on Nurse in one format says something about that player's Nurse
+performance in that format. A survivor team's result against Blight says
+something about that team's Blight matchup in that format. Arena keeps those
+records tied to their context, so the comparison is about the match you really
+played.
+
+## For killer players
+
+A killer player can build a record on the killers they actually bring into
+Arena.
+
+If you play Nurse, your Nurse results can become their own history.
+If you also play Blight, Spirit, Huntress, or another killer, those records can
+develop in their own histories too. That makes your profile easier to read:
+players can see where you are already proven, where you are still building
+evidence, and which killer you are being tested on.
+
+This also makes rivalry more specific. A strong Nurse record means you are
+measuring yourself against other Nurse players in the same kind of format, not only against the survivors you face. The comparison is
+narrower, but it is more useful: it shows what you have actually demonstrated
+with that killer.
+
+## For survivor groups
+
+A survivor group can build a record as a team.
+
+Arena gives persistent groups a way to show what they can do together across
+repeated matches. That matters because survivor strength is not only four individual skill levels.
+A group has its own habits and coordination pattern. Arena
+lets that shared performance become visible as a group record.
+
+The result is a clearer competitive identity. A group can be known for the
+matchups it has actually played and proven, then keep expanding that record as
+it takes on more killer contexts.
+
+## For matchmaking
+
+Better evidence can make matchmaking more useful over time.
+
+When Arena has repeated results in a specific format and context, it can build a
+clearer estimate of competitor performance. That helps place players
+against opponents closer to their current level, which should create more
+competitive and exciting matches.
+
+Those closer matches also produce better evidence. A balanced match says more
+about both sides than a mismatch, so improved matchmaking and improved rating
+evidence can reinforce each other.
+
+
+## For practice
+
+A controlled format gives players a clear practice target. The match conditions
+are known, the restrictions are published, and the result belongs to a clear
+match type.
+
+That helps players understand where their performance is actually strong or
+weak. A killer player can see which killers are established and which need more
+work. A survivor group can see whether it is stable against Nurse, Blight,
+Spirit, Huntress, or another killer.
+
+The value is not just a number. It is knowing what kind of match to practice
+next.
+
+{/* ## For recognition
+
+Arena can support recognition that is tied to the context players actually
+proved. That matters because "best player" is usually too vague for Dead by
+Daylight's asymmetric structure.
+
+A more useful recognition surface can be specific: a strong record with a
+declared killer, a survivor group's record against a killer context, or a
+history of results under a named format. The recognition is narrower, but it is
+also easier to understand. */}
+
+## Read the design details
+
+<CardGrid>
+  <LinkCard
+    title="Controlled Formats"
+    href="/handbook/concept/competitive-design/controlled-formats/"
+    description="How a format defines the designed match environment."
+  />
+  <LinkCard
+    title="Context-Specific Rating Dimensions"
+    href="/handbook/concept/competitive-design/context-specific-rating-dimensions/"
+    description="How and why ratings are context-scoped."
+  />
+  <LinkCard
+    title="Competitor-Unit Attribution"
+    href="/handbook/concept/competitive-design/competitor-unit-attribution/"
+    description="Who is recognized as one that produces a result, and why."
+  />
+  <LinkCard
+    title="Repeated Calibrated Evidence"
+    href="/handbook/concept/competitive-design/repeated-calibrated-evidence/"
+    description="Why repeated matches matter."
+  />
+</CardGrid>
