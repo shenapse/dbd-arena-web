@@ -1,158 +1,105 @@
 ---
 title: Context-Specific Rating Dimensions
-description: "Why Arena separates ratings by the competitive context each result actually represents."
+description: "Why Arena separates Survivor and Killer ratings into the competitive contexts each result actually represents."
 ---
 
-Arena does not try to compress every result into one general DBD rating. A
-single number would be easy to display, but it would hide too much of what the
-match actually tested.
+import { Aside } from '@astrojs/starlight/components';
 
-A rating dimension is a separate track for results that answer the same
-competitive question. In Arena, that question depends on the format, the side,
-the competitor, and especially the killer context. The point is not to make the
-rating model more complicated for its own sake. The point is to keep different
-kinds of evidence from being treated as the same thing.
+The obvious rating split is general Survivor rating and general Killer rating,
+but those two broad ratings hide too much of what the match actually tested.
 
-## Why one rating is too vague
+Arena avoids that ambiguity by using context-specific rating dimensions: ratings
+whose meaning is narrow enough that the accumulated results support the claim
+being shown.
 
-Dead by Daylight skill is not one flat category.
+## Why broad ratings become ambiguous
 
-A killer player may be strong on Nurse and still be learning Spirit. A survivor
-group may be well prepared against Blight but much weaker against Huntress. A
-team that understands how to rotate, pre-run, and spend resources against one
-killer may make different mistakes when the pressure pattern changes.
+A Survivor rating and a Killer rating sound plausible, but they can make a
+competitor look more broadly proven than the results actually support.
 
-Those differences are not small details around the match. They are part of the
-matchup itself. If Arena blended all of those results into one rating, the
-rating would become harder to read. A win with one killer could make the player
-look equally proven on another killer. A survivor group's good record against
-one matchup could make the group look equally proven against every matchup.
+A killer player may be well tested on Nurse but almost untested on Doctor. If
+those results feed one Killer rating, the player can look more broadly proven
+than they really are.
 
-That would make the rating faster to fill, but less honest about what the
-results actually show.
+The same problem exists for Survivor ratings. A survivor group may be well
+tested against Trapper but almost untested against Blight. If those results feed
+one Survivor rating, the group can look more broadly proven than it really is.
 
-## What a rating dimension means
+Broad ratings fill faster, but they also blur the claim the rating is making.
+Arena treats that blur as a reliability problem: the number may be accurate
+about the results it accumulated while still being vague about what those
+results prove.
 
-A rating dimension is the context where a rating is allowed to collect results.
-Results belong together when they are evidence about the same kind of
-performance.
+## Arena's answer: rating dimensions
 
-For example, in a rated 1v4 format, a killer player's Nurse results belong to
-the Nurse dimension for that format. Their Spirit results belong to the Spirit
-dimension. Those records can both describe the same player, but they do not
-answer the same competitive question.
+Arena solves the broad-rating problem by splitting ratings into context-specific
+rating dimensions.
 
-The same idea applies to survivor groups. A fixed survivor group's results
-against Nurse belong to that group's Nurse-facing dimension. Results against
-Blight belong to a different dimension. The group is the same group, but the
-matchup being tested is different.
+A rating dimension is a separate rating track for one kind of competitive
+evidence. It defines which results are allowed to accumulate together, so the
+rating keeps saying one clear thing instead of mixing several different claims.
 
-This makes a rating more specific. Instead of saying only "this competitor is
-strong," the rating says something closer to "this competitor has produced
-these results in this format, in this killer context."
+Results belong in the same dimension when they answer the same competitive
+question. In Arena, that question is typically shaped by the format, side, competitor
+unit, and additional competitive context. If one of those parts changes, the result may no
+longer be evidence for the same rating.
 
-## The killer context matters
+The point is not to create more numbers for their own sake. The point is to
+make each rating honest about what it has actually measured.
 
-The killer is not just a character choice. The killer changes the strategic
-problem for both sides.
+## How Killer context affects Arena ratings
 
-Nurse changes how distance and line of sight matter. Blight changes how quickly
-pressure can move across the map. Spirit changes how survivors read information
-in chase. Other killers create their own pressure patterns, mistakes, and
-preparation demands.
+In DBD, the Killer is not just a character choice. The Killer changes the
+strategic problem for both sides, so Arena treats Killer context as part of the
+rating dimension.
 
-Because of that, a result with one killer should not automatically count as
-evidence for another killer. The player behind the keyboard may be the same,
-but the task they performed was not the same.
+Killer-side records are specific to the declared Killer. Survivor-group records
+are specific to the Killer they faced.
 
-Per-killer dimensions let killer players build records that match what they are
-actually playing. A player can be recognized as a strong Nurse without the
-system pretending that the same results prove their Spirit, Blight, or Huntress
-level.
+"Good on Nurse" is not the same claim as "good on Dredge." "Good against
+Goodguy" is not the same claim as "good against every Killer." Those skills can
+overlap, but Arena does not treat one as already proving the other.
 
-## Survivor ratings are also matchup-specific
+## What this gives Arena
 
-The survivor side faces the same issue from the other direction.
+Context-specific dimensions give Arena cleaner evidence for interpretation and
+matchmaking.
 
-A survivor group is not simply being tested on "survivor skill" in the
-abstract. The group is being tested against a specific killer context. The
-right rotations, rescue timings, resource trades, bodyblocks, and risk choices
-can change heavily depending on the killer.
+They let each rating record carry the exact competitive scope that produced it.
+A Nurse record says something about that player's Nurse performance. A Doctor
+record says something about that player's Doctor performance. Arena can read
+each record as evidence for the context it actually represents.
 
-This is why Arena does not treat a survivor group's result against Nurse as
-proof that the same group is equally proven against every killer. The group may
-be excellent in that matchup and still need a separate record against Blight,
-Spirit, Huntress, or another killer.
+That scope also keeps one killer's record from carrying another killer's
+reputation. A player who wins often on Nurse should not automatically be
+matched as if their Doctor is equally proven.
 
-That separation gives survivor groups clearer practice feedback. A group can
-see which contexts are established strengths and which contexts still need
-work. It also gives matchmaking better evidence when choosing opponents for a
-specific killer matchup.
+The same benefit applies to survivor groups. Strong results against one killer
+are meaningful evidence for that matchup, not a substitute for strong results
+across all killer contexts.
 
-## What this prevents
-
-Context-specific dimensions prevent several common rating problems.
-
-They prevent one killer from carrying another killer's reputation. A player who
-wins often on Nurse should not automatically be matched as if their Doctor is
-equally proven.
-
-They prevent survivor groups from looking fully tested because of one familiar
-matchup. Strong results against one killer are meaningful, but they are not the
-same as strong results across all killer contexts.
-
-They also prevent matchmaking from using vague evidence. If a match is being
-formed around Blight, the useful question is not "how good is this account in
+For matchmaking, this makes the input more relevant. If a match is being formed
+around Blight, the useful question is not only "how good is this account in
 general?" It is closer to "how has this killer player performed on Blight, and
 how has this survivor group performed against Blight?"
 
-The result is not perfect certainty. It is cleaner evidence. The rating is
-less likely to be inflated, diluted, or misunderstood by results from a
-different competitive problem.
+For players, the record becomes easier to read. A rating can show where a
+competitor has established evidence, and which
+contexts still need work.
 
-## How this works with Arena's other choices
+## Limits
 
-Rating dimensions do not work alone. They sit between the format and the
-competitor record.
-
-The format defines the conditions of the match: rules, participants, map
-context, result requirements, and other shared assumptions. The rating
-dimension defines which competitive context the result belongs to within that
-format. Competitor-unit attribution then decides whose record receives the
-result: a killer player on a declared killer, or a persistent survivor group
-against that killer context.
-
-Repeated calibrated evidence completes the loop. A dimension becomes useful
-because accepted results accumulate over time in the same context. One Nurse
-match does not settle a player forever, but many Nurse results against rated
-opposition can start to form a meaningful Nurse record.
-
-## Limits and tradeoff
-
-Separate dimensions need their own history. A new killer dimension, or a
+Separate dimensions need their own match history. A new killer dimension, or a
 survivor group's first matches against a killer, may be less certain until more
 accepted results exist.
 
-Arena reduces that cold-start cost without collapsing the dimensions together.
-Related dimensions can be arranged into broader groups, and matchmaking can
-read a thin specific dimension through that hierarchy. When there is little
-direct evidence for the exact context, the MMR view can blend that specific
-rating with ratings from the same broader group. Result updates can also write
-through the configured hierarchy, so nearby context can help the system learn
-while the specific dimension remains distinct.
+Arena accepts the tradeoff because unclear evidence is worse than thin but
+honest evidence. Context-specific rating dimensions do not make Arena a perfect
+measurement of DBD skill. They define what each rating is allowed to mean.
 
-Arena still accepts the underlying tradeoff. A faster rating that freely mixes
-incompatible results would be easier to populate, but weaker for matchmaking
-and harder for players to interpret. A more specific rating, supported by
-hierarchical reads and writes where configured, gives the service a clearer
-basis for future matches and gives players a clearer picture of what their
-record actually represents.
-
-Context-specific rating dimensions are therefore not a claim that Arena can
-measure every part of DBD perfectly. They are a boundary around what each
-rating is allowed to mean. The rating does not try to summarize all of a
-player's DBD skill. It tries to describe performance in the competitive context
-that produced the result.
+<Aside type="note" title="Hierarchical rating model">
+  Technically, Arena reduces that cold-start cost without collapsing the dimensions together. When referenced rating evidence is thin, roughly speaking, we blend rating values of nearby dimensions to get an evidence richer MMR. (So, MMR does not necessarily coincide with rating.)
+</Aside>
 
 For the player-facing implications of this design choice, see
 [What Competitive Design Gives Players](/handbook/concept/competitive-design/player-value/).
