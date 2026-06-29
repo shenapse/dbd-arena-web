@@ -226,10 +226,6 @@ export default defineConfig({
                       label: 'Repeated Evidence',
                       slug: 'handbook/concept/competitive-design/repeated-calibrated-evidence',
                     },
-                    {
-                      label: 'Extra Context',
-                      slug: 'handbook/concept/competitive-design/extra',
-                    },
                   ],
                 },
                 { label: 'Rating Guide', translations: { ja: 'レーティングガイド' }, slug: 'handbook/concept/rating-guide' },
