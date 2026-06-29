@@ -5,7 +5,7 @@ description: "How Arena decides what a rating is actually attached to: a competi
 
 import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-Arena does not rate a player in general. It rates a defined competitor inside a
+Arena does not rate a player in general. It rates a pair of a defined competitor and a
 defined competitive context.
 
 That distinction matters because a Dead by Daylight result is not automatically
@@ -46,9 +46,7 @@ The competitor answers: whose performance does this result represent?
 The match context answers: under what competitive conditions was that
 performance produced?
 
-The rating value is the accumulated judgment for that specific pair. It is not a
-global statement about the player, the account, or the team in every possible
-setting. It is a scoped claim built from results that belong together.
+A rating value is Arena's accumulated estimate for one competitor under one defined match context. Change the competitor or change the context, and you are talking about a different rating record.
 
 The point is not to create more rating numbers for their own sake. The point is
 to make each rating honest about what the accumulated evidence can actually
@@ -56,10 +54,15 @@ support.
 
 ## What counts as the competitor
 
-A competitor is the stable unit whose performance a result can responsibly
-represent.
+The competitor is the player or group whose performance the played format is
+trying to measure.
 
-For killer-side results, the competitor is the killer player. The result belongs to that player. For survivor-side results, the competitor is a survivor "group".
+This depends on the competitive question behind the format. Some formats ask an
+individual-player question, so the competitor is a player. Other formats ask a
+team-performance question, so the competitor is the team. Arena does not force
+every result into one universal owner such as "the account" or "the individual
+player."
+
 
 The detailed attribution rules are explained in
 [Competitor-Unit Attribution](/handbook/concept/competitive-design/competitor-unit-attribution/).
