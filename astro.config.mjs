@@ -11,8 +11,20 @@ export default defineConfig({
   // Preserve old URLs after a page is renamed so external links/bookmarks
   // don't 404. `match-interruptions` → `match-problems-and-remakes`.
   redirects: {
-    '/handbook/policies/match-interruptions/': '/handbook/policies/match-problems-and-remakes/',
-    '/ja/handbook/policies/match-interruptions/': '/ja/handbook/policies/match-problems-and-remakes/',
+    '/handbook/policies/match-interruptions/': '/handbook/trouble-handling/match-problems-and-remakes/',
+    '/ja/handbook/policies/match-interruptions/': '/ja/handbook/trouble-handling/match-problems-and-remakes/',
+    '/handbook/policies/match-problems-and-remakes/': '/handbook/trouble-handling/match-problems-and-remakes/',
+    '/ja/handbook/policies/match-problems-and-remakes/': '/ja/handbook/trouble-handling/match-problems-and-remakes/',
+    // Matchmaking-journey guides moved under /handbook/matchmaking-journey/.
+    // The journey overview keeps its URL; these four sub-pages were nested.
+    '/handbook/player-profile/': '/handbook/matchmaking-journey/player-profile/',
+    '/ja/handbook/player-profile/': '/ja/handbook/matchmaking-journey/player-profile/',
+    '/handbook/groups/': '/handbook/matchmaking-journey/groups/',
+    '/ja/handbook/groups/': '/ja/handbook/matchmaking-journey/groups/',
+    '/handbook/matchmaking-and-readiness/': '/handbook/matchmaking-journey/matchmaking-and-readiness/',
+    '/ja/handbook/matchmaking-and-readiness/': '/ja/handbook/matchmaking-journey/matchmaking-and-readiness/',
+    '/handbook/results/': '/handbook/matchmaking-journey/results/',
+    '/ja/handbook/results/': '/ja/handbook/matchmaking-journey/results/',
   },
   integrations: [
     starlight({
@@ -157,26 +169,27 @@ export default defineConfig({
           label: 'Handbook',
           translations: { ja: 'ハンドブック' },
           items: [
-            { label: 'Overview', translations: { ja: '概要' }, slug: 'handbook' },
-            { label: 'Matchmaking Journey', translations: { ja: 'マッチメイキングの流れ' }, slug: 'handbook/matchmaking-journey' },
-            { label: 'Player Profile', translations: { ja: 'プレイヤープロフィール' }, slug: 'handbook/player-profile' },
-            { label: 'Groups', translations: { ja: 'グループ' }, slug: 'handbook/groups' },
-            { label: 'Matchmaking and Readiness', translations: { ja: 'マッチメイキングと準備状態' }, slug: 'handbook/matchmaking-and-readiness' },
-            { label: 'Results', translations: { ja: '結果報告' }, slug: 'handbook/results' },
+            { label: 'Handbook Contents', slug: 'handbook' },
             {
-              label: 'Player Policies',
-              translations: { ja: 'プレイヤーポリシー' },
+              label: 'Matchmaking Journey',
+              translations: { ja: 'マッチメイキングの流れ' },
+              items: [
+                { label: 'Journey', translations: { ja: '概要' }, slug: 'handbook/matchmaking-journey' },
+                { label: 'Player Profile', translations: { ja: 'プレイヤープロフィール' }, slug: 'handbook/matchmaking-journey/player-profile' },
+                { label: 'Groups', translations: { ja: 'グループ' }, slug: 'handbook/matchmaking-journey/groups' },
+                { label: 'Matchmaking and Readiness', translations: { ja: 'マッチメイキングと準備状態' }, slug: 'handbook/matchmaking-journey/matchmaking-and-readiness' },
+                { label: 'Results', translations: { ja: '結果報告' }, slug: 'handbook/matchmaking-journey/results' },
+              ],
+            },
+            {
+              label: 'Arena Policies',
+              translations: { ja: 'アリーナポリシー' },
               items: [
                 { label: 'Overview', translations: { ja: '概要' }, slug: 'handbook/policies' },
                 {
                   label: 'Participation and Conduct',
                   translations: { ja: '参加者の心得' },
                   slug: 'handbook/policies/participation-and-conduct',
-                },
-                {
-                  label: 'Match Problems',
-                  translations: { ja: '試合関連のトラブル' },
-                  slug: 'handbook/policies/match-problems-and-remakes',
                 },
                 // {
                 //   label: 'Results and Disputes',
@@ -187,6 +200,17 @@ export default defineConfig({
                   label: 'Privacy and Public Data',
                   translations: { ja: 'プライバシーと公開データ' },
                   slug: 'handbook/policies/privacy-and-public-data',
+                },
+              ],
+            },
+            {
+              label: 'Trouble Handling',
+              translations: { ja: 'トラブル対応' },
+              items: [
+                {
+                  label: 'Match Problems',
+                  translations: { ja: '試合関連のトラブル' },
+                  slug: 'handbook/trouble-handling/match-problems-and-remakes',
                 },
               ],
             },
