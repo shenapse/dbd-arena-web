@@ -1,12 +1,11 @@
 ---
 title: Competitive Design of DBD Arena
 description: >-
-  Why Arena uses controlled formats, context-specific rating dimensions,
-  competitor-unit attribution, and repeated calibrated results to make
-  competitive results more useful.
+  Why Arena uses controlled formats, competitor-context rating targets, and
+  repeated calibrated results to make competitive results more useful.
 ---
 
-import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import {  Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
 You do not need to understand Arena's competitive design to start playing.
 This page is for readers who want to know why the service is structured this
@@ -90,39 +89,36 @@ generation, build chemistry, ping, bug, and unusual events can all affect a game
 do not make results useless, but they limit what a single result can
 responsibly show.
 
-## Four core design choices
+## Three core design choices
 
-Arena uses four related choices to make competitive results easier to interpret
-without treating interpretation as the only goal. The system first defines the
-kind of match players are entering, then records results in the context that
-makes those results meaningful:
+Arena uses three related choices to make competitive results easier to
+interpret without treating interpretation as the only goal. The system first
+defines the kind of match players are entering, then defines what the result is
+evidence about, then accumulates repeated results without overreading one
+match:
 
-- **Controlled formats.** Players explicitly apply to and play a pre-defined
-  Arena format: a designed match environment with a clear competitive intent.
-  The format defines the playground players compete inside, including the match
-  structure, assumptions, restrictions, and result conditions. This gives
-  players a clearer game to play now and gives Arena a clearer result to
-  interpret later.
-- **Context-specific rating dimensions.** Killer and survivor records are
-  separated by the competitive context they actually represent. This prevents
-  the system from treating different competitive questions as the same one,
-  such as reading a Nurse result as proof of general killer strength or a
-  result against Nurse as proof of performance against every killer context.
-- **Competitor-unit attribution.** A killer result belongs to a player using a
-  specific killer. A survivor result belongs to a persistent survivor group,
-  with stable four-player parties producing the clearest team-level evidence.
-  This avoids assigning a shared match outcome to individuals whose teammates
-  may change from game to game.
-- **Repeated calibrated evidence.** Arena does not treat one accepted result as
+<Card title="Controlled formats" icon="document">
+  Arena defines a designed match environment with a clear competitive intent.
+  It gives a balanced game environment to play now
+  and a clearer result to interpret later.
+</Card>
+
+<Card title="Competitor-context rating targets" icon="seti:json">
+  Arena does not rate a player in
+  general.
+  It rates a pair of "competitor" and "match context": `(competitor, match context) -> rating`.
+</Card>
+
+<Card title="Repeated calibrated evidence" icon="database">
+  Arena does not treat one accepted result as
   a final judgment. It accumulates results over time and uses rating history to
   seek opposition close enough to provide a meaningful test. Matchmaking is a
   tool that supports this sampling loop, so future results can be more
   informative than badly mismatched games.
-
-These choices work together. Formats define the designed playground; rating
-dimensions define which competitive context the result belongs to; competitor
-units define whose performance the result represents; and repeated calibrated
-results keep the system from overreading one match.
+</Card>
+These choices work together. Formats define the designed playground;
+competitor-context rating targets define what the result is evidence about; and
+repeated calibrated results keep the system from overreading one match.
 
 
 {/* ## Controlling noise without removing the game
