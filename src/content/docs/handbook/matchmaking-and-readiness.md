@@ -52,7 +52,7 @@ format, the other players' identities may stay hidden until everyone has
 confirmed — so you decide to play based on the match itself, not on who is in
 it.
 
-## Readying up
+## Ready-up and leaving
 
 Each participant responds in one of two ways:
 
@@ -65,9 +65,14 @@ or times out, **the match is cancelled for everyone**. Once
 everyone is ready, a shared space opens where the full line-up is revealed and
 you set up the custom game and play.
 
-What happens after a cancellation — whether you simply requeue, or wait a short
-while — is set by community rules for the format. To try again, you submit a
-fresh request.
+<Aside type="caution" title="Queueing is a commitment">
+  once a queue is formed, each player must confirm ready within the ready-up window, and failing to do so may result in a warning or penalty.
+</Aside>
+<!-- - After a match starts, players may not leave except under the restart and remake rules below; by choosing to queue, players accept responsibility for staying until the match ends. -->
+
+<Aside type="caution" title="Respect other players' time">
+  If it is clear that you cannot play the formed match for any reason, choose to leave during ready-up instead of confirming ready. Early leaving is better than pretending to be ready and then making delayed leave. 
+</Aside>
 
 ## If no match is found
 
