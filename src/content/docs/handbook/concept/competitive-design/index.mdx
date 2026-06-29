@@ -1,12 +1,11 @@
 ---
 title: Competitive Design of DBD Arena
 description: >-
-  Why Arena uses controlled formats, context-specific rating dimensions,
-  competitor-unit attribution, and repeated calibrated results to make
-  competitive results more useful.
+  Why Arena uses controlled formats, competitor-context rating targets, and
+  repeated calibrated results to make competitive results more useful.
 ---
 
-import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import {  Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
 You do not need to understand Arena's competitive design to start playing.
 This page is for readers who want to know why the service is structured this
@@ -90,58 +89,34 @@ generation, build chemistry, ping, bug, and unusual events can all affect a game
 do not make results useless, but they limit what a single result can
 responsibly show.
 
-## Four core design choices
+## Three core design choices
 
-Arena uses four related choices to make competitive results easier to interpret
-without treating interpretation as the only goal. The system first defines the
-kind of match players are entering, then records results in the context that
-makes those results meaningful:
+Arena uses three related choices to make competitive results easier to
+interpret without treating interpretation as the only goal. The system first
+defines the kind of match players are entering, then defines what the result is
+evidence about, then accumulates repeated results without overreading one
+match:
 
-- **Controlled formats.** Players explicitly apply to and play a pre-defined
-  Arena format: a designed match environment with a clear competitive intent.
-  The format defines the playground players compete inside, including the match
-  structure, assumptions, restrictions, and result conditions. This gives
-  players a clearer game to play now and gives Arena a clearer result to
-  interpret later.
-- **Context-specific rating dimensions.** Killer and survivor records are
-  separated by the competitive context they actually represent. This prevents
-  the system from treating different competitive questions as the same one,
-  such as reading a Nurse result as proof of general killer strength or a
-  result against Nurse as proof of performance against every killer context.
-- **Competitor-unit attribution.** A killer result belongs to a player using a
-  specific killer. A survivor result belongs to a persistent survivor group,
-  with stable four-player parties producing the clearest team-level evidence.
-  This avoids assigning a shared match outcome to individuals whose teammates
-  may change from game to game.
-- **Repeated calibrated evidence.** Arena does not treat one accepted result as
-  a final judgment. It accumulates results over time and uses rating history to
-  seek opposition close enough to provide a meaningful test. Matchmaking is a
-  tool that supports this sampling loop, so future results can be more
-  informative than badly mismatched games.
+<Card title="Controlled formats" icon="document">
+  Arena defines a designed match environment with a clear competitive intent.
+  It gives a balanced game environment to play now
+  and a clearer result to interpret later.
+</Card>
 
-These choices work together. Formats define the designed playground; rating
-dimensions define which competitive context the result belongs to; competitor
-units define whose performance the result represents; and repeated calibrated
-results keep the system from overreading one match.
+<Card title="Competitor-context rating model" icon="seti:json">
+  Arena does not rate a player in
+  general.
+  It rates a pair of competitor and match context: `(competitor, match context) -> rating`.
+</Card>
 
-
-{/* ## Controlling noise without removing the game
-
-Arena cannot and should not remove every source of variation. It instead
-controls conditions that would otherwise make results harder to compare.
-
-| Source of uncertainty | Why it makes results harder to read | How Arena reduces it |
-|---|---|---|
-| Killer contexts mixed together | A result from one killer context can be mistaken for evidence about another, even though each killer creates a different strategic problem for both sides. | Killer rating is tracked per killer, and survivor group ratings are specific to the killer context faced. |
-| Changing survivor teammates | A change in membership can dominate the outcome, making the group's established strength unclear. | Arena rates persistent survivor groups rather than individuals. A stable four-player party provides the clearest team-level evidence. |
-| Map and rule ambiguity | A result can look like a skill gap when it was partly caused by different expectations or match conditions. | Published regulations define the map context, restrictions, structure, and result conditions. |
-| Surprise information | One side may win because the other prepared for a different situation. | The killer, participants, and map selection are revealed before the match starts. |
-| Loadout or build outliers | An extreme or unexpected build can decide a match and make it difficult to compare with other results. | General rules and per-killer balancing define what is allowed. |
-| One-off randomness | Mistakes, clutch moments, or unusual events can swing a single match. | Ratings accumulate accepted results instead of treating one match as a final verdict. |
-
-Execution, adaptation, pressure, mistakes, and clutch decisions are not noise;
-they are the game. The controlled conditions create a clearer setting in which
-those decisions can matter. */}
+<Card title="Repeated calibrated evidence" icon="database">
+  Repeated matches build more reliable ratings, help form
+  better matches, and make future results more informative.
+</Card>
+These choices work together. Formats define the designed playground;
+competitor-context rating targets define what the result is evidence about; and
+repeated calibrated results turn individual matches into a loop of clearer
+ratings, better pairings, and more useful future evidence.
 
 <CardGrid>
   <LinkCard
@@ -155,23 +130,13 @@ those decisions can matter. */}
     description="How a format controls match conditions."
   />
   <LinkCard
-    title="Context-Specific Rating Dimensions"
-    href="/handbook/concept/competitive-design/context-specific-rating-dimensions/"
-    description="How and why ratings are context-scoped."
-  />
-  <LinkCard
-    title="Competitor-Unit Attribution"
-    href="/handbook/concept/competitive-design/competitor-unit-attribution/"
-    description="Who is recognized as one that produces a result, and why."
+    title="Competitor-Context Rating Model"
+    href="/handbook/concept/competitive-design/competitor-context-rating-model/"
+    description="How Arena decides what a rating is actually attached to."
   />
   <LinkCard
     title="Repeated Calibrated Evidence"
     href="/handbook/concept/competitive-design/repeated-calibrated-evidence/"
     description="Why repeated matches matter."
-  />
-  <LinkCard
-    title="Extra Context"
-    href="/handbook/concept/competitive-design/extra/"
-    description="How Arena differs from public matches and tournaments, plus model limits."
   />
 </CardGrid>

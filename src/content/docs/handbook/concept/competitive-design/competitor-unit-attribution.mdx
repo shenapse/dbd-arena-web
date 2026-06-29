@@ -1,65 +1,81 @@
 ---
 title: Competitor-Unit Attribution
-description: "How Arena decides whose performance a match result should represent."
+description: "How Arena chooses the player or group that owns a match result."
 ---
 
-## Defining the competitor
+## Defining the competitor unit
 
-Arena uses competitor to mean the stable unit whose performance a result can
-responsibly represent. This is not always the same thing as an individual
-account. The side, the format, and the killer context affect the rating
-dimension where that competitor's result belongs.
+Arena rating is attached to a defined competitor inside a defined match context:
 
-Arena therefore does not use one universal player rating for every role and
-situation. It first asks what competitive question the result can answer, then
-places the result in the matching rating dimension and attributes it to the
-competitor unit whose performance answered that question.
+```text
+(competitor, match context) -> rating
+```
 
-## Killer competitor
+The [competitor-context rating model](/handbook/concept/competitive-design/competitor-context-rating-model/)
+explains why Arena does not rate a player in general. This page focuses only on
+the first half of that pair: how Arena decides what the competitor is.
 
-For killer-side results, the competitor is the killer player. The result is
-attributed to that player within the format and killer-specific rating
-dimension for the declared killer.
+A competitor unit is the player or group that a format treats as the owner of a
+performance. It is the unit whose results can accumulate into a rating.
 
-This matters because the killer changes the strategic problem of the match. A
-player may be highly experienced on Nurse and still be learning Spirit, and a
-survivor group that performs well against Nurse has not necessarily shown the
-same strength against Blight. Treating those results as the same competitive
-question would make the record harder to interpret.
+## The attribution principle
 
-The killer competitor model changes the question from only "How strong is this
-killer player?" to "How does this player perform with this killer, under this
-format, against serious opposition?"
+The competitor unit is defined by the competitive question behind the format.
 
-## Survivor competitor
+Arena formats are pre-defined match environments. Each format is designed to
+test a particular kind of performance. Once that question is defined, the
+natural competitor unit is the unit whose performance answers it.
 
-For survivor-side results, the competitor is a persistent survivor group. The
-result is attributed to that group within the format and killer-specific
-rating dimension for the killer it faced. A duo is the smallest survivor
-competitor unit; an individual survivor is not one.
+From a designer's perspective:
 
-High-level survivor play is coordinated by nature. The team manages risk, uses
-resources, and makes shared decisions. Individual skill matters, but the match
-result cannot cleanly divide those connected contributions among four people.
-The result is strongest as evidence about the group that produced it.
+```text
+competitive question -> natural competitor unit
+```
 
-A fixed four-player party provides the clearest competitive identity: the same
-lineup can play repeatedly and accumulate a more reliable team-level record. A
-different membership does not inherit the original group's results. The group's
-record is also specific to the killer context, because each killer demands
-different preparation and decisions.
+From a player's perspective, this means the competitor unit is
+format-dependent. Arena does not decide the competitor unit with one fixed rule
+such as "always an individual player" or "always a team." The result is
+attributed to the unit whose performance the format was designed to observe.
 
-## What Arena does not treat as a competitor
+## Example: 1v1 symmetric
 
-Arena does not treat a universal player account, a blended killer record, or an
-individual solo survivor as the rated competitor.
+In a symmetric 1v1 format, the competitive question is:
 
-A universal player rating would mix killer and survivor roles, character
-contexts, and team contexts into one number. A blended killer rating would hide
-the difference between a player's killers. A solo-survivor rating would assign
-a shared team outcome to an individual.
+**How good is this player in the standard role-alternating 1v1 format?**
 
-Requiring a persistent survivor group, at minimum a duo, preserves a stable
-competitive identity across matches. Full parties provide the strongest version
-of that identity, which is why Arena places the greatest design emphasis on
-results accumulated by stable four-player groups.
+Because both players play both roles inside the match structure, the match is
+not asking only how good a player is as Killer or only how good a player is as
+Survivor.
+
+The natural competitor unit is therefore the player.
+
+## Example: 1v4 quartet
+
+In 1v4 quartet, the competitive question is:
+
+```text
+How good are this killer player and this survivor team in standard 1v4 competition with voice?
+```
+
+The format asks players to declare their side at queue time, so their in-match roles are already
+fixed before the match is formed.
+
+For the killer side, the obvious competitor unit is the killer player. The
+killer player enters as the single player responsible for the killer-side
+performance.
+
+For the survivor side, the format assumes a prepared survivor team coordinating
+at a high level with voice. The result is not cleanly evidence about four
+independent solo survivor ratings. It is evidence about the team's shared
+performance.
+
+The natural survivor-side competitor unit is therefore the whole survivor team.
+
+## What to take away
+
+Arena does not use one universal competitor unit for every format. The format's
+competitive question decides the unit.
+
+In simple individual formats, the competitor can be the player. In coordinated
+team formats, the competitor can be the team. Rating dimensions then define the
+context in which that competitor's results accumulate.
