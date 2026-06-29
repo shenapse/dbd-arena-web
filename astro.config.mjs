@@ -13,6 +13,16 @@ export default defineConfig({
   redirects: {
     '/handbook/policies/match-interruptions/': '/handbook/policies/match-problems-and-remakes/',
     '/ja/handbook/policies/match-interruptions/': '/ja/handbook/policies/match-problems-and-remakes/',
+    // Matchmaking-journey guides moved under /handbook/matchmaking-journey/.
+    // The journey overview keeps its URL; these four sub-pages were nested.
+    '/handbook/player-profile/': '/handbook/matchmaking-journey/player-profile/',
+    '/ja/handbook/player-profile/': '/ja/handbook/matchmaking-journey/player-profile/',
+    '/handbook/groups/': '/handbook/matchmaking-journey/groups/',
+    '/ja/handbook/groups/': '/ja/handbook/matchmaking-journey/groups/',
+    '/handbook/matchmaking-and-readiness/': '/handbook/matchmaking-journey/matchmaking-and-readiness/',
+    '/ja/handbook/matchmaking-and-readiness/': '/ja/handbook/matchmaking-journey/matchmaking-and-readiness/',
+    '/handbook/results/': '/handbook/matchmaking-journey/results/',
+    '/ja/handbook/results/': '/ja/handbook/matchmaking-journey/results/',
   },
   integrations: [
     starlight({
@@ -157,12 +167,18 @@ export default defineConfig({
           label: 'Handbook',
           translations: { ja: 'ハンドブック' },
           items: [
-            { label: 'Overview', translations: { ja: '概要' }, slug: 'handbook' },
-            { label: 'Matchmaking Journey', translations: { ja: 'マッチメイキングの流れ' }, slug: 'handbook/matchmaking-journey' },
-            { label: 'Player Profile', translations: { ja: 'プレイヤープロフィール' }, slug: 'handbook/player-profile' },
-            { label: 'Groups', translations: { ja: 'グループ' }, slug: 'handbook/groups' },
-            { label: 'Matchmaking and Readiness', translations: { ja: 'マッチメイキングと準備状態' }, slug: 'handbook/matchmaking-and-readiness' },
-            { label: 'Results', translations: { ja: '結果報告' }, slug: 'handbook/results' },
+            { label: 'Handbook Contents', slug: 'handbook' },
+            {
+              label: 'Matchmaking Journey',
+              translations: { ja: 'マッチメイキングの流れ' },
+              items: [
+                { label: 'Journey', translations: { ja: '概要' }, slug: 'handbook/matchmaking-journey' },
+                { label: 'Player Profile', translations: { ja: 'プレイヤープロフィール' }, slug: 'handbook/matchmaking-journey/player-profile' },
+                { label: 'Groups', translations: { ja: 'グループ' }, slug: 'handbook/matchmaking-journey/groups' },
+                { label: 'Matchmaking and Readiness', translations: { ja: 'マッチメイキングと準備状態' }, slug: 'handbook/matchmaking-journey/matchmaking-and-readiness' },
+                { label: 'Results', translations: { ja: '結果報告' }, slug: 'handbook/matchmaking-journey/results' },
+              ],
+            },
             {
               label: 'Player Policies',
               translations: { ja: 'プレイヤーポリシー' },
