@@ -11,8 +11,10 @@ export default defineConfig({
   // Preserve old URLs after a page is renamed so external links/bookmarks
   // don't 404. `match-interruptions` → `match-problems-and-remakes`.
   redirects: {
-    '/handbook/policies/match-interruptions/': '/handbook/policies/match-problems-and-remakes/',
-    '/ja/handbook/policies/match-interruptions/': '/ja/handbook/policies/match-problems-and-remakes/',
+    '/handbook/policies/match-interruptions/': '/handbook/trouble-handling/match-problems-and-remakes/',
+    '/ja/handbook/policies/match-interruptions/': '/ja/handbook/trouble-handling/match-problems-and-remakes/',
+    '/handbook/policies/match-problems-and-remakes/': '/handbook/trouble-handling/match-problems-and-remakes/',
+    '/ja/handbook/policies/match-problems-and-remakes/': '/ja/handbook/trouble-handling/match-problems-and-remakes/',
     // Matchmaking-journey guides moved under /handbook/matchmaking-journey/.
     // The journey overview keeps its URL; these four sub-pages were nested.
     '/handbook/player-profile/': '/handbook/matchmaking-journey/player-profile/',
@@ -180,19 +182,14 @@ export default defineConfig({
               ],
             },
             {
-              label: 'Player Policies',
-              translations: { ja: 'プレイヤーポリシー' },
+              label: 'Arena Policies',
+              translations: { ja: 'アリーナポリシー' },
               items: [
                 { label: 'Overview', translations: { ja: '概要' }, slug: 'handbook/policies' },
                 {
                   label: 'Participation and Conduct',
                   translations: { ja: '参加者の心得' },
                   slug: 'handbook/policies/participation-and-conduct',
-                },
-                {
-                  label: 'Match Problems',
-                  translations: { ja: '試合関連のトラブル' },
-                  slug: 'handbook/policies/match-problems-and-remakes',
                 },
                 // {
                 //   label: 'Results and Disputes',
@@ -203,6 +200,17 @@ export default defineConfig({
                   label: 'Privacy and Public Data',
                   translations: { ja: 'プライバシーと公開データ' },
                   slug: 'handbook/policies/privacy-and-public-data',
+                },
+              ],
+            },
+            {
+              label: 'Trouble Handling',
+              translations: { ja: 'トラブル対応' },
+              items: [
+                {
+                  label: 'Match Problems',
+                  translations: { ja: '試合関連のトラブル' },
+                  slug: 'handbook/trouble-handling/match-problems-and-remakes',
                 },
               ],
             },
