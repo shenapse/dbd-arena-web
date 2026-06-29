@@ -144,7 +144,6 @@ export default defineConfig({
             },
             {
               label: 'Upcoming',
-              translations: { ja: '予定' },
               items: [
                 {
                   label: 'DBD 1v4 Duo+Duo Ranked',
@@ -210,6 +209,10 @@ export default defineConfig({
                     {
                       label: 'Controlled Formats',
                       slug: 'handbook/concept/competitive-design/controlled-formats',
+                    },          
+                    {
+                      label: 'Rating model',
+                      slug: 'handbook/concept/competitive-design/competitor-context-rating-model',
                     },
                     {
                       label: 'Rating Dimensions',

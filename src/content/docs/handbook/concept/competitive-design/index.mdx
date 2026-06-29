@@ -103,41 +103,21 @@ match:
   and a clearer result to interpret later.
 </Card>
 
-<Card title="Competitor-context rating targets" icon="seti:json">
+<Card title="Competitor-context rating model" icon="seti:json">
   Arena does not rate a player in
   general.
-  It rates a pair of "competitor" and "match context": `(competitor, match context) -> rating`.
+  It rates a pair of competitor and match context: `(competitor, match context) -> rating`.
 </Card>
 
 <Card title="Repeated calibrated evidence" icon="database">
   Arena does not treat one accepted result as
-  a final judgment. It accumulates results over time and uses rating history to
-  seek opposition close enough to provide a meaningful test. Matchmaking is a
-  tool that supports this sampling loop, so future results can be more
-  informative than badly mismatched games.
+  a final judgment. Repeated matches build more reliable ratings, help form
+  better matches, and make future results more informative.
 </Card>
 These choices work together. Formats define the designed playground;
 competitor-context rating targets define what the result is evidence about; and
-repeated calibrated results keep the system from overreading one match.
-
-
-{/* ## Controlling noise without removing the game
-
-Arena cannot and should not remove every source of variation. It instead
-controls conditions that would otherwise make results harder to compare.
-
-| Source of uncertainty | Why it makes results harder to read | How Arena reduces it |
-|---|---|---|
-| Killer contexts mixed together | A result from one killer context can be mistaken for evidence about another, even though each killer creates a different strategic problem for both sides. | Killer rating is tracked per killer, and survivor group ratings are specific to the killer context faced. |
-| Changing survivor teammates | A change in membership can dominate the outcome, making the group's established strength unclear. | Arena rates persistent survivor groups rather than individuals. A stable four-player party provides the clearest team-level evidence. |
-| Map and rule ambiguity | A result can look like a skill gap when it was partly caused by different expectations or match conditions. | Published regulations define the map context, restrictions, structure, and result conditions. |
-| Surprise information | One side may win because the other prepared for a different situation. | The killer, participants, and map selection are revealed before the match starts. |
-| Loadout or build outliers | An extreme or unexpected build can decide a match and make it difficult to compare with other results. | General rules and per-killer balancing define what is allowed. |
-| One-off randomness | Mistakes, clutch moments, or unusual events can swing a single match. | Ratings accumulate accepted results instead of treating one match as a final verdict. |
-
-Execution, adaptation, pressure, mistakes, and clutch decisions are not noise;
-they are the game. The controlled conditions create a clearer setting in which
-those decisions can matter. */}
+repeated calibrated results turn individual matches into a loop of clearer
+ratings, better pairings, and more useful future evidence.
 
 <CardGrid>
   <LinkCard
@@ -151,14 +131,9 @@ those decisions can matter. */}
     description="How a format controls match conditions."
   />
   <LinkCard
-    title="Context-Specific Rating Dimensions"
-    href="/handbook/concept/competitive-design/context-specific-rating-dimensions/"
-    description="How and why ratings are context-scoped."
-  />
-  <LinkCard
-    title="Competitor-Unit Attribution"
-    href="/handbook/concept/competitive-design/competitor-unit-attribution/"
-    description="Who is recognized as one that produces a result, and why."
+    title="Competitor-Context Rating Model"
+    href="/handbook/concept/competitive-design/competitor-context-rating-model/"
+    description="How Arena decides what a rating is actually attached to."
   />
   <LinkCard
     title="Repeated Calibrated Evidence"
