@@ -1,0 +1,110 @@
+---
+title: Competitor-Context Rating Model
+description: "How Arena decides what a rating is actually attached to: a competitor unit playing under a specific competitive context."
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+Arena does not rate a player in general. It rates a defined competitor inside a
+defined competitive context.
+
+That distinction matters because a Dead by Daylight result is not automatically
+evidence about one universal skill. A result needs an owner and a scope before
+Arena can treat it as rating evidence.
+
+## Why Arena needs this model
+
+A match result says what happened, but it does not explain by itself what the
+result should count for.
+
+In DBD, one match can join several competitive questions together. Killer and
+survivor roles are asymmetric. The declared killer changes the strategic
+problem for both sides. Survivor performance is strongly shaped by the group
+that played together. Format rules, map context, voice assumptions, and other
+conditions can also change what the result means.
+
+If Arena attached every result to a broad player record, the rating could look
+more general than the evidence really supports. A strong Nurse record could
+stand in for general killer strength. A survivor group's result could be
+mistaken for an individual survivor rating. Results from different match
+environments could be mixed as if they answered the same question.
+
+Arena uses the competitor-context rating model to avoid that blur. Before a
+result can update a rating, Arena asks what performance the result represents
+and what competitive context that performance belongs to.
+
+## The basic idea
+
+Arena rating is attached to a rating target:
+
+```text
+(competitor, match context) -> rating value
+```
+
+The competitor answers: whose performance does this result represent?
+
+The match context answers: under what competitive conditions was that
+performance produced?
+
+The rating value is the accumulated judgment for that specific pair. It is not a
+global statement about the player, the account, or the team in every possible
+setting. It is a scoped claim built from results that belong together.
+
+The point is not to create more rating numbers for their own sake. The point is
+to make each rating honest about what the accumulated evidence can actually
+support.
+
+## What counts as the competitor
+
+A competitor is the stable unit whose performance a result can responsibly
+represent.
+
+For killer-side results, the competitor is the killer player. The result belongs to that player. For survivor-side results, the competitor is a survivor "group".
+
+The detailed attribution rules are explained in
+[Competitor-Unit Attribution](/handbook/concept/competitive-design/competitor-unit-attribution/).
+
+## What counts as the context
+
+The context is the competitive scope that determines which results can
+accumulate together.
+
+In Arena, that scope can include the format, side, declared killer context, and other conditions that change what the result is evidence of. It is called as **rating dimensions**: separate rating tracks
+for separate kinds of competitive evidence.
+
+The detailed dimension model is explained in
+[Context-Specific Rating Dimensions](/handbook/concept/competitive-design/context-specific-rating-dimensions/).
+
+## Examples of rating targets
+
+The model is easiest to see through examples:
+
+```text
+(killer player A, Standard 1v4 / Killer side / Nurse) -> rating
+(killer player A, Standard 1v4 / Killer side / Doctor) -> rating
+(survivor group B, Standard 1v4 / Survivor side / vs Nurse) -> rating
+(survivor group B, Standard 1v4 / Survivor side / vs Blight) -> rating
+```
+
+These are separate rating targets because they make separate competitive
+claims. Some skills may transfer across them, but the rating claim itself remains scoped to the target.
+
+## Read the details
+
+<CardGrid>
+  <LinkCard
+    title="Competitor-Unit Attribution"
+    href="/handbook/concept/competitive-design/competitor-unit-attribution/"
+    description="How Arena defines competitor in this rating model."
+  />
+  <LinkCard
+    title="Context-Specific Rating Dimensions"
+    href="/handbook/concept/competitive-design/context-specific-rating-dimensions/"
+    description="How Arena decides which scoped rating track a result belongs to."
+  />
+  <LinkCard
+    title="Repeated Calibrated Evidence"
+    href="/handbook/concept/competitive-design/repeated-calibrated-evidence/"
+    description="Why repeated matches matter after the rating target is defined."
+  />
+</CardGrid>
