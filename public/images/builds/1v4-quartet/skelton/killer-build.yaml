@@ -1,0 +1,51 @@
+# Perk allow-list example: The Trapper
+# Run from the repo root:
+#   node utilities/perk-sheet-generator/perk-sheet-generator.js \
+#        utilities/perk-sheet-generator/examples/the-trapper.yaml \
+#        --out utilities/perk-sheet-generator/output \
+#        --preset utilities/perk-sheet-generator/output/test-preset.json
+
+killer: 
+balancing: DBD Arena - 1v4 Quartet Rank v0.1
+# universe is optional; defaults to every perk in dbdperks.json for each side.
+# universe:
+#   killer: all
+#   survivor: all
+
+killerPerks:
+  default: deny          # Start with all killer perks allowed
+  allow:                 # Then deny these specific perks
+    - Bamboozle
+
+survivorPerks:
+  default: deny          # Start with no survivor perks allowed
+  allow:                 # Then allow these specific perks and groups
+    - Any Means Necessary
+  deny: []
+
+items:
+  Flashlight:
+    default: deny
+    allow:
+      - Sport Flashlight
+    addons:
+      default: deny
+      allow:
+        - {rarity: "Common"}
+
+  Med-Kit:
+    default: deny
+    deny:
+      - Ranger Med-Kit
+    addons:
+      default: deny
+      allow:
+        - Bandages
+        - Gel Dressings
+
+addons:
+  default: deny         # Start with every Trapper add-on allowed
+  allow:                 # allow wins on conflict — re-permit one iridescent
+    - {rarity: "Common"}
+    - {rarity: "Uncommon"}
+    - {rarity: "Rare"}

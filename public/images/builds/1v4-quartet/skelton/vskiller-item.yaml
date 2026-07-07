@@ -1,0 +1,22 @@
+killer: 
+balancing: DBD Arena - 1v4 Quartet Rank v0.1
+
+default: deny
+items:
+  Flashlight:
+    allow:
+      - Sport Flashlight
+    addons:
+      allow:
+        - {rarity: "Common"}
+
+  Med-Kit:
+    allow:
+      - Ranger Med-Kit
+    addons:
+      allow:
+        - Gel Dressings
+        - Bandages
+  Firecracker:
+    allow:
+      - Firecracker
