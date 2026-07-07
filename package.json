@@ -7,6 +7,9 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "generate:perks": "dbd-perk-sheet --asset-root ${DBD_BALANCING_TOOL_ROOT:-../../../balancing-tool} $npm_config_file",
+    "generate:addons": "dbd-addon-sheet --asset-root ${DBD_BALANCING_TOOL_ROOT:-../../../balancing-tool} $npm_config_file",
+    "generate:items": "dbd-item-sheet --asset-root ${DBD_BALANCING_TOOL_ROOT:-../../../balancing-tool} $npm_config_file",
     "preview": "astro preview",
     "check": "astro check",
     "astro": "astro"
@@ -18,6 +21,9 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "dbd-perk-sheet-generator": "file:../../../balancing-tool/utilities/perk-sheet-generator",
+    "dbd-addon-sheet-generator": "file:../../../balancing-tool/utilities/addon-sheet-generator",
+    "dbd-item-sheet-generator": "file:../../../balancing-tool/utilities/item-sheet-generator",
     "typescript": "^6.0.3"
   }
 }
