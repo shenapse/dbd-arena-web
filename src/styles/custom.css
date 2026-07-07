@@ -114,33 +114,33 @@
   font-weight: 600;
 }
 
-/* ---- Regulation cards (RegulationEntry.astro) ---- */
-.regulation-group-note {
+/* ---- Game mode cards (GameModeEntry.astro) ---- */
+.game-mode-group-note {
   color: var(--sl-color-gray-3);
   font-size: 0.9rem;
   margin-top: 0.25rem;
 }
-.regulation-card {
+.game-mode-card {
   background: var(--sl-color-gray-6);
   border: 1px solid var(--sl-color-gray-5);
   border-radius: 0.5rem;
   padding: 1rem 1.1rem;
   margin: 0.75rem 0;
 }
-.regulation-card--muted {
+.game-mode-card--muted {
   opacity: 0.7;
 }
-.regulation-card__header {
+.game-mode-card__header {
   display: flex;
   align-items: center;
   gap: 0.6rem;
   flex-wrap: wrap;
 }
-.regulation-card__header h3 {
+.game-mode-card__header h3 {
   margin: 0;
   font-size: 1rem;
 }
-.regulation-card__summary {
+.game-mode-card__summary {
   margin: 0.5rem 0 0;
   color: var(--sl-color-gray-3);
   font-size: 0.9rem;
