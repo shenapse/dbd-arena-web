@@ -1,0 +1,21 @@
+---
+// One game-mode card, authored directly in markdown. The writer supplies all
+// four props per instance — this component owns no data discovery or grouping.
+import StatusBadge from './StatusBadge.astro';
+
+interface Props {
+  name: string;
+  href?: string;
+  status: 'active' | 'upcoming' | 'archived';
+  description?: string;
+}
+const { name, href, status, description } = Astro.props;
+---
+
+<article class={`game-mode-card${status !== 'active' ? ' game-mode-card--muted' : ''}`}>
+  <div class="game-mode-card__header">
+    <StatusBadge status={status} />
+    <h3>{href ? <a href={href}>{name}</a> : name}</h3>
+  </div>
+  {description && <p class="game-mode-card__summary">{description}</p>}
+</article>

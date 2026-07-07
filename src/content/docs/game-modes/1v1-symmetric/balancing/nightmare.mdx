@@ -1,0 +1,53 @@
+---
+title: Nightmare — 1v1 Symmetric Balancing
+description: Per-killer balancing for Nightmare in the 1v1 symmetric format.
+handle: 1v1-symmetric-balancing-nightmare
+status: upcoming
+version: "0.1"
+effectiveDate: "2026-06-15"
+changeHistory:
+  - version: "0.1"
+    date: "2026-06-15"
+    note: Initial per-killer balancing entry for Nightmare.
+killer: Nightmare
+format: 1v1-symmetric-rank
+---
+
+import LifecycleMeta from '@components/LifecycleMeta.astro';
+
+<LifecycleMeta
+  status={frontmatter.status}
+  version={frontmatter.version}
+  effectiveDate={frontmatter.effectiveDate}
+  changeHistory={frontmatter.changeHistory}
+/>
+
+Per-killer balancing for {frontmatter.killer}.
+These rules sit alongside the general 1v1 symmetric rule and complement it.
+
+## Map
+
+- Wrecker's Yard
+
+## Killer perks
+
+pick one from survivor perk pool.
+
+## Killer add-ons
+
+TBD
+
+## Survivor perks
+
+pick two from survivor perk pool.
+
+## Response to crouch
+
+M1 miss swing.
+
+## Applies to
+
+- [DBD 1v1 Symmetric Ranked](/game-modes/1v1-symmetric/)
+- [DBD 1v1 Asymmetric Ranked](/game-modes/1v1-asymmetric/)
+
+[← All per-killer balancing](/game-modes/1v1-symmetric/balancing/)

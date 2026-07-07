@@ -1,0 +1,74 @@
+---
+title: Game Modes
+description: >-
+  Browse every published game mode by status — active, upcoming, and
+  archived — and open its complete reference.
+---
+
+import StatusBadge from '@components/StatusBadge.astro';
+import GameModeEntry from '@components/GameModeEntry.astro';
+
+A **game mode** is one named, published set of match rules — the format you play
+under. When you join the queue you queue for one game mode, and you are only
+matched with other players who chose the same one.
+
+{/* Each game mode has a **status** that says whether you can play it right now.
+Upcoming and archived game modes are not queueable.
+
+- <StatusBadge status="active" />: Playable now — queueable through Discord.
+- <StatusBadge status="upcoming" />: Announced but not yet open.
+- <StatusBadge status="archived" />: No longer playable. Kept as historical record. */}
+
+## Active
+
+Currently playable through Discord.
+
+<GameModeEntry
+  name="DBD 1v4 Quartet Ranked"
+  href="/game-modes/1v4-quartet/"
+  status="active"
+  description="The classic competitive format: killer vs coordinated team of four survivors, played under most strict rules."
+/>
+
+<GameModeEntry
+  name="DBD 1v1 Symmetric Ranked"
+  href="/game-modes/1v1-symmetric/"
+  status="active"
+  description="The classical 1v1 format, where each player takes both the killer and survivor side, competing in a best-of-X."
+/>
+
+## Upcoming
+
+Announced but not yet queueable.
+
+<GameModeEntry
+  name="DBD 1v4 Duo+Duo Ranked"
+  href="/game-modes/1v4-duo/"
+  status="upcoming"
+  description="Atypical format: killer vs 2 Duo survivors. No cross VC. A bit smaller killer pool, less strict perk restrictions for survivor side. Survivors are rated as Duo."
+/>
+
+<GameModeEntry
+  name="DBD 1v4 Quartet Casual"
+  status="upcoming"
+  description="Unrated causal mode: borrow rating from Quartet Ranked for MMR. 3-5 map candidates for each killer, randomly chosen each match."
+/>
+
+<GameModeEntry
+  name="DBD 1v4 Duo+Duo Casual"
+  status="upcoming"
+  description="Unrated causal mode: borrow rating from Duo Ranked for MMR. 3-5 map candidates for each killer, randomly chosen each match. A bit wider MMR window."
+/>
+
+<GameModeEntry
+  name="DBD 1v4 Solo Casual"
+  status="upcoming"
+  description="Unrated causal mode: No VC. borrow rating from Duo+Duo Ranked for MMR. 3-5 map candidates for each killer, randomly chosen each match. Smaller killer pool, less strict perk restrictions for survivor side. Most pub-like format. Experimental."
+/>
+
+<GameModeEntry
+  name="DBD 1v1 Asymmetric Ranked"
+  href="/game-modes/1v1-asymmetric/"
+  status="upcoming"
+  description="A fixed-role 1v1 format where one player remains the killer and the other remains the survivor, competing against a per-killer chase-time threshold in a best-of-X."
+/>

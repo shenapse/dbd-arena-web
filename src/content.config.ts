@@ -12,7 +12,7 @@ export const collections = {
     loader: docsLoader(),
     schema: docsSchema({
       extend: z.object({
-        // Lifecycle metadata on normative regulation / policy pages.
+        // Lifecycle metadata on normative game mode / policy pages.
         status: z.enum(['active', 'upcoming', 'archived', 'provisional']).optional(),
         version: z.string().optional(),
         effectiveDate: z.string().optional(),
