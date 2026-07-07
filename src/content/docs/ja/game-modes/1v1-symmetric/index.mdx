@@ -1,0 +1,89 @@
+---
+title: DBD 1v1 Symmetric Ranked
+description: >-
+  各プレイヤーがキラー側とサバイバー側を交互に担当し、チェイス時間を競う
+  標準的な1対1形式
+handle: dbd.1v1.symmetric.rank
+status: active
+version: "1.0"
+effectiveDate: "2026-06-21"
+changeHistory:
+  - version: "0.1"
+    date: "2026-06-15"
+    note: 暫定版を公開。形式とルールは未確定。
+  - version: "1.0"
+    date: "2026-06-21"
+    note: ゲームモードを稼働中に移行。基本ルールとトラッパーのバランス調整を確定。
+language: ja
+translationStatus: complete
+translatedVersion: "1.0"
+translationDate: "2026-06-22"
+authoritativeSource: /game-modes/1v1-symmetric/
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+import KillerPool from '@components/KillerPool.astro';
+import LifecycleMeta from '@components/LifecycleMeta.astro';
+
+> **翻訳について:** このページは、読みやすさのために提供される非公式な日本語訳です。
+> 英語版との間に内容や解釈の相違がある場合は、[英語版](/game-modes/1v1-symmetric/)が優先されます。  
+> **翻訳ステータス:** 完全 · **対応英語版:** 1.0 · **翻訳日:** 2026-06-22
+
+<LifecycleMeta
+  status={frontmatter.status}
+  version={frontmatter.version}
+  effectiveDate={frontmatter.effectiveDate}
+  changeHistory={frontmatter.changeHistory}
+/>
+
+## ゲーム構成
+
+各プレイヤーがキラー側とサバイバー側の両方を担当し、チェイス時間を競う典型的な1対1形式。
+3ラウンド制で行い、各ラウンドでは両プレイヤーのチェイス時間を記録し、より長いチェイス時間を記録したプレイヤーがそのラウンドを獲得する。2ラウンドを先取したプレイヤーが勝者。
+
+| 項目 | 内容 |
+|---|---|
+| チーム構成 | プレイヤーA 1人 vs プレイヤーB 1人 |
+| マップ選択 | キラーごとに固定 |
+| 構成制限 | あり — キラー別バランス調整を参照 |
+| 試合前のキラー公開 | あり |
+| 試合前のプレイヤー公開 | あり |
+| ラウンド数 | 3 (Bo3) |
+
+## キラープール
+
+<KillerPool
+  available={["使用可能", "Trapper"]}
+  upcoming={["追加予定", "Wraith", "Hillbilly", "Doctor", "Nurse", "Blight", "Cannibal", "Pig", "Demogorgon", "Mastermind", "Dracula"]}
+/>
+
+## ルールとバランス調整
+
+<LinkCard
+  title="基本ルール"
+  href="/ja/game-modes/1v1-symmetric/rules/general/"
+  description="このゲームモードの全キラーに共通して適用されるルール。"
+/>
+
+<LinkCard
+  title="キラー別バランス調整"
+  href="/game-modes/1v1-symmetric/balancing/"
+  description="基本ルールを補完するキラー別のバランス調整。"
+/>
+
+## キュー参加条件
+
+| 対象 | キューへの参加方法 | キュー参加時の申告内容 |
+|---|---|---|
+| 各プレイヤー | 1人でキューに参加 | 制限されたプールからキラー1体 |
+
+## リザルト情報
+
+| 項目 | 説明 |
+|---|---|
+| 獲得ラウンド数 | 各プレイヤーが獲得したラウンドの合計数 |
+
+## レーティング
+
+このゲームモードでは、キラーごとに厳密に分かれたレーティングを使用する。
+詳しくは [1v4 Quartet・ランク](/ja/game-modes/1v4-quartet/) の「レーティング」を参照。
