@@ -57,7 +57,7 @@ survivorPerks:
     - Better than New
     - Bite the Bullet
     - Blood Pact
-    - Boil Over
+    # - Boil Over
     - Bond
     # - Botany Knowledge
     - Champion of Light
@@ -69,7 +69,7 @@ survivorPerks:
     - Desperate Measures
     - Detective's Hunch
     - Distortion
-    - Diversion
+    # - Diversion
     # - Do No Harm
     - Empathic Connection
     # - Finesse
@@ -92,7 +92,7 @@ survivorPerks:
     - Quick and Quiet
     # - Reactive Healing
     - Repressed Alliance
-    - Residual Manifest
+    # - Residual Manifest
     - Saboteur
     - Second Wind
     # - Self-Care
