@@ -1,4 +1,5 @@
 perks:
+  - Agitation
   - Bamboozle
   - Blood Echo
   - Brutal Strength
@@ -10,13 +11,17 @@ perks:
   - Dying Light
   - Eruption
   - Furtive Chase
+  - Grim Embrace
+  - "Hex: Ruin"
   - "Hex: Huntress Lullaby"
   - "Hex: The Third Seal"
   - "Hex: Undying"
   - Hysteria
   - Infectious Fright
   - Leverage
+  - Machine Learning
   - Mindbreaker
+  - Monitor and Abuse
   - Oppression
   - Overcharge
   - Pop Goes the Weasel
