@@ -43,6 +43,10 @@ items:
         - Bandages
         - Gel Dressings
 
+  Firecracker:
+    allow:
+      - Firecracker
+
 addons:
   default: deny         # Start with every Trapper add-on allowed
   allow:                 # allow wins on conflict — re-permit one iridescent
