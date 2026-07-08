@@ -7,9 +7,9 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "generate:perks": "dbd-perk-sheet --asset-root ${DBD_BALANCING_TOOL_ROOT:-../../../balancing-tool} $npm_config_file",
-    "generate:addons": "dbd-addon-sheet --asset-root ${DBD_BALANCING_TOOL_ROOT:-../../../balancing-tool} $npm_config_file",
-    "generate:items": "dbd-item-sheet --asset-root ${DBD_BALANCING_TOOL_ROOT:-../../../balancing-tool} $npm_config_file",
+    "generate:perks": "dbd-perk-sheet --asset-root ${DBD_BALANCING_TOOL_ROOT:-../../../balancing-tool}",
+    "generate:addons": "dbd-addon-sheet --asset-root ${DBD_BALANCING_TOOL_ROOT:-../../../balancing-tool}",
+    "generate:items": "dbd-item-sheet --asset-root ${DBD_BALANCING_TOOL_ROOT:-../../../balancing-tool}",
     "preview": "astro preview",
     "check": "astro check",
     "astro": "astro"
