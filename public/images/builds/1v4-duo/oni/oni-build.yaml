@@ -123,6 +123,6 @@ items:
       - Firecracker
 
 addons:
-  default: deny        # Start with every Trapper add-on allowed
-  allow:                 # allow wins on conflict — re-permit one iridescent
+  default: allow
+  deny:
     - {rarity: "Ultra Rare"}
