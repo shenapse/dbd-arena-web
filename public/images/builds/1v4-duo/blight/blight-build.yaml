@@ -90,13 +90,16 @@ items:
 
   Med-Kit:
     default: deny
-    deny:
+    allow:
       - Ranger Med-Kit
     addons:
       default: deny
       # allow:
       #   - Bandages
       #   - Gel Dressings
+  Firecracker:
+    allow:
+      - Firecracker
 
 addons:
   default: deny         # Start with every Trapper add-on allowed

@@ -82,7 +82,6 @@ survivorPerks:
   deny: []
 
 items:
-  default: deny
   # Flashlight:
   #   default: deny
   #   allow:

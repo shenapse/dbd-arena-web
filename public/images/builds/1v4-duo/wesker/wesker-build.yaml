@@ -1,4 +1,4 @@
-killer: The Wesker
+killer: The Mastermind
 balancing: DBD Arena - 1v4 Duo+Duo Rank v0.1
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
@@ -93,7 +93,6 @@ survivorPerks:
   deny: []
 
 items:
-  default: deny
   # Flashlight:
   #   default: deny
   #   allow:

@@ -21,6 +21,7 @@ killerPerks:
     - Dying Light
     - Eruption
     - Furtive Chase
+    - "Hex: Crowd Control"
     - "Hex: Huntress Lullaby"
     - "Hex: The Third Seal"
     - Hysteria
@@ -76,7 +77,7 @@ survivorPerks:
     # - For the People
     - Head On
     - Inner Strength
-    - Iron Will
+    # - Iron Will
     - Leader
     - Light-Footed
     - Lithe
@@ -103,7 +104,6 @@ survivorPerks:
   deny: []
 
 items:
-  default: deny
   # Flashlight:
   #   default: deny
   #   allow:

@@ -5,8 +5,6 @@ balancing: DBD Arena - 1v4 Duo+Duo Rank v0.1
 #   killer: all
 #   survivor: all
 
-# Map: Pale Rose
-
 killerPerks:
   default: deny          # Start with all killer perks allowed
   allow:                 # Then deny these specific perks
@@ -87,10 +85,11 @@ items:
 
   Med-Kit:
     default: deny
-    deny:
+    allow:
       - Ranger Med-Kit
     addons:
       default: deny
+
   Firecracker:
     allow:
       - Firecracker
