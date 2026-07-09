@@ -46,6 +46,11 @@ killerPerks:
     - Trail of Torment
     - Turn Back the Clock
 
+addons:
+  default: allow
+  deny:
+    - {rarity: "Ultra Rare"}
+
 survivorPerks:
   default: deny          # Start with no survivor perks allowed
   allow:                 # Then allow these specific perks and groups
@@ -110,19 +115,14 @@ survivorPerks:
   deny: []
 
 items:
-  Flashlight:
-    default: deny
-    allow:
-      - Sport Flashlight
-    addons:
-      default: deny
-      allow:
-        - {rarity: "Common"}
+  # Flashlight:
+  #   default: deny
+  #   allow:
+  #     - Sport Flashlight
+  #   addons:
+  #     default: deny
+  #     allow:
+  #       - {rarity: "Common"}
   Firecracker:
     allow:
       - Firecracker
-
-addons:
-  default: allow
-  deny:
-    - {rarity: "Ultra Rare"}
