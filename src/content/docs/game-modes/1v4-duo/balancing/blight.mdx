@@ -2,18 +2,19 @@
 title: Blight — 1v4 Duo+Duo Balancing
 description: Per-killer balancing for Blight in the 1v4 Duo+Duo format.
 handle: 1v4-duo-balancing-blight
-status: active
-version: "1.0"
-effectiveDate: "2026-06-15"
+status: upcoming
+version: "0.1"
+effectiveDate: "2026-07-09"
 changeHistory:
-  - version: "1.0"
-    date: "2026-06-15"
+  - version: "0.1"
+    date: "2026-07-09"
     note: Initial per-killer balancing entry for Blight.
 killer: Blight
 format: 1v4-duo
 ---
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
+import ImageRow from '@components/ImageRow.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
@@ -22,51 +23,93 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
   changeHistory={frontmatter.changeHistory}
 />
 
-Per-killer balancing for Blight. These adjustments apply specifically to the 1v4 Duo+Duo game mode and complement its shared [general rule](/game-modes/1v4-quartet/rules/general/); they do not replace it.
+Per-killer balancing for Blight. These adjustments apply specifically to the 1v4 Duo+Duo game mode and complement its shared [general rule](/game-modes/1v4-quartet/rules/general/).
 
 | Aspect | Detail |
 | --- | --- |
-| Map | Suffocation Pit |
+| Map | Mound Ormond Resort |
 | Win condition | 4k1 |
-| Draw condition | 4k0 |
+| Draw condition | - |
 
 ## Killer perks
 
 Allowed:
-- corrupt
-- call of the brine
-- dyling light
-- furtive chase
-- lullaby
-- the third seal
-- mind breaker
-- oppression
-- overcharge
-- gift of pain
-- surveillance
-- thrilling tremors
-- tinkerer
-- turn back clock
-- jagged compass
-- pop
-- deathbound
-- coulrophobia
-- thanatophobia
-- tail of torment
+- Corrupt Intervention
+- Call of Brine
+- Coulrophobia
+- Dying Light
+- Deathbound
+- Eruption
+- Furtive Chase
+- "Hex: Huntress Lullaby"
+- "Hex: The Third Seal"
+- Leverage
+- Oppression
+- Overcharge
+- Pop Goes the Weasel
+- "Scourge Hook: Gift of Pain"
+- "Scourge Hook: Jagged Compass"
+- Surveillance
+- Thanatophobia
+- Thrilling Tremors
+- Tinkerer
+- Trail of Torment
+- Turn Back the Clock
 
 ## Killer add-ons
 
-crow & rat
+<ImageRow label="Allowed add-ons:" images={[
+  { src: '/images/killers/blight/Blighted-Crow.webp', label: 'Blighted Crow' },
+  { src: '/images/killers/blight/Blighted-Rat.webp', label: 'Blighted Rat' },
+]} />
 
 ## Survivor perks
-
-coming soon...
+Allowed:
+- Balanced Landing
+- Bite the Bullet
+- Bond
+- Botany Knowledge
+- Champion of Light
+- Chemical Trap
+- Dead Hard
+- Decisive Strike
+- Deliverance
+- Desperate Measures
+- Detective's Hunch
+- Do No Harm
+- Finesse
+- Five Moves Ahead
+- Fixated
+- Flow State
+- For the People
+- Head On
+- Inner Strength
+- Iron Will
+- Light-Footed
+- Lithe
+- Leader
+- Lucky Star
+- Made for This
+- No Mither
+- Overcome
+- Plot Twist
+- Quick and Quiet
+- Reactive Healing
+- Second Wind
+- Self-Care
+- Smash Hit
+- Sprint Burst
+- Tenacity
+- Unbreakable
+- Urban Evasion
+- Visionary
+- We'll Make It
+- Windows of Opportunity
 
 ## Survivor items
 
-coming soon...
-
-[← All per-killer balancing](/game-modes/1v4-duo/balancing/)
+- 1 very rare med-kit (Ranger) with no addon
+- 1 firecracker
 
 ## Applies to
 
