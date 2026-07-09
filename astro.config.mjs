@@ -220,7 +220,31 @@ export default defineConfig({
               items: [
                 {
                   label: 'DBD 1v4 Duo+Duo Ranked',
-                  slug: 'game-modes/1v4-duo',
+                  items: [
+                    { label: 'Overview', translations: { ja: '概要' }, slug: 'game-modes/1v4-duo' },
+                    {
+                      label: 'Balancing',
+                      translations: { ja: 'バランス調整' },
+                      items: [
+                        { label: 'Overview', translations: { ja: '概要' }, slug: 'game-modes/1v4-duo/balancing' },
+                        { label: 'Nurse', translations: { ja: 'ナース' }, slug: 'game-modes/1v4-duo/balancing/nurse' },
+                        { label: 'Blight', translations: { ja: 'ブライト' }, slug: 'game-modes/1v4-duo/balancing/blight' },
+                        { label: 'Spirit', translations: { ja: 'スピリット' }, slug: 'game-modes/1v4-duo/balancing/spirit' },
+                        { label: 'Wraith', translations: { ja: 'レイス' }, slug: 'game-modes/1v4-duo/balancing/wraith' },
+                        { label: 'Hillbilly', translations: { ja: 'ヒルビリー' }, slug: 'game-modes/1v4-duo/balancing/billy' },
+                        { label: 'Doctor', translations: { ja: 'ドクター' }, slug: 'game-modes/1v4-duo/balancing/doctor' },
+                        { label: 'Nightmare', translations: { ja: 'ナイトメア' }, slug: 'game-modes/1v4-duo/balancing/nightmare' },
+                        { label: 'Pig', translations: { ja: 'ピッグ' }, slug: 'game-modes/1v4-duo/balancing/pig' },
+                        { label: 'Clown', translations: { ja: 'クラウン' }, slug: 'game-modes/1v4-duo/balancing/clown' },
+                        { label: 'Oni', translations: { ja: '鬼' }, slug: 'game-modes/1v4-duo/balancing/oni' },
+                        { label: 'Unknown', translations: { ja: 'アンノウン' }, slug: 'game-modes/1v4-duo/balancing/unknown' },
+                        { label: 'Lich', translations: { ja: 'リッチ' }, slug: 'game-modes/1v4-duo/balancing/lich' },
+                        { label: 'Dracula', translations: { ja: 'ドラキュラ' }, slug: 'game-modes/1v4-duo/balancing/dracula' },
+                        { label: 'Wesker', translations: { ja: 'ウェスカー' }, slug: 'game-modes/1v4-duo/balancing/wesker' },
+                        { label: 'Ghoul', translations: { ja: 'グール' }, slug: 'game-modes/1v4-duo/balancing/ghoul' },
+                      ],
+                    },
+                  ],
                 },
               ],
             },
