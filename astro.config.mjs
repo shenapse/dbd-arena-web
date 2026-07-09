@@ -160,6 +160,33 @@ export default defineConfig({
               translations: { ja: '稼働中' },
               items: [
                 {
+                  label: 'DBD 1v1 Symmetric Ranked',
+                  items: [
+                    { label: 'Overview', translations: { ja: '概要' }, slug: 'game-modes/1v1-symmetric' },
+                    { label: 'General Rule', translations: { ja: '基本ルール' }, slug: 'game-modes/1v1-symmetric/rules/general' },
+                    {
+                      label: 'Balancing',
+                      translations: { ja: 'バランス調整' },
+                      items: [
+                        { label: 'Overview', translations: { ja: '概要' }, slug: 'game-modes/1v1-symmetric/balancing' },
+                        { label: 'Trapper', translations: { ja: 'トラッパー' }, slug: 'game-modes/1v1-symmetric/balancing/trapper' },
+                        { label: 'Wraith', translations: { ja: 'レイス' }, slug: 'game-modes/1v1-symmetric/balancing/wraith' },
+                        { label: 'Hillbilly', translations: { ja: 'ヒルビリー' }, slug: 'game-modes/1v1-symmetric/balancing/hillbilly' },
+                        { label: 'Doctor', translations: { ja: 'ドクター' }, slug: 'game-modes/1v1-symmetric/balancing/doctor' },
+                        { label: 'Nightmare', translations: { ja: 'ナイトメア' }, slug: 'game-modes/1v1-symmetric/balancing/nightmare' },
+                        { label: 'Pig', translations: { ja: 'ピッグ' }, slug: 'game-modes/1v1-symmetric/balancing/pig' },
+                        { label: 'Wesker', translations: { ja: 'ウェスカー' }, slug: 'game-modes/1v1-symmetric/balancing/wesker' },
+                        { label: 'Demogorgon', translations: { ja: 'デモゴルゴン' }, slug: 'game-modes/1v1-symmetric/balancing/demogorgon' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              label: 'Upcoming',
+              items: [
+                {
                   label: 'DBD 1v4 Quartet Ranked',
                   items: [
                     { label: 'Overview', translations: { ja: '概要' }, slug: 'game-modes/1v4-quartet' },
@@ -188,33 +215,6 @@ export default defineConfig({
                     },
                   ],
                 },
-                {
-                  label: 'DBD 1v1 Symmetric Ranked',
-                  items: [
-                    { label: 'Overview', translations: { ja: '概要' }, slug: 'game-modes/1v1-symmetric' },
-                    { label: 'General Rule', translations: { ja: '基本ルール' }, slug: 'game-modes/1v1-symmetric/rules/general' },
-                    {
-                      label: 'Balancing',
-                      translations: { ja: 'バランス調整' },
-                      items: [
-                        { label: 'Overview', translations: { ja: '概要' }, slug: 'game-modes/1v1-symmetric/balancing' },
-                        { label: 'Trapper', translations: { ja: 'トラッパー' }, slug: 'game-modes/1v1-symmetric/balancing/trapper' },
-                        { label: 'Wraith', translations: { ja: 'レイス' }, slug: 'game-modes/1v1-symmetric/balancing/wraith' },
-                        { label: 'Hillbilly', translations: { ja: 'ヒルビリー' }, slug: 'game-modes/1v1-symmetric/balancing/hillbilly' },
-                        { label: 'Doctor', translations: { ja: 'ドクター' }, slug: 'game-modes/1v1-symmetric/balancing/doctor' },
-                        { label: 'Nightmare', translations: { ja: 'ナイトメア' }, slug: 'game-modes/1v1-symmetric/balancing/nightmare' },
-                        { label: 'Pig', translations: { ja: 'ピッグ' }, slug: 'game-modes/1v1-symmetric/balancing/pig' },
-                        { label: 'Wesker', translations: { ja: 'ウェスカー' }, slug: 'game-modes/1v1-symmetric/balancing/wesker' },
-                        { label: 'Demogorgon', translations: { ja: 'デモゴルゴン' }, slug: 'game-modes/1v1-symmetric/balancing/demogorgon' },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              label: 'Upcoming',
-              items: [
                 {
                   label: 'DBD 1v4 Duo+Duo Ranked',
                   items: [
