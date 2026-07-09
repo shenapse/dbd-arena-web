@@ -3,7 +3,7 @@ title: DBD 1v4 Quartet Ranked
 description: >-
   The classic competitive format: killer vs coordinated team of four survivors, played under most strict rules.
 handle: dbd.1v4.quartet.rank
-status: active
+status: upcoming
 version: "1.0"
 effectiveDate: "2026-06-15"
 changeHistory:
@@ -17,7 +17,7 @@ import KillerPool from '@components/KillerPool.astro';
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 
 <LifecycleMeta
-  status="active"
+  status="upcoming"
   version="1.0"
   effectiveDate="2026-06-15"
   changeHistory={[{version: "1.0", date: "2026-06-15", note: "drafted"}]}
@@ -80,18 +80,20 @@ Survivors are expected to queue as a full four-player party.
 
 ## Ratings
 
-Strict per-killer rating within this game mode. A match affects
+1v4 Quartet Ranked uses ratings that are both game-mode specific and killer specific.
 
-- for Killer player: his rating for the killer character
-- for Survivor party: the **survivor group** rating for the killer character they face.
+The same rating scope is used in both phases:
 
-e.g., suppose player K playing Nurse vs survivor team S=(s1, s2, s3, s4).
-affected ratings are:
-- (K, \{1v4 Quartet Rank game mode / role=killer / killer=Nurse\})
-- (S, \{1v4 Quartet Rank game mode / role=survivor / killer=Nurse\})
-- **NOT** (**s1**, \{1v4 Quartet Rank game mode / role=survivor / killer=Nurse\})
-- **NOT** (S, \{**some other  game mode** / role=survivor / killer=Nurse\})
-- **NOT** (S, \{some other  game mode / role=survivor / killer=**Blight**\})
+- **Matchmaking phase:** players are matched using their 1v4 Quartet Ranked rating for the relevant killer.
+- **Rating update phase:** only that same scoped rating is updated after the match.
+
+For a match where player K plays Nurse against survivor team S=(s1, s2, s3, s4), the ratings used and affected are:
+
+- (K, \{1v4 Quartet Ranked / role=killer / killer=Nurse\})
+- (S, \{1v4 Quartet Ranked / role=survivor / killer=Nurse\})
+- **NOT** (s1, \{1v4 Quartet Ranked / role=survivor / killer=Nurse\})
+- **NOT** (S, \{some other game mode / role=survivor / killer=Nurse\})
+- **NOT** (S, \{1v4 Quartet Ranked / role=survivor / killer=Blight\})
 
 ## Trouble handling
 

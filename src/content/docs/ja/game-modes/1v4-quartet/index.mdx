@@ -3,7 +3,7 @@ title: DBD 1v4 Quartet・ランク
 description: >-
   キラー1人とサバイバー4人（フルパーティ）が対戦. 制限が最も多い競技性の強い形式
 handle: dbd.1v4.quartet.rank
-status: active
+status: upcoming
 version: "1.0"
 effectiveDate: "2026-06-15"
 changeHistory:
@@ -26,7 +26,7 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
 > **翻訳ステータス:** 完全 · **対応英語版:** 1.0 · **翻訳日:** 2026-06-22
 
 <LifecycleMeta
-  status="active"
+  status="upcoming"
   version="0.1"
   effectiveDate="2026-06-15"
   changeHistory={[{version: "0.1", date: "2026-06-15", note: "drafted"}]}
@@ -88,14 +88,20 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
 
 ## レーティング
 
-キラーごとに厳密に分かれたレーティングを使用する。
-1試合によって変動するレーティングは次の通り:
+1v4 Quartet Ranked では、ゲームモードごと、かつキラーごとに分かれたレーティングを使用する。
+
+このレーティングの範囲は、次の両方のフェーズで同じである:
+
+- マッチメイキングフェーズ: 該当するキラーの1v4 Quartet Ranked 用レーティングを使ってマッチを組む
+- レーティング更新フェーズ: 試合後に、同じ範囲のレーティングを更新する
+
+1試合で使用・更新されるレーティングは次の通り:
 
 - キラープレイヤー: 使用したキラーのレーティング
 - サバイバーパーティ: 対戦したキラーに対する**サバイバーグループ**のレーティング
 
 例として、プレイヤーKがナースを使用し、サバイバーチームS=(s1, s2, s3, s4)と対戦した場合、
-変動するレーティングは次の通り:
+使用・更新されるレーティングは次の通り:
 
 - (K, \{1v4 Quartet・ランク ゲームモード / ロール=キラー / キラー=ナース\})
 - (S, \{1v4 Quartet・ランク ゲームモード / ロール=サバイバー / キラー=ナース\})
@@ -105,7 +111,4 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
 
 ## トラブル対応
 
-このゲームモードでの切断、再試合、リザルトに関する異議申し立てには、
-共通の「試合のトラブルとやり直し」および「結果と異議申し立て」ポリシーが適用される。
-
-[試合のトラブルとやり直し](/handbook/trouble-handling/match-problems-and-remakes/)および[結果と異議申し立て](/handbook/policies/results-and-disputes/)を参照してください。
+- [試合のトラブルとやり直し](/handbook/trouble-handling/match-problems-and-remakes/)
