@@ -21,9 +21,11 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "typescript": "^6.0.3"
+  },
+  "optionalDependencies": {
     "dbd-addon-sheet-generator": "file:../../../balancing-tool/utilities/addon-sheet-generator",
     "dbd-item-sheet-generator": "file:../../../balancing-tool/utilities/item-sheet-generator",
-    "dbd-perk-sheet-generator": "file:../../../balancing-tool/utilities/perk-sheet-generator",
-    "typescript": "^6.0.3"
+    "dbd-perk-sheet-generator": "file:../../../balancing-tool/utilities/perk-sheet-generator"
   }
 }
