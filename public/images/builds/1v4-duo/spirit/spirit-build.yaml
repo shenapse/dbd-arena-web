@@ -52,6 +52,7 @@ survivorPerks:
     - Deliverance
     - Diversion
     - Do No Harm
+    - Empathy
     - Finesse
     - Five Moves Ahead
     - Fixated
@@ -64,7 +65,7 @@ survivorPerks:
     - Lithe
     - Made for This
     - Overcome
-    - Quick and Quiet
+    # - Quick and Quiet
     - Repressed Alliance
     - Second Wind
     - Smash Hit

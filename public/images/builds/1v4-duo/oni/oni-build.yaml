@@ -73,6 +73,7 @@ survivorPerks:
     - Diversion
     # - Do No Harm
     # - Empathic Connection
+    - Empathy
     # - Finesse
     - Five Moves Ahead
     - Fixated
@@ -122,6 +123,6 @@ items:
       - Firecracker
 
 addons:
-  default: allow         # Start with every Trapper add-on allowed
+  default: deny        # Start with every Trapper add-on allowed
   allow:                 # allow wins on conflict — re-permit one iridescent
     - {rarity: "Ultra Rare"}

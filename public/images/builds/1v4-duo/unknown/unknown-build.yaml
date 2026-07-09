@@ -96,6 +96,11 @@ items:
       - Firecracker
 
 addons:
-  default: allow         # Start with every add-on allowed
-  deny:
-    - {rarity: "Ultra Rare"}
+  default: deny
+  allow:
+    - {rarity: "Common"}
+    - {rarity: "Uncommon"}
+    - Front-Page Article
+    - Footprint Cast
+    - B-Movie Poster
+    - {rarity: "Very Rare"}

@@ -31,6 +31,9 @@ killerPerks:
     - "Scourge Hook: Jagged Compass"
     - Pop Goes the Weasel
 
+addons:
+  default: deny
+
 survivorPerks:
   default: deny          # Start with no survivor perks allowed
   allow:                 # Then allow these specific perks and groups
@@ -46,6 +49,7 @@ survivorPerks:
     - Deliverance
     - Desperate Measures
     - Detective's Hunch
+    - Empathy
     - Fixated
     - flashbang
     - Flow State
