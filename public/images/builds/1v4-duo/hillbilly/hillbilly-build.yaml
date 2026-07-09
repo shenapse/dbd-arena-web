@@ -84,6 +84,7 @@ survivorPerks:
     - Lucky Star
     # - Made for This
     - No Mither
+    - Open Handed
     # - Overcome
     # - Plot Twist
     - Quick and Quiet
@@ -96,7 +97,7 @@ survivorPerks:
     - Smash Hit
     # - Sprint Burst
     - Tenacity
-    - Unbreakable
+    # - Unbreakable
     - Urban Evasion
     - Visionary
     # - We'll Make It
@@ -120,3 +121,4 @@ addons:
   default: allow
   deny:                 # allow wins on conflict — re-permit one iridescent
     - LoPro Chains
+    - Apex Muffler
