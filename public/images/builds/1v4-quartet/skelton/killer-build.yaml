@@ -1,0 +1,48 @@
+killer: 
+balancing: DBD Arena - 1v4 Quartet Rank v0.1
+# universe is optional; defaults to every perk in dbdperks.json for each side.
+# universe:
+#   killer: all
+#   survivor: all
+
+killerPerks:
+  default: deny
+  allow:
+    - Bamboozle
+
+survivorPerks:
+  default: deny
+  allow:
+    - Any Means Necessary
+  deny: []
+
+items:
+  Flashlight:
+    default: deny
+    allow:
+      - Sport Flashlight
+    addons:
+      default: deny
+      allow:
+        - {rarity: "Common"}
+
+  Med-Kit:
+    default: deny
+    deny:
+      - Ranger Med-Kit
+    addons:
+      default: deny
+      allow:
+        - Bandages
+        - Gel Dressings
+
+  Firecracker:
+    allow:
+      - Firecracker
+
+addons:
+  default: deny
+  allow:
+    - {rarity: "Common"}
+    - {rarity: "Uncommon"}
+    - {rarity: "Rare"}

@@ -1,0 +1,108 @@
+killer: The Lich
+balancing: DBD Arena - 1v4 Duo+Duo Rank v0.1
+# universe is optional; defaults to every perk in dbdperks.json for each side.
+# universe:
+#   killer: all
+#   survivor: all
+
+# Map: Grave of Glenvale - Dead Dawg Saloon
+
+killerPerks:
+  default: deny
+  allow:
+    - Agitation
+    - Bamboozle
+    - Blood Echo
+    - Brutal Strength
+    - Call of Brine
+    - Corrupt Intervention
+    - Coulrophobia
+    - Deadlock
+    - Deathbound
+    - Dying Light
+    - Eruption
+    - Forced Penance
+    - Furtive Chase
+    - Grim Embrace
+    # - "Hex: Crowd Control"
+    - "Hex: Huntress Lullaby"
+    # - "Hex: Ruin"
+    - "Hex: The Third Seal"
+    - "Hex: Undying"
+    - Hysteria
+    - Infectious Fright
+    - Keep Them Waiting
+    - Leverage
+    - Machine Learning
+    - Monitor and Abuse
+    - Oppression
+    - Overcharge
+    - Pop Goes the Weasel
+    - Rapid Brutality
+    - "Scourge Hook: Gift of Pain"
+    - "Scourge Hook: Pain Resonance"
+    - "Scourge Hook: Jagged Compass"
+    - Sloppy Butcher
+    - Superior Anatomy
+    - Surge
+    - Surveillance
+    - Thanatophobia
+    - Thrilling Tremors
+    - Tinkerer
+    - Trail of Torment
+    - Turn Back the Clock
+
+survivorPerks:
+  default: deny
+  allow:
+    - Aftercare
+    - Any Means Necessary
+    - Better than New
+    - Bite the Bullet
+    - Blood Pact
+    - Boil Over
+    - Bond
+    - Dead Hard
+    - Calm Spirit
+    - Counterforce
+    - Detective's Hunch
+    - Distortion
+    - Empathy
+    - Finesse
+    - Fixated
+    - Flashbang
+    - Head On
+    - Light-Footed
+    - Lucky Star
+    - No Mither
+    # - Quick and Quiet
+    - Repressed Alliance
+    - Saboteur
+    - Smash Hit
+    - Urban Evasion
+    - Visionary
+    - Windows of Opportunity
+  deny: []
+
+items:
+  Med-Kit:
+    default: deny
+    allow:
+      - Ranger Med-Kit
+  # Flashlight:
+  #   default: deny
+  #   allow:
+  #     - Sport Flashlight
+  #   addons:
+  #     default: deny
+  #     allow:
+  #       - {rarity: "Common"}
+  Firecracker:
+    allow:
+      - Firecracker
+
+addons:
+  default: allow
+  deny:
+    - {rarity: "Ultra Rare"}
+    - Robe of Eyes

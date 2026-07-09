@@ -1,0 +1,128 @@
+killer: The Oni
+balancing: DBD Arena - 1v4 Duo+Duo Rank v0.1
+# universe is optional; defaults to every perk in dbdperks.json for each side.
+# universe:
+#   killer: all
+#   survivor: all
+
+killerPerks:
+  default: deny          # Start with all killer perks allowed
+  allow:                 # Then deny these specific perks
+    - Agitation
+    - Bamboozle
+    - Blood Echo
+    - Brutal Strength
+    - Call of Brine
+    - Corrupt Intervention
+    - Coulrophobia
+    - Deadlock
+    - Deathbound
+    - Dying Light
+    - Eruption
+    - Furtive Chase
+    - Grim Embrace
+    - "Hex: Ruin"
+    - "Hex: Huntress Lullaby"
+    - "Hex: The Third Seal"
+    - "Hex: Undying"
+    - Hysteria
+    - Infectious Fright
+    - Leverage
+    - Machine Learning
+    - Monitor and Abuse
+    - Oppression
+    - Overcharge
+    - Pop Goes the Weasel
+    - "Scourge Hook: Gift of Pain"
+    - "Scourge Hook: Pain Resonance"
+    - "Scourge Hook: Jagged Compass"
+    - Sloppy Butcher
+    - Superior Anatomy
+    - Surge
+    - Surveillance
+    - Thanatophobia
+    - Thrilling Tremors
+    - Tinkerer
+    - Trail of Torment
+    - Turn Back the Clock
+
+addons:
+  default: allow
+  deny:
+    - {rarity: "Ultra Rare"}
+
+survivorPerks:
+  default: deny          # Start with no survivor perks allowed
+  allow:                 # Then allow these specific perks and groups
+    - Adrenaline
+    - Aftercare
+    - Any Means Necessary
+    - Bada Bada Boom
+    - Balanced Landing
+    - Better than New
+    - Bite the Bullet
+    - Blood Pact
+    - Boil Over
+    - Bond
+    - Calm Spirit
+    # - Botany Knowledge
+    # - Champion of Light
+    - Chemical Trap
+    - Counterforce
+    - Dead Hard
+    # - Decisive Strike
+    # - Deliverance
+    # - Desperate Measures
+    - Detective's Hunch
+    - Distortion
+    - Diversion
+    # - Do No Harm
+    # - Empathic Connection
+    - Empathy
+    # - Finesse
+    - Five Moves Ahead
+    - Fixated
+    - flashbang
+    # - Flow State
+    # - For the People
+    - Head On
+    # - Inner Strength
+    - Iron Will
+    # - Leader
+    - Light-Footed
+    # - Lithe
+    - Lucky Star
+    # - Made for This
+    - No Mither
+    - No One Left Behind
+    # - Overcome
+    # - Plot Twist
+    - Quick and Quiet
+    # - Reactive Healing
+    - Repressed Alliance
+    - Residual Manifest
+    - Saboteur
+    # - Second Wind
+    # - Self-Care
+    - Smash Hit
+    # - Sprint Burst
+    - Tenacity
+    # - Unbreakable
+    - Urban Evasion
+    - Visionary
+    # - We'll Make It
+    - Windows of Opportunity
+  deny: []
+
+items:
+  # Flashlight:
+  #   default: deny
+  #   allow:
+  #     - Sport Flashlight
+  #   addons:
+  #     default: deny
+  #     allow:
+  #       - {rarity: "Common"}
+  Firecracker:
+    allow:
+      - Firecracker

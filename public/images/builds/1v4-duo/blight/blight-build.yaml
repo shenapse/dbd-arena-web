@@ -1,0 +1,108 @@
+killer: The Blight
+balancing: DBD Arena - 1v4 Duo+Duo Rank v0.1
+# universe is optional; defaults to every perk in dbdperks.json for each side.
+# universe:
+#   killer: all
+#   survivor: all
+
+# Map: Ormond Resort
+
+killerPerks:
+  default: deny          # Start with all killer perks allowed
+  allow:                 # Then deny these specific perks
+    - Corrupt Intervention
+    - Call of Brine
+    - Coulrophobia
+    - Dying Light
+    - Deathbound
+    - Eruption
+    - Furtive Chase
+    - "Hex: Huntress Lullaby"
+    - "Hex: The Third Seal"
+    - Leverage
+    - Oppression
+    - Overcharge
+    - Pop Goes the Weasel
+    - "Scourge Hook: Gift of Pain"
+    - "Scourge Hook: Jagged Compass"
+    - Surveillance
+    - Thanatophobia
+    - Thrilling Tremors
+    - Tinkerer
+    - Trail of Torment
+    - Turn Back the Clock
+
+survivorPerks:
+  default: deny          # Start with no survivor perks allowed
+  allow:                 # Then allow these specific perks and groups
+    - Balanced Landing
+    - Bite the Bullet
+    - Bond
+    - Botany Knowledge
+    - Champion of Light
+    - Chemical Trap
+    - Dead Hard
+    - Decisive Strike
+    - Deliverance
+    - Desperate Measures
+    - Detective's Hunch
+    - Do No Harm
+    - Empathy
+    - Finesse
+    - Five Moves Ahead
+    - Fixated
+    - Flow State
+    - For the People
+    - Head On
+    - Inner Strength
+    - Iron Will
+    - Light-Footed
+    - Lithe
+    - Leader
+    - Lucky Star
+    - Made for This
+    - No Mither
+    - Overcome
+    - Plot Twist
+    - Quick and Quiet
+    - Reactive Healing
+    - Second Wind
+    - Self-Care
+    - Smash Hit
+    - Sprint Burst
+    - Tenacity
+    - Unbreakable
+    - Urban Evasion
+    - Visionary
+    - We'll Make It
+    - Windows of Opportunity
+  deny: []
+
+items:
+  # Flashlight:
+  #   default: deny
+  #   allow:
+  #     - Sport Flashlight
+  #   addons:
+  #     default: deny
+  #     allow:
+  #       - {rarity: "Common"}
+
+  Med-Kit:
+    default: deny
+    allow:
+      - Ranger Med-Kit
+    addons:
+      default: deny
+      # allow:
+      #   - Bandages
+      #   - Gel Dressings
+  Firecracker:
+    allow:
+      - Firecracker
+
+addons:
+  default: deny         # Start with every Trapper add-on allowed
+  allow:                 # allow wins on conflict — re-permit one iridescent
+    - Blighted Rat
+    - Blighted Crow
