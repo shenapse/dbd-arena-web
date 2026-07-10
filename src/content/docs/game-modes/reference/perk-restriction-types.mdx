@@ -1,10 +1,13 @@
 ---
 title: Perk Restriction Types
-description: A player-facing guide to perk combination bans and duplicate limits.
+description: A player-facing guide to perk pick limits, combination bans, and duplicate limits.
 status: active
-version: "0.2"
+version: "0.3"
 effectiveDate: "2026-07-11"
 changeHistory:
+  - version: "0.3"
+    date: "2026-07-11"
+    note: Added pick limits as a perk restriction type.
   - version: "0.2"
     date: "2026-07-11"
     note: Aligned terminology to the rendered "Duplicate Limit" wording.
@@ -24,9 +27,10 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
 
 Some balancing pages include perk restrictions that go beyond a simple allowed
 or banned list. A perk can be allowed on its own, but still become illegal when
-it is paired with another perk or repeated by another player.
+it is paired with another perk, repeated by another player, or chosen together
+with too many perks from the same limited group.
 
-This page explains the two most common restriction types: **duplicate limits** and **combo bans**.
+This page explains three restriction types: **pick limits**, **duplicate limits**, and **combo bans**.
 
 ## Allowed Perks vs. Restricted Builds
 
@@ -40,6 +44,26 @@ combination, the killer may not use those two perks together in a build.
 The same idea applies to survivor perks. `Decisive Strike` may appear as an
 allowed survivor perk, but if it is also subject to a team-level duplicate
 limit, only the allowed number of survivors may bring it in the same match.
+
+## Pick Limit
+
+A pick limit controls how many perks may be chosen from a specific group.
+
+Unlike a duplicate limit, a pick limit does not care whether the same perk is
+repeated. Instead, it counts how many perks from the limited group appear within
+the rule's scope.
+
+For example, a balancing page may allow several exhaustion perks, but say that
+each survivor may only bring one perk from that group.
+
+- Legal: A survivor brings `Dead Hard`
+- Legal: A survivor brings `Balanced Landing`
+- Illegal: A survivor brings both `Dead Hard` and `Balanced Landing`
+
+Pick limits can apply to killer perks or survivor perks. For killers, the limit
+is checked against the killer's own build. For survivors, the limit is checked
+within the listed scope, such as one survivor, one duo, or the whole survivor
+team.
 
 ## Duplicate Limit
 
@@ -95,8 +119,9 @@ For killers, the scope is always the killer's own build. For survivors, the
 scope may be one individual survivor, one duo, or the whole survivor team.
 
 Scope changes what other builds you need to compare against. For a duplicate
-limit, the same perk is counted only within that scope. For a combo ban, the
-banned perks are checked together only within that scope.
+limit, the same perk is counted only within that scope. For a pick limit, all
+perks from the limited group are counted within that scope. For a combo ban,
+the banned perks are checked together only within that scope.
 
 That means a survivor restriction with an individual scope only checks one
 survivor's own build. A duo-scoped restriction checks the two builds in that duo
@@ -117,9 +142,9 @@ scope.
 - Scope: Killer
 - Restriction type: Combo ban
 
-This works like the `Call of Brine + Eruption` example above. At the time of
-writing, this is the only restriction pattern beyond the allowed perk list that
-killers need to check.
+This works like the `Call of Brine + Eruption` example above. 
+
+For the killer player, combo bans and pick limits serve essentially the same purpose. Both prevent specific perk combinations from being used together, even if each perk is allowed on its own.
 
 ### Example 2: Combo Ban for One Survivor
 
