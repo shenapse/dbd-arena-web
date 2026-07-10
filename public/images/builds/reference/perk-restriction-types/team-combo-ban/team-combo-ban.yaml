@@ -1,0 +1,16 @@
+killer: The Trapper
+balancing: "Docs Illustration — Perk Restriction Types (not a real ruleset)"
+
+killerPerks:
+  default: deny
+  allow: []
+
+survivorPerks:
+  default: deny
+  allow:
+    - Sprint Burst
+    - Decisive Strike
+
+survivorComboBans:
+  team:
+    - [Sprint Burst, Decisive Strike]

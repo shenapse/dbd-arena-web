@@ -1,0 +1,15 @@
+killer: The Trapper
+balancing: "Docs Illustration — Perk Restriction Types (not a real ruleset)"
+
+killerPerks:
+  default: deny
+  allow:
+    - Call of Brine
+    - Eruption
+
+killerComboBans:
+  - [Call of Brine, Eruption]
+
+survivorPerks:
+  default: deny
+  allow: []

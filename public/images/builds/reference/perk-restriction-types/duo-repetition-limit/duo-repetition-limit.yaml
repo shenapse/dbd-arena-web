@@ -1,0 +1,20 @@
+killer: The Trapper
+balancing: "Docs Illustration — Perk Restriction Types (not a real ruleset)"
+
+killerPerks:
+  default: deny
+  allow: []
+
+survivorPerks:
+  default: deny
+  allow:
+    - Iron Will
+    - Dead Hard
+    - Sprint Burst
+    - Fixated
+    - Lithe
+
+survivorRepetitionLimits:
+  - scope: duo
+    max: 1
+    perks: all
