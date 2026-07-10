@@ -114,6 +114,11 @@ survivorPerks:
     - Windows of Opportunity
   deny: []
 
+survivorRepetitionLimits:
+  - scope: duo
+    max: 1                 # duo partners may not double up on any perk
+    perks: all
+
 items:
   # Flashlight:
   #   default: deny
