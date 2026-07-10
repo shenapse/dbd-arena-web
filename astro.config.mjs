@@ -227,6 +227,13 @@ export default defineConfig({
           ],
         },
         {
+          label: 'Reference',
+          translations: { ja: 'リファレンス' },
+          items: [
+            { label: 'Perk Restriction Types', translations: { ja: 'パーク制限の種類' }, slug: 'game-modes/reference/perk-restriction-types' },
+          ],
+        },
+        {
           label: 'Handbook',
           translations: { ja: 'ハンドブック' },
           items: [
