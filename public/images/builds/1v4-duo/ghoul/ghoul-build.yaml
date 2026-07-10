@@ -13,7 +13,7 @@ killerPerks:
     - Bamboozle
     - Blood Echo
     - Brutal Strength
-    # - Call of Brine
+    - Call of Brine
     - Corrupt Intervention
     - Coulrophobia
     - Deadlock
@@ -40,6 +40,9 @@ killerPerks:
     - Tinkerer
     - Trail of Torment
     - Turn Back the Clock
+
+killerComboBans:
+  - [Call of Brine, Eruption]
 
 survivorPerks:
   default: deny          # Start with no survivor perks allowed
@@ -101,6 +104,11 @@ survivorPerks:
     # - We'll Make It
     - Windows of Opportunity
   deny: []
+
+survivorRepetitionLimits:
+  - scope: duo
+    max: 1                 # duo partners may not double up on any perk
+    perks: all
 
 items:
   # Flashlight:
