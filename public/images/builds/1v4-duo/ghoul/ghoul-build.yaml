@@ -8,12 +8,12 @@ balancing: DBD Arena - 1v4 Duo+Duo Rank v0.1
 # Map: Ormond Lake Mine
 
 killerPerks:
-  default: deny          # Start with all killer perks allowed
-  allow:                 # Then deny these specific perks
+  default: deny
+  allow:
     - Bamboozle
     - Blood Echo
     - Brutal Strength
-    - Call of Brine
+    # - Call of Brine
     - Corrupt Intervention
     - Coulrophobia
     - Deadlock
@@ -54,7 +54,7 @@ survivorPerks:
     - Blood Pact
     # - Boil Over
     - Bond
-    - Botany Knowledge
+    # - Botany Knowledge
     - Champion of Light
     - Chemical Trap
     - Counterforce
@@ -93,7 +93,7 @@ survivorPerks:
     - Second Wind
     # - Self-Care
     - Smash Hit
-    - Sprint Burst
+    # - Sprint Burst
     - Tenacity
     - Unbreakable
     - Urban Evasion
