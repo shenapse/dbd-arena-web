@@ -85,6 +85,15 @@ survivorPerks:
     - Windows of Opportunity
   deny: []
 
+survivorComboBans:
+  survivor:
+    - [Balanced Landing, Dead Hard, Head On, Smash Hit]
+
+survivorRepetitionLimits:
+  - scope: duo
+    max: 1                 # duo partners may not double up on any perk
+    perks: all
+
 items:
   Med-Kit:
     default: deny
