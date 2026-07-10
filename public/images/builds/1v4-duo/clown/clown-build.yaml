@@ -62,7 +62,7 @@ survivorPerks:
     - Aftercare
     - Any Means Necessary
     - Bada Bada Boom
-    - Balanced Landing
+    # - Balanced Landing
     - Better than New
     - Bite the Bullet
     - Blood Pact
@@ -76,12 +76,13 @@ survivorPerks:
     - Diversion
     - Empathy
     - Five Moves Ahead
+    - Finesse
     - Fixated
     - Flashbang
-    # - Head On
+    - Head On
     # - Iron Will
     # - Kindred
-    - Lithe
+    # - Lithe
     - Light-Footed
     - Lucky Star
     - No Mither
