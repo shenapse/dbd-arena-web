@@ -69,13 +69,22 @@ survivorPerks:
     - Repressed Alliance
     - Second Wind
     - Smash Hit
-    # - Sprint Burst
+    - Sprint Burst
     - Tenacity
     - Unbreakable
     - Urban Evasion
     - Visionary
     - Windows of Opportunity
   deny: []
+
+survivorRepetitionLimits:
+  - scope: duo
+    max: 1                 # duo partners may not double up on any perk
+    perks: all
+
+survivorComboBans:
+  duo:
+    - [Sprint Burst, Decisive Strike]                     # duo partners can't double up on aura reading
 
 items:
   # Flashlight:
