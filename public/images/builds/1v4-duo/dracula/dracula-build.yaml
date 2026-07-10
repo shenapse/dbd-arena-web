@@ -55,6 +55,7 @@ survivorPerks:
     - Counterforce
     - Dead Hard
     # - Decisive Strike
+    - Deliverance
     - Desperate Measures
     - Detective's Hunch
     - Empathic Connection
@@ -78,10 +79,16 @@ survivorPerks:
     - Smash Hit
     # - Sprint Burst
     - Tenacity
+    - Unbreakable
     - Urban Evasion
     - Visionary
     - Windows of Opportunity
   deny: []
+
+survivorRepetitionLimits:
+  - scope: duo
+    max: 1                 # duo partners may not double up on any perk
+    perks: all
 
 items:
   # Flashlight:
@@ -95,7 +102,7 @@ items:
 
   Med-Kit:
     default: deny
-    deny:
+    allow:
       - Ranger Med-Kit
     addons:
       default: deny
