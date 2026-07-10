@@ -1,10 +1,13 @@
 ---
 title: Perk Restriction Types
-description: A player-facing guide to perk combination bans and repetition limits.
+description: A player-facing guide to perk combination bans and duplicate limits.
 status: active
-version: "0.1"
+version: "0.2"
 effectiveDate: "2026-07-11"
 changeHistory:
+  - version: "0.2"
+    date: "2026-07-11"
+    note: Aligned terminology to the rendered "Duplicate Limit" wording.
   - version: "0.1"
     date: "2026-07-11"
     note: Initial draft.
@@ -23,7 +26,7 @@ Some balancing pages include perk restrictions that go beyond a simple allowed
 or banned list. A perk can be allowed on its own, but still become illegal when
 it is paired with another perk or repeated by another player.
 
-This page explains the two most common restriction types: **repetition limits** and **combo bans**.
+This page explains the two most common restriction types: **duplicate limits** and **combo bans**.
 
 ## Allowed Perks vs. Restricted Builds
 
@@ -35,21 +38,21 @@ However, if the page also says that `Call of Brine + Eruption` is a banned
 combination, the killer may not use those two perks together in a build.
 
 The same idea applies to survivor perks. `Decisive Strike` may appear as an
-allowed survivor perk, but if it is also subject to a team-level repetition
+allowed survivor perk, but if it is also subject to a team-level duplicate
 limit, only the allowed number of survivors may bring it in the same match.
 
-## Repetition Limit
+## Duplicate Limit
 
-A repetition limit controls how many times the same perk may appear within the
+A duplicate limit controls how many times the same perk may appear within the
 rule's scope.
 
 ### Example: Duo+Duo game mode
 
-In Duo+Duo, survivor repetition limits often apply inside each duo. If a page
+In Duo+Duo, survivor duplicate limits often apply inside each duo. If a page
 says that duo partners may not repeat survivor perks, then the two players in
 the same duo cannot bring the same perk.
 
-Suppose repetition limits apply to each duo, and they apply to **all perks**.
+Suppose duplicate limits apply to each duo, and they apply to **all perks**.
 The survivor teams are Duo 1, with Player A and Player B, and Duo 2, with
 Player C and Player D.
 
@@ -57,7 +60,7 @@ Player C and Player D.
 - Legal: Player A brings `Sprint Burst`, and Player B brings `Fixated`
 - Illegal: Player A brings `Lithe`, and Player B also brings `Lithe`
 
-![Illustration: duo repetition limit (no repeated perks within a duo)](/images/builds/reference/perk-restriction-types/duo-repetition-limit/The-Trapper-survivor-perks.png)
+![Illustration: duo duplicate limit (no repeated perks within a duo)](/images/builds/reference/perk-restriction-types/duo-repetition-limit/The-Trapper-survivor-perks.png)
 
 In this case, your build's legality depends on your duo partner's build. It does
 not depend on the other duo's builds.
@@ -91,7 +94,7 @@ The scope of a restriction tells you where the rule is checked.
 For killers, the scope is always the killer's own build. For survivors, the
 scope may be one individual survivor, one duo, or the whole survivor team.
 
-Scope changes what other builds you need to compare against. For a repetition
+Scope changes what other builds you need to compare against. For a duplicate
 limit, the same perk is counted only within that scope. For a combo ban, the
 banned perks are checked together only within that scope.
 
@@ -151,9 +154,9 @@ duo.
 
 ![Illustration: combo ban for a duo (Sprint Burst + Decisive Strike)](/images/builds/reference/perk-restriction-types/duo-combo-ban/The-Trapper-survivor-perks.png)
 
-### Example 4: Repetition Limits for Duo
+### Example 4: Duplicate Limits for Duo
 
-This works like the Duo+Duo example in the **Repetition Limit** section above.
+This works like the Duo+Duo example in the **Duplicate Limit** section above.
 If the restriction applies to each duo, the same perk cannot appear more than
 once within your duo.
 
@@ -175,10 +178,10 @@ In this case, the restriction is checked across all four survivors.
 
 ![Illustration: combo ban for the whole survivor team (Sprint Burst + Decisive Strike)](/images/builds/reference/perk-restriction-types/team-combo-ban/The-Trapper-survivor-perks.png)
 
-### Example 6: Repetition Limit for Whole Survivor Team
+### Example 6: Duplicate Limit for Whole Survivor Team
 
 - Scope: Whole survivor team
-- Restriction type: Repetition limit
+- Restriction type: Duplicate limit
 
 Suppose a 1v4 Quartet balancing page says that survivor perks may not be
 repeated across the whole survivor team.
@@ -190,4 +193,4 @@ survivors.
 - Illegal: Player A brings `Lithe`, and Player B also brings `Lithe`
 - Illegal: Player A brings `Adrenaline`, and Player C in the other duo also brings `Adrenaline`
 
-![Illustration: repetition limit for the whole survivor team (no repeated perks across all four survivors)](/images/builds/reference/perk-restriction-types/team-repetition-limit/The-Trapper-survivor-perks.png)
+![Illustration: duplicate limit for the whole survivor team (no repeated perks across all four survivors)](/images/builds/reference/perk-restriction-types/team-repetition-limit/The-Trapper-survivor-perks.png)
