@@ -32,6 +32,12 @@ killerPerks:
     - Trail of Torment
     - Turn Back the Clock
 
+addons:
+  default: deny
+  allow:
+    - Blighted Rat
+    - Blighted Crow
+
 survivorPerks:
   default: deny          # Start with no survivor perks allowed
   allow:                 # Then allow these specific perks and groups
@@ -106,8 +112,22 @@ items:
     allow:
       - Firecracker
 
-addons:
-  default: deny         # Start with every Trapper add-on allowed
-  allow:                 # allow wins on conflict — re-permit one iridescent
-    - Blighted Rat
-    - Blighted Crow
+# Duplicate limits: "how many survivors may bring the SAME item."
+#   scope: duo | team
+#   max:   positive integer — at most this many members may bring any one item
+#   items: "all" (or omitted) → every allowed item; or a list → only those items
+itemDuplicateLimits:
+  - scope: duo
+    max: 1                 # no survivors in duo may bring the same item
+    items: all
+
+# Pick limits: "the group may bring at most N items drawn from this set."
+#   scope: duo | team
+#   max:   positive integer (must be less than the number of listed items)
+#   items: a list of 2+ selectors (variant names and/or { type: ... })
+# itemPickLimits:
+#   - scope: team
+#     max: 2
+#     items:
+#       - { type: Med-Kit }
+#       - { type: Toolbox }

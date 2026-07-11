@@ -44,6 +44,17 @@ killerPerks:
 killerComboBans:
   - [Call of Brine, Eruption]
 
+addons:
+  default: deny         # Start with every add-on allowed
+  allow:                 # allow wins on conflict — re-permit one iridescent
+    - {rarity: "Common"}
+    - {rarity: "Uncommon"}
+    - Amon's Necktie
+    - Aogiri Tree Robe
+    - Mado's Glove
+    - Red Spider Lily
+    - Fresh Coffee
+
 survivorPerks:
   default: deny          # Start with no survivor perks allowed
   allow:                 # Then allow these specific perks and groups
@@ -123,13 +134,7 @@ items:
   #   allow:
   #     - Firecracker
 
-addons:
-  default: deny         # Start with every add-on allowed
-  allow:                 # allow wins on conflict — re-permit one iridescent
-    - {rarity: "Common"}
-    - {rarity: "Uncommon"}
-    - Amon's Necktie
-    - Aogiri Tree Robe
-    - Mado's Glove
-    - Red Spider Lily
-    - Fresh Coffee
+itemDuplicateLimits:
+  - scope: duo
+    max: 1                 # no survivors in duo may bring the same item
+    items: all

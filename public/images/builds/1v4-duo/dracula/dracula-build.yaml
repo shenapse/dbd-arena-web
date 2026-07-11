@@ -109,3 +109,8 @@ items:
       # allow:
       #   - Bandages
       #   - Gel Dressings
+
+itemDuplicateLimits:
+  - scope: duo
+    max: 1                 # no survivors in duo may bring the same item
+    items: all

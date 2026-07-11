@@ -42,6 +42,12 @@ killerPerks:
     - Trail of Torment
     - Turn Back the Clock
 
+addons:
+  default: allow
+  deny:                 # allow wins on conflict — re-permit one iridescent
+    - LoPro Chains
+    - Apex Muffler
+
 survivorPerks:
   default: deny          # Start with no survivor perks allowed
   allow:                 # Then allow these specific perks and groups
@@ -122,8 +128,7 @@ items:
     allow:
       - Firecracker
 
-addons:
-  default: allow
-  deny:                 # allow wins on conflict — re-permit one iridescent
-    - LoPro Chains
-    - Apex Muffler
+itemDuplicateLimits:
+  - scope: duo
+    max: 1                 # no survivors in duo may bring the same item
+    items: all
