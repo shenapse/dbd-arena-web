@@ -37,21 +37,17 @@ This page explains three restriction types: **pick limits**, **duplicate limits*
 An allowed perk is not always the same thing as an allowed build.
 
 For example, on a balancing page, both `Call of Brine` and `Eruption`
-may appear as allowed killer perks. That means each perk can be used by itself.
+may appear as allowed killer perks.
 However, if the page also says that `Call of Brine + Eruption` is a banned
 combination, the killer may not use those two perks together in a build.
 
-The same idea applies to survivor perks. `Decisive Strike` may appear as an
+Similar restriction may apply to survivor perks. `Decisive Strike` may appear as an
 allowed survivor perk, but if it is also subject to a team-level duplicate
 limit, only the allowed number of survivors may bring it in the same match.
 
 ## Pick Limit
 
 A pick limit controls how many perks may be chosen from a specific group.
-
-Unlike a duplicate limit, a pick limit does not care whether the same perk is
-repeated. Instead, it counts how many perks from the limited group appear within
-the rule's scope.
 
 For example, a balancing page may allow several exhaustion perks, but say that
 each survivor may only bring one perk from that group.
@@ -83,6 +79,7 @@ Player C and Player D.
 - Legal: Player A brings `Iron Will`, and Player B brings `Dead Hard`
 - Legal: Player A brings `Sprint Burst`, and Player B brings `Fixated`
 - Illegal: Player A brings `Lithe`, and Player B also brings `Lithe`
+- Legal: Player A and C bring `Sprint Burst`, and the others don't bring it
 
 ![Illustration: duo duplicate limit (no repeated perks within a duo)](/images/builds/reference/perk-restriction-types/duo-repetition-limit/The-Trapper-survivor-perks.png)
 
@@ -111,19 +108,16 @@ For killer perks, this is straightforward: a combo ban always applies to the
 killer's own build. For survivor perks, it may apply to one survivor's build or
 to the builds of multiple teammates, depending on the restriction's *scope*.
 
-## Rule Scope
+## Restriction Scope
 
 The scope of a restriction tells you where the rule is checked.
 
 For killers, the scope is always the killer's own build. For survivors, the
 scope may be one individual survivor, one duo, or the whole survivor team.
 
-Scope changes what other builds you need to compare against. For a duplicate
-limit, the same perk is counted only within that scope. For a pick limit, all
-perks from the limited group are counted within that scope. For a combo ban,
-the banned perks are checked together only within that scope.
+Scope changes what other builds you need to compare against. 
 
-That means a survivor restriction with an individual scope only checks one
+Specifically, a survivor restriction with an individual scope only checks one
 survivor's own build. A duo-scoped restriction checks the two builds in that duo
 together. A whole-team restriction checks all survivor builds together.
 
@@ -216,6 +210,5 @@ survivors.
 
 - Legal: Player A brings `Iron Will`, Player B brings `Dead Hard`, Player C brings `Sprint Burst`, and Player D brings `Bond`
 - Illegal: Player A brings `Lithe`, and Player B also brings `Lithe`
-- Illegal: Player A brings `Adrenaline`, and Player C in the other duo also brings `Adrenaline`
 
 ![Illustration: duplicate limit for the whole survivor team (no repeated perks across all four survivors)](/images/builds/reference/perk-restriction-types/team-repetition-limit/The-Trapper-survivor-perks.png)
