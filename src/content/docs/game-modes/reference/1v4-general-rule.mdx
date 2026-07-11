@@ -1,14 +1,18 @@
 ---
-title: 1v4 Quartet — General Rule
+title: 1v4 General Rule
 description: >-
-  The shared global rule for the 1v4 quartet format. It applies to every killer.
-  Per-killer build detail (maps, win conditions, perk and add-on limits) lives in
-  the sibling per-killer balancing pages, which complement this rule.
-handle: 1v4-quartet-general
+  The shared general rule for 1v4 game modes (Quartet, Duo+Duo, and future
+  1v4 formats). It applies to every killer across those modes. Per-mode and
+  per-killer build detail (maps, win conditions, perk and add-on limits)
+  lives in each game mode's own balancing pages, which complement this rule.
+handle: 1v4-general
 status: upcoming
-version: "1.0"
+version: "1.1"
 effectiveDate: "2026-06-15"
 changeHistory:
+  - version: "1.1"
+    date: "2026-07-11"
+    note: Relocated to the shared game-modes reference section and generalized scope beyond Quartet.
   - version: "0.1"
     date: "2026-06-15"
     note: Initial publication of the general 1v4 quartet rule.
@@ -18,15 +22,16 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
 import ImageRow from '@components/ImageRow.astro';
 
 <LifecycleMeta
-  status="upcoming"
-  version="0.1"
-  effectiveDate="2026-06-15"
-  changeHistory={[{version: "0.1", date: "2026-06-15", note: "drafted"}]}
+  status={frontmatter.status}
+  version={frontmatter.version}
+  effectiveDate={frontmatter.effectiveDate}
+  changeHistory={frontmatter.changeHistory}
 />
 
-The shared global rule for the 1v4 quartet format. It applies to every killer.
-Per-killer restriction detail (maps, win conditions, perk and add-on limits) lives in
-the sibling per-killer balancing pages, which complement this rule.
+The shared general rule for 1v4 game modes (Quartet, Duo+Duo, and future 1v4
+formats). It applies to every killer across those modes. Per-mode and
+per-killer restriction detail (maps, win conditions, perk and add-on limits)
+lives in each game mode's own balancing pages, which complement this rule.
 
 ## Killer ping
 
@@ -115,3 +120,4 @@ the survivor side.
 ## Applies to
 
 - [DBD 1v4 Quartet Ranked](/game-modes/1v4-quartet/)
+- [DBD 1v4 Duo+Duo Ranked](/game-modes/1v4-duo/)
