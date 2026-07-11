@@ -1,41 +1,44 @@
 ---
-title: 1v4 Quartet — 基本ルール
+title: 1v4 基本ルール
 description: >-
-  1v4 Quartet形式で全キラーに共通して適用される基本ルール。
-  マップ、勝利条件、パークやアドオンの制限など、キラーごとの構成に関する詳細は、
-  このルールを補完する同階層のキラー別バランス調整ページに記載。
-handle: 1v4-quartet-general
+  1v4形式のゲームモード（Quartet、Duo+Duo、および今後の1v4形式）に共通して適用される基本ルール。
+  これらのモードの全キラーに適用される。モードごと・キラーごとの構成に関する詳細は、
+  このルールを補完する各ゲームモード自身のバランス調整ページに記載。
+handle: 1v4-general
 status: upcoming
-version: "0.1"
+version: "1.1"
 effectiveDate: "2026-06-15"
 changeHistory:
+  - version: "1.1"
+    date: "2026-07-11"
+    note: 共有のgame-modesリファレンスセクションへ移動し、Quartet限定から適用範囲を拡張。
   - version: "0.1"
     date: "2026-06-15"
     note: 1v4 Quartet基本ルールの初版を公開。
 language: ja
 translationStatus: complete
-translatedVersion: "0.1"
-translationDate: "2026-06-22"
-authoritativeSource: /game-modes/1v4-quartet/rules/general/
+translatedVersion: "1.1"
+translationDate: "2026-07-11"
+authoritativeSource: /game-modes/reference/1v4-general-rule/
 ---
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 import ImageRow from '@components/ImageRow.astro';
 
 > **翻訳について:** このページは、読みやすさのために提供される非公式な日本語訳です。
-> 英語版との間に内容や解釈の相違がある場合は、[英語版](/game-modes/1v4-quartet/rules/general/)が優先されます。  
-> **翻訳ステータス:** 完全 · **対応英語版:** 0.1 · **翻訳日:** 2026-06-22
+> 英語版との間に内容や解釈の相違がある場合は、[英語版](/game-modes/reference/1v4-general-rule/)が優先されます。  
+> **翻訳ステータス:** 完全 · **対応英語版:** 1.1 · **翻訳日:** 2026-07-11
 
 <LifecycleMeta
-  status="upcoming"
-  version="0.1"
-  effectiveDate="2026-06-15"
-  changeHistory={[{version: "0.1", date: "2026-06-15", note: "起草"}]}
+  status={frontmatter.status}
+  version={frontmatter.version}
+  effectiveDate={frontmatter.effectiveDate}
+  changeHistory={frontmatter.changeHistory}
 />
 
-1v4 Quartet形式で全キラーに共通して適用される基本ルール。
-マップ、勝利条件、パークやアドオンの制限など、キラーごとの詳細は、
-このルールを補完する同階層のキラー別バランス調整ページに記載。
+1v4形式のゲームモード（Quartet、Duo+Duo、および今後の1v4形式）に共通して適用される基本ルール。
+これらのモードの全キラーに適用される。モードごと・キラーごとの詳細は、
+このルールを補完する各ゲームモード自身のバランス調整ページに記載。
 
 ## キラーのPing
 
@@ -119,3 +122,4 @@ import ImageRow from '@components/ImageRow.astro';
 ## 適用対象
 
 - [DBD 1v4 Quartet・ランク](/ja/game-modes/1v4-quartet/)
+- [DBD 1v4 Duo+Duo・ランク](/ja/game-modes/1v4-duo/)

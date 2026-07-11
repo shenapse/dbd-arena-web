@@ -78,13 +78,18 @@ export default defineConfig({
     '/regulations/1v4-quartet/balancing/unknown/': '/game-modes/1v4-quartet/balancing/unknown/',
     '/regulations/1v4-quartet/balancing/wesker/': '/game-modes/1v4-quartet/balancing/wesker/',
     '/regulations/1v4-quartet/balancing/wraith/': '/game-modes/1v4-quartet/balancing/wraith/',
-    '/regulations/1v4-quartet/rules/general/': '/game-modes/1v4-quartet/rules/general/',
+    '/regulations/1v4-quartet/rules/general/': '/game-modes/reference/1v4-general-rule/',
     '/ja/regulations/': '/ja/game-modes/',
     '/ja/regulations/1v1-symmetric/': '/ja/game-modes/1v1-symmetric/',
     '/ja/regulations/1v1-symmetric/rules/general/': '/ja/game-modes/1v1-symmetric/rules/general/',
     '/ja/regulations/1v4-duo/': '/ja/game-modes/1v4-duo/',
     '/ja/regulations/1v4-quartet/': '/ja/game-modes/1v4-quartet/',
-    '/ja/regulations/1v4-quartet/rules/general/': '/ja/game-modes/1v4-quartet/rules/general/',
+    '/ja/regulations/1v4-quartet/rules/general/': '/ja/game-modes/reference/1v4-general-rule/',
+    // `1v4-quartet/rules/general` → `reference/1v4-general-rule`: this rule
+    // is shared across all 1v4 formats (Quartet, Duo+Duo, ...), not just
+    // Quartet, so it moved into the game-wide reference section.
+    '/game-modes/1v4-quartet/rules/general/': '/game-modes/reference/1v4-general-rule/',
+    '/ja/game-modes/1v4-quartet/rules/general/': '/ja/game-modes/reference/1v4-general-rule/',
   },
   integrations: [
     starlight({
@@ -185,7 +190,6 @@ export default defineConfig({
                   label: 'DBD 1v4 Quartet Ranked',
                   items: [
                     { label: 'Overview', translations: { ja: '概要' }, slug: 'game-modes/1v4-quartet' },
-                    { label: 'General Rule', translations: { ja: '基本ルール' }, slug: 'game-modes/1v4-quartet/rules/general' },
                     {
                       label: 'Balancing',
                       translations: { ja: 'バランス調整' },
@@ -230,6 +234,7 @@ export default defineConfig({
           label: 'Reference',
           translations: { ja: 'リファレンス' },
           items: [
+            { label: '1v4 General Rule', translations: { ja: '1v4 基本ルール' }, slug: 'game-modes/reference/1v4-general-rule' },
             { label: 'Perk Restriction Types', translations: { ja: 'パーク制限の種類' }, slug: 'game-modes/reference/perk-restriction-types' },
           ],
         },
