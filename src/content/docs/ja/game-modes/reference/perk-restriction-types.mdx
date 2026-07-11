@@ -1,0 +1,208 @@
+---
+title: パーク制限の種類
+description: パークの選択数制限、重複制限、組み合わせ禁止についてのプレイヤー向けガイド。
+status: active
+version: "0.3"
+effectiveDate: "2026-07-11"
+changeHistory:
+  - version: "0.3"
+    date: "2026-07-11"
+    note: パーク制限の種類として選択数制限を追加。
+  - version: "0.2"
+    date: "2026-07-11"
+    note: 表示上の「重複制限」という用語に合わせて表現を統一。
+  - version: "0.1"
+    date: "2026-07-11"
+    note: 初版。
+language: ja
+translationStatus: complete
+translatedVersion: "0.3"
+translationDate: "2026-07-11"
+authoritativeSource: /game-modes/reference/perk-restriction-types/
+---
+
+import LifecycleMeta from '@components/LifecycleMeta.astro';
+
+> **翻訳について:** このページは、読みやすさのために提供される非公式な日本語訳です。
+> 英語版との間に内容や解釈の相違がある場合は、[英語版](/game-modes/reference/perk-restriction-types/)が優先されます。  
+> **翻訳ステータス:** 完全 · **対応英語版:** 0.3 · **翻訳日:** 2026-07-11
+
+<LifecycleMeta
+  status={frontmatter.status}
+  version={frontmatter.version}
+  effectiveDate={frontmatter.effectiveDate}
+  changeHistory={frontmatter.changeHistory}
+/>
+
+一部のバランス調整ページには、単純な使用可否リストを超えたパーク制限があります。
+パーク単体では使用可能でも、たとえば、別のパークと組み合わせた場合や、別のプレイヤーが同じパークを使用する場合に、使用できなくなることがあります。
+
+このページでは、3種類の制限である**選択数制限**、**重複制限**、**組み合わせ禁止**を説明します。
+
+## 使用可能なパークと使用可能なビルド
+
+パークが使用可能であることは、必ずしもそのパークを含むビルドが使用可能であることを意味しません。
+
+たとえば、バランス調整ページで `Call of Brine` と `Eruption` の両方がキラーの使用可能パークとして記載されているとします。
+ただし、同じページで `Call of Brine + Eruption` が禁止された組み合わせとして記載されている場合、
+キラーはこの2つのパークを同じビルドで使用できません。
+
+類似の制限がサバイバーのパークにも当てはまることがあります。
+`Decisive Strike` が使用可能なサバイバーパークとして記載されていても、
+それがチームレベルのパーク重複制限の対象であれば、同じマッチに持ち込めるサバイバーの人数は
+許可された数までです。
+
+## 選択数制限
+
+選択数制限は、特定のグループから選べるパークの数を制御します。
+
+たとえば、バランス調整ページで複数の疲労系パークが使用可能とされつつ、各サバイバーがそのグループから
+持ち込めるパークは1つまでとされる場合があります。
+
+- OK: サバイバーが `Dead Hard` を持ち込む
+- OK: サバイバーが `Balanced Landing` を持ち込む
+- ****NG****: サバイバーが `Dead Hard` と `Balanced Landing` の両方を持ち込む
+
+選択数制限はキラーのパークにもサバイバーのパークにも適用されます。キラーの場合はキラー自身のビルドで
+確認します。サバイバーの場合は、サバイバー1人、1組のデュオ、サバイバーチーム全体など、記載された対象範囲内で確認します。
+
+## 重複制限
+
+重複制限は、同じパークが制限の対象範囲内で何個使用できるかを制御します。
+
+### 例: Duo+Duoゲームモード
+
+Duo+Duoでは、サバイバーのパーク重複制限が各デュオ内で適用されることがよくあります。デュオの
+パートナー同士でサバイバーパークを重複させてはならないと記載されている場合（デュオレベルでのパーク被り禁止）、同じデュオの2人は
+同じパークを持ち込めません。
+
+たとえば、パーク重複制限が各デュオに適用され、**すべてのパーク**が対象としましょう。サバイバーチームはプレイヤーAとBの
+デュオ1、プレイヤーCとDのデュオ2です。
+
+- OK: プレイヤーAが `Iron Will`、プレイヤーBが `Dead Hard` を持つ
+- OK: プレイヤーAが `Sprint Burst`、プレイヤーBが `Fixated` を持つ
+- **NG**: プレイヤーAとプレイヤーBがともに `Lithe` を持つ
+- OK: プレイヤーAとプレイヤーBがともに `Sprint Burst` を持ち、他プレイヤーは持たない
+
+![イラスト: デュオの重複制限（デュオ内で同じパークを繰り返し使用できない）](/images/builds/reference/perk-restriction-types/duo-repetition-limit/The-Trapper-survivor-perks.png)
+
+この場合、あるビルドがパーク制限に引っかからないかどうかは、そのプレイヤーのデュオ相手のビルドに左右されます。他方のデュオのビルドには左右されません。
+
+## 組み合わせ禁止
+
+組み合わせ禁止は、指定されたパーク同士を一緒に使用できないことを意味します。
+
+**例:**
+
+`Call of Brine` と `Eruption` が使用可能なパークとして記載され、同じページでこの2つが組み合わせ禁止にも
+指定されているとします。
+
+- OK: `Call of Brine` を含むが、`Eruption` を含まないビルド
+- OK: `Eruption` を含むが、`Call of Brine` を含まないビルド
+- **NG**: `Call of Brine` と `Eruption` の両方を含むビルド
+
+![イラスト: キラーの組み合わせ禁止（Call of Brine + Eruption）](/images/builds/reference/perk-restriction-types/killer-combo-ban/The-Trapper-killer-perks.png)
+
+組み合わせ禁止は、バランス調整ページ上でのルールの記載に応じて、1人のプレイヤー自身のビルドにも、
+複数プレイヤーのグループにも適用されます。
+
+キラーのパークでは単純です。組み合わせ禁止は常にキラー自身のビルドに適用されます。サバイバーのパークでは、
+制限の*対象範囲*に応じて、サバイバー1人のビルド、または複数のチームメイトのビルドに適用されることがあります。
+
+## パーク制限の対象範囲
+
+パーク制限の対象範囲は、その制限が誰に対して適用されるかを示します。
+
+キラーでは、対象範囲は常にキラー自身のビルドです。サバイバーでは、対象範囲がサバイバー1人、1組のデュオ、
+またはサバイバーチーム全体となる場合があります。
+
+対象範囲の違いによって、あなたが確認する必要のある**他人のビルド**の範囲が変わります。
+
+具体的に言うと、個人を対象範囲とするパーク制限では、サバイバー1人自身のビルドだけを確認します。
+デュオを対象範囲とする制限では、そのデュオの2人のビルドを合わせて確認します。
+チーム全体を対象範囲とする制限では、すべてのサバイバーのビルドを合わせて確認します。
+
+Duo+Duoのサバイバールールでは、制限が4人のサバイバー全員ではなく、自分のデュオに適用される場合がほとんどです。
+その場合、自分のビルドとデュオパートナーのビルドだけを比較すればよいことになります。他方のサバイバーデュオも、それぞれのデュオ内で同じルールに従います。
+
+以下の例は、同じ制限の種類でも対象範囲によってどのように変わるかを示します。
+
+## 例
+
+### 例1: キラービルドの組み合わせ禁止
+
+- 対象範囲: キラー
+- 制限の種類: 組み合わせ禁止
+
+これは前述の `Call of Brine + Eruption` の例と同じです。
+
+キラープレイヤーにとって、組み合わせ禁止と選択数制限は実質的に同じものです。どちらも、
+各パークを単体で使用できる場合でも、特定のパークの組み合わせを同時に使用できないようにします。
+
+### 例2: サバイバー1人の組み合わせ禁止
+
+- 対象範囲: サバイバー1人
+- 制限の種類: 組み合わせ禁止
+
+これはキラーの組み合わせ禁止と同じケースです。
+
+たとえば、`Deliverance` と `Unbreakable` が使用可能なサバイバーパークとして記載され、同じページでこの2つが
+サバイバー1人に対する組み合わせ禁止にも指定されているとします。
+
+- OK: `Deliverance` を含むが、`Unbreakable` を含まないビルド
+- OK: `Unbreakable` を含むが、`Deliverance` を含まないビルド
+- **NG**: `Deliverance` と `Unbreakable` の両方を含むビルド
+
+![イラスト: サバイバー1人の組み合わせ禁止（Deliverance + Unbreakable）](/images/builds/reference/perk-restriction-types/survivor-combo-ban/The-Trapper-survivor-perks.png)
+
+### 例3: デュオの組み合わせ禁止
+
+- 対象範囲: デュオ
+- 制限の種類: 組み合わせ禁止
+
+1v4 Duo+Duoのバランス調整ページに `Sprint Burst` と `Decisive Strike` が使用可能なパークとして記載され、
+さらにこれらが各デュオに対する組み合わせ禁止にも指定されているとします。
+
+- OK: 自分が `Sprint Burst` を持ち込み、デュオパートナーのビルドに `Decisive Strike` が**ない**
+- **NG**: 自分が `Sprint Burst` を持ち込み、デュオパートナーのビルドに `Decisive Strike` が**ある**
+- **NG**: 自分が `Sprint Burst` と `Decisive Strike` の両方を持ち込む
+- OK: 自分が `Decisive Strike` を持ち込み、自分のデュオ外のサバイバーが `Sprint Burst` を持ち込む
+
+![イラスト: デュオの組み合わせ禁止（Sprint Burst + Decisive Strike）](/images/builds/reference/perk-restriction-types/duo-combo-ban/The-Trapper-survivor-perks.png)
+
+### 例4: デュオの重複制限
+
+これは前述の**重複制限**セクションにあるDuo+Duoの例と同じです。制限が各デュオに適用される場合、
+同じパークを自分のデュオ内で複数回使用することはできません。
+
+### 例5: サバイバーチーム全体の組み合わせ禁止
+
+- 対象範囲: サバイバーチーム全体
+- 制限の種類: 組み合わせ禁止
+
+1v4 Quartetのバランス調整ページに `Sprint Burst` と `Decisive Strike` が使用可能なパークとして記載され、
+さらにサバイバーチーム全体に対する組み合わせ禁止にも指定されているとします。
+
+この場合、制限は4人のサバイバー全員にわたって確認されます。
+
+- OK: 自分が `Sprint Burst` を持ち込み、誰も `Decisive Strike` を持ち込まない
+- OK: 自分が `Decisive Strike` を持ち込み、誰も `Sprint Burst` を持ち込まない
+- **NG**: 自分が `Sprint Burst` を持ち込み、チームメイトの1人が `Decisive Strike` を持ち込む
+- **NG**: 自分が `Sprint Burst` と `Decisive Strike` の両方を持ち込む
+
+![イラスト: サバイバーチーム全体の組み合わせ禁止（Sprint Burst + Decisive Strike）](/images/builds/reference/perk-restriction-types/team-combo-ban/The-Trapper-survivor-perks.png)
+
+### 例6: サバイバーチーム全体の重複制限
+
+- 対象範囲: サバイバーチーム全体
+- 制限の種類: 重複制限
+
+1v4 Quartetのバランス調整ページで、サバイバーのパークはサバイバーチーム全体で重複させてはならないと
+記載されているとします。
+
+この場合、4人のサバイバー全員の中で、同じパークを複数回使用することはできません。
+
+- OK: プレイヤーAが `Iron Will`、プレイヤーBが `Dead Hard`、プレイヤーCが `Sprint Burst`、プレイヤーDが `Bond` を持ち込む
+- **NG**: プレイヤーAとプレイヤーBがともに `Lithe` を持ち込む
+
+![イラスト: サバイバーチーム全体の重複制限（4人全員で同じパークを繰り返し使用できない）](/images/builds/reference/perk-restriction-types/team-repetition-limit/The-Trapper-survivor-perks.png)
