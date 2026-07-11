@@ -46,7 +46,6 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
 
 ## Rule & balancing
 
-
 <LinkCard
   title="General rule"
   href="/game-modes/1v4-quartet/rules/general/"
@@ -56,14 +55,25 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
 <LinkCard
   title="Per-killer balancing"
   href="/game-modes/1v4-duo/balancing/"
-  description="per-killer balancing that complement the general rule."
+  description="per-killer balancing that defines allowed perks, add-ons, and items for this game mode."
 />
 
 <LinkCard
   title="Perk restriction types"
   href="/game-modes/reference/perk-restriction-types/"
-  description="Guide to combo bans and duplicate limits referenced by this mode's balancing rules."
+  description="Guide to perks restriction types beyond simple perk white list."
 />
+### Survivor perk restriction scope
+
+In Duo+Duo Ranked, the standard scope for survivor-side perk restrictions is
+each duo separately. A restriction listed on a per-killer balancing page
+therefore applies to both duos, but each duo is checked only against its own
+two survivors, not against all four survivors. A per-killer balancing page may
+define a finer scope, such as a per-survivor restriction, but it never defines
+a coarser team-level restriction across both duos. This means each duo can
+validate its build without consulting the other duo. The same rule applies to
+item restrictions.
+See **Perk Restriction Types** above for more detailed explanation.
 
 ## Queue requirement
 
