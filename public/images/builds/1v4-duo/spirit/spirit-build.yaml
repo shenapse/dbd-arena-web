@@ -36,6 +36,14 @@ killerPerks:
     - Trail of Torment
     - Turn Back the Clock
 
+addons:
+  default: deny         # Start with every Trapper add-on allowed
+  allow:                 # allow wins on conflict — re-permit one iridescent
+    - {rarity: "Common"}
+    - {rarity: "Uncommon"}
+    - {rarity: "Rare"}
+    - Kintsugi Teacup
+
 survivorPerks:
   default: deny          # Start with no survivor perks allowed
   allow:                 # Then allow these specific perks and groups
@@ -98,7 +106,7 @@ items:
 
   Med-Kit:
     default: deny
-    deny:
+    allow:
       - Ranger Med-Kit
     addons:
       default: deny
@@ -106,10 +114,7 @@ items:
       #   - Bandages
       #   - Gel Dressings
 
-addons:
-  default: deny         # Start with every Trapper add-on allowed
-  allow:                 # allow wins on conflict — re-permit one iridescent
-    - {rarity: "Common"}
-    - {rarity: "Uncommon"}
-    - {rarity: "Rare"}
-    - Kintsugi Teacup
+itemDuplicateLimits:
+  - scope: duo
+    max: 1                 # no survivors in duo may bring the same item
+    items: all

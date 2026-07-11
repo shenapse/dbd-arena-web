@@ -52,6 +52,16 @@ killerPerks:
     - Trail of Torment
     - Turn Back the Clock
 
+addons:
+  default: deny
+  allow:
+    - {rarity: "Common"}
+    - {rarity: "Uncommon"}
+    - Front-Page Article
+    - Footprint Cast
+    - B-Movie Poster
+    - {rarity: "Very Rare"}
+
 survivorPerks:
   default: deny          # Start with no survivor perks allowed
   allow:                 # Then allow these specific perks and groups
@@ -99,12 +109,7 @@ items:
     allow:
       - Firecracker
 
-addons:
-  default: deny
-  allow:
-    - {rarity: "Common"}
-    - {rarity: "Uncommon"}
-    - Front-Page Article
-    - Footprint Cast
-    - B-Movie Poster
-    - {rarity: "Very Rare"}
+itemDuplicateLimits:
+  - scope: duo
+    max: 1                 # no survivors in duo may bring the same item
+    items: all

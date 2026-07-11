@@ -52,6 +52,12 @@ killerPerks:
     - Trail of Torment
     - Turn Back the Clock
 
+addons:
+  default: allow         # Start with every add-on allowed
+  deny:
+    - {rarity: "Ultra Rare"}
+    - "All Seeing - Blood"
+
 survivorPerks:
   default: deny          # Start with no survivor perks allowed
   allow:                 # Then allow these specific perks and groups
@@ -99,8 +105,7 @@ items:
     allow:
       - Firecracker
 
-addons:
-  default: allow         # Start with every add-on allowed
-  deny:
-    - {rarity: "Ultra Rare"}
-    - "All Seeing - Blood"
+itemDuplicateLimits:
+  - scope: duo
+    max: 1                 # no survivors in duo may bring the same item
+    items: all
