@@ -10,5 +10,9 @@
   "lifecycle.status": "ステータス",
   "lifecycle.version": "バージョン",
   "lifecycle.effectiveDate": "発効日",
-  "lifecycle.changeHistory": "変更履歴"
+  "lifecycle.changeHistory": "変更履歴",
+  "killerPool.available": "使用可能",
+  "killerPool.upcoming": "追加予定",
+  "killerPool.undecided": "未定",
+  "killerPool.unsupported": "非対応"
 }

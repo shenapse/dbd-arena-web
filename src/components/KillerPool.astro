@@ -2,11 +2,27 @@
 interface Props {
   available?: string[];
   upcoming?: string[];
+  undecided?: string[];
+  unsupported?: string[];
 }
-const { available = [], upcoming = [] } = Astro.props;
+const { available = [], upcoming = [], undecided = [], unsupported = [] } = Astro.props;
+const t = Astro.locals.t;
+
+const GROUPS = [
+  { key: "available", items: available },
+  { key: "upcoming", items: upcoming },
+  { key: "undecided", items: undecided },
+  { key: "unsupported", items: unsupported },
+] as const;
 ---
 
-<ul class="tag-list">
-  {available.map(k => <li class="tag--available">{k}</li>)}
-  {upcoming.map(k => <li>{k}</li>)}
-</ul>
+<div class="killer-pool">
+  {GROUPS.filter(g => g.items.length > 0).map(g => (
+    <div class="killer-pool__group">
+      <p class="killer-pool__label">{t(`killerPool.${g.key}`)}</p>
+      <ul class="tag-list">
+        {g.items.map(k => <li class={`tag--${g.key}`}>{k}</li>)}
+      </ul>
+    </div>
+  ))}
+</div>
