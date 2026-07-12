@@ -10,5 +10,9 @@
   "lifecycle.status": "Status",
   "lifecycle.version": "Version",
   "lifecycle.effectiveDate": "Effective date",
-  "lifecycle.changeHistory": "Change history"
+  "lifecycle.changeHistory": "Change history",
+  "killerPool.available": "Available",
+  "killerPool.upcoming": "Upcoming",
+  "killerPool.undecided": "Undecided",
+  "killerPool.unsupported": "Unsupported"
 }

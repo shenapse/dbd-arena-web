@@ -33,16 +33,18 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
 | Voice comms | Partially Yes — survivors are assumed to be in voice only between their duo partners. |
 | Pre-match killer reveal | Yes — the killer character is known to both sides before the match starts. |
 | Pre-match player reveal | Yes |
+| Pre-match survivor coordination | Yes — all four survivors are added to a survivors-only private Discord thread. Before the match begins, they may discuss builds and strategy there. |
 
 ## Killer pool
 
 <KillerPool
-  available={["Available", "Blight", "Clown", "Doctor", "Dracula", "Ghoul",
+  available={["Blight", "Clown", "Doctor", "Dracula", "Ghoul",
               "Hillbilly", "Lich", "Nightmare", "Nurse", "Oni", "Spirit",
               "Unknown", "Wesker", "Wraith"]}
-  upcoming={["Upcoming", "Artist", "Cannibal", "Cenobite", "Demogorgon",
-             "Dredge", "Executioner", "Ghostface", "Mastermind", "Nemesis",
-             "Pig", "Trickster", "Xenomorph"]}
+  upcoming={["Slasher"]}
+  undecided={["Artist", "Cannibal", "Demogorgon", "Executioner", "Nemesis",
+              "Trickster", "Xenomorph"]}
+  unsupported={["Cenobite", "Dredge", "Ghostface", "Pig"]}
 />
 
 ## Rule & balancing
@@ -69,11 +71,13 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
 In Duo+Duo Ranked, the standard scope for survivor-side perk restrictions is
 each duo separately. A restriction listed on a per-killer balancing page
 therefore applies to both duos, but each duo is checked only against its own
-two survivors, not against all four survivors. A per-killer balancing page may
-define a finer scope, such as a per-survivor restriction, but it never defines
-a coarser team-level restriction across both duos. This means each duo can
-validate its build without consulting the other duo. The same rule applies to
-item restrictions.
+two survivors, not against all four survivors.
+
+A per-killer balancing page may define a finer scope, such as a per-survivor restriction,
+but it never defines a coarser team-level restriction across both duos.
+This means each duo can validate its build without consulting the other duo.
+
+The same rule applies to item restrictions.
 See **Perk Restriction Types** above for more detailed explanation.
 
 ## Queue requirement

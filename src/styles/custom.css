@@ -147,6 +147,14 @@
 }
 
 /* ---- Killer pool ovals (KillerPool.astro) ---- */
+.killer-pool__group + .killer-pool__group {
+  margin-top: 0.5rem;
+}
+.killer-pool__label {
+  margin: 0 0 0.25rem;
+  font-size: 0.8rem;
+  color: var(--sl-color-gray-3);
+}
 ul.tag-list {
   list-style: none;
   padding: 0;
@@ -166,4 +174,19 @@ ul.tag-list li.tag--available {
   background: transparent;
   border-color: var(--status-active);
   color: var(--status-active);
+}
+ul.tag-list li.tag--upcoming {
+  background: transparent;
+  border-color: var(--status-upcoming);
+  color: var(--status-upcoming);
+}
+ul.tag-list li.tag--undecided {
+  background: transparent;
+  border-color: var(--status-provisional);
+  color: var(--status-provisional);
+}
+ul.tag-list li.tag--unsupported {
+  background: transparent;
+  border-color: var(--status-archived);
+  color: var(--status-archived);
 }
