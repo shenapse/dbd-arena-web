@@ -195,6 +195,9 @@ export default defineConfig({
                       translations: { ja: 'バランス調整' },
                       items: [
                         { label: 'Overview', translations: { ja: '概要' }, slug: 'game-modes/1v4-quartet/balancing' },
+                        { label: 'Blight', translations: { ja: 'ブライト' }, slug: 'game-modes/1v4-quartet/balancing/blight' },
+                        { label: 'Nurse', translations: { ja: 'ナース' }, slug: 'game-modes/1v4-quartet/balancing/nurse' },
+                        { label: 'Spirit', translations: { ja: 'スピリット' }, slug: 'game-modes/1v4-quartet/balancing/spirit' },
                       ],
                     },
                   ],
