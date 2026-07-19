@@ -1,10 +1,3 @@
-# Perk allow-list example: The Trapper
-# Run from the repo root:
-#   node utilities/perk-sheet-generator/perk-sheet-generator.js \
-#        utilities/perk-sheet-generator/examples/the-trapper.yaml \
-#        --out utilities/perk-sheet-generator/output \
-#        --preset utilities/perk-sheet-generator/output/test-preset.json
-
 killer: The Spirit
 balancing: DBD Arena - 1v4 Quartet Rank v0.1
 # universe is optional; defaults to every perk in dbdperks.json for each side.
@@ -41,10 +34,20 @@ killerPerks:
     - Trail of Torment
     - Turn Back the Clock
 
+addons:
+  default: deny         # Start with every Trapper add-on allowed
+  allow:                 # allow wins on conflict — re-permit one iridescent
+    - {rarity: "Common"}
+    - {rarity: "Uncommon"}
+    - {rarity: "Rare"}
+    - Kintsugi Teacup
+
 survivorPerks:
   default: deny          # Start with no survivor perks allowed
   allow:                 # Then allow these specific perks and groups
+    - Aftercare
     - Any Means Necessary
+    - Bada Bada Boom
     - Balanced Landing
     - Blood Pact
     - Boil Over
@@ -52,13 +55,14 @@ survivorPerks:
     - Botany Knowledge
     - Chemical Trap
     - Dead Hard
+    - Deliverance
     - Desperate Measures
     - Diversion
     - Do No Harm
     - Finesse
     - Five Moves Ahead
     - Fixated
-    - flashbang
+    - Flashbang
     - Flow State
     - For the People
     - Head On
@@ -67,7 +71,6 @@ survivorPerks:
     - Lithe
     - Made for This
     - Overcome
-    - Quick and Quiet
     - Repressed Alliance
     - Second Wind
     - Smash Hit
@@ -98,11 +101,3 @@ items:
       allow:
         - Bandages
         - Gel Dressings
-
-addons:
-  default: deny         # Start with every Trapper add-on allowed
-  allow:                 # allow wins on conflict — re-permit one iridescent
-    - {rarity: "Common"}
-    - {rarity: "Uncommon"}
-    - {rarity: "Rare"}
-    - Kintsugi Teacup
