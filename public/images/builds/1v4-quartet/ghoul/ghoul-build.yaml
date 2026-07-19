@@ -13,8 +13,8 @@ balancing: DBD Arena - 1v4 Quartet Rank v0.1
 #   survivor: all
 
 killerPerks:
-  default: deny          # Start with all killer perks allowed
-  allow:                 # Then deny these specific perks
+  default: deny
+  allow:
     - Bamboozle
     - Blood Echo
     - Brutal Strength
@@ -46,6 +46,17 @@ killerPerks:
     - Trail of Torment
     - Turn Back the Clock
 
+addons:
+  default: deny
+  allow:
+    - {rarity: "Common"}
+    - {rarity: "Uncommon"}
+    - Amon's Necktie
+    - Aogiri Tree Robe
+    - Mado's Glove
+    - Red Spider Lily
+    - Fresh Coffee
+
 survivorPerks:
   default: deny          # Start with no survivor perks allowed
   allow:                 # Then allow these specific perks and groups
@@ -57,25 +68,21 @@ survivorPerks:
     - Better than New
     - Bite the Bullet
     - Blood Pact
-    # - Boil Over
+    - Boil Over
     - Bond
-    # - Botany Knowledge
+    #- Botany Knowledge
     - Champion of Light
     - Chemical Trap
     - Counterforce
     - Dead Hard
-    # - Decisive Strike
-    # - Deliverance
     - Desperate Measures
     - Detective's Hunch
     - Distortion
-    # - Diversion
-    # - Do No Harm
+    - Diversion
     - Empathic Connection
-    # - Finesse
     - Five Moves Ahead
     - Fixated
-    - flashbang
+    - Flashbang
     - Flow State
     - For the People
     - Head On
@@ -85,24 +92,17 @@ survivorPerks:
     - Light-Footed
     - Lithe
     - Lucky Star
-    # - Made for This
     - No Mither
-    # - Overcome
-    # - Plot Twist
     - Quick and Quiet
-    # - Reactive Healing
     - Repressed Alliance
-    # - Residual Manifest
+    - Residual Manifest
     - Saboteur
     - Second Wind
-    # - Self-Care
     - Smash Hit
     - Sprint Burst
     - Tenacity
-    # - Unbreakable
     - Urban Evasion
     - Visionary
-    # - We'll Make It
     - Windows of Opportunity
   deny: []
 
@@ -118,14 +118,3 @@ items:
   Firecracker:
     allow:
       - Firecracker
-
-addons:
-  default: deny         # Start with every Trapper add-on allowed
-  allow:                 # allow wins on conflict — re-permit one iridescent
-    - {rarity: "Common"}
-    - {rarity: "Uncommon"}
-    - Amon's Necktie
-    - Aogiri Tree Robe
-    - Mado's Glove
-    - Red Spider Lily
-    - Fresh Coffee
