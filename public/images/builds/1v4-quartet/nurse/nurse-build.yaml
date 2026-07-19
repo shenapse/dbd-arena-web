@@ -37,6 +37,15 @@ killerPerks:
     - "Scourge Hook: Jagged Compass"
     - Pop Goes the Weasel
 
+addons:
+  default: allow
+  deny:
+    - {rarity: "Ultra Rare"}
+    - Campbell's Last Breath
+    - Jenner's Last Breath
+    - Heavy Panting
+    - Ataxic Respiration
+
 survivorPerks:
   default: deny          # Start with no survivor perks allowed
   allow:                 # Then allow these specific perks and groups
