@@ -62,17 +62,15 @@ function withAliases(name: string, aliases?: string[]): string {
 /**
  * Return the display name for the current locale.
  *
- * On any non-Japanese locale, always returns `english` unchanged.
- *
- * On Japanese pages (`locale === 'ja'`):
- * - **perk**: a bilingual em-dash line
- *   `"<English> (<English aliases>) — <日本語> (<日本語 aliases>)"`, where the
- *   English aliases come from `englishAliases` (the perk's `perks.json` aliases)
- *   and the Japanese aliases from the `perks.ja.json` entry. Aliases only —
- *   abbreviations never render. If the perk has no Japanese entry, only the
- *   English cluster shows (no `—`).
- * - **addon/item**: `"<English> (<日本語>)"` when a translation exists, else the
- *   English name unchanged.
+ * - **perk**: the English cluster `"<English> (<English aliases>)"` always
+ *   renders (aliases come from `englishAliases`, the perk's `perks.json`
+ *   aliases — abbreviations never render). On Japanese pages
+ *   (`locale === 'ja'`), when a `perks.ja.json` translation exists, a
+ *   bilingual em-dash line is appended:
+ *   `"<English> (<English aliases>) — <日本語> (<日本語 aliases>)"`.
+ * - **addon/item**: on any non-Japanese locale, always returns `english`
+ *   unchanged. On Japanese pages, `"<English> (<日本語>)"` when a translation
+ *   exists, else the English name unchanged.
  */
 export function localizeName(
   english: string,
@@ -80,14 +78,15 @@ export function localizeName(
   domain: NameDomain,
   englishAliases?: string[]
 ): string {
-  if (locale !== 'ja') return english;
-  const ja = JA_LOOKUPS[domain].get(normalize(english));
-
   if (domain === 'perk') {
     const enCluster = withAliases(english, englishAliases);
+    if (locale !== 'ja') return enCluster;
+    const ja = JA_LOOKUPS.perk.get(normalize(english));
     if (!ja) return enCluster;
     return `${enCluster} — ${withAliases(ja.name, ja.aliases)}`;
   }
 
+  if (locale !== 'ja') return english;
+  const ja = JA_LOOKUPS[domain].get(normalize(english));
   return ja ? `${english} (${ja.name})` : english;
 }
