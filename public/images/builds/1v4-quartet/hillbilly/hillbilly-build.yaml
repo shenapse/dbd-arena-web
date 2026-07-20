@@ -1,11 +1,4 @@
-# Perk allow-list example: The Trapper
-# Run from the repo root:
-#   node utilities/perk-sheet-generator/perk-sheet-generator.js \
-#        utilities/perk-sheet-generator/examples/the-trapper.yaml \
-#        --out utilities/perk-sheet-generator/output \
-#        --preset utilities/perk-sheet-generator/output/test-preset.json
-
-killer: The Ghoul
+killer: The Hillbilly
 balancing: DBD Arena - 1v4 Quartet Rank v0.1
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
@@ -26,6 +19,7 @@ killerPerks:
     - Dying Light
     - Eruption
     - Furtive Chase
+    - "Hex: Crowd Control"
     - "Hex: Huntress Lullaby"
     - "Hex: The Third Seal"
     - Hysteria
@@ -47,39 +41,29 @@ killerPerks:
     - Turn Back the Clock
 
 addons:
-  default: deny
-  allow:
-    - {rarity: "Common"}
-    - {rarity: "Uncommon"}
-    - Amon's Necktie
-    - Aogiri Tree Robe
-    - Mado's Glove
-    - Red Spider Lily
-    - Fresh Coffee
+  default: allow
+  deny:
+    - LoPro Chains
+    - Apex Muffler
 
 survivorPerks:
-  default: deny          # Start with no survivor perks allowed
-  allow:                 # Then allow these specific perks and groups
-    - Adrenaline
+  default: deny
+  allow:
     - Aftercare
     - Any Means Necessary
     - Bada Bada Boom
     - Balanced Landing
-    - Better than New
-    - Bite the Bullet
     - Blood Pact
     - Boil Over
     - Bond
-    #- Botany Knowledge
-    - Champion of Light
+    - Botany Knowledge
     - Chemical Trap
-    - Counterforce
     - Dead Hard
+    - Deliverance
     - Desperate Measures
-    - Detective's Hunch
-    - Distortion
     - Diversion
-    - Empathic Connection
+    - Do No Harm
+    - Finesse
     - Five Moves Ahead
     - Fixated
     - Flashbang
@@ -87,34 +71,44 @@ survivorPerks:
     - For the People
     - Head On
     - Inner Strength
-    - Iron Will
     - Leader
-    - Light-Footed
     - Lithe
-    - Lucky Star
-    - No Mither
-    - Quick and Quiet
+    - Made for This
+    - Overcome
     - Repressed Alliance
-    - Residual Manifest
-    - Saboteur
     - Second Wind
     - Smash Hit
     - Sprint Burst
     - Tenacity
+    - Unbreakable
     - Urban Evasion
     - Visionary
     - Windows of Opportunity
   deny: []
 
+survivorRepetitionLimits:
+  - scope: team
+    max: 1
+    perks: all
+      
 items:
-  Flashlight:
-    default: deny
-    allow:
-      - Sport Flashlight
-    addons:
-      default: deny
-      allow:
-        - {rarity: "Common"}
-  Firecracker:
-    allow:
-      - Firecracker
+  # Med-Kit:
+  #   default: deny
+  #   allow:
+  #     - Ranger Med-Kit
+  # Flashlight:
+  #   default: deny
+  #   allow:
+  #     - Sport Flashlight
+  #   addons:
+  #     default: deny
+  #     allow:
+  #       - {rarity: "Common"}
+  # Firecracker:
+  #   allow:
+  #     - Firecracker
+
+itemDuplicateLimits:
+  - scope: team
+    max: 1
+    items: all

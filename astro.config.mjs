@@ -196,8 +196,13 @@ export default defineConfig({
                       items: [
                         { label: 'Overview', translations: { ja: '概要' }, slug: 'game-modes/1v4-quartet/balancing' },
                         { label: 'Blight', translations: { ja: 'ブライト' }, slug: 'game-modes/1v4-quartet/balancing/blight' },
+                        { label: 'Dracula', translations: { ja: 'ドラキュラ' }, slug: 'game-modes/1v4-quartet/balancing/dracula' },
+                        { label: 'Ghoul', translations: { ja: 'グール' }, slug: 'game-modes/1v4-quartet/balancing/ghoul' },
+                        { label: 'Hillbilly', translations: { ja: 'ヒルビリー' }, slug: 'game-modes/1v4-quartet/balancing/billy' },
                         { label: 'Nurse', translations: { ja: 'ナース' }, slug: 'game-modes/1v4-quartet/balancing/nurse' },
                         { label: 'Spirit', translations: { ja: 'スピリット' }, slug: 'game-modes/1v4-quartet/balancing/spirit' },
+                        { label: 'Wesker', translations: { ja: 'ウェスカー' }, slug: 'game-modes/1v4-quartet/balancing/wesker' },
+                        { label: 'Wraith', translations: { ja: 'レイス' }, slug: 'game-modes/1v4-quartet/balancing/wraith' },
                       ],
                     },
                   ],

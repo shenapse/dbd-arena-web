@@ -1,0 +1,68 @@
+killer: The Wraith
+balancing: DBD Arena - 1v4 Quartet Rank v0.1
+# universe is optional; defaults to every perk in dbdperks.json for each side.
+# universe:
+#   killer: all
+#   survivor: all
+
+killerPerks:
+  default: deny
+  allow:
+    - Agitation
+    - Bamboozle
+    - Brutal Strength
+    - Call of Brine
+    - Corrupt Intervention
+    - Eruption
+    - "Hex: Huntress Lullaby"
+    - "Hex: Undying"
+    - Infectious Fright
+    - "Hex: The Third Seal"
+    - Oppression
+    - Overcharge
+    - "Scourge Hook: Gift of Pain"
+    - Sloppy Butcher
+    - Thrilling Tremors
+    - Tinkerer
+    - Turn Back the Clock
+    - "Scourge Hook: Jagged Compass"
+    - Pop Goes the Weasel
+    - "Hex: Crowd Control"
+    - "Scourge Hook: Pain Resonance"
+
+addons:
+  default: deny
+  allow:
+
+survivorPerks:
+  default: deny
+  allow:
+
+  deny: []
+
+survivorRepetitionLimits:
+  - scope: team
+    max: 1
+    perks: all
+
+items:
+  # Med-Kit:
+  #   default: deny
+  #   allow:
+  #     - Ranger Med-Kit
+  # Flashlight:
+  #   default: deny
+  #   allow:
+  #     - Sport Flashlight
+  #   addons:
+  #     default: deny
+  #     allow:
+  #       - {rarity: "Common"}
+  # Firecracker:
+  #   allow:
+  #     - Firecracker
+
+itemDuplicateLimits:
+  - scope: team
+    max: 1
+    items: all
