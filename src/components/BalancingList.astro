@@ -3,16 +3,18 @@
 // build-time from a killer's `-build.yaml` — the single source of truth also
 // consumed by the balancing-tool sheet generators. See src/lib/balancing/.
 //
-// `src` is the explicit path to the YAML, root-absolute under public/ (the
-// same convention as ImageRow), e.g.
-// "/images/builds/1v4-quartet/blight/blight-build.yaml". The component reads
-// exactly that file — no directory or filename is hardcoded here.
+// The YAML is addressed by `format` + `killer`, and the file path is built
+// here as `src/data/balancing/<format>/<killer>/<killer>-build.yaml`, e.g.
+// format="1v4-quartet" killer="blight" →
+// src/data/balancing/1v4-quartet/blight/blight-build.yaml. `format` matches the
+// page's frontmatter `format:` field; `killer` is the lowercase folder/file
+// slug.
 //
 // The file is read from the filesystem at build time, resolved under the
-// project's public/ dir via process.cwd() (the project root under both
-// `astro dev` and `astro build`). Note: unlike import.meta.glob, an fs read is
-// not in Vite's watched module graph, so editing a YAML during `astro dev`
-// needs a dev-server restart to show. A missing/misspelled `src` throws rather
+// project root via process.cwd() (the project root under both `astro dev` and
+// `astro build`). Note: unlike import.meta.glob, an fs read is not in Vite's
+// watched module graph, so editing a YAML during `astro dev` needs a
+// dev-server restart to show. A missing/misspelled format/killer throws rather
 // than silently rendering nothing.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -30,12 +32,13 @@ type Section = 'killerPerks' | 'survivorPerks' | 'addons' | 'items';
 type Mode = 'allow' | 'ban';
 
 interface Props {
-  src: string;
+  format: string;
+  killer: string;
   section: Section;
   mode?: Mode;
 }
 
-const { src, section, mode: modeOverride } = Astro.props;
+const { format, killer, section, mode: modeOverride } = Astro.props;
 
 interface BuildDoc {
   killer?: string;
@@ -47,21 +50,22 @@ interface BuildDoc {
   display?: Partial<Record<Section, Mode>>;
 }
 
-// Read the explicit YAML file named by `src` (root-absolute under public/).
-// A missing or misspelled path is a caller mistake — throw loudly rather than
+// Build the YAML path from `format` + `killer` and read it. A missing or
+// misspelled format/killer is a caller mistake — throw loudly rather than
 // render nothing.
-if (!src) throw new Error(`BalancingList: "src" is required (section: "${section}").`);
-const filePath = path.join(process.cwd(), 'public', src);
+if (!format || !killer)
+  throw new Error(`BalancingList: "format" and "killer" are required (section: "${section}").`);
+const filePath = path.join(process.cwd(), 'src/data/balancing', format, killer, `${killer}-build.yaml`);
 if (!fs.existsSync(filePath)) {
   throw new Error(
-    `BalancingList: YAML not found at "${filePath}" (src: "${src}", section: "${section}").`
+    `BalancingList: YAML not found at "${filePath}" (format: "${format}", killer: "${killer}", section: "${section}").`
   );
 }
 const doc = parse(fs.readFileSync(filePath, 'utf8')) as BuildDoc;
 
 const mode: Mode = modeOverride ?? doc.display?.[section] ?? 'allow';
 const label = mode === 'ban' ? 'Banned:' : 'Allowed:';
-const context = `${section} (src: "${src}"${doc.killer ? `, killer: "${doc.killer}"` : ''})`;
+const context = `${section} (format: "${format}", killer: "${killer}"${doc.killer ? `, doc killer: "${doc.killer}"` : ''})`;
 
 // Perk/add-on rendering: a single flat name list.
 let flatNames: string[] | null = null;

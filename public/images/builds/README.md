@@ -3,6 +3,11 @@
 This REAME explains how to generate **build-restriction sheets** shown on the site — the
 killer/survivor perk sheets, killer add-on sheets, and survivor item sheets.
 
+The **source YAML** (`*-build.yaml`, the single source of truth for per-killer balancing)
+lives under `src/data/balancing/<format>/<killer>/`, e.g.
+`src/data/balancing/1v4-quartet/blight/blight-build.yaml`. The generated PNG sheets in
+this directory are the served output of those files.
+
 ## Prerequisites
 
 - `npm install` at the repo root — the three generator CLIs (`dbd-perk-sheet`,
@@ -16,14 +21,16 @@ They do **not** auto-discover files — pass the target YAML path(s) after `--`.
 the repo root:
 
 ```bash
-# regenerate every sheet for one killer
-npm run generate:perks  -- path/to/per-killer-balancing.yaml
-npm run generate:addons -- path/to/per-killer-balancing.yaml
-npm run generate:items  -- path/to/per-killer-balancing.yaml
+# regenerate every sheet for one killer (Blight, 1v4 quartet)
+npm run generate:perks  -- src/data/balancing/1v4-quartet/blight/blight-build.yaml -- --out public/images/builds/1v4-quartet/blight
+npm run generate:addons -- src/data/balancing/1v4-quartet/blight/blight-build.yaml -- --out public/images/builds/1v4-quartet/blight
+npm run generate:items  -- src/data/balancing/1v4-quartet/blight/blight-build.yaml -- --out public/images/builds/1v4-quartet/blight
 ```
 
-- **Output goes next to the input YAML** by default (into that killer's folder).
-  Append `-- --out <dir>` to write elsewhere.
+- **`--out` is required.** The generators write output next to the input YAML by default,
+  but the source YAML now lives under `src/data/balancing/` while the served sheets belong
+  here under `public/images/builds/<format>/<killer>/` — so always pass the matching
+  `-- --out <dir>`.
 - **Pass multiple YAML paths at once** to batch several killers in one run.
 - Add `-- --preset <out.json>` to also emit an aggregated BbD balancing-preset JSON.
 
