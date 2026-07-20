@@ -22,9 +22,9 @@ the repo root:
 
 ```bash
 # regenerate every sheet for one killer (Blight, 1v4 quartet)
-npm run generate:perks  -- src/data/balancing/1v4-quartet/blight/blight-build.yaml -- --out public/images/builds/1v4-quartet/blight
-npm run generate:addons -- src/data/balancing/1v4-quartet/blight/blight-build.yaml -- --out public/images/builds/1v4-quartet/blight
-npm run generate:items  -- src/data/balancing/1v4-quartet/blight/blight-build.yaml -- --out public/images/builds/1v4-quartet/blight
+npm run generate:perks src/data/balancing/1v4-quartet/blight/blight-build.yaml -- --out public/images/builds/1v4-quartet/blight
+npm run generate:addons src/data/balancing/1v4-quartet/blight/blight-build.yaml -- --out public/images/builds/1v4-quartet/blight
+npm run generate:items src/data/balancing/1v4-quartet/blight/blight-build.yaml -- --out public/images/builds/1v4-quartet/blight
 ```
 
 - **`--out` is required.** The generators write output next to the input YAML by default,
