@@ -14,6 +14,7 @@ format: 1v4-quartet
 ---
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
+import BalancingList from '@components/BalancingList.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
@@ -33,104 +34,19 @@ These rules sit alongside the general 1v4 quartet rule and complement it.
 
 ## Killer perks
 
-![The Ghoul — Allowed Killer Perks](/images/builds/1v4-quartet/ghoul/The-Ghoul-killer-perks.png)
-
-Allowed:
-  - Bamboozle
-  - Blood Echo
-  - Brutal Strength
-  - Call of Brine
-  - Corrupt Intervention
-  - Coulrophobia
-  - Deadlock
-  - Deathbound
-  - Dying Light
-  - Eruption
-  - Furtive Chase
-  - "Hex: Huntress Lullaby"
-  - "Hex: The Third Seal"
-  - Hysteria
-  - Infectious Fright
-  - Leverage
-  - Oppression
-  - Overcharge
-  - Pop Goes the Weasel
-  - "Scourge Hook: Gift of Pain"
-  - "Scourge Hook: Pain Resonance"
-  - "Scourge Hook: Jagged Compass"
-  - Sloppy Butcher
-  - Surge
-  - Surveillance
-  - Thanatophobia
-  - Thrilling Tremors
-  - Tinkerer
-  - Trail of Torment
-  - Turn Back the Clock
+<BalancingList src="/images/builds/1v4-quartet/ghoul/ghoul-build.yaml" section="killerPerks" />
 
 ## Killer add-ons
 
-![The Ghoul — Allowed Killer Add-ons](/images/builds/1v4-quartet/ghoul/The-Ghoul-killer-addons.png)
-
-Banned:
-  - All iridescent addons
-  - All very rare addons **except Fresh Coffee**
-  - Rize's Glasses
+<BalancingList src="/images/builds/1v4-quartet/ghoul/ghoul-build.yaml" section="addons" />
 
 ## Survivor perks
 
-![The Ghoul — Allowed Survivor Perks](/images/builds/1v4-quartet/ghoul/The-Ghoul-survivor-perks.png)
-
-Allowed:
-  - Adrenaline
-  - Aftercare
-  - Any Means Necessary
-  - Bada Bada Boom
-  - Balanced Landing
-  - Better than New
-  - Bite the Bullet
-  - Blood Pact
-  - Boil Over
-  - Bond
-  - Champion of Light
-  - Chemical Trap
-  - Counterforce
-  - Dead Hard
-  - Desperate Measures
-  - Detective's Hunch
-  - Distortion
-  - Diversion
-  - Empathic Connection
-  - Five Moves Ahead
-  - Fixated
-  - flashbang
-  - Flow State
-  - For the People
-  - Head On
-  - Inner Strength
-  - Iron Will
-  - Leader
-  - Light-Footed
-  - Lithe
-  - Lucky Star
-  - No Mither
-  - Quick and Quiet
-  - Repressed Alliance
-  - Residual Manifest
-  - Saboteur
-  - Second Wind
-  - Smash Hit
-  - Sprint Burst
-  - Tenacity
-  - Urban Evasion
-  - Visionary
-  - Windows of Opportunity
+<BalancingList src="/images/builds/1v4-quartet/ghoul/ghoul-build.yaml" section="survivorPerks" />
 
 ## Survivor items
 
-![The Ghoul — Allowed Items](/images/builds/1v4-quartet/ghoul/The-Ghoul-items.png)
-
-- 1 rare flashlight (Sport) with 2 common add-ons
-- 1 firecracker
+<BalancingList src="/images/builds/1v4-quartet/ghoul/ghoul-build.yaml" section="items" />
 
 [← All per-killer balancing](/game-modes/1v4-quartet/balancing/)
 

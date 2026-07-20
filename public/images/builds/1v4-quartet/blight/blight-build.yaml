@@ -12,6 +12,12 @@ balancing: DBD Arena - 1v4 Quartet Rank v0.1
 #   killer: all
 #   survivor: all
 
+display:
+  killerPerks: allow
+  survivorPerks: allow
+  addons: allow
+  items: allow
+
 killerPerks:
   default: deny          # Start with all killer perks allowed
   allow:                 # Then deny these specific perks
@@ -70,7 +76,6 @@ survivorPerks:
     - Overcome
     - Plot Twist
     - Quick and Quiet
-    - Reactive Healing
     - Second Wind
     - Self-Care
     - Smash Hit
@@ -85,19 +90,23 @@ survivorPerks:
 
 items:
   Flashlight:
+    count: 1
     default: deny
     allow:
       - Sport Flashlight
     addons:
+      count: 2
       default: deny
       allow:
         - {rarity: "Common"}
 
   Med-Kit:
+    count: 1
     default: deny
-    deny:
+    allow:
       - Ranger Med-Kit
     addons:
+      count: 2
       default: deny
       allow:
         - Bandages

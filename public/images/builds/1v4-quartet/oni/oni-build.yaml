@@ -12,6 +12,12 @@ balancing: DBD Arena - 1v4 Quartet Rank v0.1
 #   killer: all
 #   survivor: all
 
+display:
+  killerPerks: allow
+  survivorPerks: allow
+  addons: ban
+  items: allow
+
 killerPerks:
   default: deny          # Start with all killer perks allowed
   allow:                 # Then deny these specific perks
@@ -117,18 +123,21 @@ survivorPerks:
 
 items:
   Flashlight:
+    count: 1
     default: deny
     allow:
       - Sport Flashlight
     addons:
+      count: 2
       default: deny
       allow:
         - {rarity: "Common"}
   Firecracker:
+    count: 1
     allow:
       - Firecracker
 
 addons:
-  default: allow         # Start with every Trapper add-on allowed
-  allow:                 # allow wins on conflict — re-permit one iridescent
+  default: allow         # Nothing banned by default
+  deny:                  # deny wins on conflict — ban the iridescent/Ultra-Rare add-ons
     - {rarity: "Ultra Rare"}

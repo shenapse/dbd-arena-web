@@ -14,6 +14,7 @@ format: 1v4-quartet
 ---
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
+import BalancingList from '@components/BalancingList.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
@@ -33,92 +34,19 @@ These rules sit alongside the general 1v4 quartet rule and complement it.
 
 ## Killer perks
 
-Allowed:
-  - Agitation
-  - Bamboozle
-  - Blood Echo
-  - Brutal Strength
-  - Call of Brine
-  - Corrupt Intervention
-  - Coulrophobia
-  - Deadlock
-  - Deathbound
-  - Dying Light
-  - Eruption
-  - Furtive Chase
-  - Grim Embrace
-  - "Hex: Ruin"
-  - "Hex: Huntress Lullaby"
-  - "Hex: The Third Seal"
-  - "Hex: Undying"
-  - Hysteria
-  - Infectious Fright
-  - Leverage
-  - Machine Learning
-  - Monitor and Abuse
-  - Oppression
-  - Overcharge
-  - Pop Goes the Weasel
-  - "Scourge Hook: Gift of Pain"
-  - "Scourge Hook: Pain Resonance"
-  - "Scourge Hook: Jagged Compass"
-  - Sloppy Butcher
-  - Superior Anatomy
-  - Surge
-  - Surveillance
-  - Thanatophobia
-  - Thrilling Tremors
-  - Tinkerer
-  - Trail of Torment
-  - Turn Back the Clock
+<BalancingList src="/images/builds/1v4-quartet/oni/oni-build.yaml" section="killerPerks" />
 
 ## Killer add-ons
 
-Banned:
-  - All Iridescent addons.
+<BalancingList src="/images/builds/1v4-quartet/oni/oni-build.yaml" section="addons" />
 
 ## Survivor perks
-Allowed:
-  - Adrenaline
-  - Aftercare
-  - Any Means Necessary
-  - Bada Bada Boom
-  - Balanced Landing
-  - Better than New
-  - Bite the Bullet
-  - Blood Pact
-  - Boil Over
-  - Bond
-  - Calm Spirit
-  - Chemical Trap
-  - Counterforce
-  - Dead Hard
-  - Detective's Hunch
-  - Distortion
-  - Diversion
-  - Five Moves Ahead
-  - Fixated
-  - flashbang
-  - Head On
-  - Iron Will
-  - Light-Footed
-  - Lucky Star
-  - No Mither
-  - No One Left Behind
-  - Quick and Quiet
-  - Repressed Alliance
-  - Residual Manifest
-  - Saboteur
-  - Smash Hit
-  - Tenacity
-  - Urban Evasion
-  - Visionary
-  - Windows of Opportunity
+
+<BalancingList src="/images/builds/1v4-quartet/oni/oni-build.yaml" section="survivorPerks" />
 
 ## Survivor items
 
-- 1 rare flashlight with 2 common add-ons
-- 1 flashbang 
+<BalancingList src="/images/builds/1v4-quartet/oni/oni-build.yaml" section="items" />
 
 ## Applies to
 
