@@ -1,7 +1,7 @@
 ---
-title: Spirit — 1v4 Duo+Duo Balancing
-description: Per-killer balancing for Spirit in the 1v4 Duo+Duo format.
-handle: 1v4-duo-balancing-spirit
+title: Spirit — 1v4 Quartet Balancing
+description: Per-killer balancing for Spirit in the 1v4 quartet format.
+handle: 1v4-quartet-balancing-spirit
 status: upcoming
 version: "0.1"
 effectiveDate: "2026-06-15"
@@ -10,10 +10,11 @@ changeHistory:
     date: "2026-06-15"
     note: Initial per-killer balancing entry for Spirit.
 killer: Spirit
-format: 1v4-duo
+format: 1v4-quartet
 ---
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
+import BalancingList from '@components/BalancingList.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
@@ -22,7 +23,7 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
   changeHistory={frontmatter.changeHistory}
 />
 
-Per-killer balancing for Spirit. These adjustments apply specifically to the 1v4 Duo+Duo game mode and complement its shared [general rule](/game-modes/reference/1v4-general-rule/); they do not replace it.
+Per-killer balancing for Spirit. These adjustments apply specifically to the 1v4 quartet game mode and complement its shared [general rule](/game-modes/reference/1v4-general-rule/); they do not replace it.
 
 | Aspect | Detail |
 | --- | --- |
@@ -32,89 +33,28 @@ Per-killer balancing for Spirit. These adjustments apply specifically to the 1v4
 
 ## Killer perks
 
-![The Spirit — Killer Perks](/images/builds/1v4-duo/spirit/The-Spirit-killer-perks.png)
+![The Spirit — Allowed Killer Perks](/images/builds/1v4-quartet/spirit/The-Spirit-killer-perks.png)
 
-Allowed:
-- Call of Brine
-- Corrupt Intervention
-- Coulrophobia
-- Deathbound
-- Dying Light
-- Eruption
-- Furtive Chase
-- "Hex: Huntress Lullaby"
-- "Hex: The Third Seal"
-- Infectious Fright
-- Leverage
-- Oppression
-- Overcharge
-- Pop Goes the Weasel
-- "Scourge Hook: Gift of Pain"
-- "Scourge Hook: Pain Resonance"
-- "Scourge Hook: Jagged Compass"
-- Sloppy Butcher
-- Surge
-- Surveillance
-- Thanatophobia
-- Thrilling Tremors
-- Tinkerer
-- Trail of Torment
-- Turn Back the Clock
+<BalancingList format="1v4-quartet" killer="spirit" section="killerPerks" />
 
 ## Killer add-ons
 
-![The Spirit — Add-ons Perks](/images/builds/1v4-duo/spirit/The-Spirit-killer-addons.png)
+![The Spirit — Allowed Killer Add-ons](/images/builds/1v4-quartet/spirit/The-Spirit-killer-addons.png)
 
-Allowed:
-- Common, Uncommon, and Rare add-ons
-- Kintsugi Teacup
+<BalancingList format="1v4-quartet" killer="spirit" section="addons" />
 
 ## Survivor perks
 
-Allowed:
-- Aftercare
-- Any Means Necessary
-- Bada Bada Boom
-- Balanced Landing
-- Blood Pact
-- Boil Over
-- Bond
-- Botany Knowledge
-- Chemical Trap
-- Dead Hard
-- Deliverance
-- Desperate Measures
-- Diversion
-- Do No Harm
-- Finesse
-- Five Moves Ahead
-- Fixated
-- Flashbang
-- Flow State
-- For the People
-- Head On
-- Inner Strength
-- Leader
-- Lithe
-- Made for This
-- Overcome
-- Repressed Alliance
-- Second Wind
-- Smash Hit
-- Sprint Burst
-- Tenacity
-- Unbreakable
-- Urban Evasion
-- Visionary
-- Windows of Opportunity
+![The Spirit — Allowed Survivor Perks](/images/builds/1v4-quartet/spirit/The-Spirit-survivor-perks.png)
+
+<BalancingList format="1v4-quartet" killer="spirit" section="survivorPerks" />
 
 ## Survivor items
 
-![The Spirit — Survivor Items](/images/builds/1v4-duo/spirit/The-Spirit-items.png)
+![Going against The Spirit — Allowed Survivor Items](/images/builds/1v4-quartet/spirit/The-Spirit-items.png)
 
-Allowed:
-- Med-Kit (Ranger Med-Kit) with no add-ons
+<BalancingList format="1v4-quartet" killer="spirit" section="items" />
 
 ## Applies to
 
-- [DBD 1v4 Duo+Duo Ranked](/game-modes/1v4-duo/)
+- [DBD 1v4 Quartet Ranked](/game-modes/1v4-quartet/)

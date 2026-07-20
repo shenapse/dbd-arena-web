@@ -14,6 +14,7 @@ format: 1v4-quartet
 ---
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
+import BalancingList from '@components/BalancingList.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
@@ -35,93 +36,25 @@ These rules sit alongside the general 1v4 quartet rule and complement it.
 
 ![The Hillbilly — Allowed Killer Perks](/images/builds/1v4-quartet/hillbilly/The-Hillbilly-killer-perks.png)
 
-Allowed:
-- Bamboozle
-- Blood Echo
-- Brutal Strength
-- Call of Brine
-- Corrupt Intervention
-- Coulrophobia
-- Deadlock
-- Deathbound
-- Dying Light
-- Eruption
-- Furtive Chase
-- "Hex: Crowd Control"
-- "Hex: Huntress Lullaby"
-- "Hex: The Third Seal"
-- Hysteria
-- Infectious Fright
-- Leverage
-- Oppression
-- Overcharge
-- Pop Goes the Weasel
-- "Scourge Hook: Gift of Pain"
-- "Scourge Hook: Pain Resonance"
-- "Scourge Hook: Jagged Compass"
-- Sloppy Butcher
-- Surge
-- Surveillance
-- Thanatophobia
-- Thrilling Tremors
-- Tinkerer
-- Trail of Torment
-- Turn Back the Clock
+<BalancingList format="1v4-quartet" killer="hillbilly" section="killerPerks" />
 
 ## Killer add-ons
 
 ![The Hillbilly — Allowed Killer Add-ons](/images/builds/1v4-quartet/hillbilly/The-Hillbilly-killer-addons.png)
 
-Banned:
-- LoPro Chains
-- Apex Muffler
+<BalancingList format="1v4-quartet" killer="hillbilly" section="addons" />
 
 ## Survivor perks
 
 ![The Hillbilly — Allowed Survivor Perks](/images/builds/1v4-quartet/hillbilly/The-Hillbilly-survivor-perks.png)
 
-Allowed:
-- Aftercare
-- Any Means Necessary
-- Bada Bada Boom
-- Balanced Landing
-- Blood Pact
-- Boil Over
-- Bond
-- Botany Knowledge
-- Chemical Trap
-- Dead Hard
-- Deliverance
-- Desperate Measures
-- Diversion
-- Do No Harm
-- Finesse
-- Five Moves Ahead
-- Fixated
-- Flashbang
-- Flow State
-- For the People
-- Head On
-- Inner Strength
-- Leader
-- Lithe
-- Made for This
-- Overcome
-- Repressed Alliance
-- Second Wind
-- Smash Hit
-- Sprint Burst
-- Tenacity
-- Unbreakable
-- Urban Evasion
-- Visionary
-- Windows of Opportunity
+<BalancingList format="1v4-quartet" killer="hillbilly" section="survivorPerks" />
 
 ## Survivor items
 
-{/* - 1 very rare med-kit with 2 rare add-ons
-- 1 rare flashlight with 2 common add-ons
-- 1 flashbang */}
+![Going against The Hillbilly — Allowed Survivor Items](/images/builds/1v4-quartet/hillbilly/The-Hillbilly-items.png)
+
+<BalancingList format="1v4-quartet" killer="hillbilly" section="items" />
 
 [← All per-killer balancing](/game-modes/1v4-quartet/balancing/)
 
