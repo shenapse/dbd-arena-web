@@ -93,7 +93,7 @@ if (doc) {
     const side = section === 'killerPerks' ? 'killer' : 'survivor';
     const result = resolvePerks(doc[section], side, context);
     flatNames = (mode === 'ban' ? result.banned : result.allowed).map((p) =>
-      localizeName(p.name, locale, 'perk')
+      localizeName(p.name, locale, 'perk', p.aliases)
     );
   } else if (section === 'addons') {
     if (!doc.killer) throw new Error(`Missing "killer" field (${context}).`);

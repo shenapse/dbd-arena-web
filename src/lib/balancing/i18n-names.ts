@@ -17,39 +17,77 @@ import { normalize } from './normalize';
 
 export type NameDomain = 'perk' | 'addon' | 'item';
 
+// A translation value may be a bare Japanese name, or an object carrying a
+// primary Japanese `name` plus optional Japanese `aliases`/`abbreviations`
+// (mirroring the English perks.json structure). Only `name` drives display
+// today; the alias fields are stored for future use (e.g. search).
+export interface JaLocalizedName {
+  name: string;
+  aliases?: string[];
+  abbreviations?: string[];
+}
+export type JaNameMap = Record<string, string | JaLocalizedName>;
+
+/** Normalize a value to the object shape, wrapping a bare string as `{ name }`. */
+function toJaEntry(value: string | JaLocalizedName): JaLocalizedName {
+  return typeof value === 'string' ? { name: value } : value;
+}
+
 // Build a normalized lookup once per domain so punctuation/spacing differences
 // between an entry's canonical name and a map key don't cause misses (mirrors
 // how buildLookup normalizes in normalize.ts). Keep the maps per-domain — never
 // merged — so a perk and an add-on that share an English name can't
-// cross-translate.
-function buildJaLookup(map: Record<string, string>): Map<string, string> {
-  const lookup = new Map<string, string>();
+// cross-translate. Perks retain the full entry (name + aliases) so the perk
+// display can surface Japanese aliases; add-ons/items only ever need the name.
+function buildJaLookup(map: JaNameMap): Map<string, JaLocalizedName> {
+  const lookup = new Map<string, JaLocalizedName>();
   for (const [en, ja] of Object.entries(map)) {
     const key = normalize(en);
-    if (!lookup.has(key)) lookup.set(key, ja);
+    if (!lookup.has(key)) lookup.set(key, toJaEntry(ja));
   }
   return lookup;
 }
 
-const JA_LOOKUPS: Record<NameDomain, Map<string, string>> = {
-  perk: buildJaLookup(perksJa as Record<string, string>),
-  addon: buildJaLookup(addonsJa as Record<string, string>),
-  item: buildJaLookup(itemsJa as Record<string, string>),
+const JA_LOOKUPS: Record<NameDomain, Map<string, JaLocalizedName>> = {
+  perk: buildJaLookup(perksJa as JaNameMap),
+  addon: buildJaLookup(addonsJa as JaNameMap),
+  item: buildJaLookup(itemsJa as JaNameMap),
 };
+
+/** Wrap a primary name with its aliases in parens: `"Name (a, b)"`, or just `"Name"`. */
+function withAliases(name: string, aliases?: string[]): string {
+  return aliases && aliases.length ? `${name} (${aliases.join(', ')})` : name;
+}
 
 /**
  * Return the display name for the current locale.
  *
- * On Japanese pages (`locale === 'ja'`), returns `"<English> (<日本語>)"` when a
- * translation exists for `english` in `domain`, otherwise the English name
- * unchanged. On any other locale, always returns the English name unchanged.
+ * On any non-Japanese locale, always returns `english` unchanged.
+ *
+ * On Japanese pages (`locale === 'ja'`):
+ * - **perk**: a bilingual em-dash line
+ *   `"<English> (<English aliases>) — <日本語> (<日本語 aliases>)"`, where the
+ *   English aliases come from `englishAliases` (the perk's `perks.json` aliases)
+ *   and the Japanese aliases from the `perks.ja.json` entry. Aliases only —
+ *   abbreviations never render. If the perk has no Japanese entry, only the
+ *   English cluster shows (no `—`).
+ * - **addon/item**: `"<English> (<日本語>)"` when a translation exists, else the
+ *   English name unchanged.
  */
 export function localizeName(
   english: string,
   locale: string | undefined,
-  domain: NameDomain
+  domain: NameDomain,
+  englishAliases?: string[]
 ): string {
   if (locale !== 'ja') return english;
   const ja = JA_LOOKUPS[domain].get(normalize(english));
-  return ja ? `${english} (${ja})` : english;
+
+  if (domain === 'perk') {
+    const enCluster = withAliases(english, englishAliases);
+    if (!ja) return enCluster;
+    return `${enCluster} — ${withAliases(ja.name, ja.aliases)}`;
+  }
+
+  return ja ? `${english} (${ja.name})` : english;
 }
