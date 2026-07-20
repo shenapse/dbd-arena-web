@@ -26,6 +26,7 @@ import {
   collapseAddonsByRarity,
   collapseItemAddonsByRarity,
 } from '../lib/balancing/resolve';
+import { localizeName } from '../lib/balancing/i18n-names';
 import type { AllowDenyConfig, ItemsConfig } from '../lib/balancing/types';
 
 type Section = 'killerPerks' | 'survivorPerks' | 'addons' | 'items';
@@ -39,6 +40,12 @@ interface Props {
 }
 
 const { format, killer, section, mode: modeOverride } = Astro.props;
+
+// Current locale, URL-derived — 'ja' on the /ja/… pages (including the
+// English-fallback balancing pages, which is exactly where we want to append
+// the Japanese name). Only the display names below are localized; allow/deny
+// resolution and sort order stay English.
+const locale = Astro.currentLocale;
 
 interface BuildDoc {
   killer?: string;
@@ -85,22 +92,29 @@ if (doc) {
   if (section === 'killerPerks' || section === 'survivorPerks') {
     const side = section === 'killerPerks' ? 'killer' : 'survivor';
     const result = resolvePerks(doc[section], side, context);
-    flatNames = (mode === 'ban' ? result.banned : result.allowed).map((p) => p.name);
+    flatNames = (mode === 'ban' ? result.banned : result.allowed).map((p) =>
+      localizeName(p.name, locale, 'perk', p.aliases)
+    );
   } else if (section === 'addons') {
     if (!doc.killer) throw new Error(`Missing "killer" field (${context}).`);
     const result = resolveAddons(doc.addons, doc.killer, context);
     const shown = mode === 'ban' ? result.banned : result.allowed;
     const { summaries, names } = collapseAddonsByRarity(shown, result.universe);
-    flatNames = [...summaries, ...names];
+    flatNames = [...summaries, ...names.map((n) => localizeName(n, locale, 'addon'))];
   } else if (section === 'items') {
     const results = resolveItems(doc.items, doc.default ?? 'deny', context);
     itemGroups = results.map((r) => {
       const shownAddons = mode === 'ban' ? r.addons.banned : r.addons.allowed;
       const addonDisplay = collapseItemAddonsByRarity(shownAddons, r.addons.universe);
       return {
-        typeName: r.type.Name,
-        variantNames: (mode === 'ban' ? r.variants.banned : r.variants.allowed).map((v) => v.Name),
-        addonNames: [...addonDisplay.summaries, ...addonDisplay.names],
+        typeName: localizeName(r.type.Name, locale, 'item'),
+        variantNames: (mode === 'ban' ? r.variants.banned : r.variants.allowed).map((v) =>
+          localizeName(v.Name, locale, 'item')
+        ),
+        addonNames: [
+          ...addonDisplay.summaries,
+          ...addonDisplay.names.map((n) => localizeName(n, locale, 'item')),
+        ],
         count: r.count,
         addonCount: r.addonCount,
       };

@@ -21,6 +21,8 @@ export interface Named {
   Name?: string;
   aliases?: string | string[];
   Aliases?: string | string[];
+  abbreviations?: string | string[];
+  Abbreviations?: string | string[];
 }
 
 function displayName(entry: Named): string {
@@ -29,10 +31,16 @@ function displayName(entry: Named): string {
   return n;
 }
 
-function aliasList(entry: Named): string[] {
-  const raw = entry.aliases ?? entry.Aliases;
+function toList(raw: string | string[] | undefined): string[] {
   if (raw == null) return [];
   return Array.isArray(raw) ? raw : String(raw).split(',');
+}
+
+function aliasList(entry: Named): string[] {
+  return [
+    ...toList(entry.aliases ?? entry.Aliases),
+    ...toList(entry.abbreviations ?? entry.Abbreviations),
+  ];
 }
 
 /**

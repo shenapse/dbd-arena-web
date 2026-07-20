@@ -10,7 +10,8 @@ export interface Perk {
   tags: string[];
   character: string;
   survivorPerk: boolean;
-  aliases?: string | string[];
+  aliases?: string[];
+  abbreviations?: string[];
   dateAdded?: string;
 }
 
