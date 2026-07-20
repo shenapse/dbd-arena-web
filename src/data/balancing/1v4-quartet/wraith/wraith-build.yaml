@@ -8,31 +8,12 @@ balancing: DBD Arena - 1v4 Quartet Rank v0.1
 killerPerks:
   default: deny
   allow:
-    - Agitation
-    - Bamboozle
-    - Brutal Strength
-    - Call of Brine
-    - Corrupt Intervention
-    - Eruption
-    - "Hex: Huntress Lullaby"
-    - "Hex: Undying"
-    - Infectious Fright
-    - "Hex: The Third Seal"
-    - Oppression
-    - Overcharge
-    - "Scourge Hook: Gift of Pain"
-    - Sloppy Butcher
-    - Thrilling Tremors
-    - Tinkerer
-    - Turn Back the Clock
-    - "Scourge Hook: Jagged Compass"
-    - Pop Goes the Weasel
-    - "Hex: Crowd Control"
-    - "Scourge Hook: Pain Resonance"
 
 addons:
-  default: deny
-  allow:
+  default: allow
+  deny:
+    - {rarity: "Ultra Rare"}
+    - "\"All Seeing\" - Blood"
 
 survivorPerks:
   default: deny
