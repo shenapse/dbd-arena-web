@@ -14,6 +14,7 @@ format: 1v4-quartet
 ---
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
+import BalancingList from '@components/BalancingList.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
@@ -35,78 +36,19 @@ These rules sit alongside the general 1v4 quartet rule and complement it.
 
 ![The Nurse — Allowed Killer Perks](/images/builds/1v4-quartet/nurse/The-Nurse-killer-perks.png)
 
-Allowed:
-- Call of Brine
-- Corrupt Intervention
-- Dying Light
-- Eruption
-- Furtive Chase
-- "Hex: Huntress Lullaby"
-- "Hex: The Third Seal"
-- Infectious Fright
-- Leverage
-- Mindbreaker
-- Oppression
-- Overcharge
-- Surveillance
-- Thanatophobia
-- Thrilling Tremors
-- Tinkerer
-- Trail of Torment
-- Turn Back the Clock
-- "Scourge Hook: Gift of Pain"
-- "Scourge Hook: Jagged Compass"
-- Pop Goes the Weasel
+<BalancingList format="1v4-quartet" killer="nurse" section="killerPerks" />
 
 ## Killer add-ons
 
-Banned:
-- Ultra Rares
-- Campbell's Last Breath
-- Jenner's Last Breath
-- Heavy Panting
-- Ataxic Respiration
+![The Nurse — Allowed Killer Add-ons](/images/builds/1v4-quartet/nurse/The-Nurse-killer-addons.png)
+
+<BalancingList format="1v4-quartet" killer="nurse" section="addons" />
 
 ## Survivor perks
 
 ![Going against The Nurse — Allowed Survivor Perks](/images/builds/1v4-quartet/nurse/The-Nurse-survivor-perks.png)
 
-Allowed:
-- Balanced Landing
-- Bite the Bullet
-- Bond
-- Botany Knowledge
-- Champion of Light
-- Counterforce
-- Distortion
-- Dead Hard
-- Deliverance
-- Desperate Measures
-- Detective's Hunch
-- Fixated
-- flashbang
-- Flow State
-- For the People
-- Head On
-- Decisive Strike
-- Do No Harm
-- Inner Strength
-- Iron Will
-- Leader
-- Light-Footed
-- Lithe
-- Lucky Star
-- Made for This
-- Overcome
-- Plot Twist
-- Quick and Quiet
-- Second Wind
-- Self-Care
-- Tenacity
-- Unbreakable
-- Urban Evasion
-- Visionary
-- We'll Make It
+<BalancingList format="1v4-quartet" killer="nurse" section="survivorPerks" />
 
 No duplication allowed.
 
@@ -114,9 +56,7 @@ No duplication allowed.
 
 ![Going against The Nurse — Allowed Survivor Perks](/images/builds/1v4-quartet/nurse/The-Nurse-items.png)
 
-- 1 very rare med-kit (Ranger) + Gel Dressings, Bandages
-- 1 rare flashlight (Sport) with 2 common add-ons
-- 1 firecracker
+<BalancingList format="1v4-quartet" killer="nurse" section="items" />
 
 [← All per-killer balancing](/game-modes/1v4-quartet/balancing/)
 

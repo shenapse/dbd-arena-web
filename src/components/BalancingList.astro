@@ -1,0 +1,218 @@
+---
+// Renders an "Allowed:" / "Banned:" list (perks, add-ons, or items) resolved
+// build-time from a killer's `-build.yaml` — the single source of truth also
+// consumed by the balancing-tool sheet generators. See src/lib/balancing/.
+//
+// The YAML is addressed by `format` + `killer`, and the file path is built
+// here as `src/data/balancing/<format>/<killer>/<killer>-build.yaml`, e.g.
+// format="1v4-quartet" killer="blight" →
+// src/data/balancing/1v4-quartet/blight/blight-build.yaml. `format` matches the
+// page's frontmatter `format:` field; `killer` is the lowercase folder/file
+// slug.
+//
+// The file is read from the filesystem at build time, resolved under the
+// project root via process.cwd() (the project root under both `astro dev` and
+// `astro build`). Note: unlike import.meta.glob, an fs read is not in Vite's
+// watched module graph, so editing a YAML during `astro dev` needs a
+// dev-server restart to show. A missing/misspelled format/killer throws rather
+// than silently rendering nothing.
+import fs from 'node:fs';
+import path from 'node:path';
+import { parse } from 'yaml';
+import {
+  resolvePerks,
+  resolveAddons,
+  resolveItems,
+  collapseAddonsByRarity,
+  collapseItemAddonsByRarity,
+} from '../lib/balancing/resolve';
+import type { AllowDenyConfig, ItemsConfig } from '../lib/balancing/types';
+
+type Section = 'killerPerks' | 'survivorPerks' | 'addons' | 'items';
+type Mode = 'allow' | 'ban';
+
+interface Props {
+  format: string;
+  killer: string;
+  section: Section;
+  mode?: Mode;
+}
+
+const { format, killer, section, mode: modeOverride } = Astro.props;
+
+interface BuildDoc {
+  killer?: string;
+  default?: 'allow' | 'deny';
+  killerPerks?: AllowDenyConfig;
+  survivorPerks?: AllowDenyConfig;
+  addons?: AllowDenyConfig;
+  items?: ItemsConfig;
+  display?: Partial<Record<Section, Mode>>;
+}
+
+// Build the YAML path from `format` + `killer` and read it. A missing or
+// misspelled format/killer is a caller mistake — throw loudly rather than
+// render nothing.
+if (!format || !killer)
+  throw new Error(`BalancingList: "format" and "killer" are required (section: "${section}").`);
+const filePath = path.join(process.cwd(), 'src/data/balancing', format, killer, `${killer}-build.yaml`);
+if (!fs.existsSync(filePath)) {
+  throw new Error(
+    `BalancingList: YAML not found at "${filePath}" (format: "${format}", killer: "${killer}", section: "${section}").`
+  );
+}
+const doc = parse(fs.readFileSync(filePath, 'utf8')) as BuildDoc;
+
+const mode: Mode = modeOverride ?? doc.display?.[section] ?? 'allow';
+const label = mode === 'ban' ? 'Banned:' : 'Allowed:';
+const context = `${section} (format: "${format}", killer: "${killer}"${doc.killer ? `, doc killer: "${doc.killer}"` : ''})`;
+
+// Perk/add-on rendering: a single flat name list.
+let flatNames: string[] | null = null;
+// Item rendering: per configured item type, variant + add-on name lists, plus
+// the optional count metadata (`items.<Type>.count` / `.addons.count`) —
+// read-and-passed-through only, never part of allow/deny resolution.
+interface ItemGroup {
+  typeName: string;
+  variantNames: string[];
+  addonNames: string[];
+  count?: number;
+  addonCount?: number;
+}
+let itemGroups: ItemGroup[] | null = null;
+
+if (doc) {
+  if (section === 'killerPerks' || section === 'survivorPerks') {
+    const side = section === 'killerPerks' ? 'killer' : 'survivor';
+    const result = resolvePerks(doc[section], side, context);
+    flatNames = (mode === 'ban' ? result.banned : result.allowed).map((p) => p.name);
+  } else if (section === 'addons') {
+    if (!doc.killer) throw new Error(`Missing "killer" field (${context}).`);
+    const result = resolveAddons(doc.addons, doc.killer, context);
+    const shown = mode === 'ban' ? result.banned : result.allowed;
+    const { summaries, names } = collapseAddonsByRarity(shown, result.universe);
+    flatNames = [...summaries, ...names];
+  } else if (section === 'items') {
+    const results = resolveItems(doc.items, doc.default ?? 'deny', context);
+    itemGroups = results.map((r) => {
+      const shownAddons = mode === 'ban' ? r.addons.banned : r.addons.allowed;
+      const addonDisplay = collapseItemAddonsByRarity(shownAddons, r.addons.universe);
+      return {
+        typeName: r.type.Name,
+        variantNames: (mode === 'ban' ? r.variants.banned : r.variants.allowed).map((v) => v.Name),
+        addonNames: [...addonDisplay.summaries, ...addonDisplay.names],
+        count: r.count,
+        addonCount: r.addonCount,
+      };
+    });
+  }
+}
+---
+
+{doc && flatNames && (
+  <div class="balancing-list">
+    <p class="balancing-list__label"><strong>{label}</strong></p>
+    {flatNames.length === 0 ? (
+      <p class="balancing-list__none">None</p>
+    ) : (
+      <ul class="balancing-list__items">
+        {flatNames.map((name) => <li>{name}</li>)}
+      </ul>
+    )}
+  </div>
+)}
+
+{doc && itemGroups && (
+  <div class="balancing-items">
+    {itemGroups.map((group) => (
+      mode === 'ban' ? (
+        // Ban mode: counts are meaningless for a banned list (there is no
+        // "how many you may bring" for something you can't bring), so the
+        // N×/slot metadata is omitted — same block layout as before.
+        <div class="balancing-items__type">
+          <p class="balancing-items__type-name">{group.typeName}</p>
+          <p class="balancing-list__label"><strong>{label}</strong></p>
+          {group.variantNames.length === 0 ? (
+            <p class="balancing-list__none">None</p>
+          ) : (
+            <ul class="balancing-list__items">
+              {group.variantNames.map((name) => <li>{name}</li>)}
+            </ul>
+          )}
+          <p class="balancing-items__addons-label"><strong>Add-ons — {label}</strong></p>
+          {group.addonNames.length === 0 ? (
+            <p class="balancing-list__none">None</p>
+          ) : (
+            <ul class="balancing-list__items">
+              {group.addonNames.map((name) => <li>{name}</li>)}
+            </ul>
+          )}
+        </div>
+      ) : (
+        // Allow mode: one line per allowed variant, count-aware, mirroring
+        // the site's existing item prose (e.g. "1 rare flashlight (Sport)
+        // with 2 common add-ons").
+        <div class="balancing-items__type">
+          <p class="balancing-items__type-name">
+            {group.count != null ? `${group.count}× ` : ''}{group.typeName}
+          </p>
+          {group.variantNames.length === 0 ? (
+            <p class="balancing-list__none">None</p>
+          ) : (
+            <ul class="balancing-list__items">
+              {group.variantNames.map((name) => (
+                <li>
+                  {name}
+                  {group.addonNames.length > 0 && (
+                    <>
+                      {' '}
+                      ({group.addonCount != null ? `up to ${group.addonCount} add-ons` : 'Add-ons'}: {group.addonNames.join(', ')})
+                    </>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )
+    ))}
+  </div>
+)}
+
+<style>
+  .balancing-list {
+    margin: 0.5rem 0 1rem;
+  }
+  .balancing-list__label {
+    margin: 0 0 0.35rem;
+    color: var(--sl-color-white);
+  }
+  .balancing-list__none {
+    margin: 0;
+    color: var(--sl-color-gray-2);
+    font-style: italic;
+  }
+  .balancing-list__items {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+  .balancing-items {
+    margin: 0.5rem 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .balancing-items__type {
+    border-left: 2px solid var(--sl-color-gray-5);
+    padding-left: 0.75rem;
+  }
+  .balancing-items__type-name {
+    margin: 0 0 0.35rem;
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+  .balancing-items__addons-label {
+    margin: 0.5rem 0 0.35rem;
+    color: var(--sl-color-white);
+  }
+</style>

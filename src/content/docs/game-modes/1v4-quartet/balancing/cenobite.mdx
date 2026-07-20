@@ -9,11 +9,12 @@ changeHistory:
   - version: "0.1"
     date: "2026-07-19"
     note: Initial per-killer balancing entry.
-killer: Cenobitte
+killer: Cenobite
 format: 1v4-quartet
 ---
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
+import BalancingList from '@components/BalancingList.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
@@ -22,7 +23,7 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
   changeHistory={frontmatter.changeHistory}
 />
 
-Per-killer balancing for Hillbilly.
+Per-killer balancing for Cenobite.
 These rules sit alongside the general 1v4 quartet rule and complement it.
 
 | Aspect | Detail |
@@ -35,109 +36,25 @@ These rules sit alongside the general 1v4 quartet rule and complement it.
 
 ![The Cenobite — Allowed Killer Perks](/images/builds/1v4-quartet/cenobite/The-Cenobite-killer-perks.png)
 
-Allowed:
-- Agitation
-- All Shaking Thunder
-- Bamboozle
-- Brutal Strength
-- Call of Brine
-- Corrupt Intervention
-- Dark Arrogance
-- Dragon's Grip
-- Dying Light
-- Eruption
-- Forced Hesitation
-- Forced Penance
-- Grim Embrace
-- Hex: Crowd Control
-- Hex: Devour
-- Hex: Face the Darkness
-- Hex: Pentimento
-- Hex: Ruin
-{/* - Hex: Thrill of the Hunt */}
-- Hex: Undying
-- Hex: Wretched Fate
-- Make your Choice
-- Merciless Storm
-- Mindbreaker
-- Oppression
-- Overcharge
-- Pop goes the Weasel
-- Rapid Brutality
-- Save the best for last
-- Scourge Hook: Gift of Pain
-- Scourge Hook: Pain Resonance
-- Scourge Hook: Monstrous Shrine
-- Secret Project
-- Sloppy Butcher
-- Surge
-- Thanatophobia
-- Thrilling Tremors
-- Tinkerer
-- Trail of Torment
-- Turn back the clock
-
+<BalancingList format="1v4-quartet" killer="cenobite" section="killerPerks" />
 
 ## Killer add-ons
 
 ![The Cenobite — Allowed Killer Add-ons](/images/builds/1v4-quartet/cenobite/The-Cenobite-killer-addons.png)
 
-Banned:
-- All Ultra Rare add-ons
-- Greasy black lens
-- Original Pain
+<BalancingList format="1v4-quartet" killer="cenobite" section="addons" />
 
 ## Survivor perks
 
 ![The Cenobite — Allowed Survivor Perks](/images/builds/1v4-quartet/cenobite/The-Cenobite-survivor-perks.png)
 
-Allowed:
-- Aftercare
-- Any means necessary
-- Badabada boom
-- Better than New
-- Bite the bullet
-- Blood Pact
-- Bond
-- Calm Spirit
-- Clean Break
-- Counter Force
-- Cut Loose
-- Dance with Me
-- Deception
-{/* - Dejavu */}
-- Diversion
-- Empathic Connection
-- Flashbang
-- Friendly Competition
-- Headon
-- Iron Will
-- Light Footed
-- Light Weight
-- Lucky Star
-- Mettle of Man
-- Mirrored Illusion
-- No Mither
-- Open Handed
-- Parental Guidance
-- Potential Energy
-- Quick and Quiet
-- Rapid Response
-- Red Herring
-- Repressed Alliance
-{/* - Resilience */}
-- Rookie Spirit
-- Small Game
-- Smash Hit
-- Urban Evasion
-- Windows
-- Visionary
+<BalancingList format="1v4-quartet" killer="cenobite" section="survivorPerks" />
 
 ## Survivor items
 
-{/* - 1 very rare med-kit with 2 rare add-ons
-- 1 rare flashlight with 2 common add-ons
-- 1 flashbang */}
+![Going against The Cenobite — Allowed Survivor Items](/images/builds/1v4-quartet/cenobite/The-Cenobite-items.png)
+
+<BalancingList format="1v4-quartet" killer="cenobite" section="items" />
 
 [← All per-killer balancing](/game-modes/1v4-quartet/balancing/)
 

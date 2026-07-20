@@ -5,103 +5,115 @@
 #        --out utilities/perk-sheet-generator/output \
 #        --preset utilities/perk-sheet-generator/output/test-preset.json
 
-killer: The Nurse
+killer: The Blight
 balancing: DBD Arena - 1v4 Quartet Rank v0.1
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
 #   killer: all
 #   survivor: all
 
+display:
+  killerPerks: allow
+  survivorPerks: allow
+  addons: allow
+  items: allow
+
 killerPerks:
   default: deny          # Start with all killer perks allowed
   allow:                 # Then deny these specific perks
-    - Call of Brine
     - Corrupt Intervention
+    - Call of Brine
+    - Coulrophobia
     - Dying Light
+    - Deathbound
     - Eruption
     - Furtive Chase
     - "Hex: Huntress Lullaby"
     - "Hex: The Third Seal"
-    - Infectious Fright
     - Leverage
-    - Mindbreaker
     - Oppression
     - Overcharge
+    - Pop Goes the Weasel
+    - "Scourge Hook: Gift of Pain"
+    - "Scourge Hook: Jagged Compass"
     - Surveillance
     - Thanatophobia
     - Thrilling Tremors
     - Tinkerer
     - Trail of Torment
     - Turn Back the Clock
-    - "Scourge Hook: Gift of Pain"
-    - "Scourge Hook: Jagged Compass"
-    - Pop Goes the Weasel
-
-addons:
-  default: allow
-  deny:
-    - {rarity: "Ultra Rare"}
-    - Campbell's Last Breath
-    - Jenner's Last Breath
-    - Heavy Panting
-    - Ataxic Respiration
 
 survivorPerks:
   default: deny          # Start with no survivor perks allowed
   allow:                 # Then allow these specific perks and groups
     - Balanced Landing
     - Bite the Bullet
+    - Boil Over
     - Bond
     - Botany Knowledge
     - Champion of Light
-    - Counterforce
-    - Distortion
+    - Chemical Trap
     - Dead Hard
+    - Decisive Strike
     - Deliverance
     - Desperate Measures
     - Detective's Hunch
+    - Do No Harm
+    - Finesse
+    - Five Moves Ahead
     - Fixated
-    - flashbang
     - Flow State
     - For the People
     - Head On
-    - Decisive Strike
-    - Do No Harm
     - Inner Strength
     - Iron Will
-    - Leader
     - Light-Footed
     - Lithe
+    - Leader
     - Lucky Star
     - Made for This
+    - No Mither
     - Overcome
     - Plot Twist
     - Quick and Quiet
     - Second Wind
     - Self-Care
+    - Smash Hit
+    - Sprint Burst
     - Tenacity
     - Unbreakable
     - Urban Evasion
     - Visionary
     - We'll Make It
+    - Windows of Opportunity
   deny: []
 
 items:
   Flashlight:
+    count: 1
     default: deny
     allow:
       - Sport Flashlight
     addons:
+      count: 2
       default: deny
       allow:
         - {rarity: "Common"}
 
   Med-Kit:
+    count: 1
     default: deny
-    deny:
+    allow:
       - Ranger Med-Kit
     addons:
+      count: 2
       default: deny
       allow:
         - Bandages
         - Gel Dressings
+
+addons:
+  default: deny         # Start with every Trapper add-on allowed
+  allow:                 # allow wins on conflict — re-permit one iridescent
+    - Blighted Rat
+    - Blighted Crow

@@ -1,22 +1,40 @@
-killer: The Spirit
+# Perk allow-list example: The Trapper
+# Run from the repo root:
+#   node utilities/perk-sheet-generator/perk-sheet-generator.js \
+#        utilities/perk-sheet-generator/examples/the-trapper.yaml \
+#        --out utilities/perk-sheet-generator/output \
+#        --preset utilities/perk-sheet-generator/output/test-preset.json
+
+killer: The Ghoul
 balancing: DBD Arena - 1v4 Quartet Rank v0.1
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
 #   killer: all
 #   survivor: all
 
+display:
+  killerPerks: allow
+  survivorPerks: allow
+  addons: ban
+  items: allow
+
 killerPerks:
-  default: deny          # Start with all killer perks allowed
-  allow:                 # Then deny these specific perks
+  default: deny
+  allow:
+    - Bamboozle
+    - Blood Echo
+    - Brutal Strength
     - Call of Brine
     - Corrupt Intervention
     - Coulrophobia
+    - Deadlock
     - Deathbound
     - Dying Light
     - Eruption
     - Furtive Chase
     - "Hex: Huntress Lullaby"
     - "Hex: The Third Seal"
+    - Hysteria
     - Infectious Fright
     - Leverage
     - Oppression
@@ -35,31 +53,39 @@ killerPerks:
     - Turn Back the Clock
 
 addons:
-  default: deny         # Start with every Trapper add-on allowed
-  allow:                 # allow wins on conflict — re-permit one iridescent
+  default: deny
+  allow:
     - {rarity: "Common"}
     - {rarity: "Uncommon"}
-    - {rarity: "Rare"}
-    - Kintsugi Teacup
+    - Amon's Necktie
+    - Aogiri Tree Robe
+    - Mado's Glove
+    - Red Spider Lily
+    - Fresh Coffee
 
 survivorPerks:
   default: deny          # Start with no survivor perks allowed
   allow:                 # Then allow these specific perks and groups
+    - Adrenaline
     - Aftercare
     - Any Means Necessary
     - Bada Bada Boom
     - Balanced Landing
+    - Better than New
+    - Bite the Bullet
     - Blood Pact
     - Boil Over
     - Bond
-    - Botany Knowledge
+    #- Botany Knowledge
+    - Champion of Light
     - Chemical Trap
+    - Counterforce
     - Dead Hard
-    - Deliverance
     - Desperate Measures
+    - Detective's Hunch
+    - Distortion
     - Diversion
-    - Do No Harm
-    - Finesse
+    - Empathic Connection
     - Five Moves Ahead
     - Fixated
     - Flashbang
@@ -67,16 +93,20 @@ survivorPerks:
     - For the People
     - Head On
     - Inner Strength
+    - Iron Will
     - Leader
+    - Light-Footed
     - Lithe
-    - Made for This
-    - Overcome
+    - Lucky Star
+    - No Mither
+    - Quick and Quiet
     - Repressed Alliance
+    - Residual Manifest
+    - Saboteur
     - Second Wind
     - Smash Hit
     - Sprint Burst
     - Tenacity
-    - Unbreakable
     - Urban Evasion
     - Visionary
     - Windows of Opportunity
@@ -84,20 +114,16 @@ survivorPerks:
 
 items:
   Flashlight:
+    count: 1
     default: deny
     allow:
       - Sport Flashlight
     addons:
+      count: 2
       default: deny
       allow:
         - {rarity: "Common"}
-
-  Med-Kit:
-    default: deny
-    deny:
-      - Ranger Med-Kit
-    addons:
-      default: deny
-      allow:
-        - Bandages
-        - Gel Dressings
+  Firecracker:
+    count: 1
+    allow:
+      - Firecracker

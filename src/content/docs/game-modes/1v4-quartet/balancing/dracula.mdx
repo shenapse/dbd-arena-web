@@ -14,6 +14,7 @@ format: 1v4-quartet
 ---
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
+import BalancingList from '@components/BalancingList.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
@@ -33,90 +34,27 @@ These adjustments apply specifically to the 1v4 Quartet game mode and complement
 
 ## Killer perks
 
-![The Dark Lord — Killer Perks](/images/builds/1v4-quartet/dracula/The-Dark-Lord-killer-perks.png)
+![The Dark Lord — Allowed Killer Perks](/images/builds/1v4-quartet/dracula/The-Dark-Lord-killer-perks.png)
 
-Allowed:
-- Bamboozle
-- Call of Brine
-- Corrupt Intervention
-- Coulrophobia
-- Deathbound
-- Dying Light
-- Eruption
-- "Hex: Huntress Lullaby"
-- "Hex: The Third Seal"
-- Infectious Fright
-- Leverage
-- Oppression
-- Overcharge
-- Pop Goes the Weasel
-- "Scourge Hook: Gift of Pain"
-- "Scourge Hook: Pain Resonance"
-- "Scourge Hook: Jagged Compass"
-- Sloppy Butcher
-- Surge
-- Surveillance
-- Thanatophobia
-- Thrilling Tremors
-- Tinkerer
-- Trail of Torment
+<BalancingList format="1v4-quartet" killer="dracula" section="killerPerks" />
 
 ## Killer add-ons
 
-![The Dark Lord — Add-ons Perks](/images/builds/1v4-quartet/dracula/The-Dark-Lord-killer-addons.png)
+![The Dark Lord — Allowed Killer Add-ons](/images/builds/1v4-quartet/dracula/The-Dark-Lord-killer-addons.png)
 
-Allowed:
-- Common, Uncommon, and Rare add-ons
-- Lapis Lazuli
+<BalancingList format="1v4-quartet" killer="dracula" section="addons" />
 
 ## Survivor perks
 
-![The Dark Lord — Survivor Perks](/images/builds/1v4-quartet/dracula/The-Dark-Lord-survivor-perks.png)
+![The Dark Lord — Allowed Survivor Perks](/images/builds/1v4-quartet/dracula/The-Dark-Lord-survivor-perks.png)
 
-Allowed:
-{/* - Adrenaline */}
-- Aftercare
-- Any Means Necessary
-- Bada Bada Boom
-- Balanced Landing
-- Bite the Bullet
-- Bond
-- Chemical Trap
-- Counterforce
-- Dead Hard
-- Decisive Strike
-- Deliverance
-- Desperate Measures
-- Detective's Hunch
-- Empathic Connection
-- Empathy
-- Flashbang
-- Five Moves Ahead
-- Fixated
-- Flow State
-- Head On
-- Inner Strength
-{/* - Light-Footed */}
-- Leader
-- Lithe
-- Lucky Star
-- No Mither
-- Overcome
-- Quick and Quiet
-- Second Wind
-- Smash Hit
-- Sprint Burst
-- Tenacity
-- Unbreakable
-- Urban Evasion
-- Visionary
-- Windows of Opportunity
+<BalancingList format="1v4-quartet" killer="dracula" section="survivorPerks" />
 
 ## Survivor items
 
-{/* - 1 very rare med-kit with 2 rare add-ons
-- 1 rare flashlight with 2 common add-ons
-- 1 flashbang */}
+![Going against The Dark Lord — Allowed Survivor Items](/images/builds/1v4-quartet/dracula/The-Dark-Lord-items.png)
+
+<BalancingList format="1v4-quartet" killer="dracula" section="items" />
 
 [← All per-killer balancing](/game-modes/1v4-quartet/balancing/)
 
