@@ -35,6 +35,7 @@ import type {
   AllowDenyConfig,
   ItemsConfig,
   ResolvedList,
+  RarityDisplay,
 } from './types';
 
 const allPerks = perksJson as unknown as Perk[];
@@ -167,6 +168,52 @@ function finalizeList<T>(
   const allowedIds = new Set(allowedList.map(keyOf));
   const bannedList = universe.filter((e) => !allowedIds.has(keyOf(e))).sort((a, b) => nameOf(a).localeCompare(nameOf(b)));
   return { allowed: allowedList, banned: bannedList, universe: [...universe] };
+}
+
+// ---------------------------------------------------------------------------
+// Rarity-tier display collapsing
+// ---------------------------------------------------------------------------
+
+/**
+ * Collapse a displayed entry list so that any rarity tier fully present in the
+ * list becomes a single "All <Rarity> add-ons" summary line. Entries whose tier
+ * is only partially present stay listed individually. Singleton tiers (a tier
+ * with only one add-on in the universe) are left as individual names — a lone
+ * add-on reads better by its own name than "All <Rarity> add-ons".
+ */
+function collapseByRarity<T extends { Name: string; Rarity: number }>(
+  displayed: readonly T[],
+  universe: readonly T[],
+  rarityNames: readonly string[]
+): RarityDisplay {
+  const summaries: string[] = [];
+  const collapsed = new Set<number>(); // rarity indices fully covered
+  for (let idx = 0; idx < rarityNames.length; idx++) {
+    const universeCount = universe.filter((e) => e.Rarity === idx).length;
+    const displayedCount = displayed.filter((e) => e.Rarity === idx).length;
+    if (universeCount >= 2 && displayedCount === universeCount) {
+      summaries.push(`All ${rarityNames[idx]} add-ons`);
+      collapsed.add(idx);
+    }
+  }
+  const names = displayed.filter((e) => !collapsed.has(e.Rarity)).map((e) => e.Name);
+  return { summaries, names };
+}
+
+/** Collapse a displayed killer-add-on list by fully-covered rarity tier. */
+export function collapseAddonsByRarity(
+  displayed: readonly Addon[],
+  universe: readonly Addon[]
+): RarityDisplay {
+  return collapseByRarity(displayed, universe, ADDON_RARITY_NAMES);
+}
+
+/** Collapse a displayed item-add-on list by fully-covered rarity tier. */
+export function collapseItemAddonsByRarity(
+  displayed: readonly ItemTypeAddon[],
+  universe: readonly ItemTypeAddon[]
+): RarityDisplay {
+  return collapseByRarity(displayed, universe, ITEM_RARITY_NAMES);
 }
 
 // ---------------------------------------------------------------------------

@@ -100,3 +100,9 @@ export interface ResolvedList<T> {
   banned: T[];
   universe: T[];
 }
+
+/** Display grouping for a resolved add-on list: fully-covered rarity tiers collapsed to summary lines, plus remaining individual names. */
+export interface RarityDisplay {
+  summaries: string[]; // e.g. ["All Common add-ons", "All Ultra Rare add-ons"]
+  names: string[];     // remaining entries not collapsed, in the list's existing (alphabetical) order
+}
