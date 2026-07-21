@@ -1,9 +1,11 @@
 {
-  "Bandages": "包帯",
-  "Firecracker": "爆竹",
-  "Flashlight": "懐中電灯",
-  "Gel Dressings": "ジェルのパッド",
-  "Med-Kit": "救急キット",
-  "Ranger Med-Kit": "救助隊用医療キット",
-  "Sport Flashlight": "小型懐中電灯"
+  "addon/bandages": "包帯",
+  "addon/gel-dressings": "ジェルのパッド",
+  "type/firecracker": "爆竹",
+  "type/flashlight": "懐中電灯",
+  "type/med-kit": "救急キット",
+  "variant/firecracker": "爆竹",
+  "variant/flashlight": "懐中電灯",
+  "variant/ranger-med-kit": "救助隊用医療キット",
+  "variant/sport-flashlight": "小型懐中電灯"
 }

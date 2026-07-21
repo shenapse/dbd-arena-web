@@ -16,21 +16,30 @@
 // An unknown plain-string name throws a descriptive Error; we want a bad
 // -build.yaml to fail the site build loudly rather than silently render a
 // wrong list.
+//
+// Data files (src/data/dbd/*.json) are project-owned, slug-keyed maps — the
+// map key IS the identity (dedup key), so every entry is materialized with
+// its slug attached before use.
 
 import perksJson from '../../data/dbd/perks.json' with { type: 'json' };
 import addonsJson from '../../data/dbd/addons.json' with { type: 'json' };
 import itemsJson from '../../data/dbd/items.json' with { type: 'json' };
 import killersJson from '../../data/dbd/killers.json' with { type: 'json' };
+import mapsJson from '../../data/dbd/maps.json' with { type: 'json' };
 import { normalize, buildLookup } from './normalize';
 import type {
+  PerkEntry,
   Perk,
+  AddonEntry,
   Addon,
-  KillerAddons,
   ItemType,
   ItemTypeAddon,
   ItemVariant,
   ItemsData,
   KillerEntry,
+  Killer,
+  MapEntry,
+  GameMap,
   Selector,
   AllowDenyConfig,
   ItemsConfig,
@@ -38,12 +47,26 @@ import type {
   RarityDisplay,
 } from './types';
 
-const allPerks = perksJson as unknown as Perk[];
-const allKillerAddons = addonsJson as unknown as KillerAddons[];
+const perksData = perksJson as unknown as Record<string, PerkEntry>;
+const addonsData = addonsJson as unknown as Record<string, AddonEntry>;
 const itemsData = itemsJson as unknown as ItemsData;
-const allKillers = killersJson as unknown as KillerEntry[];
+const killersData = killersJson as unknown as Record<string, KillerEntry>;
+const mapsData = mapsJson as unknown as Record<string, MapEntry>;
+
+const allPerks: Perk[] = Object.entries(perksData).map(([slug, e]) => ({ slug, ...e }));
+const allKillers: Killer[] = Object.entries(killersData).map(([slug, e]) => ({ slug, ...e }));
+const allAddons: Addon[] = Object.entries(addonsData).map(([slug, e]) => ({ slug, ...e }));
+const allMaps: GameMap[] = Object.entries(mapsData).map(([slug, e]) => ({ slug, ...e }));
+
+const itemTypes: ItemType[] = Object.entries(itemsData.types).map(([slug, t]) => ({
+  slug,
+  name: t.name,
+  addons: Object.entries(t.addons).map(([aslug, a]) => ({ slug: aslug, ...a })),
+}));
+const itemVariants: ItemVariant[] = Object.entries(itemsData.variants).map(([slug, v]) => ({ slug, ...v }));
 
 const killerLookup = buildLookup(allKillers);
+const mapLookup = buildLookup(allMaps);
 
 // ---------------------------------------------------------------------------
 // Rarity models
@@ -96,7 +119,10 @@ function matchPerkSelector(
     }
     if (typeof selector.tag === 'string') {
       const tag = selector.tag.toLowerCase();
-      return universe.filter((p) => Array.isArray(p.tags) && p.tags.some((t) => t.toLowerCase() === tag));
+      return universe.filter((p) => {
+        const tags = (p as { tags?: string[] }).tags;
+        return Array.isArray(tags) && tags.some((t) => t.toLowerCase() === tag);
+      });
     }
     // YAML parses `- Boon: Circle of Healing` as { Boon: "Circle of Healing" }
     // instead of a string. If the object has exactly one key that isn't a
@@ -140,18 +166,18 @@ export function resolvePerks(
     throw new Error(`"default" must be "allow" or "deny" (${context}).`);
   }
 
-  const allowed = new Map<number, Perk>();
+  const allowed = new Map<string, Perk>();
   if (defaultVal === 'allow') {
-    for (const p of universe) allowed.set(p.id, p);
+    for (const p of universe) allowed.set(p.slug, p);
   }
   for (const sel of sideConfig?.deny ?? []) {
-    for (const p of matchPerkSelector(sel, universe, lookup, context)) allowed.delete(p.id);
+    for (const p of matchPerkSelector(sel, universe, lookup, context)) allowed.delete(p.slug);
   }
   for (const sel of sideConfig?.allow ?? []) {
-    for (const p of matchPerkSelector(sel, universe, lookup, context)) allowed.set(p.id, p);
+    for (const p of matchPerkSelector(sel, universe, lookup, context)) allowed.set(p.slug, p);
   }
 
-  return finalizeList(allowed, universe, (p) => p.id, (p) => p.name);
+  return finalizeList(allowed, universe, (p) => p.slug, (p) => p.name);
 }
 
 // ---------------------------------------------------------------------------
@@ -159,9 +185,9 @@ export function resolvePerks(
 // ---------------------------------------------------------------------------
 
 function finalizeList<T>(
-  allowed: Map<number, T>,
+  allowed: Map<string, T>,
   universe: readonly T[],
-  keyOf: (e: T) => number,
+  keyOf: (e: T) => string,
   nameOf: (e: T) => string
 ): ResolvedList<T> {
   const allowedList = [...allowed.values()].sort((a, b) => nameOf(a).localeCompare(nameOf(b)));
@@ -181,7 +207,7 @@ function finalizeList<T>(
  * with only one add-on in the universe) are left as individual names — a lone
  * add-on reads better by its own name than "All <Rarity> add-ons".
  */
-function collapseByRarity<T extends { Name: string; Rarity: number }>(
+function collapseByRarity<T extends { name: string; rarity: number }>(
   displayed: readonly T[],
   universe: readonly T[],
   rarityNames: readonly string[]
@@ -189,14 +215,14 @@ function collapseByRarity<T extends { Name: string; Rarity: number }>(
   const summaries: string[] = [];
   const collapsed = new Set<number>(); // rarity indices fully covered
   for (let idx = 0; idx < rarityNames.length; idx++) {
-    const universeCount = universe.filter((e) => e.Rarity === idx).length;
-    const displayedCount = displayed.filter((e) => e.Rarity === idx).length;
+    const universeCount = universe.filter((e) => e.rarity === idx).length;
+    const displayedCount = displayed.filter((e) => e.rarity === idx).length;
     if (universeCount >= 2 && displayedCount === universeCount) {
       summaries.push(`All ${rarityNames[idx]} add-ons`);
       collapsed.add(idx);
     }
   }
-  const names = displayed.filter((e) => !collapsed.has(e.Rarity)).map((e) => e.Name);
+  const names = displayed.filter((e) => !collapsed.has(e.rarity)).map((e) => e.name);
   return { summaries, names };
 }
 
@@ -236,11 +262,11 @@ function matchAddonSelector(
   if (isPlainObject(selector)) {
     if (selector.rarity !== undefined) {
       const idx = rarityToIndex(selector.rarity as string | number, ADDON_RARITY_NAMES, context);
-      return universe.filter((a) => a.Rarity === idx);
+      return universe.filter((a) => a.rarity === idx);
     }
     if (selector.tier !== undefined) {
       const idx = rarityToIndex(selector.tier as string | number, ADDON_RARITY_NAMES, context);
-      return universe.filter((a) => a.Rarity === idx);
+      return universe.filter((a) => a.rarity === idx);
     }
     throw new Error(
       `Unknown group selector ${JSON.stringify(selector)} (${context}). Only { rarity: "<name>" } and { tier: <0-4> } are supported.`
@@ -250,12 +276,21 @@ function matchAddonSelector(
 }
 
 /** Resolve a `-build.yaml`'s `killer:` field to its canonical killers.json entry. */
-export function resolveKiller(killerName: string, context: string): KillerEntry {
+export function resolveKiller(killerName: string, context: string): Killer {
   const killer = killerLookup.get(normalize(killerName));
   if (!killer) {
     throw new Error(`Unknown killer "${killerName}" (${context}). No matching entry in killers.json.`);
   }
   return killer;
+}
+
+/** Resolve a map name (e.g. a `-conditions.yaml`'s `map:` field) to its canonical maps.json entry. */
+export function resolveMap(mapName: string, context: string): GameMap {
+  const map = mapLookup.get(normalize(mapName));
+  if (!map) {
+    throw new Error(`Unknown map "${mapName}" (${context}). No matching entry in maps.json.`);
+  }
+  return map;
 }
 
 /**
@@ -270,11 +305,10 @@ export function resolveAddons(
   context: string
 ): ResolvedList<Addon> {
   const killer = resolveKiller(killerName, context);
-  const killerAddons = allKillerAddons.find((k) => normalize(k.Name) === normalize(killer.Name));
-  if (!killerAddons) {
-    throw new Error(`No add-ons found for killer "${killer.Name}" in addons.json (${context}).`);
+  const universe = allAddons.filter((a) => normalize(a.killer) === normalize(killer.name));
+  if (universe.length === 0) {
+    throw new Error(`No add-ons found for killer "${killer.name}" in addons.json (${context}).`);
   }
-  const universe = killerAddons.Addons;
   const lookup = buildLookup(universe);
 
   const defaultVal = addonsConfig?.default ?? 'deny';
@@ -282,28 +316,25 @@ export function resolveAddons(
     throw new Error(`"default" must be "allow" or "deny" (${context}).`);
   }
 
-  const allowed = new Map<number, Addon>();
+  const allowed = new Map<string, Addon>();
   if (defaultVal === 'allow') {
-    for (const a of universe) allowed.set(a.globalID, a);
+    for (const a of universe) allowed.set(a.slug, a);
   }
   for (const sel of addonsConfig?.deny ?? []) {
-    for (const a of matchAddonSelector(sel, universe, lookup, context)) allowed.delete(a.globalID);
+    for (const a of matchAddonSelector(sel, universe, lookup, context)) allowed.delete(a.slug);
   }
   for (const sel of addonsConfig?.allow ?? []) {
-    for (const a of matchAddonSelector(sel, universe, lookup, context)) allowed.set(a.globalID, a);
+    for (const a of matchAddonSelector(sel, universe, lookup, context)) allowed.set(a.slug, a);
   }
 
-  return finalizeList(allowed, universe, (a) => a.globalID, (a) => a.Name);
+  return finalizeList(allowed, universe, (a) => a.slug, (a) => a.name);
 }
 
 // ---------------------------------------------------------------------------
 // Items (variants + their add-ons, per item type)
 // ---------------------------------------------------------------------------
 
-const itemTypes = itemsData.ItemTypes;
-const itemVariants = itemsData.Items;
-
-function matchItemEntrySelector<T extends { Name: string; Rarity: number }>(
+function matchItemEntrySelector<T extends { name: string; rarity: number }>(
   selector: Selector,
   universe: readonly T[],
   lookup: Map<string, T>,
@@ -318,14 +349,14 @@ function matchItemEntrySelector<T extends { Name: string; Rarity: number }>(
   }
   if (isPlainObject(selector) && selector.rarity !== undefined) {
     const idx = rarityToIndex(selector.rarity as string | number, ITEM_RARITY_NAMES, context);
-    return universe.filter((e) => e.Rarity === idx);
+    return universe.filter((e) => e.rarity === idx);
   }
   throw new Error(
     `Invalid item selector ${JSON.stringify(selector)} (${context}). Expected a plain name string or a {rarity: ...} object.`
   );
 }
 
-function resolveItemEntryList<T extends { id: number; Name: string; Rarity: number }>(
+function resolveItemEntryList<T extends { slug: string; name: string; rarity: number }>(
   cfg: AllowDenyConfig | undefined,
   universe: readonly T[],
   fallbackDefault: 'allow' | 'deny',
@@ -333,7 +364,7 @@ function resolveItemEntryList<T extends { id: number; Name: string; Rarity: numb
 ): ResolvedList<T> {
   const lookup = new Map<string, T>();
   for (const e of universe) {
-    const n = normalize(e.Name);
+    const n = normalize(e.name);
     if (!lookup.has(n)) lookup.set(n, e);
   }
 
@@ -342,18 +373,18 @@ function resolveItemEntryList<T extends { id: number; Name: string; Rarity: numb
     throw new Error(`"default" must be "allow" or "deny" (${context}).`);
   }
 
-  const allowed = new Map<number, T>();
+  const allowed = new Map<string, T>();
   if (defaultVal === 'allow') {
-    for (const e of universe) allowed.set(e.id, e);
+    for (const e of universe) allowed.set(e.slug, e);
   }
   for (const sel of cfg?.deny ?? []) {
-    for (const e of matchItemEntrySelector(sel, universe, lookup, context)) allowed.delete(e.id);
+    for (const e of matchItemEntrySelector(sel, universe, lookup, context)) allowed.delete(e.slug);
   }
   for (const sel of cfg?.allow ?? []) {
-    for (const e of matchItemEntrySelector(sel, universe, lookup, context)) allowed.set(e.id, e);
+    for (const e of matchItemEntrySelector(sel, universe, lookup, context)) allowed.set(e.slug, e);
   }
 
-  return finalizeList(allowed, universe, (e) => e.id, (e) => e.Name);
+  return finalizeList(allowed, universe, (e) => e.slug, (e) => e.name);
 }
 
 export interface ItemTypeResult {
@@ -384,7 +415,7 @@ export function resolveItems(
   const cfg = itemsConfig ?? {};
 
   for (const key of Object.keys(cfg)) {
-    if (!itemTypes.some((t) => normalize(t.Name) === normalize(key))) {
+    if (!itemTypes.some((t) => normalize(t.name) === normalize(key))) {
       throw new Error(`Unknown item type "${key}" (${context}).`);
     }
   }
@@ -393,32 +424,32 @@ export function resolveItems(
   // types absent from the config are out of scope for this build, not
   // "everything banned" noise to render.
   const configuredTypes = itemTypes.filter((type) =>
-    Object.keys(cfg).some((key) => normalize(key) === normalize(type.Name))
+    Object.keys(cfg).some((key) => normalize(key) === normalize(type.name))
   );
 
   return configuredTypes.map((type) => {
     let typeCfg: ItemsConfig[string] | undefined;
     for (const [key, val] of Object.entries(cfg)) {
-      if (normalize(key) === normalize(type.Name)) {
+      if (normalize(key) === normalize(type.name)) {
         typeCfg = val;
         break;
       }
     }
 
-    const variantUniverse = itemVariants.filter((v) => v.Type === type.Name);
+    const variantUniverse = itemVariants.filter((v) => v.type === type.slug);
     const typeDefault = typeCfg?.default ?? topDefault;
 
     const variants = resolveItemEntryList(
       typeCfg,
       variantUniverse,
       topDefault,
-      `${type.Name} variant (${context})`
+      `${type.name} variant (${context})`
     );
     const addons = resolveItemEntryList(
       typeCfg?.addons,
-      type.Addons,
+      type.addons,
       typeDefault,
-      `${type.Name} add-on (${context})`
+      `${type.name} add-on (${context})`
     );
 
     return { type, variants, addons, count: typeCfg?.count, addonCount: typeCfg?.addons?.count };

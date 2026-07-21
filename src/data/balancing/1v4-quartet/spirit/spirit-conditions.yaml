@@ -1,0 +1,6 @@
+killer: The Spirit
+map: Wrecker's Yard
+winCondition:
+  kills: 4
+  gensRemaining: 1
+drawCondition: null

@@ -1,0 +1,71 @@
+---
+title: Blight — 1v4 Quartet Balancing
+description: Per-killer balancing for Blight in the 1v4 quartet format.
+handle: 1v4-quartet-balancing-blight
+status: upcoming
+version: "1.0"
+effectiveDate: "2026-06-15"
+changeHistory:
+  - version: "1.0"
+    date: "2026-06-15"
+    note: Initial per-killer balancing entry for Blight.
+killer: Blight
+format: 1v4-quartet
+language: ja
+translationStatus: complete
+translatedVersion: "1.0"
+translationDate: "2026-07-21"
+authoritativeSource: /game-modes/1v4-quartet/balancing/blight/
+---
+
+import LifecycleMeta from '@components/LifecycleMeta.astro';
+import ImageRow from '@components/ImageRow.astro';
+import BalancingList from '@components/BalancingList.astro';
+import MatchConditions from '@components/MatchConditions.astro';
+
+> **翻訳について:** このページは、読みやすさのために提供される非公式な日本語訳です。
+> 英語版との間に内容や解釈の相違がある場合は、[英語版](/game-modes/1v4-quartet/balancing/blight/)が優先されます。  
+> **翻訳ステータス:** 完全 · **対応英語版:** 1.0 · **翻訳日:** 2026-07-21
+
+<LifecycleMeta
+  status={frontmatter.status}
+  version={frontmatter.version}
+  effectiveDate={frontmatter.effectiveDate}
+  changeHistory={frontmatter.changeHistory}
+/>
+
+Per-killer balancing for Blight.
+These rules sit alongside the general 1v4 quartet rule and complement it.
+
+<MatchConditions format="1v4-quartet" killer="blight" />
+
+## Killer perks
+
+![The Blight — Allowed Killer Perks](/images/builds/1v4-quartet/blight/The-Blight-killer-perks.png)
+
+<BalancingList format="1v4-quartet" killer="blight" section="killerPerks" />
+
+## Killer add-ons
+
+<ImageRow label="Allowed add-ons:" images={[
+  { src: '/images/killers/blight/Blighted-Crow.webp', label: 'Blighted Crow' },
+  { src: '/images/killers/blight/Blighted-Rat.webp', label: 'Blighted Rat' },
+]} />
+
+<BalancingList format="1v4-quartet" killer="blight" section="addons" />
+
+## Survivor perks
+
+![The Blight — Allowed Survivor Perks](/images/builds/1v4-quartet/blight/The-Blight-survivor-perks.png)
+
+<BalancingList format="1v4-quartet" killer="blight" section="survivorPerks" />
+
+## Survivor items
+
+![The Blight — Allowed Items](/images/builds/1v4-quartet/blight/The-Blight-items.png)
+
+<BalancingList format="1v4-quartet" killer="blight" section="items" />
+
+## Applies to
+
+- [DBD 1v4 Quartet Ranked](/ja/game-modes/1v4-quartet/)

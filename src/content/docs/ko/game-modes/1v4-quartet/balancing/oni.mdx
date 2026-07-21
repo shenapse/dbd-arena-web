@@ -1,0 +1,67 @@
+---
+title: Oni — 1v4 Quartet Balancing
+description: Per-killer balancing for Oni in the 1v4 quartet format.
+handle: 1v4-quartet-balancing-oni
+status: upcoming
+version: "0.1"
+effectiveDate: "2026-06-15"
+changeHistory:
+  - version: "0.1"
+    date: "2026-06-15"
+    note: Initial per-killer balancing entry for Oni.
+killer: Oni
+format: 1v4-quartet
+language: ko
+translationStatus: complete
+translatedVersion: "0.1"
+translationDate: "2026-07-22"
+authoritativeSource: /game-modes/1v4-quartet/balancing/oni/
+---
+
+import LifecycleMeta from '@components/LifecycleMeta.astro';
+import BalancingList from '@components/BalancingList.astro';
+import MatchConditions from '@components/MatchConditions.astro';
+
+> **번역 안내:** 이 페이지는 가독성을 위해 제공되는 비공식 한국어 번역입니다.
+> 영어 원문과 내용이나 해석에 차이가 있을 경우 [영어 원문](/game-modes/1v4-quartet/balancing/oni/)이 우선합니다.  
+> **번역 상태:** 완료 · **대응 영문 버전:** 0.1 · **번역일:** 2026-07-22
+
+<LifecycleMeta
+  status={frontmatter.status}
+  version={frontmatter.version}
+  effectiveDate={frontmatter.effectiveDate}
+  changeHistory={frontmatter.changeHistory}
+/>
+
+Per-killer balancing for Oni.
+These rules sit alongside the general 1v4 quartet rule and complement it.
+
+<MatchConditions format="1v4-quartet" killer="oni" />
+
+## Killer perks
+
+![The Oni — Allowed Killer Perks](/images/builds/1v4-quartet/oni/The-Oni-killer-perks.png)
+
+<BalancingList format="1v4-quartet" killer="oni" section="killerPerks" />
+
+## Killer add-ons
+
+![The Oni — Allowed Killer Add-ons](/images/builds/1v4-quartet/oni/The-Oni-killer-addons.png)
+
+<BalancingList format="1v4-quartet" killer="oni" section="addons" />
+
+## Survivor perks
+
+![Going against The Oni — Allowed Survivor Perks](/images/builds/1v4-quartet/oni/The-Oni-survivor-perks.png)
+
+<BalancingList format="1v4-quartet" killer="oni" section="survivorPerks" />
+
+## Survivor items
+
+![Going against The Oni — Allowed Survivor Items](/images/builds/1v4-quartet/oni/The-Oni-items.png)
+
+<BalancingList format="1v4-quartet" killer="oni" section="items" />
+
+## Applies to
+
+- [DBD 1v4 Quartet Ranked](/ko/game-modes/1v4-quartet/)

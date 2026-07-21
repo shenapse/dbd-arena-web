@@ -147,6 +147,7 @@ export default defineConfig({
       locales: {
         root: { label: 'English', lang: 'en' },
         ja: { label: '日本語', lang: 'ja' },
+        ko: { label: '한국어', lang: 'ko' },
       },
       // Outbound Discord handoff (UX §9). Header social icon.
       social: [{ icon: 'discord', label: 'Join Discord', href: DISCORD_INVITE }],
@@ -160,9 +161,9 @@ export default defineConfig({
         { label: 'Start Playing', translations: { ja: 'はじめる' }, slug: 'start' },
         {
           label: 'Game Modes',
-          translations: { ja: 'ゲームモード' },
+          translations: { ja: 'ゲームモード', ko: '게임 모드' },
           items: [
-            { label: 'Overview', translations: { ja: '概要' }, slug: 'game-modes' },
+            { label: 'Overview', translations: { ja: '概要', ko: '개요' }, slug: 'game-modes' },
             {
               label: 'Active',
               translations: { ja: '稼働中' },
@@ -190,22 +191,22 @@ export default defineConfig({
                 {
                   label: 'DBD 1v4 Quartet Ranked',
                   items: [
-                    { label: 'Overview', translations: { ja: '概要' }, slug: 'game-modes/1v4-quartet' },
+                    { label: 'Overview', translations: { ja: '概要', ko: '개요' }, slug: 'game-modes/1v4-quartet' },
                     {
                       label: 'Balancing',
-                      translations: { ja: 'バランス調整' },
+                      translations: { ja: 'バランス調整', ko: '밸런스 조정' },
                       items: [
-                        { label: 'Overview', translations: { ja: '概要' }, slug: 'game-modes/1v4-quartet/balancing' },
-                        { label: 'Blight', translations: { ja: 'ブライト' }, slug: 'game-modes/1v4-quartet/balancing/blight' },
-                        { label: 'Cenobite', translations: { ja: 'セノバイト' }, slug: 'game-modes/1v4-quartet/balancing/cenobite' },
-                        { label: 'Dracula', translations: { ja: 'ドラキュラ' }, slug: 'game-modes/1v4-quartet/balancing/dracula' },
-                        { label: 'Ghoul', translations: { ja: 'グール' }, slug: 'game-modes/1v4-quartet/balancing/ghoul' },
-                        { label: 'Hillbilly', translations: { ja: 'ヒルビリー' }, slug: 'game-modes/1v4-quartet/balancing/billy' },
-                        { label: 'Nurse', translations: { ja: 'ナース' }, slug: 'game-modes/1v4-quartet/balancing/nurse' },
-                        { label: 'Oni', translations: { ja: '鬼' }, slug: 'game-modes/1v4-quartet/balancing/oni' },
-                        { label: 'Spirit', translations: { ja: 'スピリット' }, slug: 'game-modes/1v4-quartet/balancing/spirit' },
-                        { label: 'Wesker', translations: { ja: 'ウェスカー' }, slug: 'game-modes/1v4-quartet/balancing/wesker' },
-                        { label: 'Wraith', translations: { ja: 'レイス' }, slug: 'game-modes/1v4-quartet/balancing/wraith' },
+                        { label: 'Overview', translations: { ja: '概要', ko: '개요' }, slug: 'game-modes/1v4-quartet/balancing' },
+                        { label: 'Blight', translations: { ja: 'ブライト', ko: '블라이트' }, slug: 'game-modes/1v4-quartet/balancing/blight' },
+                        { label: 'Cenobite', translations: { ja: 'セノバイト', ko: '세노바이트' }, slug: 'game-modes/1v4-quartet/balancing/cenobite' },
+                        { label: 'Dracula', translations: { ja: 'ドラキュラ', ko: '드라큘라' }, slug: 'game-modes/1v4-quartet/balancing/dracula' },
+                        { label: 'Ghoul', translations: { ja: 'グール', ko: '구울' }, slug: 'game-modes/1v4-quartet/balancing/ghoul' },
+                        { label: 'Hillbilly', translations: { ja: 'ヒルビリー', ko: '힐빌리' }, slug: 'game-modes/1v4-quartet/balancing/billy' },
+                        { label: 'Nurse', translations: { ja: 'ナース', ko: '너스' }, slug: 'game-modes/1v4-quartet/balancing/nurse' },
+                        { label: 'Oni', translations: { ja: '鬼', ko: '오니' }, slug: 'game-modes/1v4-quartet/balancing/oni' },
+                        { label: 'Spirit', translations: { ja: 'スピリット', ko: '스피릿' }, slug: 'game-modes/1v4-quartet/balancing/spirit' },
+                        { label: 'Wesker', translations: { ja: 'ウェスカー', ko: '웨스커' }, slug: 'game-modes/1v4-quartet/balancing/wesker' },
+                        { label: 'Wraith', translations: { ja: 'レイス', ko: '레이스' }, slug: 'game-modes/1v4-quartet/balancing/wraith' },
                       ],
                     },
                   ],

@@ -10,7 +10,7 @@
     "generate:perks": "dbd-perk-sheet --asset-root ${DBD_BALANCING_TOOL_ROOT:-../../../balancing-tool}",
     "generate:addons": "dbd-addon-sheet --asset-root ${DBD_BALANCING_TOOL_ROOT:-../../../balancing-tool}",
     "generate:items": "dbd-item-sheet --asset-root ${DBD_BALANCING_TOOL_ROOT:-../../../balancing-tool}",
-    "sync:dbd-data": "node scripts/sync-dbd-data.mjs",
+    "check:i18n": "node scripts/check-dbd-data.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "astro": "astro"

@@ -1,64 +1,127 @@
-// Shapes of the vendored DBD universe snapshots (src/data/dbd/*.json) and of
-// the `-build.yaml` allow/deny config blocks. See scripts/sync-dbd-data.mjs
-// for how the JSON snapshots are produced.
+// Shapes of the project-owned DBD data files (src/data/dbd/*.json) and of
+// the `-build.yaml` allow/deny config blocks. The data files are slug-keyed
+// maps owned directly in this repo (no vendoring/sync) — the map key is the
+// frozen slug identity, and `name` is the current English display name.
 
-export interface Perk {
-  id: number;
+// ---------------------------------------------------------------------------
+// perks.json — Record<slug, PerkEntry>
+// ---------------------------------------------------------------------------
+
+/** Raw shape of each value in perks.json, keyed by slug. */
+export interface PerkEntry {
   name: string;
-  icon: string;
-  exhaustion: boolean;
-  tags: string[];
-  character: string;
   survivorPerk: boolean;
+  exhaustion?: boolean;
   aliases?: string[];
   abbreviations?: string[];
-  dateAdded?: string;
 }
 
-export interface Addon {
-  id: number;
-  globalID: number;
-  addonIcon: string;
-  Name: string;
-  Rarity: number;
+/** A perk resolved for use, carrying its slug (the perks.json map key) for dedup. */
+export interface Perk extends PerkEntry {
+  slug: string;
 }
 
-export interface KillerAddons {
-  Name: string;
-  Addons: Addon[];
-}
+// ---------------------------------------------------------------------------
+// killers.json — Record<slug, KillerEntry>
+// ---------------------------------------------------------------------------
 
-export interface ItemType {
-  id: number;
-  Name: string;
-  Addons: ItemTypeAddon[];
-}
-
-export interface ItemTypeAddon {
-  id: number;
-  Name: string;
-  Rarity: number;
-  icon: string;
-}
-
-export interface ItemVariant {
-  id: number;
-  Name: string;
-  Type: string;
-  Rarity: number;
-  icon: string;
-}
-
-export interface ItemsData {
-  ItemTypes: ItemType[];
-  Items: ItemVariant[];
-}
-
+/** Raw shape of each value in killers.json, keyed by slug. */
 export interface KillerEntry {
-  ID: number;
-  Name: string;
-  Aliases: string[];
-  [key: string]: unknown;
+  name: string;
+  aliases?: string[];
+}
+
+/** A killer resolved for use, carrying its slug (the killers.json map key). */
+export interface Killer extends KillerEntry {
+  slug: string;
+}
+
+// ---------------------------------------------------------------------------
+// maps.json — Record<slug, MapEntry>
+// ---------------------------------------------------------------------------
+
+/** Raw shape of each value in maps.json, keyed by slug. */
+export interface MapEntry {
+  name: string;
+  /** Slug tag grouping numbered competitive layout variants of one map (e.g. "coal-tower" for "Coal Tower 1"/"Coal Tower 2"). Pure grouping metadata — never a standalone entry, never resolved for display. */
+  family?: string;
+  aliases?: string[];
+  abbreviations?: string[];
+}
+
+/** A map resolved for use, carrying its slug (the maps.json map key). */
+export interface GameMap extends MapEntry {
+  slug: string;
+}
+
+// ---------------------------------------------------------------------------
+// addons.json — Record<compositeSlug, AddonEntry>
+// ---------------------------------------------------------------------------
+
+/** Raw shape of each value in addons.json, keyed by a `killer-slug/addon-slug` composite slug. */
+export interface AddonEntry {
+  name: string;
+  /** English killer name (denormalized) — used to filter the universe by killer. */
+  killer: string;
+  rarity: number;
+}
+
+/** An add-on resolved for use, carrying its slug (the addons.json map key) for dedup. */
+export interface Addon extends AddonEntry {
+  slug: string;
+}
+
+// ---------------------------------------------------------------------------
+// items.json — ItemsData = { types: Record<typeSlug, ...>, variants: Record<variantSlug, ...> }
+// ---------------------------------------------------------------------------
+
+/** Raw shape of an add-on nested under an item type in items.json. */
+export interface ItemAddonEntry {
+  name: string;
+  rarity: number;
+}
+
+/** Raw shape of each value in items.json's `types` map. */
+export interface ItemTypeEntry {
+  name: string;
+  addons: Record<string, ItemAddonEntry>;
+}
+
+/** Raw shape of each value in items.json's `variants` map. */
+export interface ItemVariantEntry {
+  name: string;
+  /** Slug of the owning entry in items.json's `types` map. */
+  type: string;
+  rarity: number;
+}
+
+/** Raw shape of items.json as a whole. */
+export interface ItemsData {
+  types: Record<string, ItemTypeEntry>;
+  variants: Record<string, ItemVariantEntry>;
+}
+
+/** A type-owned add-on resolved for use, carrying its slug (the nested `addons` map key). */
+export interface ItemTypeAddon {
+  slug: string;
+  name: string;
+  rarity: number;
+}
+
+/** An item type resolved for use, carrying its slug (the `types` map key) and its add-ons as an array. */
+export interface ItemType {
+  slug: string;
+  name: string;
+  addons: ItemTypeAddon[];
+}
+
+/** An item variant resolved for use, carrying its slug (the `variants` map key). */
+export interface ItemVariant {
+  slug: string;
+  name: string;
+  /** Slug of the owning item type. */
+  type: string;
+  rarity: number;
 }
 
 // ---------------------------------------------------------------------------
@@ -106,4 +169,24 @@ export interface ResolvedList<T> {
 export interface RarityDisplay {
   summaries: string[]; // e.g. ["All Common add-ons", "All Ultra Rare add-ons"]
   names: string[];     // remaining entries not collapsed, in the list's existing (alphabetical) order
+}
+
+// ---------------------------------------------------------------------------
+// <killer>-conditions.yaml — per-killer match outer-frame data (map + win/draw
+// condition), independent of the loadout config in <killer>-build.yaml.
+// ---------------------------------------------------------------------------
+
+/** Raw DBD match-outcome stats a win/draw condition is expressed in terms of. */
+export interface ConditionStats {
+  kills?: number;
+  gensRemaining?: number;
+  hookStages?: number;
+}
+
+/** Raw shape of a `<killer>-conditions.yaml` file. */
+export interface MatchConditions {
+  killer: string;
+  map: string;
+  winCondition: ConditionStats;
+  drawCondition: ConditionStats | null;
 }

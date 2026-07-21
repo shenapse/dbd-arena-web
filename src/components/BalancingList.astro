@@ -93,27 +93,30 @@ if (doc) {
     const side = section === 'killerPerks' ? 'killer' : 'survivor';
     const result = resolvePerks(doc[section], side, context);
     flatNames = (mode === 'ban' ? result.banned : result.allowed).map((p) =>
-      localizeName(p.name, locale, 'perk', p.aliases)
+      localizeName(p.name, locale, 'perk', { aliases: p.aliases })
     );
   } else if (section === 'addons') {
     if (!doc.killer) throw new Error(`Missing "killer" field (${context}).`);
     const result = resolveAddons(doc.addons, doc.killer, context);
     const shown = mode === 'ban' ? result.banned : result.allowed;
     const { summaries, names } = collapseAddonsByRarity(shown, result.universe);
-    flatNames = [...summaries, ...names.map((n) => localizeName(n, locale, 'addon'))];
+    flatNames = [
+      ...summaries,
+      ...names.map((n) => localizeName(n, locale, 'addon', { killer: doc.killer })),
+    ];
   } else if (section === 'items') {
     const results = resolveItems(doc.items, doc.default ?? 'deny', context);
     itemGroups = results.map((r) => {
       const shownAddons = mode === 'ban' ? r.addons.banned : r.addons.allowed;
       const addonDisplay = collapseItemAddonsByRarity(shownAddons, r.addons.universe);
       return {
-        typeName: localizeName(r.type.Name, locale, 'item'),
+        typeName: localizeName(r.type.name, locale, 'item', { kind: 'type' }),
         variantNames: (mode === 'ban' ? r.variants.banned : r.variants.allowed).map((v) =>
-          localizeName(v.Name, locale, 'item')
+          localizeName(v.name, locale, 'item', { kind: 'variant' })
         ),
         addonNames: [
           ...addonDisplay.summaries,
-          ...addonDisplay.names.map((n) => localizeName(n, locale, 'item')),
+          ...addonDisplay.names.map((n) => localizeName(n, locale, 'item', { kind: 'addon' })),
         ],
         count: r.count,
         addonCount: r.addonCount,

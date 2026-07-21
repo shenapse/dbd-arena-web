@@ -14,5 +14,14 @@
   "killerPool.available": "使用可能",
   "killerPool.upcoming": "追加予定",
   "killerPool.undecided": "未定",
-  "killerPool.unsupported": "非対応"
+  "killerPool.unsupported": "非対応",
+  "matchConditions.aspect": "項目",
+  "matchConditions.detail": "詳細",
+  "matchConditions.map": "マップ",
+  "matchConditions.winCondition": "キラー勝利条件",
+  "matchConditions.drawCondition": "引き分け条件",
+  "matchConditions.none": "-",
+  "matchConditions.kills": "{n}キル",
+  "matchConditions.gensRemaining": "残り発電機{n}",
+  "matchConditions.hookStages": "{n}フックステージ"
 }

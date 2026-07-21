@@ -15,6 +15,7 @@ format: 1v4-quartet
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 import BalancingList from '@components/BalancingList.astro';
+import MatchConditions from '@components/MatchConditions.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
@@ -25,11 +26,7 @@ import BalancingList from '@components/BalancingList.astro';
 
 Per-killer balancing for Spirit. These adjustments apply specifically to the 1v4 quartet game mode and complement its shared [general rule](/game-modes/reference/1v4-general-rule/); they do not replace it.
 
-| Aspect | Detail |
-| --- | --- |
-| Map | Wrecker's Yard |
-| Killer Win condition | 4k1 |
-| Draw condition | - |
+<MatchConditions format="1v4-quartet" killer="spirit" />
 
 ## Killer perks
 
