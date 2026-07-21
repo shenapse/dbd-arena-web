@@ -14,5 +14,14 @@
   "killerPool.available": "Available",
   "killerPool.upcoming": "Upcoming",
   "killerPool.undecided": "Undecided",
-  "killerPool.unsupported": "Unsupported"
+  "killerPool.unsupported": "Unsupported",
+  "matchConditions.aspect": "Aspect",
+  "matchConditions.detail": "Detail",
+  "matchConditions.map": "Map",
+  "matchConditions.winCondition": "Killer win condition",
+  "matchConditions.drawCondition": "Draw condition",
+  "matchConditions.none": "-",
+  "matchConditions.kills": "{n} kills",
+  "matchConditions.gensRemaining": "with {n} generator(s) remaining",
+  "matchConditions.hookStages": "{n} hook stages"
 }

@@ -170,3 +170,23 @@ export interface RarityDisplay {
   summaries: string[]; // e.g. ["All Common add-ons", "All Ultra Rare add-ons"]
   names: string[];     // remaining entries not collapsed, in the list's existing (alphabetical) order
 }
+
+// ---------------------------------------------------------------------------
+// <killer>-conditions.yaml — per-killer match outer-frame data (map + win/draw
+// condition), independent of the loadout config in <killer>-build.yaml.
+// ---------------------------------------------------------------------------
+
+/** Raw DBD match-outcome stats a win/draw condition is expressed in terms of. */
+export interface ConditionStats {
+  kills?: number;
+  gensRemaining?: number;
+  hookStages?: number;
+}
+
+/** Raw shape of a `<killer>-conditions.yaml` file. */
+export interface MatchConditions {
+  killer: string;
+  map: string;
+  winCondition: ConditionStats;
+  drawCondition: ConditionStats | null;
+}

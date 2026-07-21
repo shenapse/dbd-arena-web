@@ -1,0 +1,85 @@
+---
+// Renders the match "outer frame" for a killer's balancing page: the map and
+// the localized win/draw conditions — resolved build-time from a killer's
+// `-conditions.yaml`. This is independent of the loadout allow/deny config in
+// `-build.yaml` (see BalancingList.astro); it always renders the same three
+// rows (map, win condition, draw condition), so unlike BalancingList there is
+// no `section`/`mode` prop.
+//
+// The YAML is addressed by `format` + `killer`, and the file path is built
+// here as `src/data/balancing/<format>/<killer>/<killer>-conditions.yaml`,
+// e.g. format="1v4-quartet" killer="blight" →
+// src/data/balancing/1v4-quartet/blight/blight-conditions.yaml. `format`
+// matches the page's frontmatter `format:` field; `killer` is the lowercase
+// folder/file slug.
+//
+// The file is read from the filesystem at build time, resolved under the
+// project root via process.cwd() (the project root under both `astro dev` and
+// `astro build`). Note: unlike import.meta.glob, an fs read is not in Vite's
+// watched module graph, so editing a YAML during `astro dev` needs a
+// dev-server restart to show. A missing/misspelled format/killer throws rather
+// than silently rendering nothing.
+import fs from 'node:fs';
+import path from 'node:path';
+import { parse } from 'yaml';
+import { describeConditionStats } from '../lib/balancing/conditions';
+import { resolveMap } from '../lib/balancing/resolve';
+import { localizeName } from '../lib/balancing/i18n-names';
+import type { MatchConditions } from '../lib/balancing/types';
+
+interface Props {
+  format: string;
+  killer: string;
+}
+
+const { format, killer } = Astro.props;
+
+// UI microcopy (row labels) is localized via Starlight i18n; the map name is
+// resolved to its canonical maps.json entry and localized (see below), while
+// the condition figures still come straight from the YAML (game data, not UI
+// copy).
+const t = Astro.locals.t;
+
+// Build the YAML path from `format` + `killer` and read it. A missing or
+// misspelled format/killer is a caller mistake — throw loudly rather than
+// render nothing.
+if (!format || !killer) throw new Error(`MatchConditions: "format" and "killer" are required.`);
+const filePath = path.join(process.cwd(), 'src/data/balancing', format, killer, `${killer}-conditions.yaml`);
+if (!fs.existsSync(filePath)) {
+  throw new Error(
+    `MatchConditions: YAML not found at "${filePath}" (format: "${format}", killer: "${killer}").`
+  );
+}
+const doc = parse(fs.readFileSync(filePath, 'utf8')) as MatchConditions;
+
+// Resolve the authored map name to its canonical maps.json entry (throws on
+// an unknown map — see file header) and localize it for the current locale.
+// Localizing from `mapEntry.name` (not `doc.map`) means a drifted-but-known
+// alias in the YAML still localizes correctly via the canonical name.
+const locale = Astro.currentLocale;
+const mapEntry = resolveMap(doc.map, `MatchConditions (format: "${format}", killer: "${killer}")`);
+const mapDisplay = localizeName(mapEntry.name, locale, 'map');
+---
+
+<table>
+  <thead>
+    <tr>
+      <th>{t('matchConditions.aspect')}</th>
+      <th>{t('matchConditions.detail')}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{t('matchConditions.map')}</td>
+      <td>{mapDisplay}</td>
+    </tr>
+    <tr>
+      <td>{t('matchConditions.winCondition')}</td>
+      <td>{describeConditionStats(doc.winCondition, t)}</td>
+    </tr>
+    <tr>
+      <td>{t('matchConditions.drawCondition')}</td>
+      <td>{describeConditionStats(doc.drawCondition, t)}</td>
+    </tr>
+  </tbody>
+</table>

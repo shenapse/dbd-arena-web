@@ -42,9 +42,10 @@ export const collections = {
       }),
     }),
   }),
-  // Localized UI strings for custom components (StatusBadge, LifecycleMeta).
-  // Built-in Starlight UI strings are translated automatically per locale; these
-  // custom keys are read via Astro.locals.t(). Files live in src/content/i18n/.
+  // Localized UI strings for custom components (StatusBadge, LifecycleMeta,
+  // MatchConditions). Built-in Starlight UI strings are translated automatically
+  // per locale; these custom keys are read via Astro.locals.t(). Files live in
+  // src/content/i18n/.
   i18n: defineCollection({
     loader: i18nLoader(),
     schema: i18nSchema({
@@ -61,6 +62,15 @@ export const collections = {
         'lifecycle.version': z.string().optional(),
         'lifecycle.effectiveDate': z.string().optional(),
         'lifecycle.changeHistory': z.string().optional(),
+        'matchConditions.aspect': z.string().optional(),
+        'matchConditions.detail': z.string().optional(),
+        'matchConditions.map': z.string().optional(),
+        'matchConditions.winCondition': z.string().optional(),
+        'matchConditions.drawCondition': z.string().optional(),
+        'matchConditions.none': z.string().optional(),
+        'matchConditions.kills': z.string().optional(),
+        'matchConditions.gensRemaining': z.string().optional(),
+        'matchConditions.hookStages': z.string().optional(),
       }),
     }),
   }),
