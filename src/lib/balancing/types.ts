@@ -37,6 +37,24 @@ export interface Killer extends KillerEntry {
 }
 
 // ---------------------------------------------------------------------------
+// maps.json — Record<slug, MapEntry>
+// ---------------------------------------------------------------------------
+
+/** Raw shape of each value in maps.json, keyed by slug. */
+export interface MapEntry {
+  name: string;
+  /** Slug tag grouping numbered competitive layout variants of one map (e.g. "coal-tower" for "Coal Tower 1"/"Coal Tower 2"). Pure grouping metadata — never a standalone entry, never resolved for display. */
+  family?: string;
+  aliases?: string[];
+  abbreviations?: string[];
+}
+
+/** A map resolved for use, carrying its slug (the maps.json map key). */
+export interface GameMap extends MapEntry {
+  slug: string;
+}
+
+// ---------------------------------------------------------------------------
 // addons.json — Record<compositeSlug, AddonEntry>
 // ---------------------------------------------------------------------------
 

@@ -14,9 +14,9 @@
  * data itself is internally consistent (no ambiguous add-on slugs, no perk
  * alias/abbreviation that collides with another perk's canonical name).
  *
- * Runs four checks:
+ * Runs five checks:
  *   A. Every translation key is a known slug/identity in the corresponding
- *      owned data file.
+ *      owned data file (perks, addons, items, maps).
  *   B. Item add-on slugs (the nested-map key under each item type) are
  *      globally unique across all item types — required because translation
  *      keys are synthesized as `addon/<slug>` without the owning type.
@@ -25,6 +25,9 @@
  *      alias/abbreviation.
  *   D. No killer alias collides with (shadows) another killer's canonical
  *      name, and no two killers share the same normalized alias.
+ *   E. No map alias/abbreviation collides with (shadows) another map's
+ *      canonical name, and no two maps share the same normalized
+ *      alias/abbreviation.
  *
  * Exits 0 when all checks pass, non-zero otherwise.
  *
@@ -39,7 +42,7 @@ import { normalize } from '../src/lib/balancing/normalize.ts';
 const DATA_DIR = path.resolve('src/data/dbd');
 const I18N_DIR = path.join(DATA_DIR, 'i18n');
 
-const STEMS = ['perks', 'addons', 'items'];
+const STEMS = ['perks', 'addons', 'items', 'maps'];
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -69,7 +72,7 @@ function findTranslationFiles() {
 // Check A: translation keys are valid identities in the owned data.
 // ---------------------------------------------------------------------------
 
-function checkTranslationKeys(files, perks, addons, items) {
+function checkTranslationKeys(files, perks, addons, items, maps) {
   const failures = [];
 
   const itemIdentities = new Set();
@@ -87,6 +90,7 @@ function checkTranslationKeys(files, perks, addons, items) {
     perks: new Set(Object.keys(perks)),
     addons: new Set(Object.keys(addons)),
     items: itemIdentities,
+    maps: new Set(Object.keys(maps)),
   };
 
   for (const { stem, filePath } of files) {
@@ -211,6 +215,49 @@ function checkKillerAliasCollisions(killers) {
 }
 
 // ---------------------------------------------------------------------------
+// Check E: map alias/abbreviation collisions.
+// ---------------------------------------------------------------------------
+
+function checkMapAliasCollisions(maps) {
+  const failures = [];
+
+  // canonicalByNorm: normalize(map name) -> slug
+  const canonicalByNorm = new Map();
+  for (const [slug, entry] of Object.entries(maps)) {
+    canonicalByNorm.set(normalize(entry.name), slug);
+  }
+
+  // aliasOwner: normalize(alias/abbrev) -> slug of the first map that declared it
+  const aliasOwner = new Map();
+
+  for (const [slug, entry] of Object.entries(maps)) {
+    const aliasForms = [...(entry.aliases ?? []), ...(entry.abbreviations ?? [])];
+    for (const alias of aliasForms) {
+      const na = normalize(alias);
+
+      // Shadowing: this alias normalizes to another map's canonical name.
+      const canonicalOwner = canonicalByNorm.get(na);
+      if (canonicalOwner && canonicalOwner !== slug) {
+        failures.push(
+          `map "${slug}" alias "${alias}" collides with map "${canonicalOwner}"'s canonical name`
+        );
+      }
+
+      // Ambiguity: two different maps declare the same normalized alias.
+      const existingOwner = aliasOwner.get(na);
+      if (existingOwner && existingOwner !== slug) {
+        failures.push(
+          `alias "${alias}" (normalized "${na}") declared by both map "${existingOwner}" and map "${slug}"`
+        );
+      } else if (!existingOwner) {
+        aliasOwner.set(na, slug);
+      }
+    }
+  }
+  return failures;
+}
+
+// ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 
@@ -219,13 +266,14 @@ function main() {
   const addons = readJson(path.join(DATA_DIR, 'addons.json'));
   const items = readJson(path.join(DATA_DIR, 'items.json'));
   const killers = readJson(path.join(DATA_DIR, 'killers.json'));
+  const maps = readJson(path.join(DATA_DIR, 'maps.json'));
 
   const translationFiles = findTranslationFiles();
 
   const checks = [
     {
       name: 'Check A: translation keys are valid slugs',
-      failures: checkTranslationKeys(translationFiles, perks, addons, items),
+      failures: checkTranslationKeys(translationFiles, perks, addons, items, maps),
     },
     {
       name: 'Check B: item add-on slug global uniqueness',
@@ -238,6 +286,10 @@ function main() {
     {
       name: 'Check D: killer alias collisions',
       failures: checkKillerAliasCollisions(killers),
+    },
+    {
+      name: 'Check E: map alias collisions',
+      failures: checkMapAliasCollisions(maps),
     },
   ];
 

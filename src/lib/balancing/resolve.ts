@@ -25,6 +25,7 @@ import perksJson from '../../data/dbd/perks.json' with { type: 'json' };
 import addonsJson from '../../data/dbd/addons.json' with { type: 'json' };
 import itemsJson from '../../data/dbd/items.json' with { type: 'json' };
 import killersJson from '../../data/dbd/killers.json' with { type: 'json' };
+import mapsJson from '../../data/dbd/maps.json' with { type: 'json' };
 import { normalize, buildLookup } from './normalize';
 import type {
   PerkEntry,
@@ -37,6 +38,8 @@ import type {
   ItemsData,
   KillerEntry,
   Killer,
+  MapEntry,
+  GameMap,
   Selector,
   AllowDenyConfig,
   ItemsConfig,
@@ -48,10 +51,12 @@ const perksData = perksJson as unknown as Record<string, PerkEntry>;
 const addonsData = addonsJson as unknown as Record<string, AddonEntry>;
 const itemsData = itemsJson as unknown as ItemsData;
 const killersData = killersJson as unknown as Record<string, KillerEntry>;
+const mapsData = mapsJson as unknown as Record<string, MapEntry>;
 
 const allPerks: Perk[] = Object.entries(perksData).map(([slug, e]) => ({ slug, ...e }));
 const allKillers: Killer[] = Object.entries(killersData).map(([slug, e]) => ({ slug, ...e }));
 const allAddons: Addon[] = Object.entries(addonsData).map(([slug, e]) => ({ slug, ...e }));
+const allMaps: GameMap[] = Object.entries(mapsData).map(([slug, e]) => ({ slug, ...e }));
 
 const itemTypes: ItemType[] = Object.entries(itemsData.types).map(([slug, t]) => ({
   slug,
@@ -61,6 +66,7 @@ const itemTypes: ItemType[] = Object.entries(itemsData.types).map(([slug, t]) =>
 const itemVariants: ItemVariant[] = Object.entries(itemsData.variants).map(([slug, v]) => ({ slug, ...v }));
 
 const killerLookup = buildLookup(allKillers);
+const mapLookup = buildLookup(allMaps);
 
 // ---------------------------------------------------------------------------
 // Rarity models
@@ -276,6 +282,15 @@ export function resolveKiller(killerName: string, context: string): Killer {
     throw new Error(`Unknown killer "${killerName}" (${context}). No matching entry in killers.json.`);
   }
   return killer;
+}
+
+/** Resolve a map name (e.g. a `-conditions.yaml`'s `map:` field) to its canonical maps.json entry. */
+export function resolveMap(mapName: string, context: string): GameMap {
+  const map = mapLookup.get(normalize(mapName));
+  if (!map) {
+    throw new Error(`Unknown map "${mapName}" (${context}). No matching entry in maps.json.`);
+  }
+  return map;
 }
 
 /**
