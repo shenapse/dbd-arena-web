@@ -11,30 +11,41 @@
 // Their keys are *slugs* (frozen identifiers derived once from an English
 // name via slugify(), then never recomputed) — not the English name itself.
 // The join from a display-time English name to a slug goes through the
-// slug registry at src/data/dbd/i18n/slugs/<domain>.json, which maps
-// slug -> { name, ... }. We build the *inverse* of that registry here
-// (name -> slug) and use it to resolve the slug for a given English name.
+// project-owned, slug-keyed data files (src/data/dbd/perks.json,
+// addons.json, items.json), whose map keys *are* the frozen slug identities
+// (there is no separate slug registry anymore — it was absorbed into these
+// files). We build the *inverse* of each owned file here (name -> slug) and
+// use it to resolve the slug for a given English name. Item identities are
+// synthesized as "<kind>/<slug>" (kind is "type" | "variant" | "addon") to
+// match the item translation files' keys, since items.json itself is
+// relational (types own nested add-ons; variants reference a type) rather
+// than a flat kind-prefixed map.
 //
 // Critically, we never call slugify() here: if a perk/add-on/item is
-// renamed, the registry's `name` field is updated (by the generator that
-// maintains it) but the slug itself does not change, so the translation
-// keyed by that slug keeps working. Deriving the slug at runtime from the
-// current name would break that guarantee.
+// renamed, the owned file's `name` field is updated but the slug (map key)
+// itself does not change, so the translation keyed by that slug keeps
+// working. Deriving the slug at runtime from the current name would break
+// that guarantee.
 //
-// Every <domain>.<lang>.json and slugs/<domain>.json file is auto-discovered
-// via import.meta.glob and indexed at build time, keyed at display time on
-// the current locale (Astro.currentLocale). Entries may be partial; a name
-// with no entry for the active language falls back to English only (no
-// parentheses).
+// Every <domain>.<lang>.json translation file is auto-discovered via
+// import.meta.glob and indexed at build time, keyed at display time on the
+// current locale (Astro.currentLocale). Entries may be partial; a name with
+// no entry for the active language falls back to English only (no
+// parentheses). The owned data files driving the inverse maps are static
+// imports (they're operational data, not a discoverable set of files).
 //
 // Adding a language needs NO change here: drop the <domain>.<lang>.json files
 // into src/data/dbd/i18n/ and register the locale in astro.config.mjs.
 
 import { normalize } from './normalize';
+import perksJson from '../../data/dbd/perks.json' with { type: 'json' };
+import addonsJson from '../../data/dbd/addons.json' with { type: 'json' };
+import itemsJson from '../../data/dbd/items.json' with { type: 'json' };
+import type { PerkEntry, AddonEntry, ItemsData } from './types';
 
 export type NameDomain = 'perk' | 'addon' | 'item';
 
-// Filename stem (plural, as used in <stem>.<lang>.json and slugs/<stem>.json)
+// Filename stem (plural, as used in <stem>.<lang>.json translation files)
 // -> canonical domain. This also gates discovery: files whose stem isn't
 // listed here are ignored, keeping NameDomain the single source of valid
 // domains.
@@ -89,8 +100,7 @@ function emptyDomainLookups(): Record<NameDomain, Map<string, LocalizedName>> {
 // Discover every src/data/dbd/i18n/<domain>.<lang>.json at build time and index
 // it as LOOKUPS[lang][domain]. The glob argument must be a string literal (Vite
 // requirement); eager glob keeps these JSON files in the watched module graph,
-// so editing one hot-reloads during `astro dev`. This glob is intentionally
-// non-recursive, so it does not also pick up src/data/dbd/i18n/slugs/*.json.
+// so editing one hot-reloads during `astro dev`.
 const files = import.meta.glob<{ default: NameMap }>('../../data/dbd/i18n/*.json', {
   eager: true,
 });
@@ -110,63 +120,64 @@ for (const [filePath, mod] of Object.entries(files)) {
   byDomain[domain] = buildNameLookup(mod.default);
 }
 
-// --- Slug registry: build name -> slug inverse maps ------------------------
+// --- Owned data files: build name -> slug inverse maps ---------------------
 //
-// Registry shapes (slug -> identity), one file per domain:
-//   slugs/perks.json:  { "<slug>": { name } }
-//   slugs/addons.json: { "<killerSlug>/<addonSlug>": { name, killer } }
-//   slugs/items.json:  { "<kind>/<slug>": { name, kind } } where kind is one
-//                       of "type" | "variant" | "addon".
+// Owned file shapes (slug -> entry), imported statically as operational data:
+//   perks.json:  Record<slug, PerkEntry>            PerkEntry = { name, survivorPerk, aliases?, abbreviations?, ... }
+//   addons.json: Record<"killerSlug/addonSlug", AddonEntry>  AddonEntry = { name, killer (English), rarity }
+//   items.json:  ItemsData = { types: Record<typeSlug, { name, addons: Record<addonSlug, { name, rarity }> }>,
+//                               variants: Record<variantSlug, { name, type, rarity }> }
 //
 // The inverse-map keys below mirror how localizeName() will be called: a
-// perk is looked up by its (normalized) English name alone; an add-on needs
-// its killer for disambiguation (the same add-on name can exist under
-// multiple killers); an item needs its `kind` (type/variant/addon namespaces
-// don't collide by name, but keeping them separate here matches the
-// registry's own key structure).
-interface PerkEntry {
-  name: string;
-}
-interface AddonEntry {
-  name: string;
-  killer: string;
-}
-interface ItemEntry {
-  name: string;
-  kind: 'type' | 'variant' | 'addon';
-}
+// perk is looked up by its (normalized) English name alone (also indexed by
+// alias/abbreviation, so any known name form resolves — for future use, e.g.
+// search); an add-on needs its killer for disambiguation (the same add-on
+// name can exist under multiple killers); an item needs its `kind` (the
+// type/variant/addon translation-key namespaces don't collide by name, but
+// keeping them separate here matches the translation files' own key
+// structure). Item inverse *values* are synthesized "<kind>/<slug>" strings
+// so they line up exactly with the item translation files' keys (e.g.
+// "type/flashlight", "addon/bandages", "variant/firecracker") even though
+// items.json itself has no such flat key.
 
 const perkInverse = new Map<string, string>();
 const addonInverse = new Map<string, string>();
 const itemInverse = new Map<string, string>();
 
-const registryFiles = import.meta.glob<{ default: Record<string, unknown> }>(
-  '../../data/dbd/i18n/slugs/*.json',
-  { eager: true }
-);
+const perks = perksJson as Record<string, PerkEntry>;
+const addons = addonsJson as Record<string, AddonEntry>;
+const items = itemsJson as ItemsData;
 
-for (const [filePath, mod] of Object.entries(registryFiles)) {
-  // e.g. ".../slugs/perks.json" -> stem "perks".
-  const fileName = filePath.split('/').pop() ?? '';
-  const [stem] = fileName.split('.');
-  const domain = DOMAIN_BY_STEM[stem];
-  if (!domain) continue; // skip unrecognized files defensively
-
-  for (const [slug, rawEntry] of Object.entries(mod.default)) {
-    if (domain === 'perk') {
-      const entry = rawEntry as PerkEntry;
-      const key = normalize(entry.name);
-      if (!perkInverse.has(key)) perkInverse.set(key, slug);
-    } else if (domain === 'addon') {
-      const entry = rawEntry as AddonEntry;
-      const key = normalize(entry.killer) + SEP + normalize(entry.name);
-      if (!addonInverse.has(key)) addonInverse.set(key, slug);
-    } else if (domain === 'item') {
-      const entry = rawEntry as ItemEntry;
-      const key = entry.kind + SEP + normalize(entry.name);
-      if (!itemInverse.has(key)) itemInverse.set(key, slug);
-    }
+// Pass 1: canonical names win. Pass 2: aliases/abbreviations fill in any
+// remaining (unclaimed) keys, so a canonical perk name is never shadowed by
+// another perk's alias.
+for (const [slug, entry] of Object.entries(perks)) {
+  const key = normalize(entry.name);
+  if (!perkInverse.has(key)) perkInverse.set(key, slug);
+}
+for (const [slug, entry] of Object.entries(perks)) {
+  for (const alias of [...(entry.aliases ?? []), ...(entry.abbreviations ?? [])]) {
+    const key = normalize(alias);
+    if (!perkInverse.has(key)) perkInverse.set(key, slug);
   }
+}
+
+for (const [slug, entry] of Object.entries(addons)) {
+  const key = normalize(entry.killer) + SEP + normalize(entry.name);
+  if (!addonInverse.has(key)) addonInverse.set(key, slug);
+}
+
+for (const [typeSlug, t] of Object.entries(items.types)) {
+  const typeKey = 'type' + SEP + normalize(t.name);
+  if (!itemInverse.has(typeKey)) itemInverse.set(typeKey, 'type/' + typeSlug);
+  for (const [addonSlug, a] of Object.entries(t.addons)) {
+    const addonKey = 'addon' + SEP + normalize(a.name);
+    if (!itemInverse.has(addonKey)) itemInverse.set(addonKey, 'addon/' + addonSlug);
+  }
+}
+for (const [variantSlug, v] of Object.entries(items.variants)) {
+  const variantKey = 'variant' + SEP + normalize(v.name);
+  if (!itemInverse.has(variantKey)) itemInverse.set(variantKey, 'variant/' + variantSlug);
 }
 
 /** Wrap a primary name with its aliases in parens: `"Name (a, b)"`, or just `"Name"`. */

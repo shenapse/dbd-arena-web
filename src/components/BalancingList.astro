@@ -110,9 +110,9 @@ if (doc) {
       const shownAddons = mode === 'ban' ? r.addons.banned : r.addons.allowed;
       const addonDisplay = collapseItemAddonsByRarity(shownAddons, r.addons.universe);
       return {
-        typeName: localizeName(r.type.Name, locale, 'item', { kind: 'type' }),
+        typeName: localizeName(r.type.name, locale, 'item', { kind: 'type' }),
         variantNames: (mode === 'ban' ? r.variants.banned : r.variants.allowed).map((v) =>
-          localizeName(v.Name, locale, 'item', { kind: 'variant' })
+          localizeName(v.name, locale, 'item', { kind: 'variant' })
         ),
         addonNames: [
           ...addonDisplay.summaries,
