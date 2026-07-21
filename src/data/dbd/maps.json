@@ -1,0 +1,172 @@
+{
+  "azarov-s-resting-place": {
+    "name": "Azarov's Resting Place",
+    "abbreviations": [
+      "Azarov"
+    ]
+  },
+  "badham-preschool": {
+    "name": "Badham Preschool",
+    "aliases": [
+      "Badham"
+    ]
+  },
+  "blood-lodge": {
+    "name": "Blood Lodge"
+  },
+  "coal-tower-1": {
+    "name": "Coal Tower 1",
+    "family": "coal-tower",
+    "abbreviations": [
+      "CT1"
+    ]
+  },
+  "coal-tower-2": {
+    "name": "Coal Tower 2",
+    "family": "coal-tower",
+    "abbreviations": [
+      "CT2"
+    ]
+  },
+  "dead-dawg-saloon": {
+    "name": "Dead Dawg Saloon",
+    "abbreviations": [
+      "DDS"
+    ]
+  },
+  "dead-sands": {
+    "name": "Dead Sands"
+  },
+  "disturbed-ward": {
+    "name": "Disturbed Ward"
+  },
+  "eyrie-of-crows": {
+    "name": "Eyrie of Crows"
+  },
+  "fallen-refuge": {
+    "name": "Fallen Refuge"
+  },
+  "family-residence": {
+    "name": "Family Residence"
+  },
+  "father-campbell-s-chapel": {
+    "name": "Father Campbell's Chapel"
+  },
+  "forgotten-ruins": {
+    "name": "Forgotten Ruins"
+  },
+  "fractured-cowshed": {
+    "name": "Fractured Cowshed"
+  },
+  "freddy-fazbear-s-pizza": {
+    "name": "Freddy Fazbear's Pizza"
+  },
+  "garden-of-joy": {
+    "name": "Garden of Joy"
+  },
+  "gas-heaven": {
+    "name": "Gas Heaven"
+  },
+  "greenville-square": {
+    "name": "Greenville Square"
+  },
+  "grim-pantry": {
+    "name": "Grim Pantry"
+  },
+  "groaning-storehouse": {
+    "name": "Groaning Storehouse"
+  },
+  "ironworks-of-misery": {
+    "name": "Ironworks of Misery"
+  },
+  "lampkin-lane": {
+    "name": "Lampkin Lane"
+  },
+  "midwich-elementary-school": {
+    "name": "Midwich Elementary School",
+    "abbreviations": [
+      "Midwich"
+    ]
+  },
+  "mother-s-dwelling": {
+    "name": "Mother's Dwelling"
+  },
+  "mount-ormond-resort": {
+    "name": "Mount Ormond Resort",
+    "aliases": [
+      "Ormond Resort", "MOR"
+    ]
+  },
+  "nostromo-wreckage": {
+    "name": "Nostromo Wreckage"
+  },
+  "ormond-lake-mine": {
+    "name": "Ormond Lake Mine",
+    "abbreviations": [
+      "OLM"
+    ]
+  },
+  "raccoon-city-police-station": {
+    "name": "Raccoon City Police Station",
+    "abbreviations": [
+      "RPD"
+    ]
+  },
+  "raccoon-city-police-station-east-wing": {
+    "name": "Raccoon City Police Station East Wing"
+  },
+  "raccoon-city-police-station-west-wing": {
+    "name": "Raccoon City Police Station West Wing"
+  },
+  "rancid-abattoir": {
+    "name": "Rancid Abattoir"
+  },
+  "rotten-fields": {
+    "name": "Rotten Fields"
+  },
+  "sanctum-of-wrath": {
+    "name": "Sanctum of Wrath"
+  },
+  "shelter-woods": {
+    "name": "Shelter Woods"
+  },
+  "suffocation-pit": {
+    "name": "Suffocation Pit"
+  },
+  "the-game": {
+    "name": "The Game"
+  },
+  "the-pale-rose": {
+    "name": "The Pale Rose"
+  },
+  "the-shattered-square": {
+    "name": "The Shattered Square"
+  },
+  "the-temple-of-purgation": {
+    "name": "The Temple of Purgation"
+  },
+  "the-thompson-house": {
+    "name": "The Thompson House"
+  },
+  "toba-landing": {
+    "name": "Toba Landing"
+  },
+  "torment-creek": {
+    "name": "Torment Creek"
+  },
+  "treatment-theatre": {
+    "name": "Treatment Theatre"
+  },
+  "trickster-s-delusion": {
+    "name": "Trickster's Delusion"
+  },
+  "wrecker-s-yard": {
+    "name": "Wrecker's Yard",
+    "abbreviations": [
+      "Wreckers", "Wrecker's", "Yard"
+    ]
+  },
+  "wretched-shop": {
+    "name": "Wretched Shop"
+  }
+}
