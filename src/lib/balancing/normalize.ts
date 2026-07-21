@@ -15,6 +15,19 @@ export function normalize(value: string): string {
     .replace(/[\s\-_'.]+/g, '');
 }
 
+/**
+ * Lowercase, collapse every run of non-`[a-z0-9]` characters to a single `-`,
+ * and strip any leading/trailing `-`. Used to derive repo-owned, frozen i18n
+ * join keys (slugs) for perks/add-ons/items — distinct from `normalize()`,
+ * which is used for fuzzy display-name lookups, not identity.
+ */
+export function slugify(value: string): string {
+  return String(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 /** An entry that carries a display name, optionally under a different key (e.g. killers use `Name`). */
 export interface Named {
   name?: string;
