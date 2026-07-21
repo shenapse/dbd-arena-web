@@ -1,0 +1,6 @@
+killer: The Dark Lord
+map: Coal Tower 2
+winCondition:
+  kills: 4
+  gensRemaining: 1
+drawCondition: null

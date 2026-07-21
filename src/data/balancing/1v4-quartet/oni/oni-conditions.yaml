@@ -1,0 +1,6 @@
+killer: The Oni
+map: Coal Tower 1
+winCondition:
+  kills: 4
+  gensRemaining: 1
+drawCondition: null

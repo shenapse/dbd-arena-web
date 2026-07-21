@@ -1,0 +1,6 @@
+killer: The Ghoul
+map: Ormond Lake Mine
+winCondition:
+  kills: 4
+  gensRemaining: 0
+drawCondition: null

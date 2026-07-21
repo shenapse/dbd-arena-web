@@ -15,6 +15,7 @@ format: 1v4-quartet
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 import BalancingList from '@components/BalancingList.astro';
+import MatchConditions from '@components/MatchConditions.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
@@ -26,11 +27,7 @@ import BalancingList from '@components/BalancingList.astro';
 Per-killer balancing for Cenobite.
 These rules sit alongside the general 1v4 quartet rule and complement it.
 
-| Aspect | Detail |
-| --- | --- |
-| Map | Dead Dawg Saloon |
-| Win condition | 9 stages |
-| Draw condition | 8 stages |
+<MatchConditions format="1v4-quartet" killer="cenobite" />
 
 ## Killer perks
 
