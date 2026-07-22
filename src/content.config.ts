@@ -71,6 +71,8 @@ export const collections = {
         'matchConditions.kills': z.string().optional(),
         'matchConditions.gensRemaining': z.string().optional(),
         'matchConditions.hookStages': z.string().optional(),
+        'balancingOverview.killer': z.string().optional(),
+        'balancingOverview.status': z.string().optional(),
       }),
     }),
   }),

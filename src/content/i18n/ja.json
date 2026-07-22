@@ -23,5 +23,7 @@
   "matchConditions.none": "-",
   "matchConditions.kills": "{n}キル",
   "matchConditions.gensRemaining": "残り発電機{n}",
-  "matchConditions.hookStages": "{n}フックステージ"
+  "matchConditions.hookStages": "{n}フックステージ",
+  "balancingOverview.killer": "キラー",
+  "balancingOverview.status": "ステータス"
 }

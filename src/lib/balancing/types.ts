@@ -190,3 +190,22 @@ export interface MatchConditions {
   winCondition: ConditionStats;
   drawCondition: ConditionStats | null;
 }
+
+// ---------------------------------------------------------------------------
+// <format>/overview.yaml — format-level killer roster manifest, consumed by
+// BalancingOverview.astro to render the overview table on a format's index
+// page (in place of a hardcoded Markdown table).
+// ---------------------------------------------------------------------------
+
+/** One row of a format's overview.yaml killer roster. */
+export interface OverviewEntry {
+  name: string;
+  page?: string;
+  conditions?: string;
+  status: string;
+}
+
+/** Raw shape of a `<format>/overview.yaml` file. */
+export interface BalancingOverview {
+  killers: OverviewEntry[];
+}

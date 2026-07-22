@@ -23,5 +23,7 @@
   "matchConditions.none": "-",
   "matchConditions.kills": "{n} kills",
   "matchConditions.gensRemaining": "with {n} generator(s) remaining",
-  "matchConditions.hookStages": "{n} hook stages"
+  "matchConditions.hookStages": "{n} hook stages",
+  "balancingOverview.killer": "Killer",
+  "balancingOverview.status": "Status"
 }
