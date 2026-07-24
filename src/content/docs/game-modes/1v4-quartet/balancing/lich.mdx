@@ -4,16 +4,18 @@ description: Per-killer balancing for Lich in the 1v4 quartet format.
 handle: 1v4-quartet-balancing-lich
 status: upcoming
 version: "0.1"
-effectiveDate: "2026-06-15"
+effectiveDate: "2026-07-24"
 changeHistory:
   - version: "0.1"
-    date: "2026-06-15"
+    date: "2026-07-24"
     note: Initial per-killer balancing entry for Lich.
 killer: Lich
 format: 1v4-quartet
 ---
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
+import BalancingList from '@components/BalancingList.astro';
+import MatchConditions from '@components/MatchConditions.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
@@ -25,45 +27,31 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
 Per-killer balancing for Lich.
 These rules sit alongside the general 1v4 quartet rule and complement it.
 
-| Aspect | Detail |
-| --- | --- |
-| Map | |
-| Win condition | |
-| Draw condition | |
+<MatchConditions format="1v4-quartet" killer="lich" />
 
 ## Killer perks
 
-Allowed:
-- Agitation
-- Bamboozle
-- Brutal Strength
-- Call of Brine
-- Corrupt Intervention
-- Eruption
-- Furtive Chase
-- Grim Embrace
-- "Hex: Huntress Lullaby"
-- "Hex: Ruin"
-- "Hex: Undying"
-- Deadlock
-- Oppression
-- Overcharge
-- "Scourge Hook: Pain Resonance"
-- Pop Goes the Weasel
-- "Scourge Hook: Gift of Pain"
-- Surveillance
-- Thrilling Tremors
-- Tinkerer
-- Trail of Torment
-- Turn Back the Clock
+![The Lich — Allowed Killer Perks](/images/builds/1v4-quartet/lich/The-Lich-killer-perks.png)
+
+<BalancingList format="1v4-quartet" killer="lich" section="killerPerks" />
 
 ## Killer add-ons
 
-Allowed: None
+![The Lich — Allowed Killer Add-ons](/images/builds/1v4-quartet/lich/The-Lich-killer-addons.png)
+
+<BalancingList format="1v4-quartet" killer="lich" section="addons" />
 
 ## Survivor perks
 
+![The Lich — Allowed Survivor Perks](/images/builds/1v4-quartet/lich/The-Lich-survivor-perks.png)
+
+<BalancingList format="1v4-quartet" killer="lich" section="survivorPerks" />
+
 ## Survivor items
+
+![Going against The Lich — Allowed Survivor Items](/images/builds/1v4-quartet/lich/The-Lich-items.png)
+
+<BalancingList format="1v4-quartet" killer="lich" section="items" />
 
 {/* - 1 very rare med-kit with 2 rare add-ons
 - 1 rare flashlight with 2 common add-ons
