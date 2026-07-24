@@ -52,7 +52,7 @@ killerPerks:
 
 addons:
   default: allow
-  allow:
+  deny:
     - {rarity: "Ultra Rare"}
 
 survivorPerks:
