@@ -1,0 +1,50 @@
+killers:
+  - name: Blight
+    page: blight
+    conditions: blight
+    status: upcoming
+  - name: Cenobite
+    page: cenobite
+    conditions: cenobite
+    status: upcoming
+  - name: Clown
+    status: upcoming
+  - name: Doctor
+    status: upcoming
+  - name: Dracula
+    page: dracula
+    conditions: dracula
+    status: upcoming
+  - name: Ghoul
+    page: ghoul
+    conditions: ghoul
+    status: upcoming
+  - name: Hillbilly
+    page: billy
+    status: upcoming
+  - name: Lich
+    status: upcoming
+  - name: Nightmare
+    status: upcoming
+  - name: Nurse
+    page: nurse
+    conditions: nurse
+    status: upcoming
+  - name: Oni
+    page: oni
+    conditions: oni
+    status: upcoming
+  - name: Pig
+    status: upcoming
+  - name: Spirit
+    page: spirit
+    conditions: spirit
+    status: upcoming
+  - name: Unknown
+    status: upcoming
+  - name: Wesker
+    page: wesker
+    status: upcoming
+  - name: Wraith
+    page: wraith
+    status: upcoming

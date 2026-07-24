@@ -1,0 +1,112 @@
+---
+// Renders a format's killer-roster overview table (Killer / Map / Win
+// condition / Draw condition / Status) on a format's balancing index page, in
+// place of a hardcoded Markdown table. Data comes from a build-time-read
+// manifest, `src/data/balancing/<format>/overview.yaml`, shaped as
+// `BalancingOverview` (src/lib/balancing/types.ts): a `killers:` list of
+// `{ name, page?, conditions?, status }` rows.
+//
+// Each row optionally names a `conditions:` slug — if present, that killer's
+// `-conditions.yaml` is read via `tryLoadMatchConditions` (the same
+// fs/resolveMap/localizeName pipeline MatchConditions.astro uses for a single
+// killer's page) and its map/win/draw are resolved + localized for display.
+// A row with no `conditions:` (or one naming a file that doesn't exist yet —
+// e.g. a killer whose balancing page hasn't been authored) renders blank
+// map/win/draw cells rather than failing the build; only a missing/misspelled
+// `format` or a missing manifest file is treated as a caller mistake and
+// throws.
+//
+// `page:` (when present) links the killer name to
+// `<localePrefix>/game-modes/<format>/balancing/<page>/`. The locale prefix
+// reproduces what the per-locale MDX pages hardcode today (`/ja`, `/ko`; root
+// English has no prefix).
+//
+// Like MatchConditions.astro, the manifest is read directly via fs, not
+// import.meta.glob, so it is NOT in Vite's watched module graph — editing
+// overview.yaml during `astro dev` needs a dev-server restart to show.
+import fs from 'node:fs';
+import path from 'node:path';
+import { parse } from 'yaml';
+import { describeConditionStats } from '../lib/balancing/conditions';
+import { resolveMap } from '../lib/balancing/resolve';
+import { localizeName } from '../lib/balancing/i18n-names';
+import { tryLoadMatchConditions } from '../lib/balancing/load-conditions';
+import type { BalancingOverview, OverviewEntry } from '../lib/balancing/types';
+import StatusBadge from './StatusBadge.astro';
+
+interface Props {
+  format: string;
+}
+
+const { format } = Astro.props;
+
+if (!format) throw new Error(`BalancingOverview: "format" is required.`);
+const manifestPath = path.join(process.cwd(), 'src/data/balancing', format, 'overview.yaml');
+if (!fs.existsSync(manifestPath)) {
+  throw new Error(`BalancingOverview: manifest not found at "${manifestPath}" (format: "${format}").`);
+}
+const doc = parse(fs.readFileSync(manifestPath, 'utf8')) as BalancingOverview;
+
+const locale = Astro.currentLocale;
+const t = Astro.locals.t;
+
+// Reproduces the /ja and /ko locale prefixes the per-locale MDX pages
+// hardcode today; root English pages have no prefix.
+const prefix = locale === 'ja' || locale === 'ko' ? `/${locale}` : '';
+
+interface DisplayRow {
+  entry: OverviewEntry;
+  map: string;
+  win: string;
+  draw: string;
+  href: string | null;
+}
+
+const rows: DisplayRow[] = doc.killers.map((entry) => {
+  let map = '';
+  let win = '';
+  let draw = '';
+
+  if (entry.conditions) {
+    const c = tryLoadMatchConditions(format, entry.conditions);
+    if (c) {
+      const mapEntry = resolveMap(
+        c.map,
+        `BalancingOverview (format: "${format}", killer: "${entry.conditions}")`
+      );
+      map = localizeName(mapEntry.name, locale, 'map');
+      win = describeConditionStats(c.winCondition, t);
+      draw = describeConditionStats(c.drawCondition, t);
+    }
+  }
+
+  const href = entry.page ? `${prefix}/game-modes/${format}/balancing/${entry.page}/` : null;
+
+  return { entry, map, win, draw, href };
+});
+---
+
+<table>
+  <thead>
+    <tr>
+      <th>{t('balancingOverview.killer')}</th>
+      <th>{t('matchConditions.map')}</th>
+      <th>{t('matchConditions.winCondition')}</th>
+      <th>{t('matchConditions.drawCondition')}</th>
+      <th>{t('balancingOverview.status')}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {rows.map(({ entry, map, win, draw, href }) => (
+      <tr>
+        <td>{href ? <a href={href}>{entry.name}</a> : entry.name}</td>
+        <td>{map}</td>
+        <td>{win}</td>
+        <td>{draw}</td>
+        <td>
+          <StatusBadge status={entry.status as 'active' | 'upcoming' | 'archived' | 'provisional'} />
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>

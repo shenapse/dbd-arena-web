@@ -23,5 +23,7 @@
   "matchConditions.none": "-",
   "matchConditions.kills": "{n}킬",
   "matchConditions.gensRemaining": "발전기 {n}대 남음",
-  "matchConditions.hookStages": "{n}훅 스테이지"
+  "matchConditions.hookStages": "{n}훅 스테이지",
+  "balancingOverview.killer": "킬러",
+  "balancingOverview.status": "상태"
 }
