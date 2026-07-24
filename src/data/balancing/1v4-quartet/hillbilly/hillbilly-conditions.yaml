@@ -1,0 +1,5 @@
+killer: The Hillbilly
+map: Blood Lodge
+winCondition:
+  hookStages: 8
+drawCondition: null

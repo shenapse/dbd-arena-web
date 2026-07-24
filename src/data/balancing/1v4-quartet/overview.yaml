@@ -21,8 +21,11 @@ killers:
     status: upcoming
   - name: Hillbilly
     page: billy
+    conditions: hillbilly
     status: upcoming
   - name: Lich
+    page: lich
+    conditions: lich
     status: upcoming
   - name: Nightmare
     status: upcoming
