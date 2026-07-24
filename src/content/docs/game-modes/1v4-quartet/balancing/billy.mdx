@@ -15,6 +15,7 @@ format: 1v4-quartet
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 import BalancingList from '@components/BalancingList.astro';
+import MatchConditions from '@components/MatchConditions.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
@@ -26,11 +27,7 @@ import BalancingList from '@components/BalancingList.astro';
 Per-killer balancing for Hillbilly.
 These rules sit alongside the general 1v4 quartet rule and complement it.
 
-| Aspect | Detail |
-| --- | --- |
-| Map | |
-| Win condition | |
-| Draw condition | |
+<MatchConditions format="1v4-quartet" killer="hillbilly" />
 
 ## Killer perks
 
