@@ -13,19 +13,17 @@
 // matches the page's frontmatter `format:` field; `killer` is the lowercase
 // folder/file slug.
 //
-// The file is read from the filesystem at build time, resolved under the
-// project root via process.cwd() (the project root under both `astro dev` and
-// `astro build`). Note: unlike import.meta.glob, an fs read is not in Vite's
-// watched module graph, so editing a YAML during `astro dev` needs a
-// dev-server restart to show. A missing/misspelled format/killer throws rather
-// than silently rendering nothing.
-import fs from 'node:fs';
-import path from 'node:path';
-import { parse } from 'yaml';
+// The file is read from the filesystem at build time via
+// `loadMatchConditions` (src/lib/balancing/load-conditions.ts), resolved
+// under the project root via process.cwd() (the project root under both
+// `astro dev` and `astro build`). Note: unlike import.meta.glob, an fs read is
+// not in Vite's watched module graph, so editing a YAML during `astro dev`
+// needs a dev-server restart to show. A missing/misspelled format/killer
+// throws rather than silently rendering nothing.
 import { describeConditionStats } from '../lib/balancing/conditions';
 import { resolveMap } from '../lib/balancing/resolve';
 import { localizeName } from '../lib/balancing/i18n-names';
-import type { MatchConditions } from '../lib/balancing/types';
+import { loadMatchConditions } from '../lib/balancing/load-conditions';
 
 interface Props {
   format: string;
@@ -40,17 +38,9 @@ const { format, killer } = Astro.props;
 // copy).
 const t = Astro.locals.t;
 
-// Build the YAML path from `format` + `killer` and read it. A missing or
-// misspelled format/killer is a caller mistake — throw loudly rather than
-// render nothing.
-if (!format || !killer) throw new Error(`MatchConditions: "format" and "killer" are required.`);
-const filePath = path.join(process.cwd(), 'src/data/balancing', format, killer, `${killer}-conditions.yaml`);
-if (!fs.existsSync(filePath)) {
-  throw new Error(
-    `MatchConditions: YAML not found at "${filePath}" (format: "${format}", killer: "${killer}").`
-  );
-}
-const doc = parse(fs.readFileSync(filePath, 'utf8')) as MatchConditions;
+// Load the killer's `-conditions.yaml` via the shared loader (throws loudly
+// on a missing/misspelled format/killer or missing file — see its header).
+const doc = loadMatchConditions(format, killer);
 
 // Resolve the authored map name to its canonical maps.json entry (throws on
 // an unknown map — see file header) and localize it for the current locale.

@@ -22,6 +22,8 @@
   "matchConditions.drawCondition": "引き分け条件",
   "matchConditions.none": "-",
   "matchConditions.kills": "{n}キル",
-  "matchConditions.gensRemaining": "残り発電機{n}",
-  "matchConditions.hookStages": "{n}フックステージ"
+  "matchConditions.gensRemaining": "発電機残数{n}",
+  "matchConditions.hookStages": "{n}フックステージ",
+  "balancingOverview.killer": "キラー",
+  "balancingOverview.status": "ステータス"
 }
