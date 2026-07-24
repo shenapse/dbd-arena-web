@@ -57,6 +57,9 @@ addons:
   deny:
     - {rarity: "Ultra Rare"}
     - Robe of Eyes
+    - Staff of Withering
+    - Lantern of Revealing
+
 
 survivorPerks:
   default: deny
