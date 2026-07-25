@@ -1,4 +1,4 @@
-killer: The 
+killer: The Unknown
 balancing: DBD Arena - 1v4 Quartet Rank v0.1
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
@@ -10,13 +10,18 @@ killerPerks:
   allow:
 
 addons:
-  default: allow
-  deny:
+  default: deny
+  allow:
+    - {rarity: "Common"}
+    - {rarity: "Uncommon"}
+    - {rarity: "Very Rare"}
+    - Front-Page Article
+    - Footprint Cast
+    - B-Movie Poster
 
 survivorPerks:
   default: deny
   allow:
-
   deny: []
 
 survivorRepetitionLimits:

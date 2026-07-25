@@ -8,8 +8,12 @@ killers:
     conditions: cenobite
     status: upcoming
   - name: Clown
+    page: clown
+    conditions: clown
     status: upcoming
   - name: Doctor
+    page: doctor
+    conditions: doctor
     status: upcoming
   - name: Dracula
     page: dracula
@@ -44,6 +48,8 @@ killers:
     conditions: spirit
     status: upcoming
   - name: Unknown
+    page: unknown
+    conditions: unknown
     status: upcoming
   - name: Wesker
     page: wesker

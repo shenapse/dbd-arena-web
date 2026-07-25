@@ -1,0 +1,6 @@
+killer: The Wraith
+map: Dead Dawg Saloon
+winCondition:
+  hookStages: 8
+drawCondition:
+  hookStages: null

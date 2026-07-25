@@ -1,0 +1,5 @@
+killer: The Doctor
+map: Dead Sands
+winCondition:
+  hookStages: 7
+drawCondition: null
