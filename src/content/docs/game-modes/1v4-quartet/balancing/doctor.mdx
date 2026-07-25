@@ -14,6 +14,8 @@ format: 1v4-quartet
 ---
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
+import BalancingList from '@components/BalancingList.astro';
+import MatchConditions from '@components/MatchConditions.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
@@ -25,25 +27,31 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
 Per-killer balancing for Doctor.
 These rules sit alongside the general 1v4 quartet rule and complement it.
 
-| Aspect | Detail |
-| --- | --- |
-| Map | |
-| Win condition | |
-| Draw condition | |
+<MatchConditions format="1v4-quartet" killer="doctor" />
 
 ## Killer perks
 
+![The Doctor — Allowed Killer Perks](/images/builds/1v4-quartet/doctor/The-Doctor-killer-perks.png)
+
+<BalancingList format="1v4-quartet" killer="doctor" section="killerPerks" />
+
 ## Killer add-ons
 
-Allowed: None
+![The Doctor — Allowed Killer Add-ons](/images/builds/1v4-quartet/doctor/The-Doctor-killer-addons.png)
+
+<BalancingList format="1v4-quartet" killer="doctor" section="addons" />
 
 ## Survivor perks
 
+![Going against The Doctor — Allowed Survivor Perks](/images/builds/1v4-quartet/doctor/The-Doctor-survivor-perks.png)
+
+<BalancingList format="1v4-quartet" killer="doctor" section="survivorPerks" />
+
 ## Survivor items
 
-{/* - 1 very rare med-kit with 2 rare add-ons
-- 1 rare flashlight with 2 common add-ons
-- 1 flashbang */}
+![Going against The Doctor — Allowed Survivor Items](/images/builds/1v4-quartet/doctor/The-Doctor-items.png)
+
+<BalancingList format="1v4-quartet" killer="doctor" section="items" />
 
 [← All per-killer balancing](/game-modes/1v4-quartet/balancing/)
 
