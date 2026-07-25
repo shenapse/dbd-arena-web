@@ -1,0 +1,6 @@
+killer: The Unknown
+map: Ormond Lake Mine
+winCondition:
+  hookStages: 7
+drawCondition:
+  hookStages: null
