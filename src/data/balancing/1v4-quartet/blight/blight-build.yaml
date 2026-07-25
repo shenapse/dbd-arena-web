@@ -1,9 +1,4 @@
-# Perk allow-list example: The Trapper
-# Run from the repo root:
-#   node utilities/perk-sheet-generator/perk-sheet-generator.js \
-#        utilities/perk-sheet-generator/examples/the-trapper.yaml \
-#        --out utilities/perk-sheet-generator/output \
-#        --preset utilities/perk-sheet-generator/output/test-preset.json
+# Perk allow-list example: The Blight
 
 killer: The Blight
 balancing: DBD Arena - 1v4 Quartet Rank v0.1
@@ -113,7 +108,7 @@ items:
         - Gel Dressings
 
 addons:
-  default: deny         # Start with every Trapper add-on allowed
-  allow:                 # allow wins on conflict — re-permit one iridescent
+  default: deny
+  allow:
     - Blighted Rat
     - Blighted Crow
