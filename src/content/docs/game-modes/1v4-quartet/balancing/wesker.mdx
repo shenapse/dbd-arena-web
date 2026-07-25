@@ -4,10 +4,10 @@ description: Per-killer balancing for Wesker in the 1v4 quartet format.
 handle: 1v4-quartet-balancing-wesker
 status: upcoming
 version: "0.1"
-effectiveDate: "2026-06-15"
+effectiveDate: "2026-07-25"
 changeHistory:
   - version: "0.1"
-    date: "2026-06-15"
+    date: "2026-07-25"
     note: Initial per-killer balancing entry for Wesker.
 killer: Wesker
 format: 1v4-quartet
@@ -15,6 +15,7 @@ format: 1v4-quartet
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 import BalancingList from '@components/BalancingList.astro';
+import MatchConditions from '@components/MatchConditions.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
@@ -26,11 +27,7 @@ import BalancingList from '@components/BalancingList.astro';
 Per-killer balancing for Wesker.
 These rules sit alongside the general 1v4 quartet rule and complement it.
 
-| Aspect | Detail |
-| --- | --- |
-| Map | |
-| Win condition | |
-| Draw condition | |
+<MatchConditions format="1v4-quartet" killer="wesker" />
 
 ## Killer perks
 
