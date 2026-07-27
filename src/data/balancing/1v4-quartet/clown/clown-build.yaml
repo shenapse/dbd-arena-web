@@ -17,6 +17,7 @@ killerPerks:
     - Coulrophobia
     - Deadlock
     - Deathbound
+    - Dragon's Grip
     - Dying Light
     - Eruption
     - Forced Penance
@@ -84,7 +85,7 @@ survivorPerks:
     - Light-Footed
     - Lucky Star
     - No Mither
-    - No One Left Behind
+    # - No One Left Behind
     - Quick and Quiet
     - Repressed Alliance
     - Saboteur
