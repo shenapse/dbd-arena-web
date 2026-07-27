@@ -63,7 +63,7 @@ survivorPerks:
     - Aftercare
     - Any Means Necessary
     - Bada Bada Boom
-    - Balanced Landing
+    # - Balanced Landing
     - Better than New
     - Bite the Bullet
     - Blood Pact
@@ -81,7 +81,7 @@ survivorPerks:
     - Fixated
     - Flashbang
     - Head On
-    - Lithe
+    # - Lithe
     - Light-Footed
     - Lucky Star
     - No Mither
