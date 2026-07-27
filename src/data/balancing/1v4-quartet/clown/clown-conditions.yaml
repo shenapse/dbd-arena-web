@@ -1,6 +1,6 @@
 killer: The Clown
 map: Wrecker's Yard
 winCondition:
-  hookStages: 9
+  hookStages: 10
 drawCondition:
   hookStages: null

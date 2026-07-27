@@ -16,6 +16,21 @@ this directory are the served output of those files.
 
 ## Generating sheets
 
+**Bulk regeneration**: `scripts/generate-build-sheets.sh` wraps the CLIs below and loops
+over killers/formats/sheet types for you, defaulting to every killer and every sheet type
+for `1v4-quartet`:
+
+```bash
+scripts/generate-build-sheets.sh                                   # everything, 1v4-quartet
+scripts/generate-build-sheets.sh --killer blight --type perks      # one killer, one type
+scripts/generate-build-sheets.sh --format 1v4-duo --type addons,items
+scripts/generate-build-sheets.sh --dry-run                         # preview without writing
+```
+
+Run `scripts/generate-build-sheets.sh --help` for the full option list. For single-file
+runs, ad-hoc `--preset` aggregation across an explicit multi-killer batch, or other
+one-off invocations, use the raw `generate:*` scripts directly as described below.
+
 The `generate:*` scripts (see `package.json`) wrap each CLI with the default asset root.
 They do **not** auto-discover files — pass the target YAML path(s) after `--`. Run from
 the repo root:
