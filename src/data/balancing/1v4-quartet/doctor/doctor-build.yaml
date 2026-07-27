@@ -68,7 +68,7 @@ survivorPerks:
     - Bite the Bullet
     - Blood Pact
     - Bond
-    - Calm Spirit
+    # - Calm Spirit
     - Counterforce
     - Detective's Hunch
     - Distortion
@@ -76,6 +76,7 @@ survivorPerks:
     - Five Moves Ahead
     - Fixated
     - Flashbang
+    - Head On
     - Light-Footed
     - Lucky Star
     - No Mither
