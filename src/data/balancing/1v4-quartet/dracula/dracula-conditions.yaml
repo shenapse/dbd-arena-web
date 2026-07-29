@@ -1,6 +1,6 @@
 killer: The Dark Lord
-map: Coal Tower 2
+map: Wretched Shop
 winCondition:
   kills: 4
-  gensRemaining: 1
+  gensRemaining: 0
 drawCondition: null
