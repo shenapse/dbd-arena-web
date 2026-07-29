@@ -1,5 +1,5 @@
 killer: The Dark Lord
-balancing: DBD Arena - 1v4 Quartet Rank v0.1
+balancing: DBD Arena - 1v4 Quartet Rank v0.2
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
 #   killer: all
@@ -54,7 +54,7 @@ survivorPerks:
   - Counterforce
   - Dead Hard
   - Decisive Strike
-  - Deliverance
+  # - Deliverance
   - Desperate Measures
   - Detective's Hunch
   - Empathic Connection
@@ -63,6 +63,7 @@ survivorPerks:
   - Five Moves Ahead
   - Fixated
   - Flow State
+  - For The People
   - Head On
   - Inner Strength
   - Leader
@@ -71,7 +72,7 @@ survivorPerks:
   - No Mither
   - Overcome
   - Quick and Quiet
-  - Second Wind
+  # - Second Wind
   - Smash Hit
   - Sprint Burst
   - Tenacity
