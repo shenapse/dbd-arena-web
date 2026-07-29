@@ -6,6 +6,9 @@ status: upcoming
 version: "0.1"
 effectiveDate: "2026-06-15"
 changeHistory:
+  - version: "0.2"
+    date: "2026-07-29"
+    note: wincon 4k1 -> 10 stages.
   - version: "0.1"
     date: "2026-06-15"
     note: Initial per-killer balancing entry for Oni.
@@ -19,8 +22,8 @@ import MatchConditions from '@components/MatchConditions.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
-  version={frontmatter.version}
-  effectiveDate={frontmatter.effectiveDate}
+  version={frontmatter.changeHistory[0].version}
+  effectiveDate={frontmatter.changeHistory[0].date}
   changeHistory={frontmatter.changeHistory}
 />
 
