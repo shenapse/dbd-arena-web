@@ -1,5 +1,5 @@
 killer: The Spirit
-balancing: DBD Arena - 1v4 Quartet Rank v0.1
+balancing: DBD Arena - 1v4 Quartet Rank v0.2
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
 #   killer: all
@@ -14,6 +14,7 @@ display:
 killerPerks:
   default: deny          # Start with all killer perks allowed
   allow:                 # Then deny these specific perks
+    - Agitation
     - Call of Brine
     - Corrupt Intervention
     - Coulrophobia

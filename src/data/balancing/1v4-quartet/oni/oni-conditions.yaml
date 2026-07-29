@@ -1,6 +1,5 @@
 killer: The Oni
 map: Coal Tower 1
 winCondition:
-  kills: 4
-  gensRemaining: 1
+  hookStages: 10
 drawCondition: null
