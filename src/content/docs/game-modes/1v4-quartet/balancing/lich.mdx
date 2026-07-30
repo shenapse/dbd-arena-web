@@ -4,8 +4,11 @@ description: Per-killer balancing for Lich in the 1v4 quartet format.
 handle: 1v4-quartet-balancing-lich
 status: upcoming
 version: "0.1"
-effectiveDate: "2026-07-24"
+effectiveDate: "2026-07-30"
 changeHistory:
+  - version: "0.2"
+    date: "2026-07-30"
+    note: wincon 7 stages -> 4k0
   - version: "0.1"
     date: "2026-07-24"
     note: Initial per-killer balancing entry for Lich.
@@ -19,8 +22,8 @@ import MatchConditions from '@components/MatchConditions.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
-  version={frontmatter.version}
-  effectiveDate={frontmatter.effectiveDate}
+  version={frontmatter.changeHistory[0].version}
+  effectiveDate={frontmatter.changeHistory[0].date}
   changeHistory={frontmatter.changeHistory}
 />
 
