@@ -1,6 +1,6 @@
 killer: The Cenobite
 map: Dead Dawg Saloon
 winCondition:
-  hookStages: 7
+  hookStages: 9
 drawCondition:
   hookStages: null

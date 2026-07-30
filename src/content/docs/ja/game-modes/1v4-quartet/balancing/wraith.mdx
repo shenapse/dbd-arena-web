@@ -14,16 +14,17 @@ format: 1v4-quartet
 language: ja
 translationStatus: complete
 translatedVersion: "0.1"
-translationDate: "2026-07-21"
+translationDate: "2026-07-31"
 authoritativeSource: /game-modes/1v4-quartet/balancing/wraith/
 ---
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 import BalancingList from '@components/BalancingList.astro';
+import MatchConditions from '@components/MatchConditions.astro';
 
 > **翻訳について:** このページは、読みやすさのために提供される非公式な日本語訳です。
 > 英語版との間に内容や解釈の相違がある場合は、[英語版](/game-modes/1v4-quartet/balancing/wraith/)が優先されます。  
-> **翻訳ステータス:** 完全 · **対応英語版:** 0.1 · **翻訳日:** 2026-07-21
+> **翻訳ステータス:** 完全 · **対応英語版:** 0.1 · **翻訳日:** 2026-07-31
 
 <LifecycleMeta
   status={frontmatter.status}
@@ -35,18 +36,14 @@ import BalancingList from '@components/BalancingList.astro';
 Per-killer balancing for Wraith.
 These rules sit alongside the general 1v4 quartet rule and complement it.
 
-| Aspect | Detail |
-| --- | --- |
-| Map | |
-| Win condition | |
-| Draw condition | |
+<MatchConditions format="1v4-quartet" killer="wraith" />
 
 ## Killer perks
 
-{/* ![The Wraith — Allowed Killer Perks](/images/builds/1v4-quartet/wraith/The-Wraith-killer-perks.png)
+![The Wraith — Allowed Killer Perks](/images/builds/1v4-quartet/wraith/The-Wraith-killer-perks.png)
 
-<BalancingList format="1v4-quartet" killer="wraith" section="killerPerks" /> */}
-Same as Doctor
+<BalancingList format="1v4-quartet" killer="wraith" section="killerPerks" />
+
 
 ## Killer add-ons
 
@@ -56,17 +53,15 @@ Same as Doctor
 
 ## Survivor perks
 
-{/* ![Going against The Wraith — Allowed Survivor Perks](/images/builds/1v4-quartet/wraith/The-Wraith-survivor-perks.png)
+![Going against The Wraith — Allowed Survivor Perks](/images/builds/1v4-quartet/wraith/The-Wraith-survivor-perks.png)
 
-<BalancingList format="1v4-quartet" killer="wraith" section="survivorPerks" /> */}
-Same as Doctor
+<BalancingList format="1v4-quartet" killer="wraith" section="survivorPerks" />
 
 ## Survivor items
 
-{/* ![Going against The Wraith — Allowed Survivor Items](/images/builds/1v4-quartet/wraith/The-Wraith-items.png)
+![Going against The Wraith — Allowed Survivor Items](/images/builds/1v4-quartet/wraith/The-Wraith-items.png)
 
-<BalancingList format="1v4-quartet" killer="wraith" section="items" /> */}
-Same as Doctor
+<BalancingList format="1v4-quartet" killer="wraith" section="items" /> 
 
 [← All per-killer balancing](/ja/game-modes/1v4-quartet/balancing/)
 
