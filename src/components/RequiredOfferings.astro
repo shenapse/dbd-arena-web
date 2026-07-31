@@ -1,0 +1,73 @@
+---
+// Renders the shared required-offerings table for a killer's balancing page:
+// the killer/survivor offering loadout that a match's map mandates, resolved
+// build-time from the killer's map (declared in `-conditions.yaml`) against
+// the single shared `src/data/balancing/map-offerings.yaml` table. This is
+// the data-driven equivalent of the hand-authored `<ImageRow>` pairs seen on
+// e.g. `1v4-general-rule.mdx`.
+//
+// The YAML is addressed by `format` + `killer` exactly like MatchConditions
+// (same `{ format, killer }` props): `loadMatchConditions` resolves
+// `src/data/balancing/<format>/<killer>/<killer>-conditions.yaml` to get the
+// declared `map`, and `resolveMapOfferings` (src/lib/balancing/load-map-offerings.ts)
+// then looks that map up in map-offerings.yaml, throwing if the map has no
+// entry there. A missing/misspelled format/killer, or a map with no required-
+// offering entry, throws rather than silently rendering nothing — same error
+// philosophy as MatchConditions.
+//
+// Each resolved offering must carry a shipped icon (`Offering.image`, from
+// offerings.json) to render here: an offering with no icon is a data gap
+// (this page must display it but can't), so we throw rather than render a
+// broken image. A side with no required offerings (empty list) renders
+// nothing at all — no heading, no empty row.
+import ImageRow from './ImageRow.astro';
+import { localizeName } from '../lib/balancing/i18n-names';
+import { loadMatchConditions } from '../lib/balancing/load-conditions';
+import { resolveMapOfferings } from '../lib/balancing/load-map-offerings';
+import type { ResolvedOffering } from '../lib/balancing/types';
+
+interface Props {
+  format: string;
+  killer: string;
+}
+
+const { format, killer } = Astro.props;
+
+const t = Astro.locals.t;
+const locale = Astro.currentLocale;
+
+const context = `RequiredOfferings (format: "${format}", killer: "${killer}")`;
+
+// Load the killer's `-conditions.yaml` via the shared loader (throws loudly
+// on a missing/misspelled format/killer or missing file — see its header),
+// then resolve its declared map's required offerings against the shared
+// map-offerings.yaml table (throws on an unknown map or a map with no entry
+// there — see load-map-offerings.ts).
+const doc = loadMatchConditions(format, killer);
+const offerings = resolveMapOfferings(doc.map, context);
+
+// Map a side's resolved offerings to ImageRow images, localizing the caption
+// and appending "×N" when more than one copy is required. An offering with
+// no shipped icon is a data gap, not a caller mistake — throw naming both the
+// offering and the context, matching load-map-offerings.ts's wording.
+function toImages(entries: ResolvedOffering[]) {
+  return entries.map(({ offering, count }) => {
+    if (!offering.image) {
+      throw new Error(
+        `Offering "${offering.name}" has no image in offerings.json, but is required for display (${context}).`
+      );
+    }
+    const label = localizeName(offering.name, locale, 'offering');
+    return {
+      src: offering.image,
+      label: count > 1 ? `${label} ×${count}` : label,
+    };
+  });
+}
+
+const killerImages = toImages(offerings.killer);
+const survivorImages = toImages(offerings.survivor);
+---
+
+{killerImages.length > 0 && <ImageRow label={t('requiredOfferings.killer')} images={killerImages} />}
+{survivorImages.length > 0 && <ImageRow label={t('requiredOfferings.survivor')} images={survivorImages} />}
