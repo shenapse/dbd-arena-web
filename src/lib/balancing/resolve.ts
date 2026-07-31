@@ -26,6 +26,7 @@ import addonsJson from '../../data/dbd/addons.json' with { type: 'json' };
 import itemsJson from '../../data/dbd/items.json' with { type: 'json' };
 import killersJson from '../../data/dbd/killers.json' with { type: 'json' };
 import mapsJson from '../../data/dbd/maps.json' with { type: 'json' };
+import offeringsJson from '../../data/dbd/offerings.json' with { type: 'json' };
 import { normalize, buildLookup } from './normalize';
 import type {
   PerkEntry,
@@ -40,6 +41,8 @@ import type {
   Killer,
   MapEntry,
   GameMap,
+  OfferingEntry,
+  Offering,
   Selector,
   AllowDenyConfig,
   ItemsConfig,
@@ -52,11 +55,13 @@ const addonsData = addonsJson as unknown as Record<string, AddonEntry>;
 const itemsData = itemsJson as unknown as ItemsData;
 const killersData = killersJson as unknown as Record<string, KillerEntry>;
 const mapsData = mapsJson as unknown as Record<string, MapEntry>;
+const offeringsData = offeringsJson as unknown as Record<string, OfferingEntry>;
 
 const allPerks: Perk[] = Object.entries(perksData).map(([slug, e]) => ({ slug, ...e }));
 const allKillers: Killer[] = Object.entries(killersData).map(([slug, e]) => ({ slug, ...e }));
 const allAddons: Addon[] = Object.entries(addonsData).map(([slug, e]) => ({ slug, ...e }));
 const allMaps: GameMap[] = Object.entries(mapsData).map(([slug, e]) => ({ slug, ...e }));
+const allOfferings: Offering[] = Object.entries(offeringsData).map(([slug, e]) => ({ slug, ...e }));
 
 const itemTypes: ItemType[] = Object.entries(itemsData.types).map(([slug, t]) => ({
   slug,
@@ -67,6 +72,7 @@ const itemVariants: ItemVariant[] = Object.entries(itemsData.variants).map(([slu
 
 const killerLookup = buildLookup(allKillers);
 const mapLookup = buildLookup(allMaps);
+const offeringLookup = buildLookup(allOfferings);
 
 // ---------------------------------------------------------------------------
 // Rarity models
@@ -291,6 +297,15 @@ export function resolveMap(mapName: string, context: string): GameMap {
     throw new Error(`Unknown map "${mapName}" (${context}). No matching entry in maps.json.`);
   }
   return map;
+}
+
+/** Resolve an offering name (e.g. a map-offerings.yaml entry) to its canonical offerings.json entry. */
+export function resolveOffering(offeringName: string, context: string): Offering {
+  const offering = offeringLookup.get(normalize(offeringName));
+  if (!offering) {
+    throw new Error(`Unknown offering "${offeringName}" (${context}). No matching entry in offerings.json.`);
+  }
+  return offering;
 }
 
 /**

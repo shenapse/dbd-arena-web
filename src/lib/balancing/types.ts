@@ -125,6 +125,30 @@ export interface ItemVariant {
 }
 
 // ---------------------------------------------------------------------------
+// offerings.json — Record<slug, OfferingEntry>
+// ---------------------------------------------------------------------------
+
+/** Raw shape of each value in offerings.json, keyed by slug. */
+export interface OfferingEntry {
+  name: string;
+  aliases?: string[];
+  abbreviations?: string[];
+  /**
+   * Root-absolute path under `public/` to this offering's icon (e.g.
+   * "/images/offerings/Cut-Coin.webp"). Explicit rather than derived from the
+   * slug because the shipped asset filenames don't follow the slug
+   * convention (e.g. "vigo-s-blueprint" -> "Vigo_S-Blueprint.webp"). Omitted
+   * for offerings with no shipped asset.
+   */
+  image?: string;
+}
+
+/** An offering resolved for use, carrying its slug (the offerings.json map key). */
+export interface Offering extends OfferingEntry {
+  slug: string;
+}
+
+// ---------------------------------------------------------------------------
 // YAML config shapes
 // ---------------------------------------------------------------------------
 
@@ -189,6 +213,46 @@ export interface MatchConditions {
   map: string;
   winCondition: ConditionStats;
   drawCondition: ConditionStats | null;
+}
+
+// ---------------------------------------------------------------------------
+// map-offerings.yaml — the single shared table of which offerings are
+// required per map, split by killer/survivor side. Keyed by English map name
+// (resolved through resolveMap, so maps.json aliases/abbreviations are
+// accepted); every map used by any format must have an entry here.
+// ---------------------------------------------------------------------------
+
+/** One required-offering entry, resolved from either authored form. */
+export interface RequiredOffering {
+  name: string;
+  /** How many players on that side must bring it. Defaults to 1. */
+  count?: number;
+}
+
+/** Authored form in map-offerings.yaml: a bare offering name (count 1) or the object form. */
+export type RequiredOfferingEntry = string | RequiredOffering;
+
+/** The required offering set for one map, split by side. */
+export interface MapOfferingSet {
+  killer?: RequiredOfferingEntry[];
+  survivor?: RequiredOfferingEntry[];
+}
+
+/** Raw shape of map-offerings.yaml as a whole. */
+export interface MapOfferings {
+  maps: Record<string, MapOfferingSet>;
+}
+
+/** A required offering resolved for display: the canonical offerings.json entry plus its multiplicity. */
+export interface ResolvedOffering {
+  offering: Offering;
+  count: number;
+}
+
+/** A map's fully resolved required offering set, both sides. */
+export interface ResolvedMapOfferings {
+  killer: ResolvedOffering[];
+  survivor: ResolvedOffering[];
 }
 
 // ---------------------------------------------------------------------------
