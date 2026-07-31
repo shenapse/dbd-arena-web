@@ -7,8 +7,6 @@ description: >-
   lives in each game mode's own balancing pages, which complement this rule.
 handle: 1v4-general
 status: upcoming
-version: "1.1"
-effectiveDate: "2026-06-15"
 changeHistory:
   - version: "1.1"
     date: "2026-07-11"
@@ -21,12 +19,7 @@ changeHistory:
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 import ImageRow from '@components/ImageRow.astro';
 
-<LifecycleMeta
-  status={frontmatter.status}
-  version={frontmatter.version}
-  effectiveDate={frontmatter.effectiveDate}
-  changeHistory={frontmatter.changeHistory}
-/>
+<LifecycleMeta />
 
 The shared general rule for 1v4 game modes (Quartet, Duo+Duo, and future 1v4
 formats). It applies to every killer across those modes. Per-mode and

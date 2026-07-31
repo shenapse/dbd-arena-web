@@ -26,6 +26,20 @@
   "matchConditions.hookStages": "{n} hook stages",
   "requiredOfferings.killer": "Killer",
   "requiredOfferings.survivor": "Survivor",
+  "balancingIntro.subject": "Per-killer balancing for {n}.",
+  "balancingIntro.relation": "These rules sit alongside the {n} and complement it.",
+  "balancingIntro.generalRule.1v4": "general 1v4 rule",
+  "balancingIntro.generalRule.1v1Symmetric": "general 1v1 symmetric rule",
   "balancingOverview.killer": "Killer",
-  "balancingOverview.status": "Status"
+  "balancingOverview.status": "Status",
+  "translation.notice.label": "Translation note:",
+  "translation.notice.disclaimer": "This page is an unofficial translation provided as a reading aid.",
+  "translation.notice.authority": "Where it differs from the English original in content or interpretation, the {n} controls.",
+  "translation.notice.englishSource": "English original",
+  "translation.notice.statusLabel": "Translation status:",
+  "translation.notice.sourceVersionLabel": "English version covered:",
+  "translation.notice.dateLabel": "Translation date:",
+  "translation.status.complete": "Complete",
+  "translation.status.incomplete": "Incomplete",
+  "translation.status.outdated": "Outdated"
 }

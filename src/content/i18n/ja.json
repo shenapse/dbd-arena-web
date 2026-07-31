@@ -26,6 +26,20 @@
   "matchConditions.hookStages": "{n}フックステージ",
   "requiredOfferings.killer": "キラー",
   "requiredOfferings.survivor": "サバイバー",
+  "balancingIntro.subject": "{n}のキラー別バランス調整。",
+  "balancingIntro.relation": "これらのルールは{n}と併せて適用される。",
+  "balancingIntro.generalRule.1v4": "1v4 基本ルール",
+  "balancingIntro.generalRule.1v1Symmetric": "1v1 Symmetric 基本ルール",
   "balancingOverview.killer": "キラー",
-  "balancingOverview.status": "ステータス"
+  "balancingOverview.status": "ステータス",
+  "translation.notice.label": "翻訳について:",
+  "translation.notice.disclaimer": "このページは、読みやすさのために提供される非公式な日本語訳です。",
+  "translation.notice.authority": "英語版との間に内容や解釈の相違がある場合は、{n}が優先されます。",
+  "translation.notice.englishSource": "英語版",
+  "translation.notice.statusLabel": "翻訳ステータス:",
+  "translation.notice.sourceVersionLabel": "対応英語版:",
+  "translation.notice.dateLabel": "翻訳日:",
+  "translation.status.complete": "完全",
+  "translation.status.incomplete": "不完全",
+  "translation.status.outdated": "旧版"
 }

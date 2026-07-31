@@ -1,41 +1,41 @@
 ---
 // Normative-page metadata block: status, public version, effective date, and
 // change history. Lets a visitor immediately identify what they are reading.
+//
+// Zero props: status/version/effectiveDate/changeHistory are no longer
+// hand-authored per page. English pages under src/content/docs/** are the
+// sole source of lifecycle truth (UX spec §6) — this component resolves it
+// for the current route instead, so a localized page can never drift out of
+// sync with (or duplicate) the English lifecycle it describes.
 import StatusBadge from "./StatusBadge.astro";
+import { resolveLifecycleForRoute } from "../lib/docs/lifecycle";
 
-interface ChangeEntry {
-  version: string;
-  date: string;
-  note: string;
-}
-interface Props {
-  status: "active" | "upcoming" | "archived" | "provisional";
-  version: string;
-  effectiveDate: string;
-  changeHistory: ChangeEntry[];
-}
-const { status, version, effectiveDate, changeHistory } = Astro.props;
+const { lifecycle } = await resolveLifecycleForRoute(Astro.locals);
 // Labels localized via Starlight i18n (src/content/i18n/*.json).
 const t = Astro.locals.t;
 ---
 
-<dl class="meta-grid">
-  <dt>{t('lifecycle.status')}</dt>
-  <dd><StatusBadge status={status} /></dd>
-  <dt>{t('lifecycle.version')}</dt>
-  <dd>{version}</dd>
-  <dt>{t('lifecycle.effectiveDate')}</dt>
-  <dd>{effectiveDate}</dd>
-</dl>
+{lifecycle && (
+  <Fragment>
+    <dl class="meta-grid">
+      <dt>{t('lifecycle.status')}</dt>
+      <dd><StatusBadge status={lifecycle.status} /></dd>
+      <dt>{t('lifecycle.version')}</dt>
+      <dd>{lifecycle.version}</dd>
+      <dt>{t('lifecycle.effectiveDate')}</dt>
+      <dd>{lifecycle.effectiveDate}</dd>
+    </dl>
 
-<details class="change-history">
-  <summary>{t('lifecycle.changeHistory')}</summary>
-  <ul>
-    {changeHistory.map(c => (
-      <li><strong>{c.version}</strong> — <span>{c.date}</span>: {c.note}</li>
-    ))}
-  </ul>
-</details>
+    <details class="change-history">
+      <summary>{t('lifecycle.changeHistory')}</summary>
+      <ul>
+        {lifecycle.changeHistory.map(c => (
+          <li><strong>{c.version}</strong> — <span>{c.date}</span>: {c.note}</li>
+        ))}
+      </ul>
+    </details>
+  </Fragment>
+)}
 
 <style>
   .change-history {
