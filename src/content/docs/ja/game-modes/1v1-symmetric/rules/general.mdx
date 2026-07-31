@@ -5,34 +5,22 @@ description: >-
   マップ、勝利条件、パークやアドオンの制限など、キラーごとの詳細は、
   このルールを補完する同階層のキラー別バランス調整ページに記載。
 handle: 1v1-symmetric-general
-status: active
-version: "1.0"
-effectiveDate: "2026-06-21"
 changeHistory:
   - version: "1.0"
     date: "2026-06-21"
     note: 1v1 Symmetric基本ルールの初版を公開。
-language: ja
 translationStatus: complete
-translatedVersion: "1.0"
 translationDate: "2026-06-22"
-authoritativeSource: /game-modes/1v1-symmetric/rules/general/
 ---
 
 import { Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 import ImageRow from '@components/ImageRow.astro';
+import TranslationNotice from '@components/TranslationNotice.astro';
 
-> **翻訳について:** このページは、読みやすさのために提供される非公式な日本語訳です。
-> 英語版との間に内容や解釈の相違がある場合は、[英語版](/game-modes/1v1-symmetric/rules/general/)が優先されます。  
-> **翻訳ステータス:** 完全 · **対応英語版:** 1.0 · **翻訳日:** 2026-06-22
+<TranslationNotice />
 
-<LifecycleMeta
-  status={frontmatter.status}
-  version={frontmatter.version}
-  effectiveDate={frontmatter.effectiveDate}
-  changeHistory={frontmatter.changeHistory}
-/>
+<LifecycleMeta />
 
 1v1 Symmetric形式で全キラーに共通して適用される基本ルール。
 マップ、勝利条件、パークやアドオンの制限など、キラーごとの詳細は、

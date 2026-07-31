@@ -4,37 +4,25 @@ description: >-
   各プレイヤーがキラー側とサバイバー側を交互に担当し、チェイス時間を競う
   標準的な1対1形式
 handle: dbd.1v1.symmetric.rank
-status: active
-version: "1.0"
-effectiveDate: "2026-06-21"
 changeHistory:
-  - version: "0.1"
-    date: "2026-06-15"
-    note: 暫定版を公開。形式とルールは未確定。
   - version: "1.0"
     date: "2026-06-21"
     note: ゲームモードを稼働中に移行。基本ルールとトラッパーのバランス調整を確定。
-language: ja
+  - version: "0.1"
+    date: "2026-06-15"
+    note: 暫定版を公開。形式とルールは未確定。
 translationStatus: complete
-translatedVersion: "1.0"
 translationDate: "2026-06-22"
-authoritativeSource: /game-modes/1v1-symmetric/
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
 import KillerPool from '@components/KillerPool.astro';
 import LifecycleMeta from '@components/LifecycleMeta.astro';
+import TranslationNotice from '@components/TranslationNotice.astro';
 
-> **翻訳について:** このページは、読みやすさのために提供される非公式な日本語訳です。
-> 英語版との間に内容や解釈の相違がある場合は、[英語版](/game-modes/1v1-symmetric/)が優先されます。  
-> **翻訳ステータス:** 完全 · **対応英語版:** 1.0 · **翻訳日:** 2026-06-22
+<TranslationNotice />
 
-<LifecycleMeta
-  status={frontmatter.status}
-  version={frontmatter.version}
-  effectiveDate={frontmatter.effectiveDate}
-  changeHistory={frontmatter.changeHistory}
-/>
+<LifecycleMeta />
 
 ## ゲーム構成
 

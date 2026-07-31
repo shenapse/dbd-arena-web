@@ -1,9 +1,6 @@
 ---
 title: パーク制限の種類
 description: パークの選択数制限、重複制限、組み合わせ禁止についてのプレイヤー向けガイド。
-status: active
-version: "0.3"
-effectiveDate: "2026-07-11"
 changeHistory:
   - version: "0.3"
     date: "2026-07-11"
@@ -14,25 +11,16 @@ changeHistory:
   - version: "0.1"
     date: "2026-07-11"
     note: 初版。
-language: ja
 translationStatus: complete
-translatedVersion: "0.3"
 translationDate: "2026-07-11"
-authoritativeSource: /game-modes/reference/perk-restriction-types/
 ---
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
+import TranslationNotice from '@components/TranslationNotice.astro';
 
-> **翻訳について:** このページは、読みやすさのために提供される非公式な日本語訳です。
-> 英語版との間に内容や解釈の相違がある場合は、[英語版](/game-modes/reference/perk-restriction-types/)が優先されます。  
-> **翻訳ステータス:** 完全 · **対応英語版:** 0.3 · **翻訳日:** 2026-07-11
+<TranslationNotice />
 
-<LifecycleMeta
-  status={frontmatter.status}
-  version={frontmatter.version}
-  effectiveDate={frontmatter.effectiveDate}
-  changeHistory={frontmatter.changeHistory}
-/>
+<LifecycleMeta />
 
 一部のバランス調整ページには、単純な使用可否リストを超えたパーク制限があります。
 パーク単体では使用可能でも、たとえば、別のパークと組み合わせた場合や、別のプレイヤーが同じパークを使用する場合に、使用できなくなることがあります。
