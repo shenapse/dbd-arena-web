@@ -39,11 +39,16 @@
  *   F. `handle` is unique across English pages. (Localized pages
  *      intentionally mirror their English original's handle, so only
  *      English pages are compared against each other.)
- *   G. No .mdx page contains a <LifecycleMeta> tag with any attribute
- *      (only the exact zero-prop <LifecycleMeta /> is allowed), and no
- *      page has a leftover hand-written translation-notice blockquote
- *      (a line starting with `>` `**` followed by 翻訳について, 번역 안내,
- *      or "Translation note" — the prose <TranslationNotice /> replaced).
+ *   G. No .mdx page contains a zero-prop component tag (<LifecycleMeta>,
+ *      <BalancingIntro>) with any attribute (only the exact zero-prop form,
+ *      e.g. <LifecycleMeta />, is allowed); no page has a leftover
+ *      hand-written translation-notice blockquote (a line starting with
+ *      `>` `**` followed by 翻訳について, 번역 안내, or "Translation note" —
+ *      the prose <TranslationNotice /> replaced); and no per-killer
+ *      balancing page under the already-migrated game-modes/1v4-quartet/
+ *      balancing/ subtree still contains, as a consecutive line pair, the
+ *      hand-written two-line prose intro that <BalancingIntro /> replaces
+ *      (1v1-symmetric and 1v4-duo have not migrated yet and are exempt).
  *   H. Body parity for per-killer balancing pages ONLY — paths matching
  *      game-modes/*\/balancing/* (excluding the `index` listing page).
  *      These pages are meant to be byte-for-byte structural clones of
@@ -371,6 +376,32 @@ function checkHandleUniqueness() {
 
 const NOTICE_BLOCKQUOTE_MARKERS = ['翻訳について', '번역 안내', 'Translation note'];
 
+// Strictly zero-prop components: they derive everything they render from the
+// current page's own frontmatter, so an attribute would be a second, driftable
+// copy of metadata the page already declares.
+const ZERO_PROP_COMPONENTS = ['LifecycleMeta', 'BalancingIntro'];
+
+// The hand-written two-line prose intro that <BalancingIntro /> replaces on
+// per-killer balancing pages. Matched as whole trimmed lines against the page
+// BODY only — the frontmatter `description:` key uses near-identical prose
+// and must never be flagged.
+const BALANCING_INTRO_MARKERS = [
+  /^Per-killer balancing for \S+\.$/, // also matches the {frontmatter.killer} spelling
+  /^These rules sit alongside the .+ and complement it\.$/,
+];
+
+/**
+ * game-modes/1v4-quartet/balancing/<killer> paths, excluding the balancing
+ * index listing page. This is deliberately narrower than
+ * isBalancingKillerPath: only the 1v4-quartet subtree has adopted
+ * <BalancingIntro /> so far. Widen this (or fold it back into
+ * isBalancingKillerPath) once 1v1-symmetric and 1v4-duo migrate too.
+ */
+function isMigratedBalancingKillerPath(localePath) {
+  const match = localePath.match(/^game-modes\/1v4-quartet\/balancing\/([^/]+)$/);
+  return match !== null && match[1] !== 'index';
+}
+
 function checkNoHandwrittenMarkup() {
   const failures = [];
   const mdxFiles = allFiles.filter((f) => f.endsWith('.mdx'));
@@ -379,10 +410,13 @@ function checkNoHandwrittenMarkup() {
     const raw = fs.readFileSync(filePath, 'utf8');
     const relPath = relDisplay(filePath);
 
-    const lifecycleTags = raw.match(/<LifecycleMeta[^>]*>/g) ?? [];
-    for (const tag of lifecycleTags) {
-      if (tag !== '<LifecycleMeta />') {
-        failures.push(`${relPath}: hand-authored LifecycleMeta tag "${tag}" — must be exactly "<LifecycleMeta />"`);
+    for (const name of ZERO_PROP_COMPONENTS) {
+      const tagPattern = new RegExp(`<${name}(?=[\\s/>])[^>]*>`, 'g');
+      const tags = raw.match(tagPattern) ?? [];
+      for (const tag of tags) {
+        if (tag !== `<${name} />`) {
+          failures.push(`${relPath}: hand-authored ${name} tag "${tag}" — must be exactly "<${name} />"`);
+        }
       }
     }
 
@@ -393,6 +427,33 @@ function checkNoHandwrittenMarkup() {
       }
     });
   }
+
+  for (const page of pages) {
+    if (!page.filePath.endsWith('.mdx')) continue;
+    if (!isMigratedBalancingKillerPath(page.path)) continue;
+
+    const { body } = readPage(page.filePath);
+    const relPath = relDisplay(page.filePath);
+    const bodyLines = body.split('\n');
+
+    // The two markers must appear as a CONSECUTIVE pair (line i then line
+    // i+1) — that is the actual shape of the hand-written intro we removed.
+    // Requiring adjacency (rather than "both present somewhere") still
+    // exempts dracula.mdx (its second line is the different "These
+    // adjustments apply specifically to…" wording) while not false-negating
+    // on a page that happens to contain one of these sentences in isolation
+    // elsewhere.
+    for (let i = 0; i < bodyLines.length - 1; i += 1) {
+      const line = bodyLines[i].trim();
+      const nextLine = bodyLines[i + 1].trim();
+      if (BALANCING_INTRO_MARKERS[0].test(line) && BALANCING_INTRO_MARKERS[1].test(nextLine)) {
+        failures.push(
+          `${relPath}:${i + 1}-${i + 2}: leftover hand-written balancing intro: "${line}" / "${nextLine}"`
+        );
+      }
+    }
+  }
+
   return failures;
 }
 
