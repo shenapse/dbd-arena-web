@@ -30,7 +30,14 @@ export const collections = {
         killer: z.string().optional(),
         format: z.string().optional(),
         // Translation provenance. English remains the authoritative edition;
-        // localized pages record which English version they cover.
+        // localized pages record which English version they cover. `language`
+        // and `authoritativeSource` are DERIVED (from the content id's locale
+        // segment and path respectively — see UX §6); they stay declared here
+        // for type-checking, but authors must not set them in frontmatter —
+        // that is enforced at build time by
+        // `assertNoAuthoritativeOverrides()` in `src/lib/docs/lifecycle.ts`,
+        // not by this schema (Zod silently strips unknown keys rather than
+        // erroring, so removing them here would not catch a reintroduction).
         language: z.string().optional(),
         translationStatus: z.enum(['complete', 'incomplete', 'outdated']).optional(),
         translatedVersion: z.string().optional(),
@@ -39,6 +46,81 @@ export const collections = {
         // Notice classification.
         type: z.string().optional(),
         date: z.string().optional(),
+      }).superRefine((data, ctx) => {
+        const hasStatus = data.status !== undefined;
+        const hasChangeHistory = (data.changeHistory?.length ?? 0) > 0;
+
+        // Rule 1 (UX §5.3): lifecycle metadata is all-or-nothing.
+        if (hasStatus && !hasChangeHistory) {
+          ctx.addIssue({
+            code: 'custom',
+            path: ['changeHistory'],
+            message:
+              '`status` is present, so `changeHistory` must be a non-empty array; add at least one entry.',
+          });
+        }
+        // NOTE: the converse ("changeHistory implies status") is deliberately
+        // NOT enforced here. A localized page may carry `changeHistory` as a
+        // notes-only override — translated `note` prose over the English
+        // version/date lineage — while `status` is forbidden on it because it
+        // is derived. A Zod refinement only sees the parsed frontmatter, never
+        // the entry id, so it cannot tell a localized page from an English one.
+        // "English lifecycle pages need a status" is checked instead by
+        // scripts/check-translations.mjs (check D), which does know the path.
+
+        // Rule 2 (UX §5.3): version/effectiveDate are derived from the newest
+        // changeHistory entry on lifecycle pages, not declared directly.
+        // Non-lifecycle records (e.g. notices) may still carry a bare `version`.
+        if (hasStatus && data.version !== undefined) {
+          ctx.addIssue({
+            code: 'custom',
+            path: ['version'],
+            message:
+              '`version` is derived from the newest `changeHistory` entry; remove it.',
+          });
+        }
+        if (hasStatus && data.effectiveDate !== undefined) {
+          ctx.addIssue({
+            code: 'custom',
+            path: ['effectiveDate'],
+            message:
+              '`effectiveDate` is derived from the newest `changeHistory` entry; remove it.',
+          });
+        }
+
+        // Rule 3 (UX §6): translation provenance requires a date.
+        if (data.translationStatus !== undefined && data.translationDate === undefined) {
+          ctx.addIssue({
+            code: 'custom',
+            path: ['translationDate'],
+            message: '`translationStatus` is present, so `translationDate` is required; add a `translationDate` value.',
+          });
+        }
+
+        // Rule 4 (UX §6): a complete translation covers the current English
+        // version by definition, so `translatedVersion` is derived, not declared.
+        if (data.translationStatus === 'complete' && data.translatedVersion !== undefined) {
+          ctx.addIssue({
+            code: 'custom',
+            path: ['translatedVersion'],
+            message:
+              '`translationStatus: complete` implies the current English version; remove `translatedVersion` (it is derived).',
+          });
+        }
+
+        // Rule 5 (UX §6): outdated/incomplete translations cover a version that
+        // genuinely differs from English and cannot be derived, so it must be shown.
+        if (
+          (data.translationStatus === 'outdated' || data.translationStatus === 'incomplete') &&
+          data.translatedVersion === undefined
+        ) {
+          ctx.addIssue({
+            code: 'custom',
+            path: ['translatedVersion'],
+            message:
+              '`translationStatus: outdated`/`incomplete` must carry `translatedVersion` (UX §6); add the English version this translation covers.',
+          });
+        }
       }),
     }),
   }),
