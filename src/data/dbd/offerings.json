@@ -4,7 +4,8 @@
     "image": "/images/offerings/Annotated-Blueprint.webp"
   },
   "bloodied-blueprint": {
-    "name": "Bloodied Blueprint"
+    "name": "Bloodied Blueprint",
+    "image": "/images/offerings/Bloodied-Blueprint.png"
   },
   "cut-coin": {
     "name": "Cut Coin",
