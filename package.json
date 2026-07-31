@@ -11,6 +11,7 @@
     "generate:addons": "dbd-addon-sheet --asset-root ${DBD_BALANCING_TOOL_ROOT:-../../../balancing-tool}",
     "generate:items": "dbd-item-sheet --asset-root ${DBD_BALANCING_TOOL_ROOT:-../../../balancing-tool}",
     "check:i18n": "node scripts/check-dbd-data.mjs",
+    "check:translations": "node scripts/check-translations.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "astro": "astro"
