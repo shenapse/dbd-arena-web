@@ -19,6 +19,7 @@ format: 1v4-quartet
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 import BalancingList from '@components/BalancingList.astro';
 import MatchConditions from '@components/MatchConditions.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
@@ -31,6 +32,10 @@ Per-killer balancing for Cenobite.
 These rules sit alongside the general 1v4 quartet rule and complement it.
 
 <MatchConditions format="1v4-quartet" killer="cenobite" />
+
+## Required offerings
+
+<RequiredOfferings format="1v4-quartet" killer="cenobite" />
 
 ## Killer perks
 
