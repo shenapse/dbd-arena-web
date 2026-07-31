@@ -1,0 +1,93 @@
+# The single shared table of required offerings per map, used by every
+# format (not per-killer, not per-format — one table for the whole site).
+#
+# Keys are English map names as they appear in src/data/dbd/maps.json. A key
+# is resolved through resolveMap (src/lib/balancing/resolve.ts), so any
+# maps.json alias/abbreviation is accepted here too — it doesn't have to be
+# the canonical name.
+#
+# Each side (killer/survivor) is a list of required offerings. An entry is
+# either a bare offering name (one player on that side must bring it) or the
+# object form when more than one player must bring it:
+#
+#   survivor:
+#     - Shroud of Union
+#     # - name: Shroud of Union
+#     #   count: 2          # two survivors must bring it
+#
+# A map used by any format's -conditions.yaml that has NO entry here is a
+# build error by design — it forces whoever assigns a new map to a killer to
+# also declare its required offerings, rather than silently rendering none.
+
+maps:
+  Blood Lodge:
+    killer:
+      - Cut Coin
+    survivor:
+      - name: Shroud of Union
+        count: 2
+      - Annotated Blueprint
+      - Bloodied Blueprint
+
+  Coal Tower 1:
+    killer:
+      - Cut Coin
+    survivor:
+      - name: Shroud of Union
+        count: 2
+      - Annotated Blueprint
+      - Bloodied Blueprint
+
+  Dead Dawg Saloon:
+    killer:
+      - Cut Coin
+    survivor:
+      - name: Shroud of Union
+        count: 2
+      - Annotated Blueprint
+      - Bloodied Blueprint
+
+  Dead Sands:
+    killer:
+      - Cut Coin
+    survivor:
+      - name: Shroud of Union
+        count: 2
+      - Annotated Blueprint
+      - Bloodied Blueprint
+
+  Ormond Lake Mine:
+    killer:
+      - Cut Coin
+    survivor:
+      - name: Shroud of Union
+        count: 2
+      - Annotated Blueprint
+      - Bloodied Blueprint
+
+  Suffocation Pit:
+    killer:
+      - Cut Coin
+    survivor:
+      - name: Shroud of Union
+        count: 2
+      - Annotated Blueprint
+      - Bloodied Blueprint
+
+  Wrecker's Yard:
+    killer:
+      - Cut Coin
+    survivor:
+      - name: Shroud of Union
+        count: 2
+      - Annotated Blueprint
+      - Bloodied Blueprint
+
+  Wretched Shop:
+    killer:
+      - Cut Coin
+    survivor:
+      - name: Shroud of Union
+        count: 2
+      - Annotated Blueprint
+      - Bloodied Blueprint

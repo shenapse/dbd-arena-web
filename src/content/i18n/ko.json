@@ -24,6 +24,8 @@
   "matchConditions.kills": "{n}킬",
   "matchConditions.gensRemaining": "발전기 {n}대 남음",
   "matchConditions.hookStages": "{n}훅 스테이지",
+  "requiredOfferings.killer": "킬러",
+  "requiredOfferings.survivor": "생존자",
   "balancingOverview.killer": "킬러",
   "balancingOverview.status": "상태"
 }

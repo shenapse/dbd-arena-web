@@ -17,6 +17,7 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
 import ImageRow from '@components/ImageRow.astro';
 import BalancingList from '@components/BalancingList.astro';
 import MatchConditions from '@components/MatchConditions.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
@@ -29,6 +30,10 @@ Per-killer balancing for Blight.
 These rules sit alongside the general 1v4 quartet rule and complement it.
 
 <MatchConditions format="1v4-quartet" killer="blight" />
+
+## Required offerings
+
+<RequiredOfferings format="1v4-quartet" killer="blight" />
 
 ## Killer perks
 

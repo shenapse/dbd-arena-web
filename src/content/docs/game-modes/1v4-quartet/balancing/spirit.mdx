@@ -19,6 +19,7 @@ format: 1v4-quartet
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 import BalancingList from '@components/BalancingList.astro';
 import MatchConditions from '@components/MatchConditions.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
 
 <LifecycleMeta
   status={frontmatter.status}
@@ -30,6 +31,10 @@ import MatchConditions from '@components/MatchConditions.astro';
 Per-killer balancing for Spirit. These adjustments apply specifically to the 1v4 quartet game mode and complement its shared [general rule](/game-modes/reference/1v4-general-rule/); they do not replace it.
 
 <MatchConditions format="1v4-quartet" killer="spirit" />
+
+## Required offerings
+
+<RequiredOfferings format="1v4-quartet" killer="spirit" />
 
 ## Killer perks
 

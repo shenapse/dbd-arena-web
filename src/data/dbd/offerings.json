@@ -1,0 +1,25 @@
+{
+  "annotated-blueprint": {
+    "name": "Annotated Blueprint",
+    "image": "/images/offerings/Annotated-Blueprint.webp"
+  },
+  "bloodied-blueprint": {
+    "name": "Bloodied Blueprint",
+    "image": "/images/offerings/Bloodied-Blueprint.png"
+  },
+  "cut-coin": {
+    "name": "Cut Coin",
+    "image": "/images/offerings/Cut-Coin.webp"
+  },
+  "shroud-of-union": {
+    "name": "Shroud of Union",
+    "image": "/images/offerings/Shroud-of-Union.webp"
+  },
+  "torn-blueprint": {
+    "name": "Torn Blueprint"
+  },
+  "vigo-s-blueprint": {
+    "name": "Vigo's Blueprint",
+    "image": "/images/offerings/Vigo_S-Blueprint.webp"
+  }
+}

@@ -24,6 +24,8 @@
   "matchConditions.kills": "{n} kills",
   "matchConditions.gensRemaining": "with {n} generator(s) remaining",
   "matchConditions.hookStages": "{n} hook stages",
+  "requiredOfferings.killer": "Killer",
+  "requiredOfferings.survivor": "Survivor",
   "balancingOverview.killer": "Killer",
   "balancingOverview.status": "Status"
 }

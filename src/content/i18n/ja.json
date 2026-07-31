@@ -24,6 +24,8 @@
   "matchConditions.kills": "{n}キル",
   "matchConditions.gensRemaining": "発電機残数{n}",
   "matchConditions.hookStages": "{n}フックステージ",
+  "requiredOfferings.killer": "キラー",
+  "requiredOfferings.survivor": "サバイバー",
   "balancingOverview.killer": "キラー",
   "balancingOverview.status": "ステータス"
 }
