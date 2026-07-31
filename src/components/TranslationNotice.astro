@@ -1,0 +1,63 @@
+---
+// Replaces the hand-written translation-disclaimer blockquote that used to be
+// duplicated verbatim across every localized page. English is the sole
+// authoritative edition (UX spec §6); this notice always links back to it so
+// a reader who suspects drift can check the source of truth directly instead
+// of trusting a copy that could go stale.
+import { normalizeDocsId, splitLocale } from "../lib/docs/ids";
+import { resolveRouteAuthoritative } from "../lib/docs/lifecycle";
+
+const { entry } = Astro.locals.starlightRoute;
+const { locale } = splitLocale(normalizeDocsId(entry.id));
+
+// Gate on the entry id, NOT Astro.currentLocale: Starlight serves locale
+// fallback routes (e.g. a /ja/... URL backed by the English file) for every
+// English page with no localized counterpart yet. Those routes carry the
+// English entry, whose id has no locale prefix, so this check naturally
+// excludes them and leaves Starlight's own FallbackContentNotice to handle
+// that case instead of us.
+const { translationStatus, translationDate, translatedVersion } = entry.data;
+
+interface Notice {
+  readonly englishHref: string;
+  readonly statusText: string;
+  readonly sourceVersion: string | undefined;
+  readonly date: string;
+  readonly beforeLink: string;
+  readonly afterLink: string;
+}
+
+const t = Astro.locals.t;
+
+const STATUS_TEXT_KEYS = {
+  complete: 'translation.status.complete',
+  incomplete: 'translation.status.incomplete',
+  outdated: 'translation.status.outdated',
+} as const;
+
+let notice: Notice | undefined;
+
+if (locale !== undefined && translationStatus !== undefined && translationDate !== undefined) {
+  const source = await resolveRouteAuthoritative(Astro.locals);
+  const [beforeLink, afterLink] = t('translation.notice.authority').split('{n}');
+
+  notice = {
+    englishHref: source.href,
+    statusText: t(STATUS_TEXT_KEYS[translationStatus]),
+    // Omitted entirely (including its separator) when the English original
+    // is informational and has no lifecycle version to report.
+    sourceVersion: source.lifecycle ? (translatedVersion ?? source.lifecycle.version) : undefined,
+    date: translationDate,
+    beforeLink: beforeLink ?? '',
+    afterLink: afterLink ?? '',
+  };
+}
+---
+
+{notice && (
+  // Astro collapses plain source whitespace that sits at an element/tag
+  // boundary or between two adjacent `{...}` expressions, so every space
+  // that must survive into the rendered HTML is spelled out as the `{' '}`
+  // expression form instead of relying on literal whitespace.
+  <blockquote><p><strong>{t('translation.notice.label')}</strong>{' '}{t('translation.notice.disclaimer')}{' '}{notice.beforeLink}<a href={notice.englishHref}>{t('translation.notice.englishSource')}</a>{notice.afterLink}<br /><strong>{t('translation.notice.statusLabel')}</strong>{' '}{notice.statusText}{notice.sourceVersion !== undefined && <Fragment> · <strong>{t('translation.notice.sourceVersionLabel')}</strong>{' '}{notice.sourceVersion}</Fragment>} · <strong>{t('translation.notice.dateLabel')}</strong>{' '}{notice.date}</p></blockquote>
+)}

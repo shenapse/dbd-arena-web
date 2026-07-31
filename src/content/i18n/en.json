@@ -27,5 +27,15 @@
   "requiredOfferings.killer": "Killer",
   "requiredOfferings.survivor": "Survivor",
   "balancingOverview.killer": "Killer",
-  "balancingOverview.status": "Status"
+  "balancingOverview.status": "Status",
+  "translation.notice.label": "Translation note:",
+  "translation.notice.disclaimer": "This page is an unofficial translation provided as a reading aid.",
+  "translation.notice.authority": "Where it differs from the English original in content or interpretation, the {n} controls.",
+  "translation.notice.englishSource": "English original",
+  "translation.notice.statusLabel": "Translation status:",
+  "translation.notice.sourceVersionLabel": "English version covered:",
+  "translation.notice.dateLabel": "Translation date:",
+  "translation.status.complete": "Complete",
+  "translation.status.incomplete": "Incomplete",
+  "translation.status.outdated": "Outdated"
 }
