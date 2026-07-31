@@ -2,8 +2,6 @@
 title: Privacy and Public Data
 description: The sole canonical page for player-facing privacy and public-data policy.
 status: active
-version: "1.0"
-effectiveDate: "2026-06-15"
 changeHistory:
   - version: "1.0"
     date: "2026-06-15"
@@ -12,12 +10,7 @@ changeHistory:
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 
-<LifecycleMeta
-  status={frontmatter.status}
-  version={frontmatter.version}
-  effectiveDate={frontmatter.effectiveDate}
-  changeHistory={frontmatter.changeHistory}
-/>
+<LifecycleMeta />
 
 What information the service holds, what may be shown publicly, and what is kept private. This is the single canonical privacy policy for the service.
 

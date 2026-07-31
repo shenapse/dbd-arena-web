@@ -2,8 +2,6 @@
 title: Match Problems
 description: Leaving, not-played reports, remakes, restarts, disconnects, and abandonment handling.
 status: provisional
-version: "0.1"
-effectiveDate: "2026-06-25"
 changeHistory:
   - version: "0.1"
     date: "2026-06-25"
@@ -13,12 +11,7 @@ changeHistory:
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 import {Aside} from '@astrojs/starlight/components';
 
-<LifecycleMeta
-  status={frontmatter.status}
-  version={frontmatter.version}
-  effectiveDate={frontmatter.effectiveDate}
-  changeHistory={frontmatter.changeHistory}
-/>
+<LifecycleMeta />
 
 What happens when a match cannot be played cleanly from start to finish.
 

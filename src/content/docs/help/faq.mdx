@@ -2,8 +2,6 @@
 title: FAQ
 description: Searchable answers to recurring questions.
 status: upcoming
-version: "0.1"
-effectiveDate: "2026-06-25"
 changeHistory:
   - version: "0.1"
     date: "2026-06-25"
@@ -12,11 +10,6 @@ changeHistory:
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 
-<LifecycleMeta
-  status={frontmatter.status}
-  version={frontmatter.version}
-  effectiveDate={frontmatter.effectiveDate}
-  changeHistory={frontmatter.changeHistory}
-/>
+<LifecycleMeta />
 
 Preparing.

@@ -6,8 +6,6 @@ description: >-
   the sibling per-killer balancing pages, which complement this rule.
 handle: 1v1-symmetric-general
 status: active
-version: "1.0"
-effectiveDate: "2026-06-21"
 changeHistory:
   - version: "1.0"
     date: "2026-06-21"
@@ -18,12 +16,7 @@ import { Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 import ImageRow from '@components/ImageRow.astro';
 
-<LifecycleMeta
-  status={frontmatter.status}
-  version={frontmatter.version}
-  effectiveDate={frontmatter.effectiveDate}
-  changeHistory={frontmatter.changeHistory}
-/>
+<LifecycleMeta />
 
 The shared global rule for the 1v1 Symmetric format. It applies to every killer.
 Per-killer detail (maps, win conditions, perk and add-on limits) lives in 

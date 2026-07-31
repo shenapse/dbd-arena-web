@@ -5,15 +5,13 @@ description: >-
   competing on chase time.
 handle: dbd.1v1.symmetric.rank
 status: active
-version: "1.0"
-effectiveDate: "2026-06-21"
 changeHistory:
-  - version: "0.1"
-    date: "2026-06-15"
-    note: Provisional announcement. Format and rules are not yet final.
   - version: "1.0"
     date: "2026-06-21"
     note: Game Mode promoted to active. General rule and Trapper balancing finalized.
+  - version: "0.1"
+    date: "2026-06-15"
+    note: Provisional announcement. Format and rules are not yet final.
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
@@ -21,15 +19,7 @@ import KillerPool from '@components/KillerPool.astro';
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 
 
-<LifecycleMeta
-  status="active"
-  version="1.0"
-  effectiveDate="2026-06-21"
-  changeHistory={[
-    {version: "0.1", date: "2026-06-15", note: "Provisional announcement. Format and rules are not yet final."},
-    {version: "1.0", date: "2026-06-21", note: "Game Mode promoted to active. General rule and Trapper balancing finalized."},
-  ]}
-/>
+<LifecycleMeta />
 
 ## Game Structure
 

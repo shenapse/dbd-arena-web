@@ -3,8 +3,6 @@ title: killer — 1v1 Symmetric Balancing
 description: Per-killer balancing for Nurse in the 1v1 symmetric format.
 handle: 1v1-symmetric-balancing-
 status: active
-version: "1.0"
-effectiveDate: "2026-06-15"
 changeHistory:
   - version: "1.0"
     date: "2026-06-15"
@@ -15,12 +13,7 @@ format: 1v1-symmetric-rank
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 
-<LifecycleMeta
-  status={frontmatter.status}
-  version={frontmatter.version}
-  effectiveDate={frontmatter.effectiveDate}
-  changeHistory={frontmatter.changeHistory}
-/>
+<LifecycleMeta />
 
 Per-killer balancing for {frontmatter.killer}.
 These rules sit alongside the general 1v1 symmetric rule and complement it.
