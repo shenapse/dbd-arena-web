@@ -125,9 +125,9 @@ export const collections = {
     }),
   }),
   // Localized UI strings for custom components (StatusBadge, LifecycleMeta,
-  // MatchConditions). Built-in Starlight UI strings are translated automatically
-  // per locale; these custom keys are read via Astro.locals.t(). Files live in
-  // src/content/i18n/.
+  // MatchConditions, BalancingIntro). Built-in Starlight UI strings are translated
+  // automatically per locale; these custom keys are read via Astro.locals.t(). Files
+  // live in src/content/i18n/.
   i18n: defineCollection({
     loader: i18nLoader(),
     schema: i18nSchema({
@@ -159,6 +159,10 @@ export const collections = {
         'matchConditions.hookStages': z.string().optional(),
         'requiredOfferings.killer': z.string().optional(),
         'requiredOfferings.survivor': z.string().optional(),
+        'balancingIntro.subject': z.string().optional(),
+        'balancingIntro.relation': z.string().optional(),
+        'balancingIntro.generalRule.1v4': z.string().optional(),
+        'balancingIntro.generalRule.1v1Symmetric': z.string().optional(),
         'balancingOverview.killer': z.string().optional(),
         'balancingOverview.status': z.string().optional(),
         'translation.notice.label': z.string().optional(),

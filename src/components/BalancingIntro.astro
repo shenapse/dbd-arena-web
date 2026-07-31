@@ -1,0 +1,75 @@
+---
+// Renders the shared one-line intro paragraph atop a killer's balancing page:
+// "Per-killer balancing for <Killer>. These rules sit alongside the <general
+// rule> and complement it." Replaces the hand-written version of that
+// sentence duplicated across every `*-balancing.mdx`/`*.mdx` page.
+//
+// Three things that look like bugs but are deliberate:
+//
+// 1. Zero props. `killer:` and `format:` already live in this page's own
+//    frontmatter — a prop would just be a second, driftable copy of the same
+//    two facts. Same rationale as LifecycleMeta.astro taking zero props.
+//    MatchConditions.astro / RequiredOfferings.astro DO take a `killer` prop,
+//    but for a different reason: theirs is the lowercase filesystem slug used
+//    to address a YAML file on disk, not the page's display name — there is
+//    no frontmatter copy of that slug to read instead.
+//
+// 2. Locale comes from `starlightRoute.locale` (the ROUTE's locale) — the
+//    OPPOSITE gate from TranslationNotice.astro, on purpose.
+//    TranslationNotice asks "is this file a real translation?" (an entry
+//    question: it inspects `entry.data.translationStatus`, which is absent
+//    on a locale-fallback route because that route's entry IS the English
+//    file). This component instead asks "where should this link send the
+//    reader?" (a route question). On a Starlight locale-fallback route (e.g.
+//    a `/ko/…/nightmare/` URL backed by the English file, no Korean
+//    translation yet) `Astro.locals.t()` already returns Korean strings for
+//    that route. Gating the link prefix on the entry's id instead of the
+//    route's locale would emit Korean prose around an unprefixed English-tree
+//    link, ejecting the reader out of the `/ko/` tree mid-sentence.
+//    `starlightRoute.locale` is `undefined` for the root (English) locale —
+//    exactly `idToHref`'s optional second parameter, so no `'en'` special
+//    case is needed here (unlike BalancingOverview.astro, which manually
+//    checks `locale === 'ja' || locale === 'ko'`). It's narrowed against
+//    `LOCALE_PREFIXES` rather than cast so an unregistered locale value
+//    degrades to an unprefixed link instead of a bad one.
+//
+// 3. The `{' '}` spelling below is required, not decorative: Astro collapses
+//    source whitespace that sits between two adjacent `{...}` expressions.
+//    Same reason TranslationNotice.astro keeps its blockquote on one source
+//    line.
+import { AstroError } from 'astro/errors';
+import { LOCALE_PREFIXES, idToHref, type LocalePrefix } from '../lib/docs/ids';
+import { GENERAL_RULE_BY_FORMAT, KNOWN_BALANCING_FORMATS } from '../lib/docs/general-rule';
+
+const { entry, locale } = Astro.locals.starlightRoute;
+const { killer, format } = entry.data;
+
+if (!killer || !format) {
+  throw new AstroError(
+    `BalancingIntro used on ${entry.filePath ?? entry.id}, which is missing "killer" and/or "format" ` +
+      `frontmatter.`,
+    `BalancingIntro takes no props — it reads "killer"/"format" off this page's own frontmatter. Add the ` +
+      `missing key(s) to this page's frontmatter.`
+  );
+}
+
+const generalRule = GENERAL_RULE_BY_FORMAT.get(format);
+if (!generalRule) {
+  throw new AstroError(
+    `BalancingIntro used on ${entry.filePath ?? entry.id} with unknown format "${format}".`,
+    `Known formats are: ${KNOWN_BALANCING_FORMATS.join(', ')}. Either fix this page's "format" frontmatter, ` +
+      `or add a new entry to GENERAL_RULE_BY_FORMAT in src/lib/docs/general-rule.ts.`
+  );
+}
+
+const prefix = (LOCALE_PREFIXES as readonly string[]).includes(locale ?? '')
+  ? (locale as LocalePrefix)
+  : undefined;
+
+const t = Astro.locals.t;
+const subject = t('balancingIntro.subject').replace('{n}', killer);
+const [beforeLink, afterLink] = t('balancingIntro.relation').split('{n}');
+const href = idToHref(generalRule.id, prefix);
+---
+
+<p>{subject}{' '}{beforeLink ?? ''}<a href={href}>{t(generalRule.labelKey)}</a>{afterLink ?? ''}</p>
