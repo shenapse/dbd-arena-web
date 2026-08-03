@@ -93,21 +93,20 @@ survivorRepetitionLimits:
     perks: all
       
 items:
-  # Med-Kit:
+  Med-Kit:
+    default: deny
+  Flashlight:
+    default: deny
+  # Toolbox:
+    # default: deny
+  # Key:
   #   default: deny
-  #   allow:
-  #     - Ranger Med-Kit
-  # Flashlight:
+  # Map:
   #   default: deny
-  #   allow:
-  #     - Sport Flashlight
-  #   addons:
-  #     default: deny
-  #     allow:
-  #       - {rarity: "Common"}
-  # Firecracker:
-  #   allow:
-  #     - Firecracker
+  Firecracker:
+    default: deny
+  # Fog Vial:
+  #   default: deny
 
 itemDuplicateLimits:
   - scope: team
