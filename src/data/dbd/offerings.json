@@ -21,5 +21,9 @@
   "vigo-s-blueprint": {
     "name": "Vigo's Blueprint",
     "image": "/images/offerings/Vigo_S-Blueprint.webp"
+  },
+  "vigo-s-shroud": {
+    "name": "Vigo's Shroud",
+    "image": "/images/offerings/Vigo_S-Shroud.png"
   }
 }
