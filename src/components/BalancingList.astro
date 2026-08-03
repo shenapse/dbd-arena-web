@@ -47,6 +47,11 @@ const { format, killer, section, mode: modeOverride } = Astro.props;
 // resolution and sort order stay English.
 const locale = Astro.currentLocale;
 
+// UI microcopy ("Allowed:"/"Banned:"/"None"/etc.) is localized via Starlight
+// i18n, same as MatchConditions.astro; game data names go through
+// `localizeName` above instead.
+const t = Astro.locals.t;
+
 interface BuildDoc {
   killer?: string;
   default?: 'allow' | 'deny';
@@ -71,7 +76,7 @@ if (!fs.existsSync(filePath)) {
 const doc = parse(fs.readFileSync(filePath, 'utf8')) as BuildDoc;
 
 const mode: Mode = modeOverride ?? doc.display?.[section] ?? 'allow';
-const label = mode === 'ban' ? 'Banned:' : 'Allowed:';
+const label = mode === 'ban' ? t('balancingList.banned') : t('balancingList.allowed');
 const context = `${section} (format: "${format}", killer: "${killer}"${doc.killer ? `, doc killer: "${doc.killer}"` : ''})`;
 
 // Perk/add-on rendering: a single flat name list.
@@ -130,7 +135,7 @@ if (doc) {
   <div class="balancing-list">
     <p class="balancing-list__label"><strong>{label}</strong></p>
     {flatNames.length === 0 ? (
-      <p class="balancing-list__none">None</p>
+      <p class="balancing-list__none">{t('balancingList.none')}</p>
     ) : (
       <ul class="balancing-list__items">
         {flatNames.map((name) => <li>{name}</li>)}
@@ -150,15 +155,15 @@ if (doc) {
           <p class="balancing-items__type-name">{group.typeName}</p>
           <p class="balancing-list__label"><strong>{label}</strong></p>
           {group.variantNames.length === 0 ? (
-            <p class="balancing-list__none">None</p>
+            <p class="balancing-list__none">{t('balancingList.none')}</p>
           ) : (
             <ul class="balancing-list__items">
               {group.variantNames.map((name) => <li>{name}</li>)}
             </ul>
           )}
-          <p class="balancing-items__addons-label"><strong>Add-ons — {label}</strong></p>
+          <p class="balancing-items__addons-label"><strong>{t('balancingList.addons').replace('{label}', label)}</strong></p>
           {group.addonNames.length === 0 ? (
-            <p class="balancing-list__none">None</p>
+            <p class="balancing-list__none">{t('balancingList.none')}</p>
           ) : (
             <ul class="balancing-list__items">
               {group.addonNames.map((name) => <li>{name}</li>)}
@@ -168,13 +173,15 @@ if (doc) {
       ) : (
         // Allow mode: one line per allowed variant, count-aware, mirroring
         // the site's existing item prose (e.g. "1 rare flashlight (Sport)
-        // with 2 common add-ons").
+        // with 2 common add-ons"). Zero allowed variants means the whole item
+        // type is banned — say so explicitly rather than an ambiguous "None"
+        // (which elsewhere means "the allowed list happens to be empty").
         <div class="balancing-items__type">
           <p class="balancing-items__type-name">
             {group.count != null ? `${group.count}× ` : ''}{group.typeName}
           </p>
           {group.variantNames.length === 0 ? (
-            <p class="balancing-list__none">None</p>
+            <p class="balancing-list__none">{t('balancingList.itemBanned')}</p>
           ) : (
             <ul class="balancing-list__items">
               {group.variantNames.map((name) => (
@@ -183,7 +190,7 @@ if (doc) {
                   {group.addonNames.length > 0 && (
                     <>
                       {' '}
-                      ({group.addonCount != null ? `up to ${group.addonCount} add-ons` : 'Add-ons'}: {group.addonNames.join(', ')})
+                      ({group.addonCount != null ? t('balancingList.addonsUpToN').replace('{n}', String(group.addonCount)) : t('balancingList.addonsPlain')}: {group.addonNames.join(', ')})
                     </>
                   )}
                 </li>
