@@ -1,0 +1,6 @@
+killer: The Cannibal
+map: Dead Dawg Saloon
+winCondition:
+  hookStages: 8
+drawCondition:
+  hookStages: null
