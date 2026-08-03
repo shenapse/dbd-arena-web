@@ -1,7 +1,6 @@
 killer: The Lich
 map: Dead Dawg Saloon
 winCondition:
-  kills: 4
-  gensRemaining: 0
+  hookStages: 10
 drawCondition:
   hookStages: null

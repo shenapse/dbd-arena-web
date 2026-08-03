@@ -24,7 +24,7 @@ maps:
     killer:
       - Cut Coin
     survivor:
-      - name: Shroud of Union
+      - name: Vigo's Shroud
         count: 2
       - Annotated Blueprint
       - Bloodied Blueprint
@@ -33,7 +33,7 @@ maps:
     killer:
       - Cut Coin
     survivor:
-      - name: Shroud of Union
+      - name: Vigo's Shroud
         count: 2
       - Annotated Blueprint
       - Bloodied Blueprint
@@ -42,7 +42,7 @@ maps:
     killer:
       - Cut Coin
     survivor:
-      - name: Shroud of Union
+      - name: Vigo's Shroud
         count: 2
       - Annotated Blueprint
       - Bloodied Blueprint
@@ -51,7 +51,7 @@ maps:
     killer:
       - Cut Coin
     survivor:
-      - name: Shroud of Union
+      - name: Vigo's Shroud
         count: 2
       - Annotated Blueprint
       - Bloodied Blueprint
@@ -60,7 +60,7 @@ maps:
     killer:
       - Cut Coin
     survivor:
-      - name: Shroud of Union
+      - name: Vigo's Shroud
         count: 2
       - Annotated Blueprint
       - Bloodied Blueprint
@@ -69,7 +69,7 @@ maps:
     killer:
       - Cut Coin
     survivor:
-      - name: Shroud of Union
+      - name: Vigo's Shroud
         count: 2
       - Annotated Blueprint
       - Bloodied Blueprint
@@ -78,7 +78,7 @@ maps:
     killer:
       - Cut Coin
     survivor:
-      - name: Shroud of Union
+      - name: Vigo's Shroud
         count: 2
       - Annotated Blueprint
       - Bloodied Blueprint
@@ -87,7 +87,7 @@ maps:
     killer:
       - Cut Coin
     survivor:
-      - name: Shroud of Union
+      - name: Vigo's Shroud
         count: 2
       - Annotated Blueprint
       - Bloodied Blueprint
