@@ -3,6 +3,10 @@ killers:
     page: blight
     conditions: blight
     status: upcoming
+  - name: Cannibal
+    page: cannibal
+    conditions: cannibal
+    status: upcoming
   - name: Cenobite
     page: cenobite
     conditions: cenobite
