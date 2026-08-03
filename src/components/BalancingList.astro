@@ -23,11 +23,12 @@ import {
   resolvePerks,
   resolveAddons,
   resolveItems,
+  resolveItemDuplicateLimits,
   collapseAddonsByRarity,
   collapseItemAddonsByRarity,
 } from '../lib/balancing/resolve';
 import { localizeName } from '../lib/balancing/i18n-names';
-import type { AllowDenyConfig, ItemsConfig } from '../lib/balancing/types';
+import type { AllowDenyConfig, ItemsConfig, ItemDuplicateLimit } from '../lib/balancing/types';
 
 type Section = 'killerPerks' | 'survivorPerks' | 'addons' | 'items';
 type Mode = 'allow' | 'ban';
@@ -59,6 +60,7 @@ interface BuildDoc {
   survivorPerks?: AllowDenyConfig;
   addons?: AllowDenyConfig;
   items?: ItemsConfig;
+  itemDuplicateLimits?: ItemDuplicateLimit[];
   display?: Partial<Record<Section, Mode>>;
 }
 
@@ -92,6 +94,10 @@ interface ItemGroup {
   addonCount?: number;
 }
 let itemGroups: ItemGroup[] | null = null;
+// Item duplicate-limit rule text (e.g. "No two survivors may bring the same
+// item."), one line per `itemDuplicateLimits:` entry — a structural rule
+// independent of `mode`, rendered above the per-item-type blocks.
+let itemDuplicateLimitTexts: string[] | null = null;
 
 if (doc) {
   if (section === 'killerPerks' || section === 'survivorPerks') {
@@ -111,6 +117,18 @@ if (doc) {
     ];
   } else if (section === 'items') {
     const results = resolveItems(doc.items, doc.default ?? 'deny', context);
+    const duplicateLimits = resolveItemDuplicateLimits(doc.itemDuplicateLimits, context);
+    itemDuplicateLimitTexts = duplicateLimits.map((lim) => {
+      const text =
+        lim.scope === 'team'
+          ? lim.max === 1
+            ? t('balancingList.itemDuplicateLimit.team.max1')
+            : t('balancingList.itemDuplicateLimit.team.maxN')
+          : lim.max === 1
+            ? t('balancingList.itemDuplicateLimit.duo.max1')
+            : t('balancingList.itemDuplicateLimit.duo.maxN');
+      return text.replace('{max}', String(lim.max));
+    });
     itemGroups = results.map((r) => {
       const shownAddons = mode === 'ban' ? r.addons.banned : r.addons.allowed;
       const addonDisplay = collapseItemAddonsByRarity(shownAddons, r.addons.universe);
@@ -146,6 +164,11 @@ if (doc) {
 
 {doc && itemGroups && (
   <div class="balancing-items">
+    {itemDuplicateLimitTexts && itemDuplicateLimitTexts.length > 0 && (
+      <ul class="balancing-items__duplicate-limits">
+        {itemDuplicateLimitTexts.map((text) => <li>{text}</li>)}
+      </ul>
+    )}
     {itemGroups.map((group) => (
       mode === 'ban' ? (
         // Ban mode: counts are meaningless for a banned list (there is no
@@ -238,5 +261,10 @@ if (doc) {
   .balancing-items__addons-label {
     margin: 0.5rem 0 0.35rem;
     color: var(--sl-color-white);
+  }
+  .balancing-items__duplicate-limits {
+    margin: 0 0 0.75rem;
+    padding-left: 1.25rem;
+    color: var(--sl-color-gray-2);
   }
 </style>
