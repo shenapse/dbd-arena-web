@@ -182,6 +182,16 @@ export interface ItemTypeConfig extends AllowDenyConfig {
 
 export type ItemsConfig = Record<string, ItemTypeConfig>;
 
+/**
+ * One entry of a `-build.yaml`'s top-level `itemDuplicateLimits:` list — caps
+ * how many survivors may bring the same item within the given scope.
+ */
+export interface ItemDuplicateLimit {
+  scope: 'duo' | 'team';
+  max: number;
+  items?: 'all' | string[];
+}
+
 /** Result of resolving one side/universe: the allowed subset, its complement, and the full universe. */
 export interface ResolvedList<T> {
   allowed: T[];
