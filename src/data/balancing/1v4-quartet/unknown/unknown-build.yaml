@@ -114,16 +114,16 @@ items:
     default: deny
   Flashlight:
     default: deny
-  # Toolbox:
-    # default: deny
-  # Key:
-  #   default: deny
-  # Map:
-  #   default: deny
+  Toolbox:
+    default: deny
+  Key:
+    default: deny
+  Map:
+    default: deny
   Firecracker:
     default: deny
-  # Fog Vial:
-  #   default: deny
+  Fog Vial:
+    default: deny
 
 itemDuplicateLimits:
   - scope: team

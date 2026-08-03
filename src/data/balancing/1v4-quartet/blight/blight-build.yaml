@@ -107,6 +107,22 @@ items:
         - Bandages
         - Gel Dressings
 
+  Toolbox:
+    default: deny
+  Key:
+    default: deny
+  Map:
+    default: deny
+  Firecracker:
+    default: deny
+  Fog Vial:
+    default: deny
+
+itemDuplicateLimits:
+  - scope: team
+    max: 1
+    items: all
+
 addons:
   default: deny
   allow:

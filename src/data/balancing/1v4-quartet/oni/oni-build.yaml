@@ -136,6 +136,21 @@ items:
     count: 1
     allow:
       - Firecracker
+  Med-Kit:
+    default: deny
+  Toolbox:
+    default: deny
+  Key:
+    default: deny
+  Map:
+    default: deny
+  Fog Vial:
+    default: deny
+
+itemDuplicateLimits:
+  - scope: team
+    max: 1
+    items: all
 
 addons:
   default: allow         # Nothing banned by default
