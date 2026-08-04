@@ -47,6 +47,7 @@ import type {
   AllowDenyConfig,
   ItemsConfig,
   ItemDuplicateLimit,
+  SurvivorRepetitionLimit,
   ResolvedList,
   RarityDisplay,
 } from './types';
@@ -517,5 +518,54 @@ export function resolveItemDuplicateLimits(
       );
     }
     return { scope: entry.scope, max: entry.max, items: entry.items };
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Survivor perk repetition limits
+// ---------------------------------------------------------------------------
+
+/**
+ * Validate and normalize a `-build.yaml`'s top-level `survivorRepetitionLimits:`
+ * list — the perk-side counterpart of `itemDuplicateLimits`, capping how many
+ * survivors may bring the same perk within the given scope. Sentence text is
+ * not produced here — the caller turns each normalized entry into a localized
+ * string via the site's `t()`, so ja/ko get a correctly translated rule
+ * instead of baked-in English.
+ *
+ * `perks` is validated but not resolved against any universe: every entry in
+ * the yaml today omits it or sets it to `'all'`; an explicit perk-name list
+ * is not supported by the site's renderer and throws rather than being
+ * silently mishandled.
+ * @param limits - the yaml's `survivorRepetitionLimits:` field, or undefined if absent
+ * @param context - human-readable label for error messages
+ */
+export function resolveSurvivorRepetitionLimits(
+  limits: SurvivorRepetitionLimit[] | undefined,
+  context: string
+): SurvivorRepetitionLimit[] {
+  if (limits === undefined) return [];
+  if (!Array.isArray(limits)) {
+    throw new Error(`"survivorRepetitionLimits" must be a list (${context}).`);
+  }
+  return limits.map((entry, i) => {
+    if (!entry || typeof entry !== 'object') {
+      throw new Error(`survivorRepetitionLimits[${i}] must be a mapping (${context}).`);
+    }
+    if (entry.scope !== 'duo' && entry.scope !== 'team') {
+      throw new Error(
+        `survivorRepetitionLimits[${i}] has scope "${entry.scope}" (${context}); expected "duo" or "team".`
+      );
+    }
+    if (!Number.isInteger(entry.max) || entry.max < 1) {
+      throw new Error(`survivorRepetitionLimits[${i}] must have a positive integer "max" (${context}).`);
+    }
+    if (entry.perks !== undefined && entry.perks !== 'all') {
+      throw new Error(
+        `survivorRepetitionLimits[${i}] "perks" must be "all" (or omitted) — an explicit perk list is not ` +
+          `yet supported by the site's renderer (${context}).`
+      );
+    }
+    return { scope: entry.scope, max: entry.max, perks: entry.perks };
   });
 }

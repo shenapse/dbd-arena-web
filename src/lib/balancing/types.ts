@@ -192,6 +192,16 @@ export interface ItemDuplicateLimit {
   items?: 'all' | string[];
 }
 
+/**
+ * One entry of a `-build.yaml`'s top-level `survivorRepetitionLimits:` list —
+ * caps how many survivors may bring the same perk within the given scope.
+ */
+export interface SurvivorRepetitionLimit {
+  scope: 'duo' | 'team';
+  max: number;
+  perks?: 'all' | string[];
+}
+
 /** Result of resolving one side/universe: the allowed subset, its complement, and the full universe. */
 export interface ResolvedList<T> {
   allowed: T[];
