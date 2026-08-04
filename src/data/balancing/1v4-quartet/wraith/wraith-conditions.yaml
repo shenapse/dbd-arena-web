@@ -1,6 +1,6 @@
 killer: The Wraith
 map: Dead Dawg Saloon
 winCondition:
-  hookStages: 8
+  hookStages: 9
 drawCondition:
   hookStages: null
