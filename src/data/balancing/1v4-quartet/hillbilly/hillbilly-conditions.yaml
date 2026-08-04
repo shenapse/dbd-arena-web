@@ -1,5 +1,5 @@
 killer: The Hillbilly
 map: Blood Lodge
 winCondition:
-  hookStages: 8
+  hookStages: 9
 drawCondition: null
