@@ -198,6 +198,7 @@ export default defineConfig({
                       items: [
                         { label: 'Overview', translations: { ja: '概要', ko: '개요' }, slug: 'game-modes/1v4-quartet/balancing' },
                         { label: 'Blight', translations: { ja: 'ブライト', ko: '블라이트' }, slug: 'game-modes/1v4-quartet/balancing/blight' },
+                        { label: 'Cannibal', translations: { ja: 'カニバル', ko: '카니발' }, slug: 'game-modes/1v4-quartet/balancing/cannibal' },
                         { label: 'Cenobite', translations: { ja: 'セノバイト', ko: '세노바이트' }, slug: 'game-modes/1v4-quartet/balancing/cenobite' },
                         { label: 'Clown', translations: { ja: 'クラウン', ko: '클라운' }, slug: 'game-modes/1v4-quartet/balancing/clown' },
                         { label: 'Doctor', translations: { ja: 'ドクター', ko: '닥터' }, slug: 'game-modes/1v4-quartet/balancing/doctor' },
