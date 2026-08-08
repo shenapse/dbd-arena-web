@@ -1,0 +1,6 @@
+killer: The Nightmare
+map: Dead Dawg Saloon
+winCondition:
+  hookStages: 10
+drawCondition:
+  hookStages: null

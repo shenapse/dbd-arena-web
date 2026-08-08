@@ -5,7 +5,7 @@ handle: 1v4-quartet-balancing-nightmare
 status: upcoming
 changeHistory:
   - version: "0.1"
-    date: "2026-06-15"
+    date: "2026-08-08"
     note: Initial per-killer balancing entry for Nightmare.
 killer: Nightmare
 format: 1v4-quartet
@@ -13,61 +13,43 @@ format: 1v4-quartet
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 import BalancingIntro from '@components/BalancingIntro.astro';
+import BalancingList from '@components/BalancingList.astro';
+import MatchConditions from '@components/MatchConditions.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
 
 <LifecycleMeta />
 
 <BalancingIntro />
 
-| Aspect | Detail |
-| --- | --- |
-| Map | |
-| Win condition | |
-| Draw condition | |
+<MatchConditions format="1v4-quartet" killer="nightmare" />
+
+## Required offerings
+
+<RequiredOfferings format="1v4-quartet" killer="nightmare" />
 
 ## Killer perks
 
-Allowed:
-- Agitation
-- Bamboozle
-- Brutal Strength
-- Call of Brine
-- Corrupt Intervention
-- Dying Light
-- Eruption
-- Grim Embrace
-- "Hex: Crowd Control"
-- "Hex: Huntress Lullaby"
-- "Hex: Ruin"
-- "Hex: Undying"
-- "Hex: The Third Seal"
-- Hysteria
-- Infectious Fright
-- Keep Them Waiting
-- Oppression
-- Overcharge
-- Pop Goes the Weasel
-- Rapid Brutality
-- "Scourge Hook: Jagged Compass"
-- "Scourge Hook: Pain Resonance"
-- "Scourge Hook: Gift of Pain"
-- Sloppy Butcher
-- Surge
-- Surveillance
-- Thrilling Tremors
-- Tinkerer
-- Turn Back the Clock
+![The Nightmare — Allowed Killer Perks](/images/builds/1v4-quartet/nightmare/The-Nightmare-killer-perks.png)
+
+<BalancingList format="1v4-quartet" killer="nightmare" section="killerPerks" />
 
 ## Killer add-ons
 
-Allowed: None
+![The Nightmare — Allowed Killer Add-ons](/images/builds/1v4-quartet/nightmare/The-Nightmare-killer-addons.png)
+
+<BalancingList format="1v4-quartet" killer="nightmare" section="addons" />
 
 ## Survivor perks
 
+![Going against The Nightmare — Allowed Survivor Perks](/images/builds/1v4-quartet/nightmare/The-Nightmare-survivor-perks.png)
+
+<BalancingList format="1v4-quartet" killer="nightmare" section="survivorPerks" />
+
 ## Survivor items
 
-{/* - 1 very rare med-kit with 2 rare add-ons
-- 1 rare flashlight with 2 common add-ons
-- 1 flashbang */}
+![Going against The Nightmare — Allowed Survivor Items](/images/builds/1v4-quartet/nightmare/The-Nightmare-items.png)
+
+<BalancingList format="1v4-quartet" killer="nightmare" section="items" />
 
 [← All per-killer balancing](/game-modes/1v4-quartet/balancing/)
 

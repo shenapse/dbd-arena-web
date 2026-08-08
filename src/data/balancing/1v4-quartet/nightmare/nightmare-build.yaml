@@ -1,0 +1,146 @@
+killer: The Nightmare
+balancing: DBD Arena - 1v4 Quartet Rank v0.1
+# universe is optional; defaults to every perk in dbdperks.json for each side.
+# universe:
+#   killer: all
+#   survivor: all
+
+killerPerks:
+  default: deny
+  allow:
+    - Agitation
+    - All Shaking Thunder
+    - Bamboozle
+    - Brutal Strength
+    - Call of Brine
+    - Corrupt Intervention
+    - Dark Arrogance
+    - Deadlock
+    - Dragon's Grip
+    - Dying Light
+    - Eruption
+    - Forced Hesitation
+    - Forced Penance
+    - Grim Embrace
+    - "Hex: Crowd Control"
+    # - "Hex: Devour Hope"
+    #- "Hex: Face the Darkness"
+    # - "Hex: Pentimento"
+    - "Hex: Ruin"
+    #- Hex: Thrill of the Hunt
+    - "Hex: Undying"
+    # - "Hex: Wretched Fate"
+    - Make your Choice
+    - Merciless Storm
+    # - Mindbreaker
+    - Oppression
+    - Overcharge
+    - Pop goes the Weasel
+    - Rapid Brutality
+    - Save the best for last
+    - "Scourge Hook: Gift of Pain"
+    - "Scourge Hook: Pain Resonance"
+    - "Scourge Hook: Monstrous Shrine"
+    - Secret Project
+    - Sloppy Butcher
+    - Surge
+    - Surveillance
+    - Thanatophobia
+    - Thrilling Tremors
+    - Tinkerer
+    - Trail of Torment
+    - Turn back the clock
+
+addons:
+  default: allow 
+  deny:
+    - '"Z" Block'
+
+survivorPerks:
+  default: deny
+  allow:
+    - Aftercare
+    - Any means necessary
+    - Badabada boom
+    - Balanced Landing
+    - Better than New
+    - Bite the bullet
+    - Blood Pact
+    - Bond
+    - Calm Spirit
+    - Chemical Trap
+    # - Clean Break
+    - Counter Force
+    - Cut Loose
+    - Dance with Me
+    - Deception
+    #- Dejavu
+    - Detective's Hunch
+    # - Diversion
+    - Empathy
+    - Five Moves Ahead
+    - Fixated 
+    - Flashbang
+    # - Friendly Competition
+    - Headon
+    - Iron Will
+    - Light Footed
+    - Lithe
+    # - Light Weight
+    - Lucky Star
+    - Mettle of Man
+    - Mirrored Illusion
+    - No Mither
+    - Open Handed
+    - Parental Guidance
+    - Potential Energy
+    - Quick and Quiet
+    - Rapid Response
+    # - Red Herring
+    - Repressed Alliance
+    #- Resilience
+    - Rookie Spirit
+    - Saboteur
+    # - Small Game
+    - Smash Hit
+    - Tenacity
+    - Urban Evasion
+    - Visionary
+    - Windows of Opportunity
+  deny: []
+
+survivorRepetitionLimits:
+  - scope: team
+    max: 1
+    perks: all
+      
+items:
+  Flashlight:
+    count: 1
+    default: deny
+    allow:
+      - Sport Flashlight
+    addons:
+      count: 2
+      default: deny
+      allow:
+        - {rarity: "Common"}
+  Med-Kit:
+    default: deny
+  Firecracker:
+    count: 1
+    allow:
+      - Firecracker
+  Toolbox:
+    default: deny
+  Key:
+    default: deny
+  Map:
+    default: deny
+  Fog Vial:
+    default: deny
+
+itemDuplicateLimits:
+  - scope: team
+    max: 1
+    items: all

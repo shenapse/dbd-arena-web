@@ -206,6 +206,7 @@ export default defineConfig({
                         { label: 'Ghoul', translations: { ja: 'グール', ko: '구울' }, slug: 'game-modes/1v4-quartet/balancing/ghoul' },
                         { label: 'Hillbilly', translations: { ja: 'ヒルビリー', ko: '힐빌리' }, slug: 'game-modes/1v4-quartet/balancing/billy' },
                         { label: 'Lich', translations: { ja: 'リッチ', ko: '리치' }, slug: 'game-modes/1v4-quartet/balancing/lich' },
+                        { label: 'Nightmare', translations: { ja: 'ナイトメア', ko: '나이트메어' }, slug: 'game-modes/1v4-quartet/balancing/nightmare' },
                         { label: 'Nurse', translations: { ja: 'ナース', ko: '너스' }, slug: 'game-modes/1v4-quartet/balancing/nurse' },
                         { label: 'Oni', translations: { ja: '鬼', ko: '오니' }, slug: 'game-modes/1v4-quartet/balancing/oni' },
                         { label: 'Spirit', translations: { ja: 'スピリット', ko: '스피릿' }, slug: 'game-modes/1v4-quartet/balancing/spirit' },
