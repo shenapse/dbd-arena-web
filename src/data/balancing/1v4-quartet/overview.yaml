@@ -55,6 +55,10 @@ killers:
     status: upcoming
   - name: Pig
     status: upcoming
+  - name: Slasher
+    page: slasher
+    conditions: slasher
+    status: upcoming
   - name: Spirit
     page: spirit
     conditions: spirit
