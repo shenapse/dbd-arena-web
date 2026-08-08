@@ -44,6 +44,8 @@ killers:
     conditions: lich
     status: upcoming
   - name: Nightmare
+    page: nightmare
+    conditions: nightmare
     status: provisional
   - name: Nurse
     page: nurse
@@ -69,7 +71,9 @@ killers:
     status: upcoming
   - name: Wesker
     page: wesker
+    conditions: wesker
     status: provisional
   - name: Wraith
     page: wraith
-    status: upcoming
+    conditions: wraith
+    status: provisional
