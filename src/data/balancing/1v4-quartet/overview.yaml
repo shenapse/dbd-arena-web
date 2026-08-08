@@ -2,7 +2,7 @@ killers:
   - name: Animatronic
     page: animatronic
     conditions: animatronic
-    status: upcoming
+    status: provisional
   - name: Blight
     page: blight
     conditions: blight
@@ -22,7 +22,7 @@ killers:
   - name: Demogorgon
     page: demogorgon
     conditions: demogorgon
-    status: upcoming
+    status: provisional
   - name: Doctor
     page: doctor
     conditions: doctor
@@ -44,7 +44,9 @@ killers:
     conditions: lich
     status: upcoming
   - name: Nightmare
-    status: upcoming
+    page: nightmare
+    conditions: nightmare
+    status: provisional
   - name: Nurse
     page: nurse
     conditions: nurse
@@ -55,6 +57,10 @@ killers:
     status: upcoming
   - name: Pig
     status: upcoming
+  - name: Slasher
+    page: slasher
+    conditions: slasher
+    status: provisional
   - name: Spirit
     page: spirit
     conditions: spirit
@@ -65,7 +71,9 @@ killers:
     status: upcoming
   - name: Wesker
     page: wesker
-    status: upcoming
+    conditions: wesker
+    status: provisional
   - name: Wraith
     page: wraith
-    status: upcoming
+    conditions: wraith
+    status: provisional
