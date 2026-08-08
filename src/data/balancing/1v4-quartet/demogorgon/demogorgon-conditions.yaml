@@ -1,0 +1,6 @@
+killer: The Demogorgon
+map: Coal Tower 1
+winCondition:
+  hookStages: 8
+drawCondition:
+  hookStages: null

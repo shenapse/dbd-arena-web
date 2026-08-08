@@ -1,115 +1,100 @@
-killer: The Lich
+killer: The Demogorgon
 balancing: DBD Arena - 1v4 Quartet Rank v0.1
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
 #   killer: all
 #   survivor: all
 
-# Map: Grave of Glenvale - Dead Dawg Saloon
-
 killerPerks:
   default: deny
   allow:
     - Agitation
-    - All Shaking Thunder
     - Bamboozle
+    # - Blood Echo
     - Brutal Strength
     - Call of Brine
     - Corrupt Intervention
-    - Dark Arrogance
+    # - Coulrophobia
+    - Deadlock
+    # - Deathbound
+    - Dominance
     - Dragon's Grip
     - Dying Light
     - Eruption
     - Forced Hesitation
     - Forced Penance
+    - Furtive Chase
     - Grim Embrace
     - "Hex: Crowd Control"
-    - "Hex: Devour Hope"
-    #- "Hex: Face the Darkness"
-    - "Hex: Pentimento"
+    # - "Hex: Pentimento"
     - "Hex: Ruin"
-    #- Hex: Thrill of the Hunt
+    # - "Hex: Huntress Lullaby"
+    # - "Hex: The Third Seal"
     - "Hex: Undying"
-    - "Hex: Wretched Fate"
-    - Make your Choice
-    - Merciless Storm
-    - Mindbreaker
+    # - Hysteria
+    - Infectious Fright
+    - Keep Them Waiting
+    - Leverage
+    - Machine Learning
+    - Make Your Choice
+    - Monitor and Abuse
     - Oppression
     - Overcharge
-    - Pop goes the Weasel
+    - Pop Goes the Weasel
     - Rapid Brutality
-    - Save the best for last
     - "Scourge Hook: Gift of Pain"
     - "Scourge Hook: Pain Resonance"
-    - "Scourge Hook: Monstrous Shrine"
+    - "Scourge Hook: Jagged Compass"
     - Secret Project
     - Sloppy Butcher
+    - Superior Anatomy
     - Surge
+    - Surveillance
     - Thanatophobia
     - Thrilling Tremors
     - Tinkerer
     - Trail of Torment
-    - Turn back the clock
+    - Turn Back the Clock
 
 addons:
   default: allow
   deny:
-    - {rarity: "Ultra Rare"}
-    - Robe of Eyes
-    - Staff of Withering
-    - Lantern of Revealing
+    - Leprose Lichen
 
 survivorPerks:
   default: deny
   allow:
     - Aftercare
-    - Any means necessary
-    - Badabada boom
+    - Any Means Necessary
     - Better than New
-    - Bite the bullet
+    - Bite the Bullet
     - Blood Pact
     - Bond
     - Calm Spirit
-    - Clean Break
-    - Counter Force
-    - Cut Loose
-    - Dance with Me
-    - Deception
-    #- Dejavu
+    - Counterforce
     - Detective's Hunch
-    - Diversion
-    - Empathic Connection
+    - Distortion
+    - Empathy
+    - Five Moves Ahead
+    - Fixated
     - Flashbang
-    - Friendly Competition
-    - Headon
-    - Iron Will
-    - Light Footed
-    - Light Weight
+    - Head On
+    - Light-Footed
     - Lucky Star
-    - Mettle of Man
-    - Mirrored Illusion
     - No Mither
-    - Open Handed
-    - Parental Guidance
-    - Potential Energy
     - Quick and Quiet
-    - Rapid Response
-    - Red Herring
     - Repressed Alliance
-    #- Resilience
-    - Rookie Spirit
-    - Small Game
-    - Smash Hit
+    - Saboteur
     - Urban Evasion
-    - Windows of Opportunity
     - Visionary
+    - Windows of Opportunity
   deny: []
 
 survivorRepetitionLimits:
   - scope: team
     max: 1
     perks: all
-      
+
 items:
   Med-Kit:
     default: deny
