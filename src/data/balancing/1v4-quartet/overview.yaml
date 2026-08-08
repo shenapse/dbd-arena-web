@@ -15,6 +15,10 @@ killers:
     page: clown
     conditions: clown
     status: upcoming
+  - name: Demogorgon
+    page: demogorgon
+    conditions: demogorgon
+    status: upcoming
   - name: Doctor
     page: doctor
     conditions: doctor
