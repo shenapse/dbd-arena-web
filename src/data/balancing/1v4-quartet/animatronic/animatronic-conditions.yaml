@@ -1,0 +1,6 @@
+killer: The Animatronic
+map: Wrecker's Yard
+winCondition:
+  hookStages: 9
+drawCondition:
+  hookStages: null

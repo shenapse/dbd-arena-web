@@ -1,4 +1,8 @@
 killers:
+  - name: Animatronic
+    page: animatronic
+    conditions: animatronic
+    status: upcoming
   - name: Blight
     page: blight
     conditions: blight

@@ -62,6 +62,7 @@ export default defineConfig({
     '/regulations/1v4-duo/balancing/wraith/': '/game-modes/1v4-duo/balancing/wraith/',
     '/regulations/1v4-quartet/': '/game-modes/1v4-quartet/',
     '/regulations/1v4-quartet/balancing/': '/game-modes/1v4-quartet/balancing/',
+    '/regulations/1v4-quartet/balancing/animatronic/': '/game-modes/1v4-quartet/balancing/animatronic/',
     '/regulations/1v4-quartet/balancing/billy/': '/game-modes/1v4-quartet/balancing/billy/',
     '/regulations/1v4-quartet/balancing/blight/': '/game-modes/1v4-quartet/balancing/blight/',
     '/regulations/1v4-quartet/balancing/cenobite/': '/game-modes/1v4-quartet/balancing/cenobite/',
@@ -198,6 +199,7 @@ export default defineConfig({
                       translations: { ja: 'バランス調整', ko: '밸런스 조정' },
                       items: [
                         { label: 'Overview', translations: { ja: '概要', ko: '개요' }, slug: 'game-modes/1v4-quartet/balancing' },
+                        { label: 'Animatronic', translations: { ja: 'アニマトロニック', ko: '애니마트로닉' }, slug: 'game-modes/1v4-quartet/balancing/animatronic' },
                         { label: 'Blight', translations: { ja: 'ブライト', ko: '블라이트' }, slug: 'game-modes/1v4-quartet/balancing/blight' },
                         { label: 'Cannibal', translations: { ja: 'カニバル', ko: '카니발' }, slug: 'game-modes/1v4-quartet/balancing/cannibal' },
                         { label: 'Cenobite', translations: { ja: 'セノバイト', ko: '세노바이트' }, slug: 'game-modes/1v4-quartet/balancing/cenobite' },
