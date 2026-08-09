@@ -67,6 +67,10 @@ killers:
     page: spirit
     conditions: spirit
     status: upcoming
+  - name: Twins
+    page: twins
+    conditions: twins
+    status: provisional
   - name: Unknown
     page: unknown
     conditions: unknown
