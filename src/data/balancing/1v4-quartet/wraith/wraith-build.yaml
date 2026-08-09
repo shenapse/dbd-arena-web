@@ -14,13 +14,13 @@ killerPerks:
     - Brutal Strength
     - Call of Brine
     - Corrupt Intervention
-    - Coulrophobia
+    # - Coulrophobia
     - Deadlock
     - Deathbound
-    - Dragon's Grip
+    # - Dragon's Grip
     - Dying Light
     - Eruption
-    - Forced Hesitation
+    # - Forced Hesitation
     - Forced Penance
     - Furtive Chase
     - Grim Embrace
@@ -30,7 +30,7 @@ killerPerks:
     - "Hex: Huntress Lullaby"
     - "Hex: The Third Seal"
     - "Hex: Undying"
-    - Hysteria
+    # - Hysteria
     - Infectious Fright
     - Keep Them Waiting
     - Leverage
@@ -40,7 +40,7 @@ killerPerks:
     - Overcharge
     - Pop Goes the Weasel
     - Rapid Brutality
-    - Secret Project
+    # - Secret Project
     - "Scourge Hook: Gift of Pain"
     - "Scourge Hook: Pain Resonance"
     - "Scourge Hook: Jagged Compass"
