@@ -121,6 +121,11 @@ survivorPerks:
     - Windows of Opportunity
   deny: []
 
+survivorRepetitionLimits:
+  - scope: team
+    max: 1
+    perks: all
+
 items:
   Flashlight:
     count: 1

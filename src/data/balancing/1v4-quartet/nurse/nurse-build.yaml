@@ -92,6 +92,11 @@ survivorPerks:
     - We'll Make It
   deny: []
 
+survivorRepetitionLimits:
+  - scope: team
+    max: 1
+    perks: all
+
 items:
   Flashlight:
     count: 1
