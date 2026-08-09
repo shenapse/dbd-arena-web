@@ -56,7 +56,9 @@ killers:
     conditions: oni
     status: upcoming
   - name: Pig
-    status: upcoming
+    page: pig
+    conditions: pig
+    status: provisional
   - name: Slasher
     page: slasher
     conditions: slasher
