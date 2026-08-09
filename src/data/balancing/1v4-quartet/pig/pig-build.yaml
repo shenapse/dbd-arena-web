@@ -1,4 +1,4 @@
-killer: The Wraith
+killer: The Pig
 balancing: DBD Arena - 1v4 Quartet Rank v0.1
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
@@ -20,7 +20,7 @@ killerPerks:
     # - Dragon's Grip
     - Dying Light
     - Eruption
-    # - Forced Hesitation
+    - Forced Hesitation
     - Forced Penance
     - Furtive Chase
     - Grim Embrace
@@ -35,12 +35,12 @@ killerPerks:
     - Keep Them Waiting
     - Leverage
     - Machine Learning
-    - Monitor and Abuse
+    # - Monitor and Abuse
     - Oppression
     - Overcharge
     - Pop Goes the Weasel
     - Rapid Brutality
-    # - Secret Project
+    - Secret Project
     - "Scourge Hook: Gift of Pain"
     - "Scourge Hook: Pain Resonance"
     - "Scourge Hook: Jagged Compass"
@@ -50,15 +50,19 @@ killerPerks:
     - Surveillance
     - Thanatophobia
     - Thrilling Tremors
-    - Tinkerer
+    # - Tinkerer
     - Trail of Torment
     - Turn Back the Clock
 
 addons:
-  default: allow
-  deny:
-    - {rarity: "Ultra Rare"}
-    - "\"All Seeing\" - Blood"
+  default: deny
+  allow:
+    - {rarity: "Common"}
+    - {rarity: "Uncommon"}
+    - Slow-Release Toxin
+    - Rusty Attachments
+    - Jigsaw's Annotated Plan
+    - Jigsaw's Sketch
 
 survivorPerks:
   default: deny
@@ -95,17 +99,27 @@ survivorRepetitionLimits:
     perks: all
 
 items:
+  Flashlight:
+    count: 1
+    default: deny
+    allow:
+      - Sport Flashlight
+    addons:
+      count: 2
+      default: deny
+      allow:
+        - {rarity: "Common"}
   Med-Kit:
     default: deny
-  Flashlight:
-    default: deny
+  Firecracker:
+    count: 1
+    allow:
+      - Firecracker
   Toolbox:
     default: deny
   Key:
     default: deny
   Map:
-    default: deny
-  Firecracker:
     default: deny
   Fog Vial:
     default: deny

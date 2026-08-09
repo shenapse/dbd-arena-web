@@ -56,6 +56,15 @@ maps:
       - Annotated Blueprint
       - Bloodied Blueprint
 
+  Midwich Elementary School:
+    killer:
+      - Cut Coin
+    survivor:
+      - name: Vigo's Shroud
+        count: 2
+      - Annotated Blueprint
+      - Bloodied Blueprint
+
   Ormond Lake Mine:
     killer:
       - Cut Coin

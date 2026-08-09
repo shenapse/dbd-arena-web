@@ -1,0 +1,6 @@
+killer: The Pig
+map: Midwich
+winCondition:
+  hookStages: 8
+drawCondition:
+  hookStages: null

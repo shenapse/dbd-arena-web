@@ -2,10 +2,10 @@
 title: Pig — 1v4 Quartet Balancing
 description: Per-killer balancing for Pig in the 1v4 quartet format.
 handle: 1v4-quartet-balancing-pig
-status: upcoming
+status: provisional
 changeHistory:
   - version: "0.1"
-    date: "2026-06-15"
+    date: "2026-08-09"
     note: Initial per-killer balancing entry for Pig.
 killer: Pig
 format: 1v4-quartet
@@ -13,49 +13,43 @@ format: 1v4-quartet
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 import BalancingIntro from '@components/BalancingIntro.astro';
+import BalancingList from '@components/BalancingList.astro';
+import MatchConditions from '@components/MatchConditions.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
 
 <LifecycleMeta />
 
 <BalancingIntro />
 
-| Aspect | Detail |
-| --- | --- |
-| Map | |
-| Win condition | |
-| Draw condition | |
+<MatchConditions format="1v4-quartet" killer="pig" />
+
+## Required offerings
+
+<RequiredOfferings format="1v4-quartet" killer="pig" />
 
 ## Killer perks
 
-Allowed:
-- Corrupt Intervention
-- Call of Brine
-- Dying Light
-- Eruption
-- Furtive Chase
-- "Hex: Huntress Lullaby"
-- "Hex: The Third Seal"
-- Mindbreaker
-- Oppression
-- Overcharge
-- Surveillance
-- Thrilling Tremors
-- Tinkerer
-- Turn Back the Clock
-- "Scourge Hook: Gift of Pain"
-- "Scourge Hook: Jagged Compass"
-- Pop Goes the Weasel
+![The Pig — Allowed Killer Perks](/images/builds/1v4-quartet/pig/The-Pig-killer-perks.png)
+
+<BalancingList format="1v4-quartet" killer="pig" section="killerPerks" />
 
 ## Killer add-ons
 
-Allowed: None
+![The Pig — Allowed Killer Add-ons](/images/builds/1v4-quartet/pig/The-Pig-killer-addons.png)
+
+<BalancingList format="1v4-quartet" killer="pig" section="addons" />
 
 ## Survivor perks
 
+![Going against The Pig — Allowed Survivor Perks](/images/builds/1v4-quartet/pig/The-Pig-survivor-perks.png)
+
+<BalancingList format="1v4-quartet" killer="pig" section="survivorPerks" />
+
 ## Survivor items
 
-{/* - 1 very rare med-kit with 2 rare add-ons
-- 1 rare flashlight with 2 common add-ons
-- 1 flashbang */}
+![Going against The Pig — Allowed Survivor Items](/images/builds/1v4-quartet/pig/The-Pig-items.png)
+
+<BalancingList format="1v4-quartet" killer="pig" section="items" />
 
 [← All per-killer balancing](/game-modes/1v4-quartet/balancing/)
 
