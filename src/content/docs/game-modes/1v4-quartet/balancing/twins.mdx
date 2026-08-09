@@ -1,0 +1,58 @@
+---
+title: Twins — 1v4 Quartet Balancing
+description: Per-killer balancing for Twins in the 1v4 quartet format.
+handle: 1v4-quartet-balancing-twins
+status: provisional
+changeHistory:
+  - version: "0.1"
+    date: "2026-08-10"
+    note: Initial per-killer balancing entry for Twins.
+killer: Twins
+format: 1v4-quartet
+---
+
+import LifecycleMeta from '@components/LifecycleMeta.astro';
+import BalancingIntro from '@components/BalancingIntro.astro';
+import BalancingList from '@components/BalancingList.astro';
+import MatchConditions from '@components/MatchConditions.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
+
+<LifecycleMeta />
+
+<BalancingIntro />
+
+<MatchConditions format="1v4-quartet" killer="twins" />
+
+## Required offerings
+
+<RequiredOfferings format="1v4-quartet" killer="twins" />
+
+## Killer perks
+
+![The Twins — Allowed Killer Perks](/images/builds/1v4-quartet/twins/The-Twins-killer-perks.png)
+
+<BalancingList format="1v4-quartet" killer="twins" section="killerPerks" />
+
+## Killer add-ons
+
+![The Twins — Allowed Killer Add-ons](/images/builds/1v4-quartet/twins/The-Twins-killer-addons.png)
+
+<BalancingList format="1v4-quartet" killer="twins" section="addons" />
+
+## Survivor perks
+
+![Going against The Twins — Allowed Survivor Perks](/images/builds/1v4-quartet/twins/The-Twins-survivor-perks.png)
+
+<BalancingList format="1v4-quartet" killer="twins" section="survivorPerks" />
+
+## Survivor items
+
+![Going against The Twins — Allowed Survivor Items](/images/builds/1v4-quartet/twins/The-Twins-items.png)
+
+<BalancingList format="1v4-quartet" killer="twins" section="items" />
+
+[← All per-killer balancing](/game-modes/1v4-quartet/balancing/)
+
+## Applies to
+
+- [DBD 1v4 Quartet Ranked](/game-modes/1v4-quartet/)
