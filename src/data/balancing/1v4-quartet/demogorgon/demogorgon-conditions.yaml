@@ -1,6 +1,6 @@
 killer: The Demogorgon
-map: Coal Tower 1
+map: Dead Sands
 winCondition:
-  hookStages: 8
+  hookStages: 9
 drawCondition:
   hookStages: null
