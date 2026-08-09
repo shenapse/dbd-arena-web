@@ -217,6 +217,7 @@ export default defineConfig({
                         { label: 'Pig', translations: { ja: 'ピッグ', ko: '피그' }, slug: 'game-modes/1v4-quartet/balancing/pig' },
                         { label: 'Slasher', translations: { ja: 'スラッシャー', ko: '슬래셔' }, slug: 'game-modes/1v4-quartet/balancing/slasher' },
                         { label: 'Spirit', translations: { ja: 'スピリット', ko: '스피릿' }, slug: 'game-modes/1v4-quartet/balancing/spirit' },
+                        { label: 'Twins', translations: { ja: 'ツインズ', ko: '트윈즈' }, slug: 'game-modes/1v4-quartet/balancing/twins' },
                         { label: 'Unknown', translations: { ja: 'アンノウン', ko: '언노운' }, slug: 'game-modes/1v4-quartet/balancing/unknown' },
                         { label: 'Wesker', translations: { ja: 'ウェスカー', ko: '웨스커' }, slug: 'game-modes/1v4-quartet/balancing/wesker' },
                         { label: 'Wraith', translations: { ja: 'レイス', ko: '레이스' }, slug: 'game-modes/1v4-quartet/balancing/wraith' },
