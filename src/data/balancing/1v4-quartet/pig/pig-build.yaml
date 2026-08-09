@@ -14,7 +14,7 @@ killerPerks:
     - Brutal Strength
     - Call of Brine
     - Corrupt Intervention
-    - Coulrophobia
+    # - Coulrophobia
     - Deadlock
     - Deathbound
     # - Dragon's Grip
@@ -30,12 +30,12 @@ killerPerks:
     - "Hex: Huntress Lullaby"
     - "Hex: The Third Seal"
     - "Hex: Undying"
-    - Hysteria
+    # - Hysteria
     - Infectious Fright
     - Keep Them Waiting
     - Leverage
     - Machine Learning
-    - Monitor and Abuse
+    # - Monitor and Abuse
     - Oppression
     - Overcharge
     - Pop Goes the Weasel
@@ -50,7 +50,7 @@ killerPerks:
     - Surveillance
     - Thanatophobia
     - Thrilling Tremors
-    - Tinkerer
+    # - Tinkerer
     - Trail of Torment
     - Turn Back the Clock
 
