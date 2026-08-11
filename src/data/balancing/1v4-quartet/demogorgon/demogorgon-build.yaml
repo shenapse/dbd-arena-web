@@ -64,27 +64,37 @@ addons:
 survivorPerks:
   default: deny
   allow:
+    - Adrenaline
     - Aftercare
     - Any Means Necessary
+    - Balanced Landing
     - Better than New
     - Bite the Bullet
     - Blood Pact
     - Bond
     - Calm Spirit
+    - Clean Break
     - Counterforce
     - Detective's Hunch
     - Distortion
+    - Empathic Connection
     - Empathy
     - Five Moves Ahead
+    - Finesse
     - Fixated
     - Flashbang
     - Head On
+    - Iron Will
     - Light-Footed
+    - Lithe
     - Lucky Star
     - No Mither
+    - Parental Guidance
     - Quick and Quiet
     - Repressed Alliance
     - Saboteur
+    - Smash Hit
+    - Tenacity
     - Urban Evasion
     - Visionary
     - Windows of Opportunity
@@ -99,7 +109,15 @@ items:
   Med-Kit:
     default: deny
   Flashlight:
+    count: 1
     default: deny
+    allow:
+      - Sport Flashlight
+    addons:
+      count: 2
+      default: deny
+      allow:
+        - {rarity: "Common"}
   Toolbox:
     default: deny
   Key:
@@ -107,7 +125,9 @@ items:
   Map:
     default: deny
   Firecracker:
-    default: deny
+    count: 1
+    allow:
+      - Firecracker
   Fog Vial:
     default: deny
 

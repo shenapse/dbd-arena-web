@@ -1,6 +1,6 @@
 killer: The Demogorgon
 map: Dead Sands
 winCondition:
-  hookStages: 9
+  hookStages: 10
 drawCondition:
   hookStages: null
