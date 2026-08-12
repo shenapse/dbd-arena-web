@@ -24,6 +24,7 @@ killerPerks:
     - Dying Light
     - Eruption
     - Furtive Chase
+    - "Hex: Ruin"
     - "Hex: Crowd Control"
     - "Hex: Huntress Lullaby"
     - "Hex: The Third Seal"
@@ -89,7 +90,7 @@ survivorPerks:
     # - Desperate Measures
     # - Decisive Strike
     - Diversion
-    - Do No Harm
+    # - Do No Harm
     - Empathic Connection
     - Finesse
     - Five Moves Ahead
@@ -100,7 +101,7 @@ survivorPerks:
     - Head On
     - Inner Strength
     - Iron Will
-    - Leader
+    # - Leader
     - Light-Footed
     - Lithe
     - Lucky Star

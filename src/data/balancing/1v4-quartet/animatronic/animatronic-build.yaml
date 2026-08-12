@@ -8,25 +8,25 @@ balancing: DBD Arena - 1v4 Quartet Rank v0.1
 killerPerks:
   default: deny
   allow:
-    # - Agitation
+    - Agitation
     - All Shaking Thunder
     - Bamboozle
     - Brutal Strength
     - Call of Brine
     - Corrupt Intervention
-    - Dark Arrogance
+    # - Dark Arrogance
     - Deadlock
     - Dragon's Grip
     - Dying Light
     - Eruption
-    - Forced Hesitation
+    # - Forced Hesitation
     - Forced Penance
     - Furtive Chase
     - Grim Embrace
     - "Hex: Crowd Control"
     # - "Hex: Devour Hope"
     #- "Hex: Face the Darkness"
-    # - "Hex: Pentimento"
+    - "Hex: Pentimento"
     - "Hex: Ruin"
     #- Hex: Thrill of the Hunt
     - "Hex: Undying"
@@ -70,50 +70,26 @@ survivorPerks:
   default: deny
   allow:
     - Aftercare
-    - Any means necessary
-    - Badabada boom
-    - Balanced Landing
+    - Any Means Necessary
     - Better than New
-    - Bite the bullet
+    - Bite the Bullet
     - Blood Pact
     - Bond
     - Calm Spirit
-    - Chemical Trap
-    # - Clean Break
-    - Counter Force
-    - Cut Loose
-    - Dance with Me
-    - Deception
-    #- Dejavu
+    - Counterforce
     - Detective's Hunch
-    # - Diversion
+    - Distortion
     - Empathy
     - Five Moves Ahead
     - Fixated
     - Flashbang
-    # - Friendly Competition
-    - Headon
-    - Iron Will
-    - Light Footed
-    - Lithe
-    # - Light Weight
+    - Head On
+    - Light-Footed
     - Lucky Star
-    - Mettle of Man
-    - Mirrored Illusion
     - No Mither
-    - Open Handed
-    - Parental Guidance
-    # - Potential Energy
     - Quick and Quiet
-    - Rapid Response
-    # - Red Herring
     - Repressed Alliance
-    #- Resilience
-    - Rookie Spirit
     - Saboteur
-    # - Small Game
-    - Smash Hit
-    - Tenacity
     - Urban Evasion
     - Visionary
     - Windows of Opportunity
