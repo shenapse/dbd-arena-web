@@ -31,6 +31,10 @@ killers:
     page: dracula
     conditions: dracula
     status: upcoming
+  - name: Ghost Face
+    page: ghost-face
+    conditions: ghost-face
+    status: provisional
   - name: Ghoul
     page: ghoul
     conditions: ghoul

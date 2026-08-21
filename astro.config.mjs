@@ -208,6 +208,7 @@ export default defineConfig({
                         { label: 'Demogorgon', translations: { ja: 'デモゴルゴン', ko: '데모고르곤' }, slug: 'game-modes/1v4-quartet/balancing/demogorgon' },
                         { label: 'Doctor', translations: { ja: 'ドクター', ko: '닥터' }, slug: 'game-modes/1v4-quartet/balancing/doctor' },
                         { label: 'Dracula', translations: { ja: 'ドラキュラ', ko: '드라큘라' }, slug: 'game-modes/1v4-quartet/balancing/dracula' },
+                        { label: 'Ghost Face', translations: { ja: 'ゴーストフェイス', ko: '고스트페이스' }, slug: 'game-modes/1v4-quartet/balancing/ghost-face' },
                         { label: 'Ghoul', translations: { ja: 'グール', ko: '구울' }, slug: 'game-modes/1v4-quartet/balancing/ghoul' },
                         { label: 'Good Guy', translations: { ja: 'グッドガイ', ko: '굿가이' }, slug: 'game-modes/1v4-quartet/balancing/good-guy' },
                         { label: 'Hillbilly', translations: { ja: 'ヒルビリー', ko: '힐빌리' }, slug: 'game-modes/1v4-quartet/balancing/billy' },
