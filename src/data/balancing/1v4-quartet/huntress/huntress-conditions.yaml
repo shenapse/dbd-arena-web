@@ -1,0 +1,6 @@
+killer: The Huntress
+map: Wrecker's Yard
+winCondition:
+  hookStages: 8
+drawCondition:
+  hookStages: null

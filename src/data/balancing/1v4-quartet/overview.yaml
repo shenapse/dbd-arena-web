@@ -43,6 +43,10 @@ killers:
     page: billy
     conditions: hillbilly
     status: upcoming
+  - name: Huntress
+    page: huntress
+    conditions: huntress
+    status: provisional
   - name: Lich
     page: lich
     conditions: lich
