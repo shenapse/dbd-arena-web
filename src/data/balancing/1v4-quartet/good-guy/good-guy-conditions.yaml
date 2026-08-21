@@ -1,0 +1,6 @@
+killer: The Good Guy
+map: Dead Dawg Saloon
+winCondition:
+  hookStages: 7
+drawCondition:
+  hookStages: null

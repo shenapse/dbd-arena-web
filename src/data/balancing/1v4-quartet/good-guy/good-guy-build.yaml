@@ -1,4 +1,4 @@
-killer: The Doctor
+killer: The Good Guy
 balancing: DBD Arena - 1v4 Quartet Rank v0.1
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
@@ -16,11 +16,11 @@ killerPerks:
   allow:
     - Agitation
     - Bamboozle
-    - Blood Echo
+    # - Blood Echo
     - Brutal Strength
     - Call of Brine
     - Corrupt Intervention
-    - Coulrophobia
+    # - Coulrophobia
     - Deadlock
     - Deathbound
     - Dragon's Grip
@@ -38,15 +38,15 @@ killerPerks:
     - "Hex: Undying"
     - Hysteria
     - Infectious Fright
-    - Keep Them Waiting
+    # - Keep Them Waiting
     - Leverage
     - Machine Learning
     - Monitor and Abuse
     - Oppression
     - Overcharge
     - Pop Goes the Weasel
-    - Rapid Brutality
-    - Secret Project
+    # - Rapid Brutality
+    # - Secret Project
     - "Scourge Hook: Gift of Pain"
     - "Scourge Hook: Pain Resonance"
     - "Scourge Hook: Jagged Compass"
@@ -63,7 +63,10 @@ killerPerks:
 addons:
   default: allow
   deny:
-    - {rarity: "Ultra Rare"}
+    - Hard Hat
+    - Mirror Shards
+    - Rat Poison
+    - Yardstick
 
 survivorPerks:
   default: deny
@@ -74,7 +77,7 @@ survivorPerks:
     - Bite the Bullet
     - Blood Pact
     - Bond
-    # - Calm Spirit
+    - Calm Spirit
     - Counterforce
     - Detective's Hunch
     - Distortion
@@ -92,7 +95,6 @@ survivorPerks:
     - Urban Evasion
     - Visionary
     - Windows of Opportunity
-
   deny: []
 
 survivorRepetitionLimits:

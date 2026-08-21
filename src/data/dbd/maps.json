@@ -73,6 +73,12 @@
   "grim-pantry": {
     "name": "Grim Pantry"
   },
+  "hawkins-national-laboratory": {
+    "name": "Hawkins National Laboratory",
+    "abbreviations": [
+      "Hawkins"
+    ]
+  },
   "groaning-storehouse": {
     "name": "Groaning Storehouse"
   },
@@ -155,7 +161,10 @@
     "name": "Torment Creek"
   },
   "treatment-theatre": {
-    "name": "Treatment Theatre"
+    "name": "Treatment Theatre",
+    "aliases": [
+      "Lery"
+    ]
   },
   "trickster-s-delusion": {
     "name": "Trickster's Delusion"

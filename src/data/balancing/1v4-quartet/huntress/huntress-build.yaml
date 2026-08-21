@@ -1,4 +1,4 @@
-killer: The Doctor
+killer: The Huntress
 balancing: DBD Arena - 1v4 Quartet Rank v0.1
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
@@ -20,13 +20,13 @@ killerPerks:
     - Brutal Strength
     - Call of Brine
     - Corrupt Intervention
-    - Coulrophobia
+    # - Coulrophobia
     - Deadlock
     - Deathbound
-    - Dragon's Grip
+    # - Dragon's Grip
     - Dying Light
     - Eruption
-    - Forced Hesitation
+    # - Forced Hesitation
     - Forced Penance
     - Furtive Chase
     - Grim Embrace
@@ -36,17 +36,18 @@ killerPerks:
     - "Hex: Huntress Lullaby"
     - "Hex: The Third Seal"
     - "Hex: Undying"
-    - Hysteria
+    # - Hysteria
     - Infectious Fright
-    - Keep Them Waiting
+    - Iron Maiden
+    # - Keep Them Waiting
     - Leverage
     - Machine Learning
     - Monitor and Abuse
     - Oppression
     - Overcharge
     - Pop Goes the Weasel
-    - Rapid Brutality
-    - Secret Project
+    # - Rapid Brutality
+    # - Secret Project
     - "Scourge Hook: Gift of Pain"
     - "Scourge Hook: Pain Resonance"
     - "Scourge Hook: Jagged Compass"
@@ -63,7 +64,8 @@ killerPerks:
 addons:
   default: allow
   deny:
-    - {rarity: "Ultra Rare"}
+    - Iridescent Head
+    - Glowing Concoction
 
 survivorPerks:
   default: deny
@@ -74,12 +76,12 @@ survivorPerks:
     - Bite the Bullet
     - Blood Pact
     - Bond
-    # - Calm Spirit
+    - Calm Spirit
     - Counterforce
     - Detective's Hunch
     - Distortion
     - Empathy
-    - Five Moves Ahead
+    # - Five Moves Ahead
     - Fixated
     - Flashbang
     - Head On
@@ -88,11 +90,11 @@ survivorPerks:
     - No Mither
     - Quick and Quiet
     - Repressed Alliance
+    - Residual Manifest
     - Saboteur
     - Urban Evasion
     - Visionary
     - Windows of Opportunity
-
   deny: []
 
 survivorRepetitionLimits:
@@ -104,7 +106,15 @@ items:
   Med-Kit:
     default: deny
   Flashlight:
+    count: 1
     default: deny
+    allow:
+      - Sport Flashlight
+    addons:
+      count: 2
+      default: deny
+      allow:
+        - {rarity: "Common"}
   Toolbox:
     default: deny
   Key:

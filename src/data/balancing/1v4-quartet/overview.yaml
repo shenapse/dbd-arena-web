@@ -31,14 +31,26 @@ killers:
     page: dracula
     conditions: dracula
     status: upcoming
+  - name: Ghost Face
+    page: ghost-face
+    conditions: ghost-face
+    status: provisional
   - name: Ghoul
     page: ghoul
     conditions: ghoul
     status: upcoming
+  - name: Good Guy
+    page: good-guy
+    conditions: good-guy
+    status: provisional
   - name: Hillbilly
     page: billy
     conditions: hillbilly
     status: upcoming
+  - name: Huntress
+    page: huntress
+    conditions: huntress
+    status: provisional
   - name: Lich
     page: lich
     conditions: lich
@@ -58,6 +70,10 @@ killers:
   - name: Pig
     page: pig
     conditions: pig
+    status: provisional
+  - name: Shape
+    page: shape
+    conditions: shape
     status: provisional
   - name: Slasher
     page: slasher
