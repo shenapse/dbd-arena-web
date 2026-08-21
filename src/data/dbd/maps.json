@@ -161,7 +161,10 @@
     "name": "Torment Creek"
   },
   "treatment-theatre": {
-    "name": "Treatment Theatre"
+    "name": "Treatment Theatre",
+    "aliases": [
+      "Lery"
+    ]
   },
   "trickster-s-delusion": {
     "name": "Trickster's Delusion"

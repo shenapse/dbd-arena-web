@@ -109,3 +109,12 @@ maps:
         count: 2
       - Annotated Blueprint
       - Bloodied Blueprint
+
+  Lery:
+    killer:
+      - Cut Coin
+    survivor:
+      - name: Vigo's Shroud
+        count: 2
+      - Annotated Blueprint
+      - Bloodied Blueprint
