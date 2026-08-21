@@ -217,6 +217,7 @@ export default defineConfig({
                         { label: 'Nurse', translations: { ja: 'ナース', ko: '너스' }, slug: 'game-modes/1v4-quartet/balancing/nurse' },
                         { label: 'Oni', translations: { ja: '鬼', ko: '오니' }, slug: 'game-modes/1v4-quartet/balancing/oni' },
                         { label: 'Pig', translations: { ja: 'ピッグ', ko: '피그' }, slug: 'game-modes/1v4-quartet/balancing/pig' },
+                        { label: 'Shape', translations: { ja: 'シェイプ', ko: '쉐이프' }, slug: 'game-modes/1v4-quartet/balancing/shape' },
                         { label: 'Slasher', translations: { ja: 'スラッシャー', ko: '슬래셔' }, slug: 'game-modes/1v4-quartet/balancing/slasher' },
                         { label: 'Spirit', translations: { ja: 'スピリット', ko: '스피릿' }, slug: 'game-modes/1v4-quartet/balancing/spirit' },
                         { label: 'Twins', translations: { ja: 'ツインズ', ko: '트윈즈' }, slug: 'game-modes/1v4-quartet/balancing/twins' },

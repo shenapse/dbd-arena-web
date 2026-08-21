@@ -67,6 +67,10 @@ killers:
     page: pig
     conditions: pig
     status: provisional
+  - name: Shape
+    page: shape
+    conditions: shape
+    status: provisional
   - name: Slasher
     page: slasher
     conditions: slasher
