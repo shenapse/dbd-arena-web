@@ -7,6 +7,12 @@ balancing: DBD Arena - 1v4 Quartet Rank v0.1
 
 # Map: Grave of Glenvale - Dead Dawg Saloon
 
+display:
+  killerPerks: allow
+  survivorPerks: allow
+  addons: ban
+  items: allow
+
 killerPerks:
   default: deny
   allow:
