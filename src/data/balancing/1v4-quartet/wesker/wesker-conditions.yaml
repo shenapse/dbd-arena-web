@@ -1,6 +1,6 @@
 killer: The Wesker
 map: Coal Tower 1
 winCondition:
-  kills: 4
-  gensRemaining: 0
-drawCondition: null
+  hookStages: 8
+drawCondition:
+  hookStages: null
