@@ -1,0 +1,124 @@
+killer: The Good Guy
+balancing: DBD Arena - 1v4 Quartet Rank v0.1
+# universe is optional; defaults to every perk in dbdperks.json for each side.
+# universe:
+#   killer: all
+#   survivor: all
+
+display:
+  killerPerks: allow
+  survivorPerks: allow
+  addons: ban
+  items: allow
+
+killerPerks:
+  default: deny
+  allow:
+    - Agitation
+    - Bamboozle
+    # - Blood Echo
+    - Brutal Strength
+    - Call of Brine
+    - Corrupt Intervention
+    # - Coulrophobia
+    - Deadlock
+    - Deathbound
+    - Dragon's Grip
+    - Dying Light
+    - Eruption
+    - Forced Hesitation
+    - Forced Penance
+    - Furtive Chase
+    - Grim Embrace
+    - "Hex: Crowd Control"
+    - "Hex: Pentimento"
+    - "Hex: Ruin"
+    - "Hex: Huntress Lullaby"
+    - "Hex: The Third Seal"
+    - "Hex: Undying"
+    - Hysteria
+    - Infectious Fright
+    # - Keep Them Waiting
+    - Leverage
+    - Machine Learning
+    - Monitor and Abuse
+    - Oppression
+    - Overcharge
+    - Pop Goes the Weasel
+    # - Rapid Brutality
+    # - Secret Project
+    - "Scourge Hook: Gift of Pain"
+    - "Scourge Hook: Pain Resonance"
+    - "Scourge Hook: Jagged Compass"
+    - Sloppy Butcher
+    - Superior Anatomy
+    - Surge
+    - Surveillance
+    - Thanatophobia
+    - Thrilling Tremors
+    - Tinkerer
+    - Trail of Torment
+    - Turn Back the Clock
+
+addons:
+  default: allow
+  deny:
+    - Hard Hat
+    - Mirror Shards
+    - Rat Poison
+    - Yardstick
+
+survivorPerks:
+  default: deny
+  allow:
+    - Aftercare
+    - Any Means Necessary
+    - Better than New
+    - Bite the Bullet
+    - Blood Pact
+    - Bond
+    - Calm Spirit
+    - Counterforce
+    - Detective's Hunch
+    - Distortion
+    - Empathy
+    - Five Moves Ahead
+    - Fixated
+    - Flashbang
+    - Head On
+    - Light-Footed
+    - Lucky Star
+    - No Mither
+    - Quick and Quiet
+    - Repressed Alliance
+    - Saboteur
+    - Urban Evasion
+    - Visionary
+    - Windows of Opportunity
+  deny: []
+
+survivorRepetitionLimits:
+  - scope: team
+    max: 1
+    perks: all
+
+items:
+  Med-Kit:
+    default: deny
+  Flashlight:
+    default: deny
+  Toolbox:
+    default: deny
+  Key:
+    default: deny
+  Map:
+    default: deny
+  Firecracker:
+    default: deny
+  Fog Vial:
+    default: deny
+
+itemDuplicateLimits:
+  - scope: team
+    max: 1
+    items: all

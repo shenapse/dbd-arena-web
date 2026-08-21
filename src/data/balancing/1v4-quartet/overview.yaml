@@ -35,6 +35,10 @@ killers:
     page: ghoul
     conditions: ghoul
     status: upcoming
+  - name: Good Guy
+    page: good-guy
+    conditions: good-guy
+    status: provisional
   - name: Hillbilly
     page: billy
     conditions: hillbilly
