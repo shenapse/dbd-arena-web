@@ -1,10 +1,3 @@
-# Perk allow-list example: The Trapper
-# Run from the repo root:
-#   node utilities/perk-sheet-generator/perk-sheet-generator.js \
-#        utilities/perk-sheet-generator/examples/the-trapper.yaml \
-#        --out utilities/perk-sheet-generator/output \
-#        --preset utilities/perk-sheet-generator/output/test-preset.json
-
 killer: The Ghoul
 balancing: DBD Arena - 1v4 Quartet Rank v0.1
 # universe is optional; defaults to every perk in dbdperks.json for each side.
@@ -29,14 +22,19 @@ killerPerks:
     - Coulrophobia
     - Deadlock
     - Deathbound
+    - Dragon's Grip
     - Dying Light
     - Eruption
+    - Forced Penance
     - Furtive Chase
     - "Hex: Huntress Lullaby"
     - "Hex: The Third Seal"
+    - "Hex: Wretched Fate"
     - Hysteria
     - Infectious Fright
     - Leverage
+    - Machine Learning
+    - Make Your Choice
     - Oppression
     - Overcharge
     - Pop Goes the Weasel
@@ -74,14 +72,14 @@ survivorPerks:
     - Better than New
     - Bite the Bullet
     - Blood Pact
-    - Boil Over
+    # - Boil Over
     - Bond
     #- Botany Knowledge
     - Champion of Light
     - Chemical Trap
     - Counterforce
     - Dead Hard
-    - Desperate Measures
+    # - Desperate Measures
     - Detective's Hunch
     - Distortion
     - Diversion
@@ -89,23 +87,26 @@ survivorPerks:
     - Five Moves Ahead
     - Fixated
     - Flashbang
-    - Flow State
-    - For the People
+    # - Flow State
+    # - For the People
     - Head On
-    - Inner Strength
+    # - Inner Strength
     - Iron Will
-    - Leader
+    # - Leader
     - Light-Footed
     - Lithe
     - Lucky Star
+    - Mettle of Man
     - No Mither
     - Quick and Quiet
     - Repressed Alliance
     - Residual Manifest
+    - Road Life
     - Saboteur
-    - Second Wind
+    # - Second Wind
     - Smash Hit
-    - Sprint Burst
+    # - Sprint Burst
+    - Solidarity
     - Tenacity
     - Urban Evasion
     - Visionary
