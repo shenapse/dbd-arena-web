@@ -1,6 +1,5 @@
 killer: The Ghoul
 map: Ormond Lake Mine
 winCondition:
-  kills: 4
-  gensRemaining: 0
+  hookStages: 10
 drawCondition: null
