@@ -1,0 +1,58 @@
+---
+title: Artist — 1v4 Quartet Balancing
+description: Per-killer balancing for Artist in the 1v4 quartet format.
+handle: 1v4-quartet-balancing-artist
+status: provisional
+changeHistory:
+  - version: "0.1"
+    date: "2026-08-25"
+    note: Initial per-killer balancing entry for Artist.
+killer: Artist
+format: 1v4-quartet
+---
+
+import LifecycleMeta from '@components/LifecycleMeta.astro';
+import BalancingIntro from '@components/BalancingIntro.astro';
+import BalancingList from '@components/BalancingList.astro';
+import MatchConditions from '@components/MatchConditions.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
+
+<LifecycleMeta />
+
+<BalancingIntro />
+
+<MatchConditions format="1v4-quartet" killer="artist" />
+
+## Required offerings
+
+<RequiredOfferings format="1v4-quartet" killer="artist" />
+
+## Killer perks
+
+![The Artist — Allowed Killer Perks](/images/builds/1v4-quartet/artist/The-Artist-killer-perks.png)
+
+<BalancingList format="1v4-quartet" killer="artist" section="killerPerks" />
+
+## Killer add-ons
+
+![The Artist — Allowed Killer Add-ons](/images/builds/1v4-quartet/artist/The-Artist-killer-addons.png)
+
+<BalancingList format="1v4-quartet" killer="artist" section="addons" />
+
+## Survivor perks
+
+![Going against The Artist — Allowed Survivor Perks](/images/builds/1v4-quartet/artist/The-Artist-survivor-perks.png)
+
+<BalancingList format="1v4-quartet" killer="artist" section="survivorPerks" />
+
+## Survivor items
+
+![Going against The Artist — Allowed Survivor Items](/images/builds/1v4-quartet/artist/The-Artist-items.png)
+
+<BalancingList format="1v4-quartet" killer="artist" section="items" />
+
+[← All per-killer balancing](/game-modes/1v4-quartet/balancing/)
+
+## Applies to
+
+- [DBD 1v4 Quartet Ranked](/game-modes/1v4-quartet/)

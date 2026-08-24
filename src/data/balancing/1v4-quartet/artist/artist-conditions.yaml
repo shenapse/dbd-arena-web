@@ -1,0 +1,6 @@
+killer: The Artist
+map: Azarov
+winCondition:
+  hookStages: 9
+drawCondition:
+  hookStages: null

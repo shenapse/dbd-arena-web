@@ -3,6 +3,10 @@ killers:
     page: animatronic
     conditions: animatronic
     status: provisional
+  - name: Artist
+    page: artist
+    conditions: artist
+    status: provisional
   - name: Blight
     page: blight
     conditions: blight
