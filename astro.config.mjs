@@ -200,7 +200,7 @@ export default defineConfig({
                       translations: { ja: 'バランス調整', ko: '밸런스 조정' },
                       items: [
                         { label: 'Overview', translations: { ja: '概要', ko: '개요' }, slug: 'game-modes/1v4-quartet/balancing' },
-                        { label: 'Animatronic', translations: { ja: 'アニマトロニック', ko: '애니마트로닉' }, slug: 'game-modes/1v4-quartet/balancing/animatronic' },
+                        { label: 'Artist', translations: { ja: 'アーティスト', ko: '아티스트' }, slug: 'game-modes/1v4-quartet/balancing/artist' },
                         { label: 'Blight', translations: { ja: 'ブライト', ko: '블라이트' }, slug: 'game-modes/1v4-quartet/balancing/blight' },
                         { label: 'Cannibal', translations: { ja: 'カニバル', ko: '카니발' }, slug: 'game-modes/1v4-quartet/balancing/cannibal' },
                         { label: 'Cenobite', translations: { ja: 'セノバイト', ko: '세노바이트' }, slug: 'game-modes/1v4-quartet/balancing/cenobite' },
@@ -212,7 +212,6 @@ export default defineConfig({
                         { label: 'Ghoul', translations: { ja: 'グール', ko: '구울' }, slug: 'game-modes/1v4-quartet/balancing/ghoul' },
                         { label: 'Good Guy', translations: { ja: 'グッドガイ', ko: '굿가이' }, slug: 'game-modes/1v4-quartet/balancing/good-guy' },
                         { label: 'Hillbilly', translations: { ja: 'ヒルビリー', ko: '힐빌리' }, slug: 'game-modes/1v4-quartet/balancing/billy' },
-                        { label: 'Huntress', translations: { ja: 'ハントレス', ko: '헌트리스' }, slug: 'game-modes/1v4-quartet/balancing/huntress' },
                         { label: 'Lich', translations: { ja: 'リッチ', ko: '리치' }, slug: 'game-modes/1v4-quartet/balancing/lich' },
                         { label: 'Nightmare', translations: { ja: 'ナイトメア', ko: '나이트메어' }, slug: 'game-modes/1v4-quartet/balancing/nightmare' },
                         { label: 'Nurse', translations: { ja: 'ナース', ko: '너스' }, slug: 'game-modes/1v4-quartet/balancing/nurse' },

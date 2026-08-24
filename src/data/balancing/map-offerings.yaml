@@ -101,6 +101,15 @@ maps:
       - Annotated Blueprint
       - Bloodied Blueprint
 
+  Azarov:
+    killer:
+      - Cut Coin
+    survivor:
+      - name: Vigo's Shroud
+        count: 2
+      - Annotated Blueprint
+      - Bloodied Blueprint
+
   Hawkins:
     killer:
       - Cut Coin
