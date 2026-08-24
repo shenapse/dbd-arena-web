@@ -1,8 +1,4 @@
 killers:
-  - name: Animatronic
-    page: animatronic
-    conditions: animatronic
-    status: provisional
   - name: Artist
     page: artist
     conditions: artist
@@ -51,10 +47,6 @@ killers:
     page: billy
     conditions: hillbilly
     status: upcoming
-  - name: Huntress
-    page: huntress
-    conditions: huntress
-    status: provisional
   - name: Lich
     page: lich
     conditions: lich
