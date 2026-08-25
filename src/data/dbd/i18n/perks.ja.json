@@ -20,6 +20,7 @@
   "champion-of-light": "光の闘士",
   "chemical-trap": "化学的な罠",
   "clean-break": "決別",
+  "corrective-action": "是正措置",
   "corrupt-intervention": "堕落の介入",
   "coulrophobia": "ピエロ恐怖症",
   "counterforce": "カウンターフォース",
@@ -33,17 +34,20 @@
   "dance-with-me": "ダンス・ウィズ・ミー",
   "dark-arrogance": "闇の慢心",
   "dead-hard": "デッド・ハード",
+  "deadline": "締め切り",
   "deathbound": "デスバウンド",
   "deception": "欺き",
   "deliverance": "解放",
   "desperate-measures": "苦肉の策",
   "detective-s-hunch": "刑事の直感",
+  "discordance": "不協和音",
   "distortion": "ディストーション",
   "diversion": {
     "name": "陽動",
     "aliases": []
   },
   "do-no-harm": "害をなすなかれ",
+  "dominance": "支配",
   "dragon-s-grip": "ドラゴンの掌握",
   "dramaturgy": "劇作法",
   "empathic-connection": "共感的つながり",
@@ -59,12 +63,14 @@
     ]
   },
   "flashbang": "スタングレネード",
-  "flow-state": "フローステート",
+  "flow-state": "フロー状態",
   "for-the-people": "人々のために",
   "forced-hesitation": "躊躇の強制",
   "forced-penance": "強制苦行",
   "friendly-competition": "切磋琢磨",
   "furtive-chase": "隠密の追跡",
+  "game-afoot": "執拗な狩り",
+  "genetic-limits": "遺伝的限界",
   "grim-embrace": "不吉な包囲",
   "head-on": "真っ向勝負",
   "hex-crowd-control": "呪術：クラウドコントロール",
@@ -83,6 +89,8 @@
       "内なる回復"
     ]
   },
+  "iron-grasp": "鋼の握力",
+  "iron-maiden": "アイアンメイデン",
   "iron-will": "鋼の意思",
   "keep-them-waiting": {
     "name": "待たせておけ",
@@ -91,6 +99,7 @@
     ]
   },
   "kindred": "血族",
+  "knockout": "ノックアウト",
   "leader": "リーダー",
   "leverage": "骨抜きの作用",
   "light-footed": "忍び足",
@@ -129,11 +138,13 @@
   "quick-and-quiet": "素早く静かに",
   "rapid-brutality": "素早い残虐行為",
   "rapid-response": "迅速な対応",
+  "ravenous": "貪欲",
   "reactive-healing": "反射回復",
   "red-herring": "おとり",
   "repressed-alliance": "抑圧の同盟",
   "residual-manifest": "残像の顕現",
   "resilience": "逆境魂",
+  "road-life": "路上生活",
   "rookie-spirit": "新人魂",
   "saboteur": "サボタージュ",
   "scourge-hook-jagged-compass": "悶絶のフック：不規則なコンパス",
@@ -156,6 +167,7 @@
   "sloppy-butcher": "ずさんな肉屋",
   "small-game": "小さな獲物",
   "smash-hit": "大ヒット",
+  "solidarity": "連帯感",
   "sprint-burst": "全力疾走",
   "superior-anatomy": "人体の超越",
   "surge": {
@@ -165,6 +177,7 @@
     ]
   },
   "surveillance": "監視",
+  "teamwork-collective-stealth": "チームワーク：共同ステルス",
   "tenacity": "執念",
   "thanatophobia": "死恐怖症",
   "thrilling-tremors": "戦慄",
@@ -175,6 +188,7 @@
   "urban-evasion": "都会の逃走術",
   "visionary": "透視家",
   "we-ll-make-it": "きっとやり遂げる",
+  "whispers": "囁き",
   "will-to-live": {
     "name": "生きる意志",
     "aliases": [
