@@ -75,6 +75,7 @@ survivorPerks:
     # - Boil Over
     - Bond
     #- Botany Knowledge
+    - Calm Spirit
     - Champion of Light
     - Chemical Trap
     - Counterforce
@@ -87,12 +88,12 @@ survivorPerks:
     - Five Moves Ahead
     - Fixated
     - Flashbang
-    # - Flow State
-    # - For the People
+    - Flow State
+    - For the People
     - Head On
     # - Inner Strength
     - Iron Will
-    # - Leader
+    - Leader
     - Light-Footed
     - Lithe
     - Lucky Star
@@ -106,7 +107,7 @@ survivorPerks:
     # - Second Wind
     - Smash Hit
     # - Sprint Burst
-    - Solidarity
+    # - Solidarity
     - Tenacity
     - Urban Evasion
     - Visionary
