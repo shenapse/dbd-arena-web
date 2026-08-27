@@ -275,6 +275,11 @@ export default defineConfig({
               items: [
                 { label: 'Overview', translations: { ja: '概要' }, slug: 'handbook/policies' },
                 {
+                  label: 'Eligibility and Participation',
+                  translations: { ja: '参加資格' },
+                  slug: 'handbook/policies/eligibility-and-participation',
+                },
+                {
                   label: 'Participation and Conduct',
                   translations: { ja: '参加者の心得' },
                   slug: 'handbook/policies/participation-and-conduct',
