@@ -71,13 +71,17 @@ survivorPerks:
   allow:
     - Aftercare
     - Any Means Necessary
+    - Badabada boom
     - Balanced Landing
     - Better than New
     - Bite the Bullet
     - Blood Pact
     - Bond
     - Calm Spirit
+    - Chemical Trap
     - Counterforce
+    - Cut Loose
+    - Dance with Me
     - Dejavu
     - Detective's Hunch
     - Distortion
@@ -89,6 +93,7 @@ survivorPerks:
     - Head On
     - Iron Will
     - Light-Footed
+    - Lithe
     - Lucky Star
     - No Mither
     - Open Handed
@@ -97,6 +102,7 @@ survivorPerks:
     - Repressed Alliance
     - Residual Manifest
     - Saboteur
+    - Second Wind
     - Urban Evasion
     - Visionary
     - Windows of Opportunity
