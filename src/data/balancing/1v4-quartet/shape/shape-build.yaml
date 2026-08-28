@@ -93,7 +93,7 @@ survivorPerks:
     - Head On
     - Iron Will
     - Light-Footed
-    - Lithe
+    # - Lithe
     - Lucky Star
     - No Mither
     - Open Handed
