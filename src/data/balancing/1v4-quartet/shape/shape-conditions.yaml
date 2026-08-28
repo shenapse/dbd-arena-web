@@ -1,6 +1,6 @@
 killer: The Shape
 map: Hawkins
 winCondition:
-  hookStages: 10
+  hookStages: 9
 drawCondition:
   hookStages: null
