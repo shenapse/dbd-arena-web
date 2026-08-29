@@ -102,7 +102,7 @@ survivorPerks:
     - Repressed Alliance
     - Residual Manifest
     - Saboteur
-    - Second Wind
+    # - Second Wind
     - Urban Evasion
     - Visionary
     - Windows of Opportunity
