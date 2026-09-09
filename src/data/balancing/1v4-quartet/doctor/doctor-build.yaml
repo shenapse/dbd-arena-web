@@ -16,7 +16,7 @@ killerPerks:
   allow:
     - Agitation
     - Bamboozle
-    - Blood Echo
+    # - Blood Echo
     - Brutal Strength
     - Call of Brine
     - Corrupt Intervention
@@ -34,16 +34,16 @@ killerPerks:
     - "Hex: Pentimento"
     - "Hex: Ruin"
     - "Hex: Huntress Lullaby"
-    - "Hex: The Third Seal"
+    # - "Hex: The Third Seal"
     - "Hex: Undying"
-    - Hysteria
+    # - Hysteria
     - Infectious Fright
     - Keep Them Waiting
     - Leverage
     - Machine Learning
     - Monitor and Abuse
     - Oppression
-    - Overcharge
+    # - Overcharge
     - Pop Goes the Weasel
     - Rapid Brutality
     - Secret Project
@@ -51,7 +51,7 @@ killerPerks:
     - "Scourge Hook: Pain Resonance"
     - "Scourge Hook: Jagged Compass"
     - Sloppy Butcher
-    - Superior Anatomy
+    # - Superior Anatomy
     - Surge
     - Surveillance
     - Thanatophobia
