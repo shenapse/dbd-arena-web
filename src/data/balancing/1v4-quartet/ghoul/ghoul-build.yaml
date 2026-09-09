@@ -83,7 +83,7 @@ survivorPerks:
     # - Desperate Measures
     - Detective's Hunch
     - Distortion
-    - Diversion
+    # - Diversion
     - Empathic Connection
     - Five Moves Ahead
     - Fixated
@@ -93,12 +93,14 @@ survivorPerks:
     - Head On
     # - Inner Strength
     - Iron Will
-    - Leader
+    # - Leader
     - Light-Footed
     - Lithe
     - Lucky Star
     - Mettle of Man
     - No Mither
+    - Open Handed
+    # - Potential Energy
     - Quick and Quiet
     - Repressed Alliance
     - Residual Manifest
