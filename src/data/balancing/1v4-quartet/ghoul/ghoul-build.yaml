@@ -78,6 +78,7 @@ survivorPerks:
     - Calm Spirit
     - Champion of Light
     - Chemical Trap
+    - Clean Break
     - Counterforce
     - Dead Hard
     # - Desperate Measures
@@ -104,7 +105,7 @@ survivorPerks:
     - Quick and Quiet
     - Repressed Alliance
     - Residual Manifest
-    - Road Life
+    # - Road Life
     - Saboteur
     # - Second Wind
     - Smash Hit

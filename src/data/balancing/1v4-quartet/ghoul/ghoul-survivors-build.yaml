@@ -1,0 +1,34 @@
+killer: The Ghoul           # OPTIONAL; drives the "Going against:" header + portrait
+balancing: DBD Arena
+
+survivors:
+  - perks:
+      - Head On
+      - Quick and Quiet
+      - Lucky Star
+      - Empathic Connection
+    offering: Vigo's Shroud 
+
+  - perks:
+      - Balanced Landing
+      - Dead Hard
+      - Flow State
+      - Any Means Necessary
+    item: Firecracker
+    offering: Vigo's Shroud
+
+  - perks:
+      - Smash Hit
+      - Five Moves Ahead
+      - Iron Will
+      - Clean Break
+    offering: Bloodied Blueprint
+
+  - perks: 
+    - Lithe
+    - For the People
+    - Adrenaline
+    - Champion of Light
+    item: Sport Flashlight
+    addons: [Battery, Leather Grip]
+    offering: Annotated Blueprint

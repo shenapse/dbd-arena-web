@@ -1,0 +1,36 @@
+# npm run generate:build-sheet src/data/balancing/1v4-quartet/ghost-face/ghost-face-survivors-build.yaml -- --out public/images/builds/1v4-quartet/ghost-face
+
+killer: The Doctor          # OPTIONAL; drives the "Going against:" header + portrait
+balancing: DBD Arena
+
+survivors:
+  - perks:
+      - Head On
+      - Quick and Quiet
+      - Lucky Star
+      - Flashbang
+    offering: Vigo's Shroud 
+
+  - perks:
+      - Five Moves Ahead
+      - Repressed Alliance
+      - Visionary
+      - Saboteur
+    # item: Sport Flashlight
+    # addons: [Battery, Leather Grip]
+    offering: Vigo's Shroud
+
+  - perks:
+      - Bond
+      - Any Means Necessary
+      - Fixated
+      - Light-Footed
+    # item: Firecracker
+    offering: Bloodied Blueprint
+
+  - perks: 
+    - Better than New
+    - Blood Pact
+    - Bite the Bullet
+    - Windows of Opportunity
+    offering: Annotated Blueprint

@@ -2,11 +2,19 @@
 #
 # generate-build-sheets.sh
 #
-# Wraps the dbd-perk-sheet / dbd-addon-sheet / dbd-item-sheet CLIs (see
-# public/images/builds/README.md) to bulk-regenerate build-restriction sheet
-# PNGs from the per-killer *-build.yaml source files under
-# src/data/balancing/<format>/<killer>/, writing them to
+# Wraps the dbd-perk-sheet / dbd-addon-sheet / dbd-item-sheet / dbd-build-sheet
+# CLIs (see public/images/builds/README.md) to bulk-regenerate
+# build-restriction sheet PNGs from the per-killer *-build.yaml source files
+# under src/data/balancing/<format>/<killer>/, writing them to
 # public/images/builds/<format>/<killer>/ by default.
+#
+# The first three types (perks/addons/items) render an allow/deny-list build
+# sheet from a single <slug>-build.yaml restriction file. The fourth type,
+# build-sheet, is different in kind: it renders one specific, already-picked
+# killer/survivor loadout (not an allow-list) from the optional
+# <slug>-killer-builds.yaml / <slug>-survivor-builds.yaml source files, and
+# — when the unit's <slug>-build.yaml restriction file exists — cross-
+# validates that loadout against it automatically.
 #
 # Usage:
 #   scripts/generate-build-sheets.sh [options]
@@ -23,9 +31,10 @@ ASSET_ROOT="${DBD_BALANCING_TOOL_ROOT:-$REPO_ROOT/../../../balancing-tool}"
 PERK_BIN="$REPO_ROOT/node_modules/.bin/dbd-perk-sheet"
 ADDON_BIN="$REPO_ROOT/node_modules/.bin/dbd-addon-sheet"
 ITEM_BIN="$REPO_ROOT/node_modules/.bin/dbd-item-sheet"
+BUILD_SHEET_BIN="$REPO_ROOT/node_modules/.bin/dbd-build-sheet"
 
 VALID_FORMATS=(1v4-quartet 1v4-duo 1v1)
-VALID_TYPES=(perks addons items)
+VALID_TYPES=(perks addons items build-sheet)
 
 FORMAT="1v4-quartet"
 KILLER_ARG="all"
@@ -39,25 +48,33 @@ print_usage() {
 Usage: scripts/generate-build-sheets.sh [options]
 
 Regenerates build-restriction sheet PNGs (killer/survivor perks, killer
-add-ons, survivor items) from the source YAML under src/data/balancing/,
-wrapping the dbd-perk-sheet / dbd-addon-sheet / dbd-item-sheet CLIs.
+add-ons, survivor items, and picked-loadout build sheets) from the source
+YAML under src/data/balancing/, wrapping the dbd-perk-sheet /
+dbd-addon-sheet / dbd-item-sheet / dbd-build-sheet CLIs.
 
 Options:
   --format <fmt>        1v4-quartet | 1v4-duo | 1v1   (default: 1v4-quartet)
   --killer <slug|all>   Killer directory slug, or 'all' for every killer in
                          the format. Ignored for --format 1v1 (there is only
                          one unit, 'base').             (default: all)
-  --type <t[,t..]|all>  perks | addons | items | all, comma-separated combos
-                         allowed (e.g. addons,items). Note: 'perks' always
-                         generates BOTH killer-perks and survivor-perks
-                         images in a single call — they cannot be split.
+  --type <t[,t..]|all>  perks | addons | items | build-sheet | all,
+                         comma-separated combos allowed (e.g. addons,items).
+                         Note: 'perks' always generates BOTH killer-perks and
+                         survivor-perks images in a single call — they cannot
+                         be split. 'build-sheet' renders a specific picked
+                         killer/survivor loadout (not an allow-list) from the
+                         optional <slug>-killer-builds.yaml /
+                         <slug>-survivor-builds.yaml files instead of
+                         <slug>-build.yaml, and does not accept --preset.
                                                          (default: all)
   --out <dir>            Override the output directory for every unit
                          processed (default per killer:
                          public/images/builds/<format>/<killer>).
                          WARNING: combined with --killer all, every killer's
                          output is written into this SAME directory.
-  --preset <path>        Pass-through --preset to the generator CLI(s).
+  --preset <path>        Pass-through --preset to the perks/addons/items
+                         generator CLIs. Ignored for --type build-sheet
+                         (dbd-build-sheet has no --preset flag).
   --dry-run              Print the commands that would run, without running
                          them.
   -h, --help              Show this help.
@@ -75,13 +92,18 @@ Examples:
   # 1v1 base build, all sheet types
   scripts/generate-build-sheets.sh --format 1v1
 
+  # Blight's picked-loadout build sheet (killer-builds.yaml and/or
+  # survivor-builds.yaml, cross-validated against blight-build.yaml if present)
+  scripts/generate-build-sheets.sh --killer blight --type build-sheet
+
 Env:
   DBD_BALANCING_TOOL_ROOT   Path to the balancing-tool checkout (default:
                              ../../../balancing-tool relative to the repo
                              root).
 
 A failed run is safe to re-run: each generator call fully overwrites its
-target files, so regeneration is idempotent.
+target files, so regeneration is idempotent — this holds for build-sheet
+output too.
 EOF
 }
 
@@ -115,6 +137,21 @@ yaml_path_for() {
     echo "$SRC_BASE/1v1/base/1v1-build.yaml"
   else
     echo "$SRC_BASE/$fmt/$slug/${slug}-build.yaml"
+  fi
+}
+
+# Unlike yaml_path_for (one mandatory <slug>-build.yaml allow-list), the
+# build-sheet type has up to two independent, OPTIONAL source files per unit:
+# a killer-builds.yaml and a survivor-builds.yaml. Prints both candidate
+# paths (whether or not they exist) — callers check existence themselves.
+build_sheet_files_for() {
+  local fmt="$1" slug="$2"
+  if [[ "$fmt" == "1v1" ]]; then
+    echo "$SRC_BASE/1v1/base/base-killer-builds.yaml"
+    echo "$SRC_BASE/1v1/base/base-survivor-builds.yaml"
+  else
+    echo "$SRC_BASE/$fmt/$slug/${slug}-killer-builds.yaml"
+    echo "$SRC_BASE/$fmt/$slug/${slug}-survivor-builds.yaml"
   fi
 }
 
@@ -170,6 +207,57 @@ run_type() {
   fi
 }
 
+# Runs dbd-build-sheet for one unit. Unlike run_type, this type:
+#   - takes up to two OPTIONAL source files (killer-builds/survivor-builds)
+#     passed together as multiple positional args to a single invocation,
+#   - auto-adds --rules pointing at the unit's existing <slug>-build.yaml
+#     restriction file, if that file exists,
+#   - never receives --preset (dbd-build-sheet has no such flag),
+#   - treats "neither source file exists" as a skip whenever resolving every
+#     killer (--killer all), or whenever build-sheet was only pulled in via
+#     an (implicit or explicit) --type all, but as a hard die() when the
+#     caller named a specific killer (--killer <slug>) AND explicitly asked
+#     for --type build-sheet (alone or comma-separated with other types) —
+#     an explicit, unambiguous request for something missing should fail
+#     loudly, same as the other types.
+run_build_sheet() {
+  local fmt="$1" slug="$2" restriction_yaml="$3" out_dir="$4"
+  local candidate
+  local existing=()
+  while IFS= read -r candidate; do
+    if [[ -f "$candidate" ]]; then
+      existing+=("$candidate")
+    fi
+  done < <(build_sheet_files_for "$fmt" "$slug")
+
+  if [[ ${#existing[@]} -eq 0 ]]; then
+    if [[ "$EXPLICIT_BUILD_SHEET" == true && "$KILLER_ARG" != "all" ]]; then
+      local expected1 expected2
+      expected1="$(build_sheet_files_for "$fmt" "$slug" | sed -n '1p')"
+      expected2="$(build_sheet_files_for "$fmt" "$slug" | sed -n '2p')"
+      die "No build-sheet source found for '$slug'. Expected one or both of: $expected1, $expected2"
+    else
+      echo "==> build-sheet: $slug: no *-killer-builds.yaml or *-survivor-builds.yaml, skipping"
+      return 0
+    fi
+  fi
+
+  local cmd=("$BUILD_SHEET_BIN" "${existing[@]}" --asset-root "$ASSET_ROOT" --out "$out_dir")
+  if [[ -f "$restriction_yaml" ]]; then
+    cmd+=(--rules "$restriction_yaml")
+  fi
+
+  local names=("${existing[@]##*/}")
+  echo "==> build-sheet: ${names[*]} -> $out_dir"
+  if [[ "$DRY_RUN" == true ]]; then
+    printf '  %q ' "${cmd[@]}"
+    echo
+  else
+    mkdir -p "$out_dir"
+    "${cmd[@]}"
+  fi
+}
+
 # --- arg parsing -------------------------------------------------------
 
 while [[ $# -gt 0 ]]; do
@@ -211,8 +299,21 @@ for t in "${type_items[@]}"; do
   for v in "${VALID_TYPES[@]}"; do
     [[ "$t" == "$v" ]] && valid=true && break
   done
-  [[ "$valid" == true ]] || die "Invalid --type '$t'. Valid values: perks, addons, items, all (comma-separated combos allowed)."
+  [[ "$valid" == true ]] || die "Invalid --type '$t'. Valid values: perks, addons, items, build-sheet, all (comma-separated combos allowed)."
   TYPES+=("$t")
+done
+
+# Whether the user's raw, pre-expansion --type value literally named
+# 'build-sheet' (as opposed to it merely coming along for the ride via the
+# post-expansion "all" -> VALID_TYPES list, which always includes it). This
+# distinguishes an explicit ask for build-sheet from an implicit one, so that
+# run_build_sheet knows whether missing source files should die() or skip.
+EXPLICIT_BUILD_SHEET=false
+for t in "${type_items[@]}"; do
+  if [[ "$t" == "build-sheet" ]]; then
+    EXPLICIT_BUILD_SHEET=true
+    break
+  fi
 done
 
 if [[ ! -d "$ASSET_ROOT" ]]; then
@@ -222,9 +323,9 @@ if [[ ! -d "$ASSET_ROOT" ]]; then
   echo "the underlying CLI will report the missing files it needs." >&2
 fi
 
-for bin_var in PERK_BIN ADDON_BIN ITEM_BIN; do
+for bin_var in PERK_BIN ADDON_BIN ITEM_BIN BUILD_SHEET_BIN; do
   bin_path="${!bin_var}"
-  [[ -x "$bin_path" ]] || die "$bin_path not found — did you run 'npm install'? (dbd-*-sheet CLIs are optionalDependencies from the balancing-tool repo)"
+  [[ -x "$bin_path" ]] || die "$bin_path not found — did you run 'npm install'? (dbd-*-sheet CLIs, including dbd-build-sheet-generator, are optionalDependencies from the balancing-tool repo)"
 done
 
 # --- main ----------------------------------------------------------------
@@ -236,9 +337,27 @@ killers_output="$(resolve_killers "$FORMAT" "$KILLER_ARG")"
 
 while IFS= read -r slug; do
   yaml="$(yaml_path_for "$FORMAT" "$slug")"
-  [[ -f "$yaml" ]] || die "Expected YAML not found: $yaml"
+
+  # The singular <slug>-build.yaml is mandatory for perks/addons/items, but
+  # only optionally consulted (for --rules) by build-sheet — so only die()
+  # on it missing when a type that actually requires it was requested.
+  needs_yaml=false
+  for t in "${TYPES[@]}"; do
+    if [[ "$t" != "build-sheet" ]]; then
+      needs_yaml=true
+      break
+    fi
+  done
+  if [[ "$needs_yaml" == true ]]; then
+    [[ -f "$yaml" ]] || die "Expected YAML not found: $yaml"
+  fi
+
   out_dir="${OUT_OVERRIDE:-$OUT_BASE/$FORMAT/$slug}"
   for t in "${TYPES[@]}"; do
-    run_type "$t" "$yaml" "$out_dir"
+    if [[ "$t" == "build-sheet" ]]; then
+      run_build_sheet "$FORMAT" "$slug" "$yaml" "$out_dir"
+    else
+      run_type "$t" "$yaml" "$out_dir"
+    fi
   done
 done <<< "$killers_output"
