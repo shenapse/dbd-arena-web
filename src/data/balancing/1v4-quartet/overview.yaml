@@ -31,6 +31,10 @@ killers:
     page: dracula
     conditions: dracula
     status: upcoming
+  - name: Dredge
+    page: dredge
+    conditions: dredge
+    status: provisional
   - name: Ghost Face
     page: ghost-face
     conditions: ghost-face
