@@ -1,0 +1,35 @@
+killer: The Blight           # OPTIONAL; drives the "Going against:" header + portrait
+balancing: DBD Arena
+
+survivors:
+  - perks:
+    - Lithe
+    - Finesse
+    - Plot Twist
+    - Decisive Strike
+    offering: Vigo's Shroud 
+
+  - perks:
+    - Overcome
+    - Deliverance
+    - Unbreakable
+    - Desperate Measures
+    item: Ranger Med-kit
+    addons: [Bandages, Gel Dressings]
+    offering: Vigo's Shroud
+
+  - perks:
+    - Sprint Burst
+    - Tenacity
+    - For the People
+    - Fixated
+    item: Sport Flashlight
+    addons: [Battery, Leather Grip]
+    offering: Bloodied Blueprint
+
+  - perks: 
+    - Dead Hard
+    - Iron Will
+    - Urban Evasion
+    - Botany Knowledge
+    offering: Annotated Blueprint
