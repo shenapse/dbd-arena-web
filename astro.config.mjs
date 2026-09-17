@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import { DISCORD_INVITE } from './src/constants.ts';
+import { DISCORD_INVITE, DISCORD_CLOSED_MESSAGE } from './src/constants.ts';
 
 // Provisional service name — carried over from the earlier site skeleton as a
 // placeholder. Final branding is a website-design decision (UX §7.1).
@@ -136,6 +136,25 @@ export default defineConfig({
             rel: 'stylesheet',
             href: 'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=Inter:wght@400;500;600;700&display=swap',
           },
+        },
+        // Site-wide Discord-invite intercept (UX §9 handoff — Discord isn't
+        // public yet). Matches every anchor whose href is DISCORD_INVITE
+        // (header social icon, sidebar link, and the Start Playing CTA all
+        // point at this same constant) and shows an alert instead of
+        // navigating. Plain window.alert by design: no toast/modal library
+        // in this repo. See src/constants.ts for the stub Twitter/X contact.
+        {
+          tag: 'script',
+          content: `(function () {
+  var discordHref = ${JSON.stringify(DISCORD_INVITE)};
+  var message = ${JSON.stringify(DISCORD_CLOSED_MESSAGE)};
+  document.addEventListener('click', function (event) {
+    var anchor = event.target && event.target.closest ? event.target.closest('a') : null;
+    if (!anchor || anchor.getAttribute('href') !== discordHref) return;
+    event.preventDefault();
+    window.alert(message);
+  });
+})();`,
         },
       ],
       description:
