@@ -1,6 +1,5 @@
 killer: The Dredge
 map: Midwich
 winCondition:
-  kills: 4
-  gensRemaining: 1
+  hookStages: 11
 drawCondition: null

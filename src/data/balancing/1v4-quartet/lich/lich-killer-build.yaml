@@ -1,0 +1,38 @@
+killer: The Lich           # OPTIONAL; drives the "Going against:" header + portrait
+balancing: DBD Arena
+
+builds:
+  - perks:
+    - "Hex: Ruin"
+    - "Hex: Crowd Control"
+    - "Hex: Pentimento"
+    - "Scourge Hook: Pain Resonance"
+    offering: Cut Coin
+
+  - perks:
+    - "Hex: Ruin"
+    - "Hex: Undying"
+    - "Hex: Pentimento"
+    - "Hex: Wretched Fate"
+    offering: Cut Coin
+    
+  # - perks:
+  #   - Corrupt Intervention
+  #   - "Scourge Hook: Pain Resonance"
+  #   - Eruption
+  #   - Pop goes the Weasel
+  #   offering: Cut Coin
+
+  - perks:
+    - Agitation
+    - Forced Hesitation
+    - "Scourge Hook: Pain Resonance"
+    - Corrupt Intervention
+    offering: Cut Coin
+
+  - perks:
+    - Turn Back the Clock
+    - "Scourge Hook: Pain Resonance"
+    - Corrupt Intervention
+    - Grim Embrace
+    offering: Cut Coin
