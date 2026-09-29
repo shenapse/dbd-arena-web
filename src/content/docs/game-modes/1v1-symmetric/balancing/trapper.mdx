@@ -7,28 +7,30 @@ changeHistory:
   - version: "0.1"
     date: "2026-06-21"
     note: Initial per-killer balancing entry for Trapper.
-killer: trapper
+killer: The Trapper
 format: 1v1-symmetric-rank
 ---
 
 import LifecycleMeta from '@components/LifecycleMeta.astro';
+import BalancingIntro from '@components/BalancingIntro.astro';
+import BalancingList from '@components/BalancingList.astro';
+import MatchConditions from '@components/MatchConditions.astro';
 
 <LifecycleMeta />
 
-Per-killer balancing for {frontmatter.killer}.
-These rules sit alongside the general 1v1 symmetric rule and complement it.
+<BalancingIntro />
 
-## Map
-
-- Suffocation Pit
+<MatchConditions format="1v1" killer="trapper" />
 
 ## Killer perks
 
-Choose one perk from perk pool.
+Choose one perk from the perk pool below.
+
+<BalancingList format="1v1" killer="trapper" section="killerPerks" />
 
 ## Killer add-ons
 
-- Trapper Sack
+<BalancingList format="1v1" killer="trapper" section="addons" />
 
 ## Killer power
 
@@ -36,10 +38,19 @@ The Trapper must not use his power during the 1v1 match.
 
 ## Survivor perks
 
-- Lithe
+Choose one exhaustion perk and one non-exhaustion perk from the pool below.
+
+<BalancingList format="1v1" killer="trapper" section="survivorPerks" />
+
+## Survivor items
+
+<BalancingList format="1v1" killer="trapper" section="items" />
 
 ## Response to crouch
+
 M1 miss swing.
+
+[← All per-killer balancing](/game-modes/1v1-symmetric/balancing/)
 
 ## Applies to
 
