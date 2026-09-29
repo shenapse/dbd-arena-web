@@ -231,7 +231,8 @@ export interface ConditionStats {
 export interface MatchConditions {
   killer: string;
   map: string;
-  winCondition: ConditionStats;
+  /** `null` = no fixed threshold (mirrored match: the better-performing player wins). */
+  winCondition: ConditionStats | null;
   drawCondition: ConditionStats | null;
 }
 

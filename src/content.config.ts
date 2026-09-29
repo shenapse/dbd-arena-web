@@ -157,6 +157,7 @@ export const collections = {
         'matchConditions.kills': z.string().optional(),
         'matchConditions.gensRemaining': z.string().optional(),
         'matchConditions.hookStages': z.string().optional(),
+        'matchConditions.relativeWin': z.string().optional(),
         'balancingList.allowed': z.string().optional(),
         'balancingList.banned': z.string().optional(),
         'balancingList.itemBanned': z.string().optional(),

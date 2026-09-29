@@ -75,7 +75,7 @@ const rows: DisplayRow[] = doc.killers.map((entry) => {
         `BalancingOverview (format: "${format}", killer: "${entry.conditions}")`
       );
       map = localizeName(mapEntry.name, locale, 'map');
-      win = describeConditionStats(c.winCondition, t);
+      win = describeConditionStats(c.winCondition, t, 'matchConditions.relativeWin');
       draw = describeConditionStats(c.drawCondition, t);
     }
   }

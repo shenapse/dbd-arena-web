@@ -9,14 +9,20 @@ type ConditionKey =
   | 'matchConditions.none'
   | 'matchConditions.kills'
   | 'matchConditions.gensRemaining'
-  | 'matchConditions.hookStages';
+  | 'matchConditions.hookStages'
+  | 'matchConditions.relativeWin';
 
 type Translate = (key: ConditionKey) => string;
 
 /** Compose a ConditionStats (or null) into a localized sentence by looking up
- * per-stat phrase templates via `t` and joining the ones present. */
-export function describeConditionStats(stats: ConditionStats | null, t: Translate): string {
-  if (!stats) return t('matchConditions.none');
+ * per-stat phrase templates via `t` and joining the ones present. A `null`
+ * `stats` renders as `t(nullKey)` (default: the generic "none" placeholder). */
+export function describeConditionStats(
+  stats: ConditionStats | null,
+  t: Translate,
+  nullKey: ConditionKey = 'matchConditions.none'
+): string {
+  if (!stats) return t(nullKey);
 
   const parts: string[] = [];
   if (stats.kills != null) parts.push(t('matchConditions.kills').replace('{n}', String(stats.kills)));
