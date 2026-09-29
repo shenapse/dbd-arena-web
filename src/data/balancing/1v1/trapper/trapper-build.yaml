@@ -1,0 +1,47 @@
+killer: The Trapper
+balancing: DBD Arena - 1v1 Symmetric Rank v0.1
+
+universe: 1v1-standard
+
+display:
+  killerPerks: allow
+  survivorPerks: allow
+  addons: allow
+  items: allow
+
+killerPerks:
+  default: allow
+
+addons:
+  default: deny
+  allow:
+    - Trapper Sack
+
+survivorPerks:
+  default: allow
+
+# survivorRepetitionLimits:
+#   - scope: team
+#     max: 1
+#     perks: all
+
+items:
+  Flashlight:
+    default: deny
+  Med-Kit:
+    default: deny
+  Firecracker:
+    default: deny
+  Toolbox:
+    default: deny
+  Key:
+    default: deny
+  Map:
+    default: deny
+  Fog Vial:
+    default: deny
+
+# itemDuplicateLimits:
+#   - scope: team
+#     max: 1
+#     items: all

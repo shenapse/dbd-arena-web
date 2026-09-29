@@ -1,0 +1,113 @@
+# Shared perk universe: the pool of perks a build may draw from.
+#
+# Referenced from a -build.yaml via `universe:` (see the build templates):
+#   universe: quartet-standard            # this file, both sides
+#   universe:
+#     killer: quartet-standard            # a universe id, `all`, or an inline list
+#     survivor: all
+# A side set to an id uses that side of this file. `all` is reserved and
+# cannot be a universe id. The id is this file's name without `.yaml`.
+#
+# Keys (any other top-level key is an error):
+#   name:        optional human label (unused by resolution)
+#   description: optional free text
+#   killer:      `all` or a non-empty list of killer perk names; omitted => all
+#   survivor:    `all` or a non-empty list of survivor perk names; omitted => all
+#
+# Rules:
+#   - Names are plain strings, matched like build yaml names (case, spaces and
+#     punctuation ignored, aliases accepted). Group selectors such as
+#     `{ exhaustion: true }` are not allowed here.
+#   - Names containing a colon must be quoted: "Hex: Ruin".
+#   - Unknown names and duplicates are build errors.
+#   - A build's allow/deny lists resolve inside the universe, so allowing a
+#     perk outside it is an "Unknown perk" error.
+#
+# Like the build yamls, edits need a dev-server restart to show in `astro dev`.
+
+name: Quartet standard pool
+description: Perks legal as a base pool for 1v4 Quartet builds.
+
+killer:
+  - Agitation
+  - Bamboozle
+  - Blood Echo
+  - Brutal Strength
+  - Call of Brine
+  - Corrupt Intervention
+  - Deadlock
+  - Discordance
+  - Dragon's Grip
+  - Dying Light
+  - Eruption
+  - Forced Penance
+  - Game Afoot
+  - Genetic Limits
+  - Grim Embrace
+  - "Hex: Crowd Control"
+  - "Hex: Ruin"
+  - "Hex: Undying"
+  - Iron Grasp
+  - Iron Maiden
+  - Knock Out
+  - Make your Choice
+  - Merciless Storm
+  - Mindbreaker
+  - Oppression
+  - Pop goes the Weasel
+  - Rapid Brutality
+  - Ravenous
+  - Save the best for last
+  - "Scourge Hook: Gift of Pain"
+  - "Scourge Hook: Pain Resonance"
+  - Secret Project
+  - Sloppy Butcher
+  - Surge
+  - Thanatophobia
+  - Thrilling Tremors
+  - Tinkerer
+  - Trail of Torment
+  - Turn back the clock
+  - Whispers
+
+survivor:
+  - Aftercare
+  - Any means necessary
+  - Badabada boom
+  - Balanced Landing
+  - Better than New
+  - Bite the bullet
+  - Blood Pact
+  - Bond
+  - Boil Over
+  - Calm Spirit
+  - Chemical Trap
+  - Corrective Action
+  - Counter Force
+  - Cut Loose
+  - Dance with Me
+  - Deception
+  - Deadline
+  - Detective's Hunch
+  - Empathy
+  - Five Moves Ahead
+  - Fixated
+  - Flashbang
+  - For the People
+  - Headon
+  - Iron Will
+  - Light Footed
+  - Lithe
+  - Light Weight
+  - Lucky Star
+  - No One Left Behind
+  - Open Handed
+  - Quick and Quiet
+  - Repressed Alliance
+  - Residual Manifest
+  - Road Life
+  - Smash Hit
+  - Tenacity
+  - Urban Evasion
+  - Visionary
+  - Windows of Opportunity

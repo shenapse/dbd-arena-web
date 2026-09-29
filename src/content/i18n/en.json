@@ -24,6 +24,7 @@
   "matchConditions.kills": "{n} kills",
   "matchConditions.gensRemaining": "with {n} generator(s) remaining",
   "matchConditions.hookStages": "{n} hook stages",
+  "matchConditions.relativeWin": "No fixed condition — the better-performing player wins",
   "balancingList.allowed": "Allowed:",
   "balancingList.banned": "Banned:",
   "balancingList.itemBanned": "Banned",

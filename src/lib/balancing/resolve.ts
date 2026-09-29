@@ -50,6 +50,7 @@ import type {
   SurvivorRepetitionLimit,
   ResolvedList,
   RarityDisplay,
+  UniverseSideDecl,
 } from './types';
 
 const perksData = perksJson as unknown as Record<string, PerkEntry>;
@@ -112,11 +113,23 @@ function matchPerkSelector(
   selector: Selector,
   universe: readonly Perk[],
   lookup: Map<string, Perk>,
-  context: string
+  context: string,
+  sideLookup?: Map<string, Perk>
 ): Perk[] {
+  // A name that misses the (narrowed) universe but exists on this side gets a
+  // more precise error than "unknown perk".
+  const notInUniverse = (name: string): Error | null =>
+    sideLookup?.has(normalize(name))
+      ? new Error(
+          `Perk "${name}" (${context}) is not in this build's perk universe. ` +
+            `Add it to the universe or remove it from allow/deny.`
+        )
+      : null;
   if (typeof selector === 'string') {
     const perk = lookup.get(normalize(selector));
     if (!perk) {
+      const outside = notInUniverse(selector);
+      if (outside) throw outside;
       throw new Error(`Unknown perk name "${selector}" (${context}). No matching perk found on this side.`);
     }
     return [perk];
@@ -142,6 +155,8 @@ function matchPerkSelector(
       const reconstructed = `${key}: ${String(value)}`;
       const perk = lookup.get(normalize(reconstructed));
       if (perk) return [perk];
+      const outside = notInUniverse(reconstructed);
+      if (outside) throw outside;
       throw new Error(
         `Unknown perk name "${reconstructed}" (${context}). No matching perk found on this side. ` +
           `If this is a perk name containing a colon, wrap it in quotes in the YAML (e.g. "Boon: Circle of Healing").`
@@ -154,20 +169,71 @@ function matchPerkSelector(
   throw new Error(`Invalid selector value ${JSON.stringify(selector)} (${context}).`);
 }
 
+/** Every perk of one side (killer or survivor). */
+export function allSidePerks(side: 'killer' | 'survivor'): Perk[] {
+  return allPerks.filter((p) => p.survivorPerk === (side === 'survivor'));
+}
+
+/**
+ * Map a universe's perk-name list to perks of one side, rejecting unknown
+ * names, group-selector objects and duplicates (compared by perk, so an alias
+ * and the full name count as the same entry).
+ * @param context - human-readable label for error messages
+ */
+export function resolveUniverseNames(
+  names: readonly unknown[],
+  sideAll: readonly Perk[],
+  context: string
+): Perk[] {
+  const lookup = buildLookup(sideAll);
+  const seen = new Set<string>();
+  const perks: Perk[] = [];
+  for (const raw of names) {
+    if (typeof raw !== 'string') {
+      // `- Hex: Ruin` parses as { Hex: "Ruin" }; point at the quoting fix.
+      const hint =
+        isPlainObject(raw) && Object.keys(raw).length === 1
+          ? ` If this is a perk name containing a colon, wrap it in quotes in the YAML (e.g. "${Object.keys(raw)[0]}: ${String(Object.values(raw)[0])}").`
+          : '';
+      throw new Error(
+        `Invalid universe entry ${JSON.stringify(raw)} (${context}). Only perk name strings are allowed.${hint}`
+      );
+    }
+    const perk = lookup.get(normalize(raw));
+    if (!perk) {
+      throw new Error(`Unknown perk name "${raw}" (${context}). No matching perk found on this side.`);
+    }
+    if (seen.has(perk.slug)) {
+      throw new Error(`Duplicate perk "${raw}" (${context}); "${perk.name}" is already listed.`);
+    }
+    seen.add(perk.slug);
+    perks.push(perk);
+  }
+  return perks;
+}
+
 /**
  * Resolve allowed perks for one side (killer or survivor) of a `-build.yaml`.
  * @param sideConfig - the `killerPerks:`/`survivorPerks:` block ({ default, allow, deny })
  * @param side - which perk universe to resolve against
  * @param context - human-readable label for error messages, e.g. `"killerPerks (killer: The Blight)"`
+ * @param universeDecl - optional narrowed universe (already expanded from ids by
+ *   load-universe.ts): `'all'`/omitted = every perk of the side, or a perk-name list
  */
 export function resolvePerks(
   sideConfig: AllowDenyConfig | undefined,
   side: 'killer' | 'survivor',
-  context: string
+  context: string,
+  universeDecl?: UniverseSideDecl
 ): ResolvedList<Perk> {
-  const isSurvivor = side === 'survivor';
-  const universe = allPerks.filter((p) => p.survivorPerk === isSurvivor);
+  const sideAll = allSidePerks(side);
+  const universe =
+    universeDecl === undefined || universeDecl === 'all'
+      ? sideAll
+      : resolveUniverseNames(universeDecl, sideAll, `universe (${context})`);
   const lookup = buildLookup(universe);
+  // Only needed to tell "outside the universe" from "unknown" when narrowed.
+  const sideLookup = universe === sideAll ? undefined : buildLookup(sideAll);
 
   const defaultVal = sideConfig?.default ?? 'allow';
   if (defaultVal !== 'allow' && defaultVal !== 'deny') {
@@ -179,10 +245,10 @@ export function resolvePerks(
     for (const p of universe) allowed.set(p.slug, p);
   }
   for (const sel of sideConfig?.deny ?? []) {
-    for (const p of matchPerkSelector(sel, universe, lookup, context)) allowed.delete(p.slug);
+    for (const p of matchPerkSelector(sel, universe, lookup, context, sideLookup)) allowed.delete(p.slug);
   }
   for (const sel of sideConfig?.allow ?? []) {
-    for (const p of matchPerkSelector(sel, universe, lookup, context)) allowed.set(p.slug, p);
+    for (const p of matchPerkSelector(sel, universe, lookup, context, sideLookup)) allowed.set(p.slug, p);
   }
 
   return finalizeList(allowed, universe, (p) => p.slug, (p) => p.name);

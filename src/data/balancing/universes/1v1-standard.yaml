@@ -1,0 +1,45 @@
+# Shared perk universe: the pool of perks a build may draw from.
+#
+# Referenced from a -build.yaml via `universe:` (see the build templates):
+#   universe: 1v1-standard            # this file, both sides
+#   universe:
+#     killer: 1v1-standard            # a universe id, `all`, or an inline list
+#     survivor: all
+# A side set to an id uses that side of this file. `all` is reserved and
+# cannot be a universe id. The id is this file's name without `.yaml`.
+#
+# Keys (any other top-level key is an error):
+#   name:        optional human label (unused by resolution)
+#   description: optional free text
+#   killer:      `all` or a non-empty list of killer perk names; omitted => all
+#   survivor:    `all` or a non-empty list of survivor perk names; omitted => all
+#
+# Rules:
+#   - Names are plain strings, matched like build yaml names (case, spaces and
+#     punctuation ignored, aliases accepted). Group selectors such as
+#     `{ exhaustion: true }` are not allowed here.
+#   - Names containing a colon must be quoted: "Hex: Ruin".
+#   - Unknown names and duplicates are build errors.
+#   - A build's allow/deny lists resolve inside the universe, so allowing a
+#     perk outside it is an "Unknown perk" error.
+#
+# Like the build yamls, edits need a dev-server restart to show in `astro dev`.
+
+name: 1v1 standard pool
+description: Perks legal as a base pool for 1v4 1v1 builds.
+
+killer:
+  - Bamboozle
+  - Brutal Strength
+
+survivor:
+  - Balanced Landing
+  - Dramaturgy
+  # - Five Moves Ahead
+  - Finesse
+  - Lithe
+  - Resilience
+  # - Smash Hit
+  - Sprint Burst
+  # - Urban Evasion
+  # - Windows of Opportunity

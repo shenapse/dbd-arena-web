@@ -1,8 +1,9 @@
 killer: The 
 balancing: DBD Arena - 1v4 Quartet Rank v0.1
-# universe is optional; defaults to every perk in dbdperks.json for each side.
-# universe:
-#   killer: all
+# universe is optional; omitted means every perk for each side.
+# universe: quartet-standard       # shared pool from src/data/balancing/universes/<id>.yaml (both sides)
+# universe:                        # or per side: `all`, a universe id, or an inline list of perk names
+#   killer: quartet-standard
 #   survivor: all
 
 killerPerks:

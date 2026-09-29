@@ -28,9 +28,11 @@ import {
   collapseAddonsByRarity,
   collapseItemAddonsByRarity,
 } from '../lib/balancing/resolve';
+import { resolveUniverseDecl } from '../lib/balancing/load-universe';
 import { localizeName } from '../lib/balancing/i18n-names';
 import type {
   AllowDenyConfig,
+  BuildUniverseDecl,
   ItemsConfig,
   ItemDuplicateLimit,
   SurvivorRepetitionLimit,
@@ -62,6 +64,7 @@ const t = Astro.locals.t;
 interface BuildDoc {
   killer?: string;
   default?: 'allow' | 'deny';
+  universe?: BuildUniverseDecl;
   killerPerks?: AllowDenyConfig;
   survivorPerks?: AllowDenyConfig;
   addons?: AllowDenyConfig;
@@ -114,7 +117,7 @@ let survivorRepetitionLimitTexts: string[] | null = null;
 if (doc) {
   if (section === 'killerPerks' || section === 'survivorPerks') {
     const side = section === 'killerPerks' ? 'killer' : 'survivor';
-    const result = resolvePerks(doc[section], side, context);
+    const result = resolvePerks(doc[section], side, context, resolveUniverseDecl(doc.universe, side, context));
     flatNames = (mode === 'ban' ? result.banned : result.allowed).map((p) =>
       localizeName(p.name, locale, 'perk', { aliases: p.aliases })
     );

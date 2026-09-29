@@ -24,6 +24,7 @@
   "matchConditions.kills": "{n}킬",
   "matchConditions.gensRemaining": "발전기 {n}대 남음",
   "matchConditions.hookStages": "{n}훅 스테이지",
+  "matchConditions.relativeWin": "고정 조건 없음 (더 좋은 성적을 낸 쪽이 승리)",
   "balancingList.allowed": "사용 가능:",
   "balancingList.banned": "사용 금지:",
   "balancingList.itemBanned": "사용 금지",

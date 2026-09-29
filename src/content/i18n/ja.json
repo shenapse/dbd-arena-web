@@ -24,6 +24,7 @@
   "matchConditions.kills": "{n}キル",
   "matchConditions.gensRemaining": "発電機残数{n}",
   "matchConditions.hookStages": "{n}フックステージ",
+  "matchConditions.relativeWin": "固定条件なし（成績の良い方が勝利）",
   "balancingList.allowed": "使用可能:",
   "balancingList.banned": "使用禁止:",
   "balancingList.itemBanned": "使用禁止",
