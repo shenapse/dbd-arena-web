@@ -1,0 +1,39 @@
+# STUB: placeholder 1v1 build sheet for Pig. Add-ons and item rules are not decided yet.
+killer: The Pig
+balancing: DBD Arena - 1v1 Symmetric Rank v0.1
+
+universe: 1v1-standard
+
+display:
+  killerPerks: allow
+  survivorPerks: allow
+  addons: allow
+  items: allow
+
+killerPerks:
+  default: allow
+
+addons:
+  default:
+  allow:
+    - Last will
+    - Workshop grease
+
+survivorPerks:
+  default: allow
+
+items:
+  Flashlight:
+    default: deny
+  Med-Kit:
+    default: deny
+  Firecracker:
+    default: deny
+  Toolbox:
+    default: deny
+  Key:
+    default: deny
+  Map:
+    default: deny
+  Fog Vial:
+    default: deny

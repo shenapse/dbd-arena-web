@@ -1,0 +1,41 @@
+killers:
+  - name: Trapper
+    page: trapper
+    conditions: trapper
+    status: active
+  - name: Demogorgon
+    page: demogorgon
+    conditions: demogorgon
+    status: upcoming
+  - name: Doctor
+    page: doctor
+    conditions: doctor
+    status: upcoming
+  - name: Hillbilly
+    page: hillbilly
+    conditions: hillbilly
+    status: upcoming
+  - name: Nightmare
+    page: nightmare
+    conditions: nightmare
+    status: upcoming
+  - name: Pig
+    page: pig
+    conditions: pig
+    status: upcoming
+  - name: Wesker
+    page: wesker
+    conditions: wesker
+    status: upcoming
+  - name: Wraith
+    page: wraith
+    conditions: wraith
+    status: upcoming
+  - name: Blight
+    page: blight
+    conditions: blight
+    status: upcoming
+  - name: Cannibal
+    page: cannibal
+    conditions: cannibal
+    status: upcoming
