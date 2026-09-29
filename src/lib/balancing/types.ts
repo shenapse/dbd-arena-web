@@ -202,6 +202,28 @@ export interface SurvivorRepetitionLimit {
   perks?: 'all' | string[];
 }
 
+// ---------------------------------------------------------------------------
+// Perk universes — src/data/balancing/universes/<id>.yaml, shared perk pools
+// referenced from a -build.yaml's `universe:` field.
+// ---------------------------------------------------------------------------
+
+/** One side of a universe: every perk of that side, or an explicit list of perk names. */
+export type UniverseSideDecl = 'all' | string[];
+
+/** Raw shape of a universe file. A missing side means `all`. */
+export interface UniverseFile {
+  name?: string;
+  description?: string;
+  killer?: UniverseSideDecl;
+  survivor?: UniverseSideDecl;
+}
+
+/**
+ * A `-build.yaml`'s `universe:` field: a universe id (both sides), or per side
+ * `all`, a universe id, or an inline perk-name list. Omitted means `all`.
+ */
+export type BuildUniverseDecl = string | { killer?: string | string[]; survivor?: string | string[] };
+
 /** Result of resolving one side/universe: the allowed subset, its complement, and the full universe. */
 export interface ResolvedList<T> {
   allowed: T[];
