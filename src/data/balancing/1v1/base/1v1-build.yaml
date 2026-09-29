@@ -1,26 +1,36 @@
 killer: The Trapper
-balancing: DBD Arena - 1v1 Symmetric Rank
+killer: The Trapper
+balancing: DBD Arena - 1v1 Symmetric Rank v0.1
 
-universe: 1v1-standard           # or per side: `all`, a universe id, or an inline list of perk names
+universe: 1v1-standard
+
+display:
+  killerPerks: allow
+  survivorPerks: allow
+  addons: allow
+  items: allow
 
 killerPerks:
-  default: allow          # Start with all killer perks allowed
-  # allow:                 # Then deny these specific perks
-  #   - Bamboozle
-  #   - Brutal Strength
-  #   - Dark Arrogance
+  default: allow
+
+addons:
+  default: deny
 
 survivorPerks:
-  default: allow          # Start with no survivor perks allowed
-  # allow:                 # Then allow these specific perks and groups
-  #   - Balanced Landing
-  #   - Dramaturgy
-  #   - Finesse
-  #   - Five Moves Ahead
-  #   - Fixated
-  #   - Lithe
-  #   - Resilience
-  #   - Smash Hit
-  #   - Urban Evasion
-  #   - Windows of Opportunity
-  deny: []
+  default: allow
+
+items:
+  Flashlight:
+    default: deny
+  Med-Kit:
+    default: deny
+  Firecracker:
+    default: deny
+  Toolbox:
+    default: deny
+  Key:
+    default: deny
+  Map:
+    default: deny
+  Fog Vial:
+    default: deny
