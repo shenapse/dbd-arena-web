@@ -17,7 +17,8 @@
 // throws.
 //
 // `page:` (when present) links the killer name to
-// `<localePrefix>/game-modes/<format>/balancing/<page>/`. The locale prefix
+// `<localePrefix>/game-modes/<format>/balancing/<page>/` (format `1v1` maps to
+// the `1v1-symmetric` route). The locale prefix
 // reproduces what the per-locale MDX pages hardcode today (`/ja`, `/ko`; root
 // English has no prefix).
 //
@@ -54,6 +55,10 @@ const t = Astro.locals.t;
 // hardcode today; root English pages have no prefix.
 const prefix = locale === 'ja' || locale === 'ko' ? `/${locale}` : '';
 
+// The data folder for 1v1 is `1v1`, but its docs route is `1v1-symmetric`.
+const ROUTE_SEGMENT_BY_FORMAT: Record<string, string> = { '1v1': '1v1-symmetric' };
+const routeSegment = ROUTE_SEGMENT_BY_FORMAT[format] ?? format;
+
 interface DisplayRow {
   entry: OverviewEntry;
   map: string;
@@ -80,7 +85,7 @@ const rows: DisplayRow[] = doc.killers.map((entry) => {
     }
   }
 
-  const href = entry.page ? `${prefix}/game-modes/${format}/balancing/${entry.page}/` : null;
+  const href = entry.page ? `${prefix}/game-modes/${routeSegment}/balancing/${entry.page}/` : null;
 
   return { entry, map, win, draw, href };
 });

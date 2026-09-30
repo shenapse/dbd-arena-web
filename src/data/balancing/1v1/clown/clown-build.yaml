@@ -1,5 +1,4 @@
-killer: The Trapper
-killer: The Trapper
+killer: The Clown
 balancing: DBD Arena - 1v1 Symmetric Rank v0.1
 
 universe: 1v1-standard
@@ -11,10 +10,15 @@ display:
   items: allow
 
 killerPerks:
-  default: allow
+  default: deny
+  allow:
+  - Bamboozle
 
 addons:
   default: deny
+  allow:
+    - Flask of Bleach
+    - Ether 15% Vol
 
 survivorPerks:
   default: allow

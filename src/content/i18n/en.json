@@ -45,7 +45,7 @@
   "balancingIntro.subject": "Per-killer balancing for {n}.",
   "balancingIntro.relation": "These rules sit alongside the {n} and complement it.",
   "balancingIntro.generalRule.1v4": "general 1v4 rule",
-  "balancingIntro.generalRule.1v1Symmetric": "general 1v1 symmetric rule",
+  "balancingIntro.generalRule.1v1": "general 1v1 rule",
   "balancingOverview.killer": "Killer",
   "balancingOverview.status": "Status",
   "translation.notice.label": "Translation note:",

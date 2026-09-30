@@ -1,5 +1,5 @@
-killer: The Trapper
-killer: The Trapper
+# STUB: placeholder 1v1 build sheet for Wesker. Add-ons and item rules are not decided yet.
+killer: The Mastermind
 balancing: DBD Arena - 1v1 Symmetric Rank v0.1
 
 universe: 1v1-standard
@@ -11,10 +11,14 @@ display:
   items: allow
 
 killerPerks:
-  default: allow
+  default: deny
 
 addons:
   default: deny
+  allow:
+    - Uroboros tendril
+    - Egg (gold)
+    - Leather gloves
 
 survivorPerks:
   default: allow

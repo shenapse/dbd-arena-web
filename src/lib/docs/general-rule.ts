@@ -10,7 +10,7 @@
 
 export type GeneralRuleLabelKey =
   | 'balancingIntro.generalRule.1v4'
-  | 'balancingIntro.generalRule.1v1Symmetric';
+  | 'balancingIntro.generalRule.1v1';
 
 export interface GeneralRuleTarget {
   /** Locale-independent docs id — feed to idToHref() with the route's locale. */
@@ -22,9 +22,9 @@ const RULE_1V4: GeneralRuleTarget = {
   id: 'game-modes/reference/1v4-general-rule',
   labelKey: 'balancingIntro.generalRule.1v4',
 };
-const RULE_1V1_SYMMETRIC: GeneralRuleTarget = {
-  id: 'game-modes/1v1-symmetric/rules/general',
-  labelKey: 'balancingIntro.generalRule.1v1Symmetric',
+const RULE_1V1: GeneralRuleTarget = {
+  id: 'game-modes/reference/1v1-general-rule',
+  labelKey: 'balancingIntro.generalRule.1v1',
 };
 
 // Keys are the literal `format:` strings in use today. Note the 1v1 pages
@@ -38,7 +38,7 @@ const RULE_1V1_SYMMETRIC: GeneralRuleTarget = {
 export const GENERAL_RULE_BY_FORMAT: ReadonlyMap<string, GeneralRuleTarget> = new Map([
   ['1v4-quartet', RULE_1V4],
   ['1v4-duo', RULE_1V4],
-  ['1v1-symmetric-rank', RULE_1V1_SYMMETRIC],
+  ['1v1-symmetric-rank', RULE_1V1],
 ]);
 
 export const KNOWN_BALANCING_FORMATS: readonly string[] = [...GENERAL_RULE_BY_FORMAT.keys()];

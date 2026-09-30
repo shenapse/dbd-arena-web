@@ -1,0 +1,123 @@
+---
+title: 1v1 General Rule
+description: >-
+  The shared general rule for 1v1 game modes (Symmetric, Asymmetric, and future
+  1v1 formats). It applies to every killer across those modes. Per-mode and
+  per-killer detail (maps, win conditions, perk and add-on limits) lives in
+  each game mode's own balancing pages, which complement this rule.
+handle: 1v1-general
+status: active
+changeHistory:
+  - version: "1.1"
+    date: "2026-09-30"
+    note: Relocated to the shared game-modes reference section and generalized scope beyond Symmetric.
+  - version: "1.0"
+    date: "2026-06-21"
+    note: Initial publication of the general 1v1 symmetric rule.
+---
+
+import { Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
+import LifecycleMeta from '@components/LifecycleMeta.astro';
+import ImageRow from '@components/ImageRow.astro';
+
+<LifecycleMeta />
+
+The shared general rule for 1v1 game modes (Symmetric, Asymmetric, and future
+1v1 formats). It applies to every killer across those modes. Per-mode and
+per-killer detail (maps, win conditions, perk and add-on limits) lives in
+each game mode's own balancing pages, which complement this rule.
+
+## Killer ping
+
+The killer must hold a stable connection below 60 ms for the trial to
+count.
+Persistent high ping or instability is handled as a remake.
+
+## Starting a round
+
+<Aside type="note" title="Summary">
+  The round follows the common "crouch and response" starting convention at Killer Shack.
+</Aside>
+
+Each round must begin at Killer Shack. The survivor chooses one of the
+shack's two doorways and takes position there. The killer must take
+position at the opposite doorway.
+The survivor has the right to choose which doorway they use before the
+round begins.
+
+Once both players are in position, the killer must nod to indicate they are ready before starting. 
+The survivor then gives the start signal
+by performing one quick crouch. Upon seeing the signal, the killer must
+immediately perform the designated start response.
+
+The designated start response—such as missing a basic attack or using
+the killer's power—is specified in the applicable per-killer rule.
+
+## Starting the chase timer
+
+The chase timer starts when the survivor performs the start signal. If
+the killer does not perform the designated response, or performs it
+noticeably late, the players must reset and repeat the starting
+procedure.
+
+## Basic Rules
+
+- No map resources may be used or broken before the start of a round (including generators, chests, etc.).
+- You may not influence the map layout before the start of a round (for example, bamboozling a window).
+- You may not close the hatch.
+
+### Don't stay hidden rule
+
+Survivors may not stay hidden to earn chase time:
+- Survivors may not walk, crouch, or stand still for more than 15 seconds at a time while outside the killer's line of sight. After 15 seconds of walking, crouching, or standing still, they must run for at least 5 seconds.
+- If a survivor has been in the killer's line of sight for more than 15 seconds and outside the killer's terror radius for more than 15 seconds, they must immediately make a loud-noise notification.
+- These timers reset when the killer interacts with an object on the map (for example, by breaking a pallet).
+
+## Rule Enforcement
+
+If a rule violation occurs (except as listed below), the non-offending player may replay that round.
+
+- Exception:
+  - Don't stay hidden rule
+
+If there is a dispute, video evidence must be presented.
+
+### Chase time compensation
+
+- All additional time earned by violating the "Don't stay hidden rule" is deducted from the survivor's chase time.
+- The violating state is cleared when any of the following occurs:
+  - the pursuit restarts
+  - the killer enters the Undetectable state
+
+In particular, stealth killers may claim a violation only after their stealth ability ends.
+
+## Surrender
+
+Surrender is made by disconnecting.
+
+The survivor may surrender at any time.
+The killer may surrender once achieving their applicable win condition
+is no longer possible.
+
+A surrender causes the surrendering player to lose the current round.
+It does not forfeit the entire match.
+
+## Applies to
+
+- [DBD 1v1 Symmetric Ranked](/game-modes/1v1-symmetric/)
+- DBD 1v1 Asymmetric Ranked
+
+
+<CardGrid>
+<LinkCard
+  title="1v1 Symmetric Ranked"
+  href="/game-modes/1v1-symmetric/"
+  description="Game mode overview"
+/>
+
+<LinkCard
+  title="Per-killer balancing"
+  href="/game-modes/1v1-symmetric/balancing/"
+  description="1v1 Symmetric Ranked per-killer balancing overview"
+/>
+</CardGrid>

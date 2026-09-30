@@ -1,5 +1,5 @@
-killer: The Trapper
-killer: The Trapper
+# STUB: placeholder 1v1 build sheet for Pig. Add-ons and item rules are not decided yet.
+killer: The Pig
 balancing: DBD Arena - 1v1 Symmetric Rank v0.1
 
 universe: 1v1-standard
@@ -14,7 +14,10 @@ killerPerks:
   default: allow
 
 addons:
-  default: deny
+  default:
+  allow:
+    - Last will
+    - Workshop grease
 
 survivorPerks:
   default: allow
