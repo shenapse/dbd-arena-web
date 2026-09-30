@@ -1,12 +1,16 @@
 ---
-title: 1v1 Symmetric — General Rule
+title: 1v1 General Rule
 description: >-
-  The shared global rule for the 1v1 Symmetric format. It applies to every killer.
-  Per-killer detail (maps, win conditions, perk and add-on limits) lives in
-  the sibling per-killer balancing pages, which complement this rule.
-handle: 1v1-symmetric-general
+  The shared general rule for 1v1 game modes (Symmetric, Asymmetric, and future
+  1v1 formats). It applies to every killer across those modes. Per-mode and
+  per-killer detail (maps, win conditions, perk and add-on limits) lives in
+  each game mode's own balancing pages, which complement this rule.
+handle: 1v1-general
 status: active
 changeHistory:
+  - version: "1.1"
+    date: "2026-09-30"
+    note: Relocated to the shared game-modes reference section and generalized scope beyond Symmetric.
   - version: "1.0"
     date: "2026-06-21"
     note: Initial publication of the general 1v1 symmetric rule.
@@ -18,9 +22,10 @@ import ImageRow from '@components/ImageRow.astro';
 
 <LifecycleMeta />
 
-The shared global rule for the 1v1 Symmetric format. It applies to every killer.
-Per-killer detail (maps, win conditions, perk and add-on limits) lives in 
-the sibling per-killer balancing pages, which complement this rule.
+The shared general rule for 1v1 game modes (Symmetric, Asymmetric, and future
+1v1 formats). It applies to every killer across those modes. Per-mode and
+per-killer detail (maps, win conditions, perk and add-on limits) lives in
+each game mode's own balancing pages, which complement this rule.
 
 ## Killer ping
 
@@ -105,14 +110,14 @@ It does not forfeit the entire match.
 
 <CardGrid>
 <LinkCard
-  title="Back to game mode overview"
+  title="1v1 Symmetric Ranked"
   href="/game-modes/1v1-symmetric/"
-  description="1v1 Symmetric Ranked"
+  description="Game mode overview"
 />
 
 <LinkCard
-  title="Proceed to per-killer balancing"
-  href="/game-modes/1v1-symmetric/balancing"
+  title="Per-killer balancing"
+  href="/game-modes/1v1-symmetric/balancing/"
   description="1v1 Symmetric Ranked per-killer balancing overview"
 />
 </CardGrid>

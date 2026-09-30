@@ -178,7 +178,7 @@ export const collections = {
         'balancingIntro.subject': z.string().optional(),
         'balancingIntro.relation': z.string().optional(),
         'balancingIntro.generalRule.1v4': z.string().optional(),
-        'balancingIntro.generalRule.1v1Symmetric': z.string().optional(),
+        'balancingIntro.generalRule.1v1': z.string().optional(),
         'balancingOverview.killer': z.string().optional(),
         'balancingOverview.status': z.string().optional(),
         'translation.notice.label': z.string().optional(),
