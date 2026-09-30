@@ -1,0 +1,54 @@
+---
+title: Clown — 1v1 Symmetric Balancing
+description: Per-killer balancing for Clown in the 1v1 symmetric format.
+handle: 1v1-symmetric-balancing-clown
+status: upcoming
+changeHistory:
+  - version: "0.1"
+    date: "2026-09-30"
+    note: Initial per-killer balancing entry for Clown.
+killer: The Clown
+format: 1v1-symmetric-rank
+---
+
+import LifecycleMeta from '@components/LifecycleMeta.astro';
+import BalancingIntro from '@components/BalancingIntro.astro';
+import BalancingList from '@components/BalancingList.astro';
+import MatchConditions from '@components/MatchConditions.astro';
+
+<LifecycleMeta />
+
+<BalancingIntro />
+
+<MatchConditions format="1v1" killer="clown" />
+
+## Killer perks
+
+Choose one perk from the perk pool below.
+
+<BalancingList format="1v1" killer="clown" section="killerPerks" />
+
+## Killer add-ons
+
+<BalancingList format="1v1" killer="clown" section="addons" />
+
+## Survivor perks
+
+Choose two perks from the pool below.
+
+<BalancingList format="1v1" killer="clown" section="survivorPerks" />
+
+## Survivor items
+
+<BalancingList format="1v1" killer="clown" section="items" />
+
+## Response to crouch
+
+M1 miss swing.
+
+[← All per-killer balancing](/game-modes/1v1-symmetric/balancing/)
+
+## Applies to
+
+- [DBD 1v1 Symmetric Ranked](/game-modes/1v1-symmetric/)
+- [DBD 1v1 Asymmetric Ranked](/game-modes/1v1-asymmetric/)

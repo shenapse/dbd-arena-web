@@ -210,6 +210,7 @@ export default defineConfig({
                         { label: 'Demogorgon', slug: 'game-modes/1v1-symmetric/balancing/demogorgon' },
                         { label: 'Blight', slug: 'game-modes/1v1-symmetric/balancing/blight' },
                         { label: 'Cannibal', slug: 'game-modes/1v1-symmetric/balancing/cannibal' },
+                        { label: 'Clown', slug: 'game-modes/1v1-symmetric/balancing/clown' },
                       ],
                     },
                   ],

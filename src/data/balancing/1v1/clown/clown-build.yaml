@@ -1,0 +1,40 @@
+killer: The Clown
+balancing: DBD Arena - 1v1 Symmetric Rank v0.1
+
+universe: 1v1-standard
+
+display:
+  killerPerks: allow
+  survivorPerks: allow
+  addons: allow
+  items: allow
+
+killerPerks:
+  default: deny
+  allow:
+  - Bamboozle
+
+addons:
+  default: deny
+  allow:
+    - Flask of Bleach
+    - Ether 15% Vol
+
+survivorPerks:
+  default: allow
+
+items:
+  Flashlight:
+    default: deny
+  Med-Kit:
+    default: deny
+  Firecracker:
+    default: deny
+  Toolbox:
+    default: deny
+  Key:
+    default: deny
+  Map:
+    default: deny
+  Fog Vial:
+    default: deny

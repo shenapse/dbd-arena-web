@@ -39,3 +39,7 @@ killers:
     page: cannibal
     conditions: cannibal
     status: upcoming
+  - name: Clown
+    page: clown
+    conditions: clown
+    status: upcoming
