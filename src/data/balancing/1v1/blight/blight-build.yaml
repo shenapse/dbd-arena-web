@@ -16,9 +16,9 @@ killerPerks:
 addons:
   default: deny
   allow:
-    - Blighted Crowd
+    - Blighted Crow
     - Blighted Rat
-    - Shredded Note
+    - Shredded Notes
 
 survivorPerks:
   default: allow
