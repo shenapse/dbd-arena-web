@@ -1,8 +1,16 @@
 killers:
-  - name: Trapper
-    page: trapper
-    conditions: trapper
-    status: active
+  - name: Blight
+    page: blight
+    conditions: blight
+    status: upcoming
+  - name: Cannibal
+    page: cannibal
+    conditions: cannibal
+    status: upcoming
+  - name: Clown
+    page: clown
+    conditions: clown
+    status: upcoming
   - name: Demogorgon
     page: demogorgon
     conditions: demogorgon
@@ -23,6 +31,10 @@ killers:
     page: pig
     conditions: pig
     status: upcoming
+  - name: Trapper
+    page: trapper
+    conditions: trapper
+    status: active
   - name: Wesker
     page: wesker
     conditions: wesker
@@ -30,16 +42,4 @@ killers:
   - name: Wraith
     page: wraith
     conditions: wraith
-    status: upcoming
-  - name: Blight
-    page: blight
-    conditions: blight
-    status: upcoming
-  - name: Cannibal
-    page: cannibal
-    conditions: cannibal
-    status: upcoming
-  - name: Clown
-    page: clown
-    conditions: clown
     status: upcoming
