@@ -1,0 +1,54 @@
+---
+title: Pig — 1v1 Symmetric Balancing
+description: Per-killer balancing for Pig in the 1v1 symmetric format.
+handle: 1v1-symmetric-balancing-pig
+killer: The Pig
+format: 1v1-symmetric-rank
+translationStatus: complete
+translationDate: "2026-10-01"
+---
+
+import LifecycleMeta from '@components/LifecycleMeta.astro';
+import BalancingIntro from '@components/BalancingIntro.astro';
+import BalancingList from '@components/BalancingList.astro';
+import MatchConditions from '@components/MatchConditions.astro';
+import TranslationNotice from '@components/TranslationNotice.astro';
+
+<TranslationNotice />
+
+<LifecycleMeta />
+
+<BalancingIntro />
+
+<MatchConditions format="1v1" killer="pig" />
+
+## Killer perks
+
+以下のパークリストから1つを選択．
+
+<BalancingList format="1v1" killer="pig" section="killerPerks" />
+
+## Killer add-ons
+
+<BalancingList format="1v1" killer="pig" section="addons" />
+
+## Survivor perks
+
+以下のパークリストから疲労パークを1つと，そうでないパークを1つずつ選択．
+
+<BalancingList format="1v1" killer="pig" section="survivorPerks" />
+
+## Survivor items
+
+<BalancingList format="1v1" killer="pig" section="items" />
+
+## Response to crouch
+
+通常攻撃を空振り．
+
+[← All per-killer balancing](/ja/game-modes/1v1-symmetric/balancing/)
+
+## Applies to
+
+- [DBD 1v1 Symmetric Ranked](/ja/game-modes/1v1-symmetric/)
+- [DBD 1v1 Asymmetric Ranked](/ja/game-modes/1v1-asymmetric/)
