@@ -51,6 +51,10 @@ killers:
     page: billy
     conditions: hillbilly
     status: upcoming
+  - name: Krasue
+    page: krasue
+    conditions: krasue
+    status: provisional
   - name: Lich
     page: lich
     conditions: lich
