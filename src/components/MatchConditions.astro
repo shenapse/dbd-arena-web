@@ -2,9 +2,10 @@
 // Renders the match "outer frame" for a killer's balancing page: the map and
 // the localized win/draw conditions — resolved build-time from a killer's
 // `-conditions.yaml`. This is independent of the loadout allow/deny config in
-// `-build.yaml` (see BalancingList.astro); it always renders the same three
-// rows (map, win condition, draw condition), so unlike BalancingList there is
-// no `section`/`mode` prop.
+// `-build.yaml` (see BalancingList.astro); it renders the map row plus a win
+// and/or draw row only when the YAML defines that key (omitted = not
+// applicable, e.g. 1v1 symmetric), so unlike BalancingList there is no
+// `section`/`mode` prop.
 //
 // The YAML is addressed by `format` + `killer`, and the file path is built
 // here as `src/data/balancing/<format>/<killer>/<killer>-conditions.yaml`,
@@ -63,13 +64,17 @@ const mapDisplay = localizeName(mapEntry.name, locale, 'map');
       <td>{t('matchConditions.map')}</td>
       <td>{mapDisplay}</td>
     </tr>
-    <tr>
-      <td>{t('matchConditions.winCondition')}</td>
-      <td>{describeConditionStats(doc.winCondition, t, 'matchConditions.relativeWin')}</td>
-    </tr>
-    <tr>
-      <td>{t('matchConditions.drawCondition')}</td>
-      <td>{describeConditionStats(doc.drawCondition, t)}</td>
-    </tr>
+    {doc.winCondition !== undefined && (
+      <tr>
+        <td>{t('matchConditions.winCondition')}</td>
+        <td>{describeConditionStats(doc.winCondition, t, 'matchConditions.relativeWin')}</td>
+      </tr>
+    )}
+    {doc.drawCondition !== undefined && (
+      <tr>
+        <td>{t('matchConditions.drawCondition')}</td>
+        <td>{describeConditionStats(doc.drawCondition, t)}</td>
+      </tr>
+    )}
   </tbody>
 </table>
