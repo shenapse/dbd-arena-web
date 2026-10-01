@@ -253,9 +253,14 @@ export interface ConditionStats {
 export interface MatchConditions {
   killer: string;
   map: string;
-  /** `null` = no fixed threshold (mirrored match: the better-performing player wins). */
-  winCondition: ConditionStats | null;
-  drawCondition: ConditionStats | null;
+  /**
+   * `null` = no fixed threshold (the better-performing player wins). Omitted =
+   * not applicable to the format (e.g. 1v1 symmetric, a mirrored match with no
+   * pre-defined win condition); the row/column is not rendered.
+   */
+  winCondition?: ConditionStats | null;
+  /** Same `null` / omitted semantics as `winCondition`. */
+  drawCondition?: ConditionStats | null;
 }
 
 // ---------------------------------------------------------------------------

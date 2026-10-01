@@ -67,6 +67,11 @@ interface DisplayRow {
   href: string | null;
 }
 
+// Win/draw columns appear only if some killer's conditions define that key
+// (omitted = not applicable, e.g. 1v1 symmetric).
+let showWin = false;
+let showDraw = false;
+
 const rows: DisplayRow[] = doc.killers.map((entry) => {
   let map = '';
   let win = '';
@@ -80,8 +85,14 @@ const rows: DisplayRow[] = doc.killers.map((entry) => {
         `BalancingOverview (format: "${format}", killer: "${entry.conditions}")`
       );
       map = localizeName(mapEntry.name, locale, 'map');
-      win = describeConditionStats(c.winCondition, t, 'matchConditions.relativeWin');
-      draw = describeConditionStats(c.drawCondition, t);
+      if (c.winCondition !== undefined) {
+        showWin = true;
+        win = describeConditionStats(c.winCondition, t, 'matchConditions.relativeWin');
+      }
+      if (c.drawCondition !== undefined) {
+        showDraw = true;
+        draw = describeConditionStats(c.drawCondition, t);
+      }
     }
   }
 
@@ -96,8 +107,8 @@ const rows: DisplayRow[] = doc.killers.map((entry) => {
     <tr>
       <th>{t('balancingOverview.killer')}</th>
       <th>{t('matchConditions.map')}</th>
-      <th>{t('matchConditions.winCondition')}</th>
-      <th>{t('matchConditions.drawCondition')}</th>
+      {showWin && <th>{t('matchConditions.winCondition')}</th>}
+      {showDraw && <th>{t('matchConditions.drawCondition')}</th>}
       <th>{t('balancingOverview.status')}</th>
     </tr>
   </thead>
@@ -106,8 +117,8 @@ const rows: DisplayRow[] = doc.killers.map((entry) => {
       <tr>
         <td>{href ? <a href={href}>{entry.name}</a> : entry.name}</td>
         <td>{map}</td>
-        <td>{win}</td>
-        <td>{draw}</td>
+        {showWin && <td>{win}</td>}
+        {showDraw && <td>{draw}</td>}
         <td>
           <StatusBadge status={entry.status as 'active' | 'upcoming' | 'archived' | 'provisional'} />
         </td>
