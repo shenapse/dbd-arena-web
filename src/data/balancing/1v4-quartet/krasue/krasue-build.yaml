@@ -68,6 +68,7 @@ addons:
     - Lorenza's Remains
     - Theatre Binoculars
     - Pig's Eye
+    - Spattered Handkerchief
 
 survivorPerks:
   default: deny
