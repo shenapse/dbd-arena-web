@@ -8,7 +8,8 @@
 // format="1v4-quartet" killer="blight" →
 // src/data/balancing/1v4-quartet/blight/blight-build.yaml. `format` matches the
 // page's frontmatter `format:` field; `killer` is the lowercase folder/file
-// slug.
+// slug. An optional `source` prop redirects the build YAML to another format's
+// folder (default: `format`), so a mode can reuse another mode's build data.
 //
 // The file is read from the filesystem at build time, resolved under the
 // project root via process.cwd() (the project root under both `astro dev` and
@@ -46,9 +47,13 @@ interface Props {
   killer: string;
   section: Section;
   mode?: Mode;
+  // Format whose `-build.yaml` is rendered. Defaults to `format`. A mode that
+  // adopts another mode's build restrictions (e.g. 1v4-pug-casual reusing
+  // 1v4-quartet) sets this instead of owning a duplicate YAML.
+  source?: string;
 }
 
-const { format, killer, section, mode: modeOverride } = Astro.props;
+const { format, killer, section, mode: modeOverride, source = format } = Astro.props;
 
 // Current locale, URL-derived — 'ja' on the /ja/… pages (including the
 // English-fallback balancing pages, which is exactly where we want to append
@@ -79,17 +84,17 @@ interface BuildDoc {
 // render nothing.
 if (!format || !killer)
   throw new Error(`BalancingList: "format" and "killer" are required (section: "${section}").`);
-const filePath = path.join(process.cwd(), 'src/data/balancing', format, killer, `${killer}-build.yaml`);
+const filePath = path.join(process.cwd(), 'src/data/balancing', source, killer, `${killer}-build.yaml`);
 if (!fs.existsSync(filePath)) {
   throw new Error(
-    `BalancingList: YAML not found at "${filePath}" (format: "${format}", killer: "${killer}", section: "${section}").`
+    `BalancingList: YAML not found at "${filePath}" (format: "${format}", source: "${source}", killer: "${killer}", section: "${section}").`
   );
 }
 const doc = parse(fs.readFileSync(filePath, 'utf8')) as BuildDoc;
 
 const mode: Mode = modeOverride ?? doc.display?.[section] ?? 'allow';
 const label = mode === 'ban' ? t('balancingList.banned') : t('balancingList.allowed');
-const context = `${section} (format: "${format}", killer: "${killer}"${doc.killer ? `, doc killer: "${doc.killer}"` : ''})`;
+const context = `${section} (format: "${format}", source: "${source}", killer: "${killer}"${doc.killer ? `, doc killer: "${doc.killer}"` : ''})`;
 
 // Perk/add-on rendering: a single flat name list.
 let flatNames: string[] | null = null;
