@@ -1,0 +1,6 @@
+killer: The Dark Lord
+map: Wretched Shop
+winCondition:
+  kills: 4
+  gensRemaining: 0
+drawCondition: null

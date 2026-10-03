@@ -12,6 +12,7 @@ format: 1v4-pug-casual
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
+import MatchConditions from '@components/MatchConditions.astro';
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 
 <LifecycleMeta />
@@ -19,11 +20,7 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
 PUG Casual begins with the following map and match outcome conditions. They are an
 initial baseline taken from 1v4 Quartet Ranked and may evolve independently.
 
-| Aspect | Detail |
-|---|---|
-| Map | Ormond Lake Mine |
-| Killer win condition | 10 hook stages |
-| Draw condition | - |
+<MatchConditions format="1v4-pug-casual" killer="ghoul" />
 
 ## Build restrictions
 

@@ -1,0 +1,5 @@
+killer: The Oni
+map: Coal Tower 1
+winCondition:
+  hookStages: 10
+drawCondition: null

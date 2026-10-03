@@ -1,0 +1,5 @@
+killer: The Nurse
+map: Coal Tower 1
+winCondition:
+  hookStages: 11
+drawCondition: null

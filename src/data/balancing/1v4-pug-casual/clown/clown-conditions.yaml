@@ -1,0 +1,5 @@
+killer: The Clown
+map: Wrecker's Yard
+winCondition:
+  hookStages: 10
+drawCondition: null
