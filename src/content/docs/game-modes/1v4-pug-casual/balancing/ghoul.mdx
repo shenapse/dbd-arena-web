@@ -11,23 +11,44 @@ killer: Ghoul
 format: 1v4-pug-casual
 ---
 
-import { LinkCard } from '@astrojs/starlight/components';
 import MatchConditions from '@components/MatchConditions.astro';
+import BalancingList from '@components/BalancingList.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 
 <LifecycleMeta />
 
 <MatchConditions format="1v4-pug-casual" killer="ghoul" />
 
-## Build restrictions
+## Required offerings
 
-PUG Casual adopts the same build restrictions as 1v4 Quartet Ranked.
+<RequiredOfferings format="1v4-pug-casual" killer="ghoul" />
 
-<LinkCard
-  title="Ghoul — 1v4 Quartet Balancing"
-  href="/game-modes/1v4-quartet/balancing/ghoul/"
-  description="The 1v4 Quartet Ranked map, match outcome conditions, required offerings, and build restrictions for Ghoul."
-/>
+## Killer perks
+
+![The Ghoul — Allowed Killer Perks](/images/builds/1v4-quartet/ghoul/The-Ghoul-killer-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="ghoul" section="killerPerks" />
+
+## Killer add-ons
+
+![The Ghoul — Allowed Killer Add-ons](/images/builds/1v4-quartet/ghoul/The-Ghoul-killer-addons.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="ghoul" section="addons" />
+
+## Survivor perks
+
+![Going against The Ghoul — Allowed Survivor Perks](/images/builds/1v4-quartet/ghoul/The-Ghoul-survivor-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="ghoul" section="survivorPerks" />
+
+## Survivor items
+
+![Going against The Ghoul — Allowed Survivor Items](/images/builds/1v4-quartet/ghoul/The-Ghoul-items.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="ghoul" section="items" />
+
+[← All per-killer balancing](/game-modes/1v4-pug-casual/balancing/)
 
 ## Applies to
 

@@ -11,23 +11,44 @@ killer: Nurse
 format: 1v4-pug-casual
 ---
 
-import { LinkCard } from '@astrojs/starlight/components';
 import MatchConditions from '@components/MatchConditions.astro';
+import BalancingList from '@components/BalancingList.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 
 <LifecycleMeta />
 
 <MatchConditions format="1v4-pug-casual" killer="nurse" />
 
-## Build restrictions
+## Required offerings
 
-PUG Casual adopts the same build restrictions as 1v4 Quartet Ranked.
+<RequiredOfferings format="1v4-pug-casual" killer="nurse" />
 
-<LinkCard
-  title="Nurse — 1v4 Quartet Balancing"
-  href="/game-modes/1v4-quartet/balancing/nurse/"
-  description="The 1v4 Quartet Ranked map, match outcome conditions, required offerings, and build restrictions for Nurse."
-/>
+## Killer perks
+
+![The Nurse — Allowed Killer Perks](/images/builds/1v4-quartet/nurse/The-Nurse-killer-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="nurse" section="killerPerks" />
+
+## Killer add-ons
+
+![The Nurse — Allowed Killer Add-ons](/images/builds/1v4-quartet/nurse/The-Nurse-killer-addons.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="nurse" section="addons" />
+
+## Survivor perks
+
+![Going against The Nurse — Allowed Survivor Perks](/images/builds/1v4-quartet/nurse/The-Nurse-survivor-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="nurse" section="survivorPerks" />
+
+## Survivor items
+
+![Going against The Nurse — Allowed Survivor Perks](/images/builds/1v4-quartet/nurse/The-Nurse-items.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="nurse" section="items" />
+
+[← All per-killer balancing](/game-modes/1v4-pug-casual/balancing/)
 
 ## Applies to
 

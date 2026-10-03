@@ -11,23 +11,44 @@ killer: Hillbilly
 format: 1v4-pug-casual
 ---
 
-import { LinkCard } from '@astrojs/starlight/components';
 import MatchConditions from '@components/MatchConditions.astro';
+import BalancingList from '@components/BalancingList.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 
 <LifecycleMeta />
 
 <MatchConditions format="1v4-pug-casual" killer="hillbilly" />
 
-## Build restrictions
+## Required offerings
 
-PUG Casual adopts the same build restrictions as 1v4 Quartet Ranked.
+<RequiredOfferings format="1v4-pug-casual" killer="hillbilly" />
 
-<LinkCard
-  title="Hillbilly — 1v4 Quartet Balancing"
-  href="/game-modes/1v4-quartet/balancing/billy/"
-  description="The 1v4 Quartet Ranked map, match outcome conditions, required offerings, and build restrictions for Hillbilly."
-/>
+## Killer perks
+
+![The Hillbilly — Allowed Killer Perks](/images/builds/1v4-quartet/hillbilly/The-Hillbilly-killer-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="hillbilly" section="killerPerks" />
+
+## Killer add-ons
+
+![The Hillbilly — Allowed Killer Add-ons](/images/builds/1v4-quartet/hillbilly/The-Hillbilly-killer-addons.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="hillbilly" section="addons" />
+
+## Survivor perks
+
+![The Hillbilly — Allowed Survivor Perks](/images/builds/1v4-quartet/hillbilly/The-Hillbilly-survivor-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="hillbilly" section="survivorPerks" />
+
+## Survivor items
+
+![Going against The Hillbilly — Allowed Survivor Items](/images/builds/1v4-quartet/hillbilly/The-Hillbilly-items.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="hillbilly" section="items" />
+
+[← All per-killer balancing](/game-modes/1v4-pug-casual/balancing/)
 
 ## Applies to
 

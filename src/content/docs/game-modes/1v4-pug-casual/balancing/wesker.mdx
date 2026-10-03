@@ -11,23 +11,44 @@ killer: Wesker
 format: 1v4-pug-casual
 ---
 
-import { LinkCard } from '@astrojs/starlight/components';
 import MatchConditions from '@components/MatchConditions.astro';
+import BalancingList from '@components/BalancingList.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 
 <LifecycleMeta />
 
 <MatchConditions format="1v4-pug-casual" killer="wesker" />
 
-## Build restrictions
+## Required offerings
 
-PUG Casual adopts the same build restrictions as 1v4 Quartet Ranked.
+<RequiredOfferings format="1v4-pug-casual" killer="wesker" />
 
-<LinkCard
-  title="Wesker — 1v4 Quartet Balancing"
-  href="/game-modes/1v4-quartet/balancing/wesker/"
-  description="The 1v4 Quartet Ranked map, match outcome conditions, required offerings, and build restrictions for Wesker."
-/>
+## Killer perks
+
+![The Mastermind — Allowed Killer Perks](/images/builds/1v4-quartet/wesker/The-Mastermind-killer-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="wesker" section="killerPerks" />
+
+## Killer add-ons
+
+![The Mastermind — Allowed Killer Add-ons](/images/builds/1v4-quartet/wesker/The-Mastermind-killer-addons.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="wesker" section="addons" />
+
+## Survivor perks
+
+![Going against The Mastermind — Allowed Survivor Perks](/images/builds/1v4-quartet/wesker/The-Mastermind-survivor-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="wesker" section="survivorPerks" />
+
+## Survivor items
+
+![Going against The Mastermind — Allowed Survivor Items](/images/builds/1v4-quartet/wesker/The-Mastermind-items.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="wesker" section="items" />
+
+[← All per-killer balancing](/game-modes/1v4-pug-casual/balancing/)
 
 ## Applies to
 

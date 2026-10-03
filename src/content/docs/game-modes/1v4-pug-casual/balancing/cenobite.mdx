@@ -11,23 +11,44 @@ killer: Cenobite
 format: 1v4-pug-casual
 ---
 
-import { LinkCard } from '@astrojs/starlight/components';
 import MatchConditions from '@components/MatchConditions.astro';
+import BalancingList from '@components/BalancingList.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 
 <LifecycleMeta />
 
 <MatchConditions format="1v4-pug-casual" killer="cenobite" />
 
-## Build restrictions
+## Required offerings
 
-PUG Casual adopts the same build restrictions as 1v4 Quartet Ranked.
+<RequiredOfferings format="1v4-pug-casual" killer="cenobite" />
 
-<LinkCard
-  title="Cenobite — 1v4 Quartet Balancing"
-  href="/game-modes/1v4-quartet/balancing/cenobite/"
-  description="The 1v4 Quartet Ranked map, match outcome conditions, required offerings, and build restrictions for Cenobite."
-/>
+## Killer perks
+
+![The Cenobite — Allowed Killer Perks](/images/builds/1v4-quartet/cenobite/The-Cenobite-killer-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="cenobite" section="killerPerks" />
+
+## Killer add-ons
+
+![The Cenobite — Allowed Killer Add-ons](/images/builds/1v4-quartet/cenobite/The-Cenobite-killer-addons.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="cenobite" section="addons" />
+
+## Survivor perks
+
+![The Cenobite — Allowed Survivor Perks](/images/builds/1v4-quartet/cenobite/The-Cenobite-survivor-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="cenobite" section="survivorPerks" />
+
+## Survivor items
+
+![Going against The Cenobite — Allowed Survivor Items](/images/builds/1v4-quartet/cenobite/The-Cenobite-items.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="cenobite" section="items" />
+
+[← All per-killer balancing](/game-modes/1v4-pug-casual/balancing/)
 
 ## Applies to
 

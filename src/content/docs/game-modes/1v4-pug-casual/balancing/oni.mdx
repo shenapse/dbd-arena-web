@@ -11,23 +11,44 @@ killer: Oni
 format: 1v4-pug-casual
 ---
 
-import { LinkCard } from '@astrojs/starlight/components';
 import MatchConditions from '@components/MatchConditions.astro';
+import BalancingList from '@components/BalancingList.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 
 <LifecycleMeta />
 
 <MatchConditions format="1v4-pug-casual" killer="oni" />
 
-## Build restrictions
+## Required offerings
 
-PUG Casual adopts the same build restrictions as 1v4 Quartet Ranked.
+<RequiredOfferings format="1v4-pug-casual" killer="oni" />
 
-<LinkCard
-  title="Oni — 1v4 Quartet Balancing"
-  href="/game-modes/1v4-quartet/balancing/oni/"
-  description="The 1v4 Quartet Ranked map, match outcome conditions, required offerings, and build restrictions for Oni."
-/>
+## Killer perks
+
+![The Oni — Allowed Killer Perks](/images/builds/1v4-quartet/oni/The-Oni-killer-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="oni" section="killerPerks" />
+
+## Killer add-ons
+
+![The Oni — Allowed Killer Add-ons](/images/builds/1v4-quartet/oni/The-Oni-killer-addons.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="oni" section="addons" />
+
+## Survivor perks
+
+![Going against The Oni — Allowed Survivor Perks](/images/builds/1v4-quartet/oni/The-Oni-survivor-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="oni" section="survivorPerks" />
+
+## Survivor items
+
+![Going against The Oni — Allowed Survivor Items](/images/builds/1v4-quartet/oni/The-Oni-items.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="oni" section="items" />
+
+[← All per-killer balancing](/game-modes/1v4-pug-casual/balancing/)
 
 ## Applies to
 

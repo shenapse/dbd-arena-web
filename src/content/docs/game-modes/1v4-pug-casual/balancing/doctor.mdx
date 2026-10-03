@@ -11,23 +11,44 @@ killer: Doctor
 format: 1v4-pug-casual
 ---
 
-import { LinkCard } from '@astrojs/starlight/components';
 import MatchConditions from '@components/MatchConditions.astro';
+import BalancingList from '@components/BalancingList.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 
 <LifecycleMeta />
 
 <MatchConditions format="1v4-pug-casual" killer="doctor" />
 
-## Build restrictions
+## Required offerings
 
-PUG Casual adopts the same build restrictions as 1v4 Quartet Ranked.
+<RequiredOfferings format="1v4-pug-casual" killer="doctor" />
 
-<LinkCard
-  title="Doctor — 1v4 Quartet Balancing"
-  href="/game-modes/1v4-quartet/balancing/doctor/"
-  description="The 1v4 Quartet Ranked map, match outcome conditions, required offerings, and build restrictions for Doctor."
-/>
+## Killer perks
+
+![The Doctor — Allowed Killer Perks](/images/builds/1v4-quartet/doctor/The-Doctor-killer-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="doctor" section="killerPerks" />
+
+## Killer add-ons
+
+![The Doctor — Allowed Killer Add-ons](/images/builds/1v4-quartet/doctor/The-Doctor-killer-addons.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="doctor" section="addons" />
+
+## Survivor perks
+
+![Going against The Doctor — Allowed Survivor Perks](/images/builds/1v4-quartet/doctor/The-Doctor-survivor-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="doctor" section="survivorPerks" />
+
+## Survivor items
+
+![Going against The Doctor — Allowed Survivor Items](/images/builds/1v4-quartet/doctor/The-Doctor-items.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="doctor" section="items" />
+
+[← All per-killer balancing](/game-modes/1v4-pug-casual/balancing/)
 
 ## Applies to
 

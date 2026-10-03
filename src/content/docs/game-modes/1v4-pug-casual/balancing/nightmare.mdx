@@ -11,23 +11,44 @@ killer: Nightmare
 format: 1v4-pug-casual
 ---
 
-import { LinkCard } from '@astrojs/starlight/components';
 import MatchConditions from '@components/MatchConditions.astro';
+import BalancingList from '@components/BalancingList.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 
 <LifecycleMeta />
 
 <MatchConditions format="1v4-pug-casual" killer="nightmare" />
 
-## Build restrictions
+## Required offerings
 
-PUG Casual adopts the same build restrictions as 1v4 Quartet Ranked.
+<RequiredOfferings format="1v4-pug-casual" killer="nightmare" />
 
-<LinkCard
-  title="Nightmare — 1v4 Quartet Balancing"
-  href="/game-modes/1v4-quartet/balancing/nightmare/"
-  description="The 1v4 Quartet Ranked map, match outcome conditions, required offerings, and build restrictions for Nightmare."
-/>
+## Killer perks
+
+![The Nightmare — Allowed Killer Perks](/images/builds/1v4-quartet/nightmare/The-Nightmare-killer-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="nightmare" section="killerPerks" />
+
+## Killer add-ons
+
+![The Nightmare — Allowed Killer Add-ons](/images/builds/1v4-quartet/nightmare/The-Nightmare-killer-addons.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="nightmare" section="addons" />
+
+## Survivor perks
+
+![Going against The Nightmare — Allowed Survivor Perks](/images/builds/1v4-quartet/nightmare/The-Nightmare-survivor-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="nightmare" section="survivorPerks" />
+
+## Survivor items
+
+![Going against The Nightmare — Allowed Survivor Items](/images/builds/1v4-quartet/nightmare/The-Nightmare-items.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="nightmare" section="items" />
+
+[← All per-killer balancing](/game-modes/1v4-pug-casual/balancing/)
 
 ## Applies to
 

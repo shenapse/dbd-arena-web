@@ -11,23 +11,45 @@ killer: Wraith
 format: 1v4-pug-casual
 ---
 
-import { LinkCard } from '@astrojs/starlight/components';
 import MatchConditions from '@components/MatchConditions.astro';
+import BalancingList from '@components/BalancingList.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 
 <LifecycleMeta />
 
 <MatchConditions format="1v4-pug-casual" killer="wraith" />
 
-## Build restrictions
+## Required offerings
 
-PUG Casual adopts the same build restrictions as 1v4 Quartet Ranked.
+<RequiredOfferings format="1v4-pug-casual" killer="wraith" />
 
-<LinkCard
-  title="Wraith — 1v4 Quartet Balancing"
-  href="/game-modes/1v4-quartet/balancing/wraith/"
-  description="The 1v4 Quartet Ranked map, match outcome conditions, required offerings, and build restrictions for Wraith."
-/>
+## Killer perks
+
+![The Wraith — Allowed Killer Perks](/images/builds/1v4-quartet/wraith/The-Wraith-killer-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="wraith" section="killerPerks" />
+
+
+## Killer add-ons
+
+![The Wraith — Allowed Killer Add-ons](/images/builds/1v4-quartet/wraith/The-Wraith-killer-addons.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="wraith" section="addons" />
+
+## Survivor perks
+
+![Going against The Wraith — Allowed Survivor Perks](/images/builds/1v4-quartet/wraith/The-Wraith-survivor-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="wraith" section="survivorPerks" />
+
+## Survivor items
+
+![Going against The Wraith — Allowed Survivor Items](/images/builds/1v4-quartet/wraith/The-Wraith-items.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="wraith" section="items" />
+
+[← All per-killer balancing](/game-modes/1v4-pug-casual/balancing/)
 
 ## Applies to
 

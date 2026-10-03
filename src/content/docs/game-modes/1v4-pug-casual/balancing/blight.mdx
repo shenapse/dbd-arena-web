@@ -11,23 +11,48 @@ killer: Blight
 format: 1v4-pug-casual
 ---
 
-import { LinkCard } from '@astrojs/starlight/components';
 import MatchConditions from '@components/MatchConditions.astro';
+import BalancingList from '@components/BalancingList.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
+import ImageRow from '@components/ImageRow.astro';
 import LifecycleMeta from '@components/LifecycleMeta.astro';
 
 <LifecycleMeta />
 
 <MatchConditions format="1v4-pug-casual" killer="blight" />
 
-## Build restrictions
+## Required offerings
 
-PUG Casual adopts the same build restrictions as 1v4 Quartet Ranked.
+<RequiredOfferings format="1v4-pug-casual" killer="blight" />
 
-<LinkCard
-  title="Blight — 1v4 Quartet Balancing"
-  href="/game-modes/1v4-quartet/balancing/blight/"
-  description="The 1v4 Quartet Ranked map, match outcome conditions, required offerings, and build restrictions for Blight."
-/>
+## Killer perks
+
+![The Blight — Allowed Killer Perks](/images/builds/1v4-quartet/blight/The-Blight-killer-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="blight" section="killerPerks" />
+
+## Killer add-ons
+
+<ImageRow label="Allowed add-ons:" images={[
+  { src: '/images/killers/blight/Blighted-Crow.webp', label: 'Blighted Crow' },
+  { src: '/images/killers/blight/Blighted-Rat.webp', label: 'Blighted Rat' },
+]} />
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="blight" section="addons" />
+
+## Survivor perks
+
+![The Blight — Allowed Survivor Perks](/images/builds/1v4-quartet/blight/The-Blight-survivor-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="blight" section="survivorPerks" />
+
+## Survivor items
+
+![The Blight — Allowed Items](/images/builds/1v4-quartet/blight/The-Blight-items.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="blight" section="items" />
+
+[← All per-killer balancing](/game-modes/1v4-pug-casual/balancing/)
 
 ## Applies to
 
