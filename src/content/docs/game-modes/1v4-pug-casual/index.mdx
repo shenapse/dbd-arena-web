@@ -1,0 +1,87 @@
+---
+title: DBD 1v4 PUG Casual
+description: >-
+  A casual 1v4 format where one killer faces four individually queued survivors
+  under the shared 1v4 rules.
+handle: dbd.1v4.pug.casual
+status: upcoming
+changeHistory:
+  - version: "0.1"
+    date: "2026-10-03"
+    note: Initial public announcement of the 1v4 PUG Casual game mode.
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+import KillerPool from '@components/KillerPool.astro';
+import LifecycleMeta from '@components/LifecycleMeta.astro';
+
+<LifecycleMeta />
+
+## Game structure
+
+| Aspect | Value |
+|---|---|
+| Team structure | 1 × Killer vs 4 × Survivors |
+| Survivor team structure | 4 individually queued players. They do not need to belong to a party. |
+| Map selection | Fixed per killer character |
+| Voice comms | Yes — all four survivors are assumed to be in voice with one another. |
+| Pre-match killer reveal | Yes — the killer character is known to both sides before the match starts. |
+| Pre-match player reveal | Yes |
+
+## Killer pool
+
+<KillerPool
+  available={["Nurse", "Blight", "Hillbilly", 
+  "Dracula", "Ghoul", "Spirit",
+  "Oni", "Wesker", "Nightmare", "Clown",
+  "Demogorgon", "Cenobite", "Unknown", "Doctor", "Wraith"]}
+  upcoming={[ "Slasher", "Artist", "Lich", "Good Guy",  "Cannibal"]}
+  undecided={["Ghostface", "Executioner", "Twins", "Pig", "Trickster", "Nemesis", "Xenomorph", "Legion", "Dredge","Shape","Singularity"]}
+  unsupported={["Animatronic", "Huntress", "Trapper", "Hag", "Knight", "Skull Merchant"]}
+/>
+
+## Rule & balancing
+
+<LinkCard
+  title="General rule"
+  href="/game-modes/reference/1v4-general-rule/"
+  description="Global rules that apply to every 1v4 game mode."
+/>
+
+PUG-specific per-killer balancing will be added later.
+
+## Queue requirement
+
+Both roles currently queue solo.
+
+| Who | How they queue | Declares at queue time |
+|---|---|---|
+| Killer player | Queues solo. | One killer character. |
+| Survivor player | Queues solo. | Nothing. |
+
+A future update will allow survivor parties of two, three, or four players.
+Any remaining survivor slots will be filled by solo-queued or party-queued players.
+
+## Result facts
+
+| Fact | Notes |
+|---|---|
+| Winning side | Which side won — killers or survivors. Omitted on a draw. |
+| Draw | Marks a drawn match. Mutually exclusive with a winning side. |
+| Generators remaining | How many generators were left unrepaired at the end (0-5). |
+| Hook stages | Total hook stages performed by the killer during the match (0-12). |
+| Kills | How many survivors were killed (0-4). |
+
+## Ratings
+
+1v4 PUG Casual uses ratings that are both game-mode specific and killer specific.
+
+The same rating scope is used in both phases:
+
+- **Matchmaking phase:** players are matched using their 1v4 PUG Casual rating for the relevant killer.
+- **Rating update phase:** that same scoped rating is updated after the match.
+
+## Trouble handling
+
+For match related trouble handling, see the
+shared [Match Problems and Remakes](/handbook/trouble-handling/match-problems-and-remakes/).

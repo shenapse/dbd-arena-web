@@ -261,6 +261,12 @@ export default defineConfig({
                     },
                   ],
                 },
+                {
+                  label: 'DBD 1v4 PUG Casual',
+                  items: [
+                    { label: 'Overview', translations: { ja: '概要', ko: '개요' }, slug: 'game-modes/1v4-pug-casual' },
+                  ],
+                },
               ],
             },
           ],
