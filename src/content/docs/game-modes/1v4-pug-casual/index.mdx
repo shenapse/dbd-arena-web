@@ -31,10 +31,23 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
 ## Killer pool
 
 <KillerPool
-  available={["Nurse", "Blight", "Hillbilly", 
-  "Dracula", "Ghoul", "Spirit",
-  "Oni", "Wesker", "Nightmare", "Clown",
-  "Demogorgon", "Cenobite", "Unknown", "Doctor", "Wraith"]}
+  available={[
+    { name: "Nurse", href: "/game-modes/1v4-pug-casual/balancing/nurse/" },
+    { name: "Blight", href: "/game-modes/1v4-pug-casual/balancing/blight/" },
+    { name: "Hillbilly", href: "/game-modes/1v4-pug-casual/balancing/billy/" },
+    { name: "Dracula", href: "/game-modes/1v4-pug-casual/balancing/dracula/" },
+    { name: "Ghoul", href: "/game-modes/1v4-pug-casual/balancing/ghoul/" },
+    { name: "Spirit", href: "/game-modes/1v4-pug-casual/balancing/spirit/" },
+    { name: "Oni", href: "/game-modes/1v4-pug-casual/balancing/oni/" },
+    { name: "Wesker", href: "/game-modes/1v4-pug-casual/balancing/wesker/" },
+    { name: "Nightmare", href: "/game-modes/1v4-pug-casual/balancing/nightmare/" },
+    { name: "Clown", href: "/game-modes/1v4-pug-casual/balancing/clown/" },
+    { name: "Demogorgon", href: "/game-modes/1v4-pug-casual/balancing/demogorgon/" },
+    { name: "Cenobite", href: "/game-modes/1v4-pug-casual/balancing/cenobite/" },
+    { name: "Unknown", href: "/game-modes/1v4-pug-casual/balancing/unknown/" },
+    { name: "Doctor", href: "/game-modes/1v4-pug-casual/balancing/doctor/" },
+    { name: "Wraith", href: "/game-modes/1v4-pug-casual/balancing/wraith/" },
+  ]}
   upcoming={[ "Slasher", "Artist", "Lich", "Good Guy",  "Cannibal"]}
   undecided={["Ghostface", "Executioner", "Twins", "Pig", "Trickster", "Nemesis", "Xenomorph", "Legion", "Dredge","Shape","Singularity"]}
   unsupported={["Animatronic", "Huntress", "Trapper", "Hag", "Knight", "Skull Merchant"]}
@@ -48,7 +61,11 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
   description="Global rules that apply to every 1v4 game mode."
 />
 
-PUG-specific per-killer balancing will be added later.
+<LinkCard
+  title="Per-killer balancing"
+  href="/game-modes/1v4-pug-casual/balancing/"
+  description="Initial PUG Casual maps and match outcomes, plus build restrictions adopted from 1v4 Quartet Ranked."
+/>
 
 ## Queue requirement
 
