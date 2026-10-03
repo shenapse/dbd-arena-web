@@ -1,0 +1,5 @@
+killer: The Wesker
+map: Coal Tower 1
+winCondition:
+  hookStages: 9
+drawCondition: null

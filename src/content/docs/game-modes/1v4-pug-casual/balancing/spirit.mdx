@@ -1,0 +1,55 @@
+---
+title: Spirit — 1v4 PUG Casual Balancing
+description: Initial PUG Casual map and match outcome conditions for Spirit.
+handle: 1v4-pug-casual-balancing-spirit
+status: upcoming
+changeHistory:
+  - version: "0.1"
+    date: "2026-10-03"
+    note: Initial PUG Casual balancing entry for Spirit.
+killer: Spirit
+format: 1v4-pug-casual
+---
+
+import MatchConditions from '@components/MatchConditions.astro';
+import BalancingList from '@components/BalancingList.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
+import LifecycleMeta from '@components/LifecycleMeta.astro';
+
+<LifecycleMeta />
+
+<MatchConditions format="1v4-pug-casual" killer="spirit" />
+
+## Required offerings
+
+<RequiredOfferings format="1v4-pug-casual" killer="spirit" />
+
+## Killer perks
+
+![The Spirit — Allowed Killer Perks](/images/builds/1v4-quartet/spirit/The-Spirit-killer-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="spirit" section="killerPerks" />
+
+## Killer add-ons
+
+![The Spirit — Allowed Killer Add-ons](/images/builds/1v4-quartet/spirit/The-Spirit-killer-addons.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="spirit" section="addons" />
+
+## Survivor perks
+
+![The Spirit — Allowed Survivor Perks](/images/builds/1v4-quartet/spirit/The-Spirit-survivor-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="spirit" section="survivorPerks" />
+
+## Survivor items
+
+![Going against The Spirit — Allowed Survivor Items](/images/builds/1v4-quartet/spirit/The-Spirit-items.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="spirit" section="items" />
+
+[← All per-killer balancing](/game-modes/1v4-pug-casual/balancing/)
+
+## Applies to
+
+- [DBD 1v4 PUG Casual](/game-modes/1v4-pug-casual/)

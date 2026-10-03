@@ -1,0 +1,55 @@
+---
+title: Cenobite — 1v4 PUG Casual Balancing
+description: Initial PUG Casual map and match outcome conditions for Cenobite.
+handle: 1v4-pug-casual-balancing-cenobite
+status: upcoming
+changeHistory:
+  - version: "0.1"
+    date: "2026-10-03"
+    note: Initial PUG Casual balancing entry for Cenobite.
+killer: Cenobite
+format: 1v4-pug-casual
+---
+
+import MatchConditions from '@components/MatchConditions.astro';
+import BalancingList from '@components/BalancingList.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
+import LifecycleMeta from '@components/LifecycleMeta.astro';
+
+<LifecycleMeta />
+
+<MatchConditions format="1v4-pug-casual" killer="cenobite" />
+
+## Required offerings
+
+<RequiredOfferings format="1v4-pug-casual" killer="cenobite" />
+
+## Killer perks
+
+![The Cenobite — Allowed Killer Perks](/images/builds/1v4-quartet/cenobite/The-Cenobite-killer-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="cenobite" section="killerPerks" />
+
+## Killer add-ons
+
+![The Cenobite — Allowed Killer Add-ons](/images/builds/1v4-quartet/cenobite/The-Cenobite-killer-addons.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="cenobite" section="addons" />
+
+## Survivor perks
+
+![The Cenobite — Allowed Survivor Perks](/images/builds/1v4-quartet/cenobite/The-Cenobite-survivor-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="cenobite" section="survivorPerks" />
+
+## Survivor items
+
+![Going against The Cenobite — Allowed Survivor Items](/images/builds/1v4-quartet/cenobite/The-Cenobite-items.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="cenobite" section="items" />
+
+[← All per-killer balancing](/game-modes/1v4-pug-casual/balancing/)
+
+## Applies to
+
+- [DBD 1v4 PUG Casual](/game-modes/1v4-pug-casual/)

@@ -1,0 +1,55 @@
+---
+title: Doctor — 1v4 PUG Casual Balancing
+description: Initial PUG Casual map and match outcome conditions for Doctor.
+handle: 1v4-pug-casual-balancing-doctor
+status: upcoming
+changeHistory:
+  - version: "0.1"
+    date: "2026-10-03"
+    note: Initial PUG Casual balancing entry for Doctor.
+killer: Doctor
+format: 1v4-pug-casual
+---
+
+import MatchConditions from '@components/MatchConditions.astro';
+import BalancingList from '@components/BalancingList.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
+import LifecycleMeta from '@components/LifecycleMeta.astro';
+
+<LifecycleMeta />
+
+<MatchConditions format="1v4-pug-casual" killer="doctor" />
+
+## Required offerings
+
+<RequiredOfferings format="1v4-pug-casual" killer="doctor" />
+
+## Killer perks
+
+![The Doctor — Allowed Killer Perks](/images/builds/1v4-quartet/doctor/The-Doctor-killer-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="doctor" section="killerPerks" />
+
+## Killer add-ons
+
+![The Doctor — Allowed Killer Add-ons](/images/builds/1v4-quartet/doctor/The-Doctor-killer-addons.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="doctor" section="addons" />
+
+## Survivor perks
+
+![Going against The Doctor — Allowed Survivor Perks](/images/builds/1v4-quartet/doctor/The-Doctor-survivor-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="doctor" section="survivorPerks" />
+
+## Survivor items
+
+![Going against The Doctor — Allowed Survivor Items](/images/builds/1v4-quartet/doctor/The-Doctor-items.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="doctor" section="items" />
+
+[← All per-killer balancing](/game-modes/1v4-pug-casual/balancing/)
+
+## Applies to
+
+- [DBD 1v4 PUG Casual](/game-modes/1v4-pug-casual/)

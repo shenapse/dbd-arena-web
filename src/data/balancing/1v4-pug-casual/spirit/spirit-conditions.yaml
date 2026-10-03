@@ -1,0 +1,5 @@
+killer: The Spirit
+map: Wrecker's Yard
+winCondition:
+  hookStages: 11
+drawCondition: null

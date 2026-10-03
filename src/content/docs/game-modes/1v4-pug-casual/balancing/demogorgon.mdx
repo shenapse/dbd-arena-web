@@ -1,0 +1,55 @@
+---
+title: Demogorgon — 1v4 PUG Casual Balancing
+description: Initial PUG Casual map and match outcome conditions for Demogorgon.
+handle: 1v4-pug-casual-balancing-demogorgon
+status: upcoming
+changeHistory:
+  - version: "0.1"
+    date: "2026-10-03"
+    note: Initial PUG Casual balancing entry for Demogorgon.
+killer: Demogorgon
+format: 1v4-pug-casual
+---
+
+import MatchConditions from '@components/MatchConditions.astro';
+import BalancingList from '@components/BalancingList.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
+import LifecycleMeta from '@components/LifecycleMeta.astro';
+
+<LifecycleMeta />
+
+<MatchConditions format="1v4-pug-casual" killer="demogorgon" />
+
+## Required offerings
+
+<RequiredOfferings format="1v4-pug-casual" killer="demogorgon" />
+
+## Killer perks
+
+![The Demogorgon — Allowed Killer Perks](/images/builds/1v4-quartet/demogorgon/The-Demogorgon-killer-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="demogorgon" section="killerPerks" />
+
+## Killer add-ons
+
+![The Demogorgon — Allowed Killer Add-ons](/images/builds/1v4-quartet/demogorgon/The-Demogorgon-killer-addons.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="demogorgon" section="addons" />
+
+## Survivor perks
+
+![Going against The Demogorgon — Allowed Survivor Perks](/images/builds/1v4-quartet/demogorgon/The-Demogorgon-survivor-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="demogorgon" section="survivorPerks" />
+
+## Survivor items
+
+![Going against The Demogorgon — Allowed Survivor Items](/images/builds/1v4-quartet/demogorgon/The-Demogorgon-items.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="demogorgon" section="items" />
+
+[← All per-killer balancing](/game-modes/1v4-pug-casual/balancing/)
+
+## Applies to
+
+- [DBD 1v4 PUG Casual](/game-modes/1v4-pug-casual/)

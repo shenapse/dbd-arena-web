@@ -1,0 +1,6 @@
+killer: The Blight
+map: Suffocation Pit
+winCondition:
+  kills: 4
+  gensRemaining: 1
+drawCondition: null

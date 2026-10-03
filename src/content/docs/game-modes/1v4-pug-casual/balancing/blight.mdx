@@ -1,0 +1,59 @@
+---
+title: Blight — 1v4 PUG Casual Balancing
+description: Initial PUG Casual map and match outcome conditions for Blight.
+handle: 1v4-pug-casual-balancing-blight
+status: upcoming
+changeHistory:
+  - version: "0.1"
+    date: "2026-10-03"
+    note: Initial PUG Casual balancing entry for Blight.
+killer: Blight
+format: 1v4-pug-casual
+---
+
+import MatchConditions from '@components/MatchConditions.astro';
+import BalancingList from '@components/BalancingList.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
+import ImageRow from '@components/ImageRow.astro';
+import LifecycleMeta from '@components/LifecycleMeta.astro';
+
+<LifecycleMeta />
+
+<MatchConditions format="1v4-pug-casual" killer="blight" />
+
+## Required offerings
+
+<RequiredOfferings format="1v4-pug-casual" killer="blight" />
+
+## Killer perks
+
+![The Blight — Allowed Killer Perks](/images/builds/1v4-quartet/blight/The-Blight-killer-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="blight" section="killerPerks" />
+
+## Killer add-ons
+
+<ImageRow label="Allowed add-ons:" images={[
+  { src: '/images/killers/blight/Blighted-Crow.webp', label: 'Blighted Crow' },
+  { src: '/images/killers/blight/Blighted-Rat.webp', label: 'Blighted Rat' },
+]} />
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="blight" section="addons" />
+
+## Survivor perks
+
+![The Blight — Allowed Survivor Perks](/images/builds/1v4-quartet/blight/The-Blight-survivor-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="blight" section="survivorPerks" />
+
+## Survivor items
+
+![The Blight — Allowed Items](/images/builds/1v4-quartet/blight/The-Blight-items.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="blight" section="items" />
+
+[← All per-killer balancing](/game-modes/1v4-pug-casual/balancing/)
+
+## Applies to
+
+- [DBD 1v4 PUG Casual](/game-modes/1v4-pug-casual/)

@@ -1,9 +1,16 @@
 ---
+interface KillerPoolLink {
+  name: string;
+  href: string;
+}
+
+type KillerPoolItem = string | KillerPoolLink;
+
 interface Props {
-  available?: string[];
-  upcoming?: string[];
-  undecided?: string[];
-  unsupported?: string[];
+  available?: KillerPoolItem[];
+  upcoming?: KillerPoolItem[];
+  undecided?: KillerPoolItem[];
+  unsupported?: KillerPoolItem[];
 }
 const { available = [], upcoming = [], undecided = [], unsupported = [] } = Astro.props;
 const t = Astro.locals.t;
@@ -21,7 +28,11 @@ const GROUPS = [
     <div class="killer-pool__group">
       <p class="killer-pool__label">{t(`killerPool.${g.key}`)}</p>
       <ul class="tag-list">
-        {g.items.map(k => <li class={`tag--${g.key}`}>{k}</li>)}
+        {g.items.map((item) => (
+          <li class={`tag--${g.key}`}>
+            {typeof item === 'string' ? item : <a href={item.href}>{item.name}</a>}
+          </li>
+        ))}
       </ul>
     </div>
   ))}

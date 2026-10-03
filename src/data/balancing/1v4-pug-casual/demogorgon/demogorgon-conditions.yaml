@@ -1,0 +1,5 @@
+killer: The Demogorgon
+map: Dead Sands
+winCondition:
+  hookStages: 8
+drawCondition: null

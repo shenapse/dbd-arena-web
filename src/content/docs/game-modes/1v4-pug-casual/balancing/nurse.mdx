@@ -1,0 +1,55 @@
+---
+title: Nurse — 1v4 PUG Casual Balancing
+description: Initial PUG Casual map and match outcome conditions for Nurse.
+handle: 1v4-pug-casual-balancing-nurse
+status: upcoming
+changeHistory:
+  - version: "0.1"
+    date: "2026-10-03"
+    note: Initial PUG Casual balancing entry for Nurse.
+killer: Nurse
+format: 1v4-pug-casual
+---
+
+import MatchConditions from '@components/MatchConditions.astro';
+import BalancingList from '@components/BalancingList.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
+import LifecycleMeta from '@components/LifecycleMeta.astro';
+
+<LifecycleMeta />
+
+<MatchConditions format="1v4-pug-casual" killer="nurse" />
+
+## Required offerings
+
+<RequiredOfferings format="1v4-pug-casual" killer="nurse" />
+
+## Killer perks
+
+![The Nurse — Allowed Killer Perks](/images/builds/1v4-quartet/nurse/The-Nurse-killer-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="nurse" section="killerPerks" />
+
+## Killer add-ons
+
+![The Nurse — Allowed Killer Add-ons](/images/builds/1v4-quartet/nurse/The-Nurse-killer-addons.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="nurse" section="addons" />
+
+## Survivor perks
+
+![Going against The Nurse — Allowed Survivor Perks](/images/builds/1v4-quartet/nurse/The-Nurse-survivor-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="nurse" section="survivorPerks" />
+
+## Survivor items
+
+![Going against The Nurse — Allowed Survivor Perks](/images/builds/1v4-quartet/nurse/The-Nurse-items.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="nurse" section="items" />
+
+[← All per-killer balancing](/game-modes/1v4-pug-casual/balancing/)
+
+## Applies to
+
+- [DBD 1v4 PUG Casual](/game-modes/1v4-pug-casual/)

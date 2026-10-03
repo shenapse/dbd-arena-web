@@ -1,0 +1,55 @@
+---
+title: Clown — 1v4 PUG Casual Balancing
+description: Initial PUG Casual map and match outcome conditions for Clown.
+handle: 1v4-pug-casual-balancing-clown
+status: upcoming
+changeHistory:
+  - version: "0.1"
+    date: "2026-10-03"
+    note: Initial PUG Casual balancing entry for Clown.
+killer: Clown
+format: 1v4-pug-casual
+---
+
+import MatchConditions from '@components/MatchConditions.astro';
+import BalancingList from '@components/BalancingList.astro';
+import RequiredOfferings from '@components/RequiredOfferings.astro';
+import LifecycleMeta from '@components/LifecycleMeta.astro';
+
+<LifecycleMeta />
+
+<MatchConditions format="1v4-pug-casual" killer="clown" />
+
+## Required offerings
+
+<RequiredOfferings format="1v4-pug-casual" killer="clown" />
+
+## Killer perks
+
+![The Clown — Allowed Killer Perks](/images/builds/1v4-quartet/clown/The-Clown-killer-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="clown" section="killerPerks" />
+
+## Killer add-ons
+
+![The Clown — Allowed Killer Add-ons](/images/builds/1v4-quartet/clown/The-Clown-killer-addons.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="clown" section="addons" />
+
+## Survivor perks
+
+![Going against The Clown — Allowed Survivor Perks](/images/builds/1v4-quartet/clown/The-Clown-survivor-perks.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="clown" section="survivorPerks" />
+
+## Survivor items
+
+![Going against The Clown — Allowed Survivor Items](/images/builds/1v4-quartet/clown/The-Clown-items.png)
+
+<BalancingList format="1v4-pug-casual" source="1v4-quartet" killer="clown" section="items" />
+
+[← All per-killer balancing](/game-modes/1v4-pug-casual/balancing/)
+
+## Applies to
+
+- [DBD 1v4 PUG Casual](/game-modes/1v4-pug-casual/)
