@@ -4,6 +4,9 @@ description: >-
   1v1形式のゲームモード（Symmetric、Asymmetric、および今後の1v1形式）に共通して適用される基本ルール。
 handle: 1v1-general
 changeHistory:
+  - version: "1.2"
+    date: "2026-10-04"
+    note: サバイバーが切断またはハッチ脱出でチェイスタイマーを終了する扱いを明確化。
   - version: "1.1"
     date: "2026-09-30"
     note: 共有のgame-modesリファレンスセクションへ移動し、Symmetric限定から適用範囲を拡張。
@@ -11,7 +14,7 @@ changeHistory:
     date: "2026-06-21"
     note: 1v1 Symmetric基本ルールの初版を公開。
 translationStatus: complete
-translationDate: "2026-10-01"
+translationDate: "2026-10-04"
 ---
 
 import { Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
@@ -85,12 +88,14 @@ import TranslationNotice from '@components/TranslationNotice.astro';
 
 特にステルスキラーは、ステルス能力が終了した後にのみ違反を主張できる。
 
-## 降参
-降参は切断によって行う。
+## チェイスタイマーの終了と降参
 
-サバイバーはいつでも降参できる。キラーは、勝利条件を達成できなくなった時点以降いつでも降参できる。
+サバイバーは、切断するかハッチから脱出することでチェイスタイマーを終了できる。
+これによって、サバイバーが現在のラウンドに自動的に敗北することはない。
 
-降参したプレイヤーは現在のラウンドに敗北する。マッチ全体の敗北にはならない。
+キラーは、勝利条件を達成できなくなった時点以降、切断して降参できる。
+
+キラーが降参した場合、キラーは現在のラウンドに敗北する。マッチ全体の敗北にはならない。
 
 ## 適用対象
 
