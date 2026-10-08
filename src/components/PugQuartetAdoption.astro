@@ -1,0 +1,17 @@
+---
+// States that PUG Casual uses the named 1v4 Quartet Ranked build
+// restrictions. The page body is shared by English and locale-fallback
+// routes, so the copy and link must be resolved from the route locale here
+// rather than hand-written in the English MDX source.
+import { LOCALE_PREFIXES, idToHref, type LocalePrefix } from '../lib/docs/ids';
+
+const { locale } = Astro.locals.starlightRoute;
+const prefix = (LOCALE_PREFIXES as readonly string[]).includes(locale ?? '')
+  ? (locale as LocalePrefix)
+  : undefined;
+const t = Astro.locals.t;
+const [beforeLink, afterLink] = t('pugBalancing.adoptsQuartet').split('{link}');
+const href = idToHref('game-modes/1v4-quartet/balancing', prefix);
+---
+
+<p>{beforeLink ?? ''}<a href={href}>{t('pugBalancing.quartet')}</a>{afterLink ?? ''}</p>

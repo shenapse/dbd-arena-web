@@ -1,8 +1,8 @@
 ---
 title: DBD 1v4 PUG Casual
 description: >-
-  A casual 1v4 format where one killer faces four individually queued survivors
-  under the shared 1v4 rules.
+  A casual 1v4 format where one killer faces four survivors queued solo or as
+  a party under the shared 1v4 rules.
 handle: dbd.1v4.pug.casual
 status: upcoming
 changeHistory:
@@ -22,7 +22,7 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
 | Aspect | Value |
 |---|---|
 | Team structure | 1 × Killer vs 4 × Survivors |
-| Survivor team structure | 4 individually queued players. They do not need to belong to a party. |
+| Survivor team structure | 4 players queued solo or as a party. |
 | Map selection | Fixed per killer character |
 | Voice comms | Yes — all four survivors are assumed to be in voice with one another. |
 | Pre-match killer reveal | Yes — the killer character is known to both sides before the match starts. |
@@ -69,14 +69,13 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
 
 ## Queue requirement
 
-Both roles currently queue solo.
+Killers queue solo. Survivors may queue solo or as a party.
 
 | Who | How they queue | Declares at queue time |
 |---|---|---|
 | Killer player | Queues solo. | One killer character. |
-| Survivor player | Queues solo. | Nothing. |
+| Survivor player | Queues solo or as a party. | Nothing. |
 
-A future update will allow survivor parties of two, three, or four players.
 Any remaining survivor slots will be filled by solo-queued or party-queued players.
 
 ## Result facts

@@ -181,6 +181,8 @@ export const collections = {
         'balancingIntro.generalRule.1v1': z.string().optional(),
         'balancingOverview.killer': z.string().optional(),
         'balancingOverview.status': z.string().optional(),
+        'pugBalancing.adoptsQuartet': z.string().optional(),
+        'pugBalancing.quartet': z.string().optional(),
         'translation.notice.label': z.string().optional(),
         'translation.notice.disclaimer': z.string().optional(),
         'translation.notice.authority': z.string().optional(),

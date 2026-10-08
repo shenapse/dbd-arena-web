@@ -1,0 +1,105 @@
+---
+title: DBD 1v4 PUG Casual
+description: >-
+  キラー1人と、ソロまたはパーティでキューに参加するサバイバー4人が対戦する、
+  共通の1v4ルールを採用したカジュアル形式。
+handle: dbd.1v4.pug.casual
+changeHistory:
+  - version: "0.1"
+    date: "2026-10-03"
+    note: 1v4 PUG Casualゲームモードを初めて公開。
+translationStatus: complete
+translationDate: "2026-10-08"
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+import KillerPool from '@components/KillerPool.astro';
+import LifecycleMeta from '@components/LifecycleMeta.astro';
+import TranslationNotice from '@components/TranslationNotice.astro';
+
+<TranslationNotice />
+
+<LifecycleMeta />
+
+## ゲーム構成
+
+| 項目 | 内容 |
+|---|---|
+| チーム構成 | キラー1人 vs サバイバー4人 |
+| サバイバーチーム構成 | ソロまたはパーティでキューに参加する4人のプレイヤー |
+| マップ選択 | キラーごとに固定 |
+| ボイスチャット | あり — サバイバー4人全員が互いにVC可能とみなす |
+| 試合前のキラー公開 | あり — 試合開始前にキラーキャラクターが両陣営に公開される |
+| 試合前のプレイヤー公開 | あり |
+
+## キラープール
+
+<KillerPool
+  available={[
+    { name: "Nurse", href: "/game-modes/1v4-pug-casual/balancing/nurse/" },
+    { name: "Blight", href: "/game-modes/1v4-pug-casual/balancing/blight/" },
+    { name: "Hillbilly", href: "/game-modes/1v4-pug-casual/balancing/billy/" },
+    { name: "Dracula", href: "/game-modes/1v4-pug-casual/balancing/dracula/" },
+    { name: "Ghoul", href: "/game-modes/1v4-pug-casual/balancing/ghoul/" },
+    { name: "Spirit", href: "/game-modes/1v4-pug-casual/balancing/spirit/" },
+    { name: "Oni", href: "/game-modes/1v4-pug-casual/balancing/oni/" },
+    { name: "Wesker", href: "/game-modes/1v4-pug-casual/balancing/wesker/" },
+    { name: "Nightmare", href: "/game-modes/1v4-pug-casual/balancing/nightmare/" },
+    { name: "Clown", href: "/game-modes/1v4-pug-casual/balancing/clown/" },
+    { name: "Demogorgon", href: "/game-modes/1v4-pug-casual/balancing/demogorgon/" },
+    { name: "Cenobite", href: "/game-modes/1v4-pug-casual/balancing/cenobite/" },
+    { name: "Unknown", href: "/game-modes/1v4-pug-casual/balancing/unknown/" },
+    { name: "Doctor", href: "/game-modes/1v4-pug-casual/balancing/doctor/" },
+    { name: "Wraith", href: "/game-modes/1v4-pug-casual/balancing/wraith/" },
+  ]}
+  upcoming={[ "Slasher", "Artist", "Lich", "Good Guy", "Cannibal"]}
+  undecided={["Ghostface", "Executioner", "Twins", "Pig", "Trickster", "Nemesis", "Xenomorph", "Legion", "Dredge", "Shape", "Singularity"]}
+  unsupported={["Animatronic", "Huntress", "Trapper", "Hag", "Knight", "Skull Merchant"]}
+/>
+
+## ルールとバランス調整
+
+<LinkCard
+  title="基本ルール"
+  href="/ja/game-modes/reference/1v4-general-rule/"
+  description="すべての1v4ゲームモードに適用される共通ルール。"
+/>
+
+<LinkCard
+  title="キラー別バランス調整"
+  href="/game-modes/1v4-pug-casual/balancing/"
+  description="PUG Casualの初期マップと勝敗条件、および1v4 Quartet Rankedから採用するビルド制限。"
+/>
+
+## キュー参加条件
+
+| 対象 | キューへの参加方法 | キュー参加時の申告内容 |
+|---|---|---|
+| キラープレイヤー | 1人でキューに参加 | 使用するキラー1体 |
+| サバイバープレイヤー | ソロまたはパーティでキューに参加 | なし |
+
+空いているサバイバー枠は、ソロまたはパーティでキューに参加しているプレイヤーで埋められる。
+
+## リザルト情報
+
+| 項目 | 説明 |
+|---|---|
+| 勝利陣営 | キラーまたはサバイバーのどちらが勝利したか。引き分けの場合は記録しない |
+| 引き分け | 試合が引き分けだったことを示す。勝利陣営とは両立しない |
+| 残り発電機数 | 試合終了時に修理されていなかった発電機の数（0〜5） |
+| フックステージ | 試合中にキラーが行ったフックステージの合計数（0〜12） |
+| キル数 | 死亡したサバイバーの数（0〜4） |
+
+## レーティング
+
+1v4 PUG Casualでは、ゲームモードごと、かつキラーごとに分かれたレーティングを使用する。
+
+このレーティングの範囲は、次の両方のフェーズで同じである:
+
+- **マッチメイキングフェーズ:** 該当するキラーの1v4 PUG Casual用レーティングを使ってマッチを組む。
+- **レーティング更新フェーズ:** 試合後に、同じ範囲のレーティングを更新する。
+
+## トラブル対応
+
+試合に関するトラブル対応は、共通の
+[試合のトラブルとやり直し](/handbook/trouble-handling/match-problems-and-remakes/)を参照。

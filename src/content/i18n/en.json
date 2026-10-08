@@ -48,6 +48,8 @@
   "balancingIntro.generalRule.1v1": "general 1v1 rule",
   "balancingOverview.killer": "Killer",
   "balancingOverview.status": "Status",
+  "pugBalancing.adoptsQuartet": "PUG Casual adopts the {link} restrictions for killer perks, killer add-ons, and survivor perks.",
+  "pugBalancing.quartet": "1v4 Quartet Ranked",
   "translation.notice.label": "Translation note:",
   "translation.notice.disclaimer": "This page is an unofficial translation provided as a reading aid.",
   "translation.notice.authority": "Where it differs from the English original in content or interpretation, the {n} controls.",
