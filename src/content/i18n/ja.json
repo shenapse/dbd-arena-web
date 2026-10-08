@@ -48,6 +48,8 @@
   "balancingIntro.generalRule.1v1": "1v1 基本ルール",
   "balancingOverview.killer": "キラー",
   "balancingOverview.status": "ステータス",
+  "pugBalancing.adoptsQuartet": "PUG Casualのキラーパーク、キラーアドオン、サバイバーパークの制限は、{link} のものを採用する。",
+  "pugBalancing.quartet": "1v4 Quartet Ranked",
   "translation.notice.label": "翻訳について:",
   "translation.notice.disclaimer": "このページは、読みやすさのために提供される非公式な日本語訳です。",
   "translation.notice.authority": "英語版との間に内容や解釈の相違がある場合は、{n}が優先されます。",
