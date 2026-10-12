@@ -6,6 +6,9 @@ description: >-
 handle: dbd.1v1.symmetric.rank
 status: active
 changeHistory:
+  - version: "1.1"
+    date: "2026-10-12"
+    note: Wraith, Doctor, Blight, Cannibal, Demogorgon, Mastermind, Nightmare, Pig and Clown added to the available killer pool.
   - version: "1.0"
     date: "2026-06-21"
     note: Game Mode promoted to active. General rule and Trapper balancing finalized.
@@ -40,8 +43,19 @@ round.
 ## Killer pool
 
 <KillerPool
-  available={["Trapper"]}
-  upcoming={["Wraith", "Hillbilly", "Doctor", "Nurse", "Blight", "Cannibal", "Pig", "Demogorgon", "Mastermind", "Dracula"]}
+  available={[
+    { name: "Trapper", href: "/game-modes/1v1-symmetric/balancing/trapper/" },
+    { name: "Wraith", href: "/game-modes/1v1-symmetric/balancing/wraith/" },
+    { name: "Doctor", href: "/game-modes/1v1-symmetric/balancing/doctor/" },
+    { name: "Blight", href: "/game-modes/1v1-symmetric/balancing/blight/" },
+    { name: "Cannibal", href: "/game-modes/1v1-symmetric/balancing/cannibal/" },
+    { name: "Demogorgon", href: "/game-modes/1v1-symmetric/balancing/demogorgon/" },
+    { name: "Mastermind", href: "/game-modes/1v1-symmetric/balancing/wesker/" },
+    { name: "Nightmare", href: "/game-modes/1v1-symmetric/balancing/nightmare/" },
+    { name: "Pig", href: "/game-modes/1v1-symmetric/balancing/pig/" },
+    { name: "Clown", href: "/game-modes/1v1-symmetric/balancing/clown/" },
+  ]}
+  upcoming={["Hillbilly", "Nurse", "Dracula"]}
 />
 
 
