@@ -2,23 +2,23 @@ killers:
   - name: Blight
     page: blight
     conditions: blight
-    status: upcoming
+    status: active
   - name: Cannibal
     page: cannibal
     conditions: cannibal
-    status: upcoming
+    status: active
   - name: Clown
     page: clown
     conditions: clown
-    status: upcoming
+    status: active
   - name: Demogorgon
     page: demogorgon
     conditions: demogorgon
-    status: upcoming
+    status: active
   - name: Doctor
     page: doctor
     conditions: doctor
-    status: upcoming
+    status: active
   - name: Hillbilly
     page: hillbilly
     conditions: hillbilly
@@ -26,11 +26,11 @@ killers:
   - name: Nightmare
     page: nightmare
     conditions: nightmare
-    status: upcoming
+    status: active
   - name: Pig
     page: pig
     conditions: pig
-    status: upcoming
+    status: active
   - name: Trapper
     page: trapper
     conditions: trapper
@@ -38,8 +38,8 @@ killers:
   - name: Wesker
     page: wesker
     conditions: wesker
-    status: upcoming
+    status: active
   - name: Wraith
     page: wraith
     conditions: wraith
-    status: upcoming
+    status: active

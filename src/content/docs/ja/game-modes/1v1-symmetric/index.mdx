@@ -5,6 +5,9 @@ description: >-
   標準的な1対1形式
 handle: dbd.1v1.symmetric.rank
 changeHistory:
+  - version: "1.1"
+    date: "2026-10-12"
+    note: レイス、ドクター、ブライト、カニバル、デモゴルゴン、マスターマインド、ナイトメア、ピッグ、クラウンを使用可能なキラープールに追加。
   - version: "1.0"
     date: "2026-06-21"
     note: ゲームモードを稼働中に移行。基本ルールとトラッパーのバランス調整を確定。
@@ -12,7 +15,7 @@ changeHistory:
     date: "2026-06-15"
     note: 暫定版を公開。形式とルールは未確定。
 translationStatus: complete
-translationDate: "2026-06-22"
+translationDate: "2026-10-12"
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
@@ -41,8 +44,19 @@ import TranslationNotice from '@components/TranslationNotice.astro';
 ## キラープール
 
 <KillerPool
-  available={["Trapper"]}
-  upcoming={["Wraith", "Hillbilly", "Doctor", "Nurse", "Blight", "Cannibal", "Pig", "Demogorgon", "Mastermind", "Dracula"]}
+  available={[
+    { name: "Trapper", href: "/ja/game-modes/1v1-symmetric/balancing/trapper/" },
+    { name: "Wraith", href: "/ja/game-modes/1v1-symmetric/balancing/wraith/" },
+    { name: "Doctor", href: "/ja/game-modes/1v1-symmetric/balancing/doctor/" },
+    { name: "Blight", href: "/ja/game-modes/1v1-symmetric/balancing/blight/" },
+    { name: "Cannibal", href: "/ja/game-modes/1v1-symmetric/balancing/cannibal/" },
+    { name: "Demogorgon", href: "/ja/game-modes/1v1-symmetric/balancing/demogorgon/" },
+    { name: "Mastermind", href: "/ja/game-modes/1v1-symmetric/balancing/wesker/" },
+    { name: "Nightmare", href: "/ja/game-modes/1v1-symmetric/balancing/nightmare/" },
+    { name: "Pig", href: "/ja/game-modes/1v1-symmetric/balancing/pig/" },
+    { name: "Clown", href: "/ja/game-modes/1v1-symmetric/balancing/clown/" },
+  ]}
+  upcoming={["Hillbilly", "Nurse", "Dracula"]}
 />
 
 ## ルールとバランス調整
