@@ -77,7 +77,7 @@ survivorPerks:
     # - Champion of Light
     - Chemical Trap
     - Counterforce
-    - Dead Hard
+    # - Dead Hard
     # - Decisive Strike
     # - Deliverance
     # - Desperate Measures
