@@ -1,5 +1,5 @@
 killer: The Demogorgon
-balancing: DBD Arena - 1v4 Quartet Rank v0.1
+balancing: DBD Arena - 1v4 Quartet Rank v0.4
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
 #   killer: all
@@ -70,11 +70,11 @@ addons:
 survivorPerks:
   default: deny
   allow:
-    - Adrenaline
+    # - Adrenaline
     - Aftercare
     - Any Means Necessary
     # - Balanced Landing
-    - Better than New
+    # - Better than New
     - Bite the Bullet
     - Blood Pact
     - Bond
@@ -83,7 +83,7 @@ survivorPerks:
     - Counterforce
     - Detective's Hunch
     - Distortion
-    - Empathic Connection
+    # - Empathic Connection
     - Empathy
     - Five Moves Ahead
     - Finesse
@@ -91,6 +91,7 @@ survivorPerks:
     - Flashbang
     - Head On
     - Iron Will
+    - Lend a Hand
     - Light-Footed
     - Lithe
     - Lucky Star
