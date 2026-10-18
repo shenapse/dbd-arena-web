@@ -737,6 +737,10 @@
     "name": "Left Behind",
     "survivorPerk": true
   },
+  "lend-a-hand": {
+    "name": "Lend a Hand",
+    "survivorPerk": true
+  },
   "lethal-pursuer": {
     "name": "Lethal Pursuer",
     "survivorPerk": false
