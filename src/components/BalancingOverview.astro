@@ -115,7 +115,7 @@ const rows: DisplayRow[] = doc.killers.map((entry) => {
   <tbody>
     {rows.map(({ entry, map, win, draw, href }) => (
       <tr>
-        <td>{href ? <a href={href}>{entry.name}</a> : entry.name}</td>
+        <td>{href ? <a href={href}>{localizeName(entry.name, locale, 'killer')}</a> : localizeName(entry.name, locale, 'killer')}</td>
         <td>{map}</td>
         {showWin && <td>{win}</td>}
         {showDraw && <td>{draw}</td>}

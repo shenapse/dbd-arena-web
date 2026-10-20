@@ -1,4 +1,4 @@
-// Display-layer localization for perk/add-on/item/map/offering NAMES only.
+// Display-layer localization for perk/add-on/item/map/offering/killer NAMES only.
 //
 // Allow/deny resolution and sorting in resolve.ts stay entirely English (the
 // -build.yaml selectors are English, and the generated build sheets sort by
@@ -43,9 +43,17 @@ import addonsJson from '../../data/dbd/addons.json' with { type: 'json' };
 import itemsJson from '../../data/dbd/items.json' with { type: 'json' };
 import mapsJson from '../../data/dbd/maps.json' with { type: 'json' };
 import offeringsJson from '../../data/dbd/offerings.json' with { type: 'json' };
-import type { PerkEntry, AddonEntry, ItemsData, MapEntry, OfferingEntry } from './types';
+import killersJson from '../../data/dbd/killers.json' with { type: 'json' };
+import type {
+  PerkEntry,
+  AddonEntry,
+  ItemsData,
+  MapEntry,
+  OfferingEntry,
+  KillerEntry,
+} from './types';
 
-export type NameDomain = 'perk' | 'addon' | 'item' | 'map' | 'offering';
+export type NameDomain = 'perk' | 'addon' | 'item' | 'map' | 'offering' | 'killer';
 
 // Filename stem (plural, as used in <stem>.<lang>.json translation files)
 // -> canonical domain. This also gates discovery: files whose stem isn't
@@ -57,6 +65,7 @@ const DOMAIN_BY_STEM: Record<string, NameDomain> = {
   items: 'item',
   maps: 'map',
   offerings: 'offering',
+  killers: 'killer',
 };
 
 // Separator used when building composite inverse-map keys (addon: killer +
@@ -104,6 +113,7 @@ function emptyDomainLookups(): Record<NameDomain, Map<string, LocalizedName>> {
     item: new Map(),
     map: new Map(),
     offering: new Map(),
+    killer: new Map(),
   };
 }
 
@@ -139,6 +149,7 @@ for (const [filePath, mod] of Object.entries(files)) {
 //                               variants: Record<variantSlug, { name, type, rarity }> }
 //   maps.json:   Record<slug, MapEntry>              MapEntry = { name, family?, aliases?, abbreviations? }
 //   offerings.json: Record<slug, OfferingEntry>       OfferingEntry = { name, aliases?, abbreviations?, image? }
+//   killers.json: Record<slug, KillerEntry>           KillerEntry = { name, aliases? }
 //
 // The inverse-map keys below mirror how localizeName() will be called: a
 // perk is looked up by its (normalized) English name alone (also indexed by
@@ -158,12 +169,14 @@ const addonInverse = new Map<string, string>();
 const itemInverse = new Map<string, string>();
 const mapInverse = new Map<string, string>();
 const offeringInverse = new Map<string, string>();
+const killerInverse = new Map<string, string>();
 
 const perks = perksJson as Record<string, PerkEntry>;
 const addons = addonsJson as Record<string, AddonEntry>;
 const items = itemsJson as ItemsData;
 const maps = mapsJson as Record<string, MapEntry>;
 const offerings = offeringsJson as Record<string, OfferingEntry>;
+const killers = killersJson as unknown as Record<string, KillerEntry>;
 
 // Pass 1: canonical names win. Pass 2: aliases/abbreviations fill in any
 // remaining (unclaimed) keys, so a canonical perk name is never shadowed by
@@ -198,6 +211,23 @@ for (const [slug, entry] of Object.entries(offerings)) {
   for (const alias of [...(entry.aliases ?? []), ...(entry.abbreviations ?? [])]) {
     const key = normalize(alias);
     if (!offeringInverse.has(key)) offeringInverse.set(key, slug);
+  }
+}
+
+// killers.json names carry a leading "The " ("The Hillbilly") that overview.yaml
+// omits ("Hillbilly"), so the bare form is indexed too.
+for (const [slug, entry] of Object.entries(killers)) {
+  const key = normalize(entry.name);
+  if (!killerInverse.has(key)) killerInverse.set(key, slug);
+}
+for (const [slug, entry] of Object.entries(killers)) {
+  const key = normalize(entry.name.replace(/^the\s+/i, ''));
+  if (!killerInverse.has(key)) killerInverse.set(key, slug);
+}
+for (const [slug, entry] of Object.entries(killers)) {
+  for (const alias of entry.aliases ?? []) {
+    const key = normalize(alias);
+    if (!killerInverse.has(key)) killerInverse.set(key, slug);
   }
 }
 
@@ -249,10 +279,10 @@ export interface LocalizeOpts {
  *   aliases — abbreviations never render). When a translation exists for the
  *   active locale, a bilingual em-dash line is appended:
  *   `"<English> (<English aliases>) — <localized> (<localized aliases>)"`.
- * - **addon/item/map/offering**: `"<English> (<localized>)"` when a translation
+ * - **addon/item/map/offering/killer**: `"<English> (<localized>)"` when a translation
  *   exists, else the English name unchanged. Resolving the slug requires
  *   `opts.killer` (addon) or `opts.kind` (item); maps and offerings resolve
- *   directly by name. Without the required opt, no slug can be resolved and
+ *   directly by name (a killer also matches its aliases, so "Dracula" finds The Dark Lord). Without the required opt, no slug can be resolved and
  *   the English name renders unchanged.
  */
 export function localizeName(
@@ -287,6 +317,12 @@ export function localizeName(
   if (domain === 'offering') {
     const slug = offeringInverse.get(normalize(english));
     const t = slug ? table?.offering.get(slug) : undefined;
+    return t ? `${english} (${t.name})` : english;
+  }
+
+  if (domain === 'killer') {
+    const slug = killerInverse.get(normalize(english));
+    const t = slug ? table?.killer.get(slug) : undefined;
     return t ? `${english} (${t.name})` : english;
   }
 

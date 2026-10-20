@@ -61,7 +61,7 @@ const I18N_DIR = path.join(DATA_DIR, 'i18n');
 const BALANCING_DIR = path.resolve('src/data/balancing');
 const PUBLIC_DIR = path.resolve('public');
 
-const STEMS = ['perks', 'addons', 'items', 'maps', 'offerings'];
+const STEMS = ['perks', 'addons', 'items', 'maps', 'offerings', 'killers'];
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -91,7 +91,7 @@ function findTranslationFiles() {
 // Check A: translation keys are valid identities in the owned data.
 // ---------------------------------------------------------------------------
 
-function checkTranslationKeys(files, perks, addons, items, maps, offerings) {
+function checkTranslationKeys(files, perks, addons, items, maps, offerings, killers) {
   const failures = [];
 
   const itemIdentities = new Set();
@@ -111,6 +111,7 @@ function checkTranslationKeys(files, perks, addons, items, maps, offerings) {
     items: itemIdentities,
     maps: new Set(Object.keys(maps)),
     offerings: new Set(Object.keys(offerings)),
+    killers: new Set(Object.keys(killers)),
   };
 
   for (const { stem, filePath } of files) {
@@ -472,7 +473,7 @@ function main() {
   const checks = [
     {
       name: 'Check A: translation keys are valid slugs',
-      failures: checkTranslationKeys(translationFiles, perks, addons, items, maps, offerings),
+      failures: checkTranslationKeys(translationFiles, perks, addons, items, maps, offerings, killers),
     },
     {
       name: 'Check B: item add-on slug global uniqueness',
