@@ -1,0 +1,51 @@
+---
+title: ゲームモード
+description: >-
+  公開されているゲームモードを、プレイ可能・近日公開・公開終了のステータス別に確認し、
+  各モードの詳しいルールを参照できます。
+translationStatus: complete
+translationDate: "2026-10-31"
+---
+
+import GameModeEntry from '@components/GameModeEntry.astro';
+import TranslationNotice from '@components/TranslationNotice.astro';
+
+<TranslationNotice />
+
+**ゲームモード**とは、対戦形式と試合ルールの組であり、それぞれ固有の名前が付けられています。
+キューに入るときは1つのゲームモードを選び、
+同じモードを選んだプレイヤーとのみマッチングされます。
+
+## プレイ可能
+
+現在、Discord からエントリーできるゲームモードです。
+
+<GameModeEntry
+  name="DBD 1v1 Symmetric Ranked"
+  href="/ja/game-modes/1v1-symmetric/"
+  status="active"
+  description="各プレイヤーがキラーとサバイバーの両方を担当し、Best-of-X で勝敗を決める1v1形式です。"
+/>
+
+## 実装予定
+
+<GameModeEntry
+  name="DBD 1v4 Quartet Ranked"
+  href="/ja/game-modes/1v4-quartet/"
+  status="upcoming"
+  description="キラー1人と、VCで連携する4人のサバイバーチームが、厳格なルールのもとで対戦する、伝統的な競技形式です。"
+/>
+
+<GameModeEntry
+  name="DBD 1v4 PUG Casual"
+  href="/ja/game-modes/1v4-pug-casual/"
+  status="upcoming"
+  description="キラー1人と、ソロまたはパーティでキューに参加した4人のサバイバーが、共通の1v4ルールのもとで対戦するカジュアルな形式です。サバイバーはVC必須。"
+/>
+
+{/* <GameModeEntry
+  name="DBD 1v1 Asymmetric Ranked"
+  href="/ja/game-modes/1v1-asymmetric/"
+  status="upcoming"
+  description="一方のプレイヤーがキラー、もう一方がサバイバーを担当し続ける、役割固定の1v1形式です。キラーごとに定められたチェイス時間の基準をもとに各ラウンドの勝敗を判定し、Best-of-X で対戦します。"
+/> */}

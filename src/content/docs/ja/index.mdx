@@ -1,0 +1,41 @@
+---
+title: DBD Arena
+description: >-
+  DBD Arena — 真剣な対戦で、実力を確かな戦績に。
+template: splash
+translationStatus: complete
+translationDate: "2026-10-31"
+hero:
+  title: |
+    <span class="hero-eyebrow">Competitive Dead by Daylight · Unofficial</span><span class="hero-mark">DBD <span class="hero-arena">Arena</span></span>
+  tagline: |
+    <span class="hero-lead">Serious matches. Stronger proof of skill.</span><span class="hero-sub">明確な試合条件とルールのもと、実力に応じた相手とレーティングマッチを重ね、戦績を積み上げましょう。Arena での試合結果は、ほかでは得がたい、あなたの実力を裏付ける記録になります。</span>
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+import TranslationNotice from '@components/TranslationNotice.astro';
+
+<TranslationNotice />
+
+<CardGrid>
+  <LinkCard
+    title="DBD Arena とは"
+    href="/ja/what-is-arena/"
+    description="Arena を初めて知った方へ。対戦の魅力と、ここでの試合結果が持つ独自の意味をご紹介します。"
+  />
+  <LinkCard
+    title="プレイを始める"
+    href="/ja/start/"
+    description="必要な準備を確認し、競技形式を選び、登録に向けた準備を整えて Discord に参加しましょう。"
+  />
+  <LinkCard
+    title="ゲームモード一覧"
+    href="/ja/game-modes/"
+    description="Arena のゲームモードについて、競技形式、試合条件、ルール、ビルド制限を確認できます。"
+  />
+  <LinkCard
+    title="ハンドブック"
+    href="/ja/handbook/"
+    description="試合への参加から結果報告まで、Arena の日々の利用方法を確認できます。"
+  />
+</CardGrid>
