@@ -171,7 +171,7 @@ export default defineConfig({
           label: 'Game Modes',
           translations: { ja: 'ゲームモード', ko: '게임 모드' },
           items: [
-            { label: 'Overview', translations: { ja: '概要', ko: '개요' }, slug: 'game-modes' },
+            { label: 'Overview', translations: { ja: 'ゲームモード一覧', ko: '개요' }, slug: 'game-modes' },
             {
               label: 'Active',
               translations: { ja: '稼働中' },
@@ -179,12 +179,12 @@ export default defineConfig({
                 {
                   label: 'DBD 1v1 Symmetric Ranked',
                   items: [
-                    { label: 'Overview', translations: { ja: '概要' }, slug: 'game-modes/1v1-symmetric' },
+                    { label: 'Overview', translations: { ja: 'ゲームモード概要' }, slug: 'game-modes/1v1-symmetric' },
                     {
                       label: 'Balancing',
                       translations: { ja: 'バランス調整' },
                       items: [
-                        { label: 'Overview', translations: { ja: '概要' }, slug: 'game-modes/1v1-symmetric/balancing' },
+                        { label: 'Overview', translations: { ja: 'バランス調整一覧' }, slug: 'game-modes/1v1-symmetric/balancing' },
                         { label: 'Blight', translations: { ja: 'ブライト', ko: '블라이트' }, slug: 'game-modes/1v1-symmetric/balancing/blight' },
                         { label: 'Cannibal', translations: { ja: 'カニバル', ko: '카니발' }, slug: 'game-modes/1v1-symmetric/balancing/cannibal' },
                         { label: 'Clown', translations: { ja: 'クラウン', ko: '클라운' }, slug: 'game-modes/1v1-symmetric/balancing/clown' },
@@ -204,16 +204,17 @@ export default defineConfig({
             },
             {
               label: 'Upcoming',
+              translations: { ja: '実装予定' },
               items: [
                 {
                   label: 'DBD 1v4 Quartet Ranked',
                   items: [
-                    { label: 'Overview', translations: { ja: '概要', ko: '개요' }, slug: 'game-modes/1v4-quartet' },
+                    { label: 'Overview', translations: { ja: 'ゲームモード概要', ko: '개요' }, slug: 'game-modes/1v4-quartet' },
                     {
                       label: 'Balancing',
                       translations: { ja: 'バランス調整', ko: '밸런스 조정' },
                       items: [
-                        { label: 'Overview', translations: { ja: '概要', ko: '개요' }, slug: 'game-modes/1v4-quartet/balancing' },
+                        { label: 'Overview', translations: { ja: 'バランス調整一覧', ko: '개요' }, slug: 'game-modes/1v4-quartet/balancing' },
                         { label: 'Artist', translations: { ja: 'アーティスト', ko: '아티스트' }, slug: 'game-modes/1v4-quartet/balancing/artist' },
                         { label: 'Blight', translations: { ja: 'ブライト', ko: '블라이트' }, slug: 'game-modes/1v4-quartet/balancing/blight' },
                         { label: 'Cannibal', translations: { ja: 'カニバル', ko: '카니발' }, slug: 'game-modes/1v4-quartet/balancing/cannibal' },
@@ -247,12 +248,12 @@ export default defineConfig({
                 {
                   label: 'DBD 1v4 PUG Casual',
                   items: [
-                    { label: 'Overview', translations: { ja: '概要', ko: '개요' }, slug: 'game-modes/1v4-pug-casual' },
+                    { label: 'Overview', translations: { ja: 'ゲームモード概要', ko: '개요' }, slug: 'game-modes/1v4-pug-casual' },
                     {
                       label: 'Balancing',
                       translations: { ja: 'バランス調整', ko: '밸런스 조정' },
                       items: [
-                        { label: 'Overview', translations: { ja: '概要', ko: '개요' }, slug: 'game-modes/1v4-pug-casual/balancing' },
+                        { label: 'Overview', translations: { ja: 'バランス調整一覧', ko: '개요' }, slug: 'game-modes/1v4-pug-casual/balancing' },
                         { label: 'Nurse', translations: { ja: 'ナース', ko: '너스' }, slug: 'game-modes/1v4-pug-casual/balancing/nurse' },
                         { label: 'Blight', translations: { ja: 'ブライト', ko: '블라이트' }, slug: 'game-modes/1v4-pug-casual/balancing/blight' },
                         { label: 'Hillbilly', translations: { ja: 'ヒルビリー', ko: '힐빌리' }, slug: 'game-modes/1v4-pug-casual/balancing/billy' },
