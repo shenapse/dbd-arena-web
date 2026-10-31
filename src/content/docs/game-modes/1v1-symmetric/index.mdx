@@ -24,12 +24,17 @@ import LifecycleMeta from '@components/LifecycleMeta.astro';
 
 <LifecycleMeta />
 
-## Game Structure
+## Overview
 
-The classical 1v1 format where each player takes both the killer and survivor side,
-competing in best-of-3. In each round, both
-players record a chase time, and the player with the longer chase time takes the
-round.
+A ranked 1v1 mode that tests both your killer and survivor chase skills.
+In each round, you take turns playing both roles against your opponent.
+The player who survives longer wins the round; the first to win two
+rounds wins the best-of-three match.
+
+Queue solo with killer(s) from the available pool. Each killer has a fixed
+map and specific build restrictions, with a separate rating for that killer.
+
+## Game Structure
 
 | Attribute | Value |
 |---|---|
@@ -77,7 +82,7 @@ round.
 
 | Who | How they queue | Declares at queue time |
 |---|---|---|
-| Each player | Queues solo | One killer character from a restricted pool |
+| Each player | Queues solo | killer character(s) from a restricted pool |
 
 ## Result facts
 
