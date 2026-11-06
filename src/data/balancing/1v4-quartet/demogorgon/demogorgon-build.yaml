@@ -1,5 +1,5 @@
 killer: The Demogorgon
-balancing: DBD Arena - 1v4 Quartet Rank v0.4
+balancing: DBD Arena - 1v4 Quartet Rank v0.5
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
 #   killer: all
@@ -79,7 +79,8 @@ survivorPerks:
     - Blood Pact
     - Bond
     - Calm Spirit
-    - Clean Break
+    # - Clean Break
+    - Chemical Trap
     - Counterforce
     - Detective's Hunch
     - Distortion
@@ -91,15 +92,17 @@ survivorPerks:
     - Flashbang
     - Head On
     - Iron Will
-    - Lend a Hand
+    # - Lend a Hand
     - Light-Footed
     - Lithe
     - Lucky Star
-    - Mettle of Man
+    # - Mettle of Man
     - No Mither
+    - Open Handed
     - Parental Guidance
     - Quick and Quiet
     - Repressed Alliance
+    - Rookie Spirit
     - Saboteur
     - Smash Hit
     - Tenacity

@@ -1,5 +1,5 @@
 killer: The Hillbilly
-balancing: DBD Arena - 1v4 Quartet Rank v0.1
+balancing: DBD Arena - 1v4 Quartet Rank v0.2
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
 #   killer: all
@@ -63,6 +63,7 @@ survivorPerks:
     - Boil Over
     - Bond
     - Botany Knowledge
+    - Champion of Light
     - Chemical Trap
     - Dead Hard
     - Deliverance
@@ -77,14 +78,17 @@ survivorPerks:
     - For the People
     - Head On
     - Inner Strength
+    - Iron Will
     - Leader
     - Lithe
+    - Lucky Star
     - Made for This
     - No Mither
     - Overcome
     - Repressed Alliance
     - Second Wind
     - Smash Hit
+    - Spine Chill
     - Sprint Burst
     - Tenacity
     - Unbreakable
@@ -102,7 +106,15 @@ items:
   Med-Kit:
     default: deny
   Flashlight:
+    count: 1
     default: deny
+    allow:
+      - Sport Flashlight
+    addons:
+      count: 2
+      default: deny
+      allow:
+        - {rarity: "Common"}
   Toolbox:
     default: deny
   Key:
@@ -110,7 +122,9 @@ items:
   Map:
     default: deny
   Firecracker:
-    default: deny
+    count: 1
+    allow:
+      - Firecracker
   Fog Vial:
     default: deny
 

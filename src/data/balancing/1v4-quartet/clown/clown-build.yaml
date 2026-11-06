@@ -1,5 +1,5 @@
 killer: The Clown
-balancing: DBD Arena - 1v4 Quartet Rank v0.1
+balancing: DBD Arena - 1v4 Quartet Rank v0.2
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
 #   killer: all
@@ -70,14 +70,15 @@ survivorPerks:
     - Any Means Necessary
     - Bada Bada Boom
     # - Balanced Landing
-    - Better than New
+    # - Better than New
     - Bite the Bullet
     - Blood Pact
-    - Boil Over
+    # - Boil Over
     - Bond
     - Calm Spirit
     - Chemical Trap
     - Counterforce
+    - Cut Loose
     - Detective's Hunch
     - Distortion
     - Diversion
@@ -92,6 +93,7 @@ survivorPerks:
     - Lucky Star
     - No Mither
     # - No One Left Behind
+    - Open Handed
     - Quick and Quiet
     - Repressed Alliance
     - Saboteur
