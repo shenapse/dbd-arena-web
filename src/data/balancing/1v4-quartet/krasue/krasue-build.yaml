@@ -1,5 +1,5 @@
 killer: The Krasue
-balancing: DBD Arena - 1v4 Quartet Rank v0.1
+balancing: DBD Arena - 1v4 Quartet Rank v0.2
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
 #   killer: all
@@ -14,7 +14,7 @@ display:
 killerPerks:
   default: deny
   allow:
-    - Agitation
+    # - Agitation
     # - All Shaking Thunder
     - Bamboozle
     - Brutal Strength
@@ -25,7 +25,7 @@ killerPerks:
     # - Dragon's Grip
     - Dying Light
     - Eruption
-    - Forced Hesitation
+    # - Forced Hesitation
     - Forced Penance
     - Grim Embrace
     - "Hex: Crowd Control"

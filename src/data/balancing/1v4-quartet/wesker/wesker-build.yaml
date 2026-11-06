@@ -1,5 +1,5 @@
 killer: The Mastermind
-balancing: DBD Arena - 1v4 Quartet Rank v0.1
+balancing: DBD Arena - 1v4 Quartet Rank v0.4
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
 #   killer: all
@@ -67,14 +67,16 @@ survivorPerks:
     - Aftercare
     - Any Means Necessary
     - Bada Bada Boom
-    - Better than New
+    # - Better than New
     - Bite the Bullet
     - Blood Pact
-    - Boil Over
+    # - Boil Over
     - Bond
     - Calm Spirit
     - Chemical Trap
+    - Corrective Action
     - Counterforce
+    - Cut Loose
     - Detective's Hunch
     - Distortion
     - Diversion
@@ -83,10 +85,12 @@ survivorPerks:
     - Fixated
     - Flashbang
     - Head on
+    - Iron Will
     - Light-Footed
     - Lucky Star
     - No Mither
     - No One Left Behind
+    - Open Handed
     - Quick and Quiet
     - Repressed Alliance
     - Saboteur

@@ -1,5 +1,5 @@
 killer: The Ghoul
-balancing: DBD Arena - 1v4 Quartet Rank v0.1
+balancing: DBD Arena - 1v4 Quartet Rank v0.3
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
 #   killer: all
@@ -98,7 +98,7 @@ survivorPerks:
     - Light-Footed
     - Lithe
     - Lucky Star
-    - Mettle of Man
+    # - Mettle of Man
     - No Mither
     - Open Handed
     # - Potential Energy
@@ -111,6 +111,7 @@ survivorPerks:
     - Smash Hit
     # - Sprint Burst
     # - Solidarity
+    - Spine Chill
     - Tenacity
     - Urban Evasion
     - Visionary

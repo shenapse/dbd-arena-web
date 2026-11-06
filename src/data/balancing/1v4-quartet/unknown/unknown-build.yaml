@@ -1,5 +1,5 @@
 killer: The Unknown
-balancing: DBD Arena - 1v4 Quartet Rank v0.1
+balancing: DBD Arena - 1v4 Quartet Rank v0.2
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
 #   killer: all
@@ -28,14 +28,14 @@ killerPerks:
     - Forced Penance
     - Grim Embrace
     - "Hex: Crowd Control"
-    - "Hex: Devour Hope"
+    # - "Hex: Devour Hope"
     #- "Hex: Face the Darkness"
     - "Hex: Pentimento"
     - "Hex: Ruin"
     #- Hex: Thrill of the Hunt
     - "Hex: Undying"
     - "Hex: Wretched Fate"
-    - Make your Choice
+    # - Make your Choice
     - Merciless Storm
     - Mindbreaker
     - Oppression
@@ -45,7 +45,7 @@ killerPerks:
     - Save the best for last
     - "Scourge Hook: Gift of Pain"
     - "Scourge Hook: Pain Resonance"
-    - "Scourge Hook: Monstrous Shrine"
+    # - "Scourge Hook: Monstrous Shrine"
     - Secret Project
     - Sloppy Butcher
     - Surge
@@ -71,40 +71,45 @@ survivorPerks:
     - Aftercare
     - Any means necessary
     - Badabada boom
-    - Better than New
+    # - Better than New
     - Bite the bullet
     - Blood Pact
     - Bond
     - Calm Spirit
-    - Clean Break
+    # - Clean Break
+    - Corrective Action
     - Counter Force
     - Cut Loose
     - Dance with Me
     - Deception
     #- Dejavu
+    - Detective's Hunch
     - Diversion
-    - Empathic Connection
+    # - Empathic Connection
+    - Fixated
     - Flashbang
-    - Friendly Competition
+    # - Friendly Competition
     - Headon
     - Iron Will
     - Light Footed
-    - Light Weight
+    # - Light Weight
     - Lucky Star
-    - Mettle of Man
+    # - Mettle of Man
     - Mirrored Illusion
     - No Mither
     - Open Handed
     - Parental Guidance
     - Potential Energy
     - Quick and Quiet
-    - Rapid Response
+    # - Rapid Response
     - Red Herring
     - Repressed Alliance
     #- Resilience
     - Rookie Spirit
+    - Saboteur
     - Small Game
     - Smash Hit
+    - Spine Chill
     - Urban Evasion
     - Windows of Opportunity
     - Visionary

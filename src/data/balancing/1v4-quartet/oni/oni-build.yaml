@@ -6,7 +6,7 @@
 #        --preset utilities/perk-sheet-generator/output/test-preset.json
 
 killer: The Oni
-balancing: DBD Arena - 1v4 Quartet Rank v0.3
+balancing: DBD Arena - 1v4 Quartet Rank v0.4
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
 #   killer: all
@@ -67,20 +67,22 @@ survivorPerks:
     - Any Means Necessary
     - Bada Bada Boom
     - Balanced Landing
-    - Better than New
+    # - Better than New
     - Bite the Bullet
     - Blood Pact
-    - Boil Over
+    # - Boil Over
     - Bond
     - Calm Spirit
     # - Botany Knowledge
     # - Champion of Light
     - Chemical Trap
+    - Corrective Action
     - Counterforce
     # - Dead Hard
     # - Decisive Strike
     # - Deliverance
     # - Desperate Measures
+    - Cut Loose
     - Detective's Hunch
     - Distortion
     - Diversion
@@ -104,6 +106,7 @@ survivorPerks:
     - No One Left Behind
     # - Overcome
     # - Plot Twist
+    - Open Handed
     - Quick and Quiet
     # - Reactive Healing
     - Repressed Alliance

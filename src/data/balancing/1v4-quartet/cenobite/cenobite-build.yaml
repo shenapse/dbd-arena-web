@@ -1,5 +1,5 @@
 killer: The Cenobite
-balancing: DBD Arena - 1v4 Quartet Rank v0.1
+balancing: DBD Arena - 1v4 Quartet Rank v0.3
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
 #   killer: all
@@ -69,39 +69,42 @@ survivorPerks:
   allow:
     - Aftercare
     - Any means necessary
-    - Badabada boom
-    - Better than New
+    # - Badabada boom
+    # - Better than New
     - Bite the bullet
     - Blood Pact
     - Bond
     - Calm Spirit
-    - Clean Break
+    # - Clean Break
+    - Corrective Action
     - Counter Force
     - Cut Loose
     - Dance with Me
     - Deception
     #- Dejavu
+    - Detective's Hunch
     - Diversion
     - Empathic Connection
     - Flashbang
-    - Friendly Competition
+    # - Friendly Competition
     - Headon
     - Iron Will
     - Light Footed
-    - Light Weight
+    # - Light Weight
     - Lucky Star
-    - Mettle of Man
+    # - Mettle of Man
     - Mirrored Illusion
     - No Mither
     - Open Handed
     - Parental Guidance
     - Potential Energy
     - Quick and Quiet
-    - Rapid Response
+    # - Rapid Response
     - Red Herring
     - Repressed Alliance
     #- Resilience
     - Rookie Spirit
+    - Saboteur
     - Small Game
     - Smash Hit
     - Urban Evasion
