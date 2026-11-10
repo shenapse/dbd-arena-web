@@ -96,7 +96,15 @@ items:
   Med-Kit:
     default: deny
   Flashlight:
+    count: 1
     default: deny
+    allow:
+      - Sport Flashlight
+    addons:
+      count: 2
+      default: deny
+      allow:
+        - {rarity: "Common"}
   Toolbox:
     default: deny
   Key:
@@ -104,7 +112,9 @@ items:
   Map:
     default: deny
   Firecracker:
-    default: deny
+    count: 1
+    allow:
+      - Firecracker
   Fog Vial:
     default: deny
 
