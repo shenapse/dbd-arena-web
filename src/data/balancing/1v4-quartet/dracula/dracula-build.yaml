@@ -1,5 +1,5 @@
 killer: The Dark Lord
-balancing: DBD Arena - 1v4 Quartet Rank v0.2
+balancing: DBD Arena - 1v4 Quartet Rank v0.3
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
 #   killer: all
@@ -9,14 +9,18 @@ killerPerks:
   default: deny
   allow:
   - Bamboozle
+  - Brutal Strength
   - Call of Brine
   - Corrupt Intervention
   - Coulrophobia
   - Deathbound
   - Dying Light
   - Eruption
+  - "Hex: Crowd Control"
   - "Hex: Huntress Lullaby"
+  - "Hex: Ruin"
   - "Hex: The Third Seal"
+  - "Hex: Undying"
   - Infectious Fright
   - Leverage
   - Oppression
@@ -32,6 +36,7 @@ killerPerks:
   - Thrilling Tremors
   - Tinkerer
   - Trail of Torment
+  - Turn Back the Clock
 
 addons:
   default: deny
@@ -48,18 +53,19 @@ survivorPerks:
   - Any Means Necessary
   - Bada Bada Boom
   - Balanced Landing
+  - Better than New
   - Bite the Bullet
   - Bond
   - Chemical Trap
+  - Clean Break
   - Counterforce
-  - Dead Hard
-  - Decisive Strike
   # - Deliverance
   - Desperate Measures
   - Detective's Hunch
   - Empathic Connection
   - Empathy
   - Flashbang
+  - Finesse
   - Five Moves Ahead
   - Fixated
   - Flow State
@@ -70,13 +76,12 @@ survivorPerks:
   - Lithe
   - Lucky Star
   - No Mither
-  - Overcome
+  - Open Handed
   - Quick and Quiet
   # - Second Wind
   - Smash Hit
   - Sprint Burst
   - Tenacity
-  - Unbreakable
   - Urban Evasion
   - Visionary
   - Windows of Opportunity
