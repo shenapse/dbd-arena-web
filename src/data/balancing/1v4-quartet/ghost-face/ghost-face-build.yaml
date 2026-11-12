@@ -1,5 +1,5 @@
 killer: The Ghost Face
-balancing: DBD Arena - 1v4 Quartet Rank v0.1
+balancing: DBD Arena - 1v4 Quartet Rank v0.2
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
 #   killer: all
@@ -72,7 +72,7 @@ survivorPerks:
   allow:
     - Aftercare
     - Any Means Necessary
-    - Better than New
+    # - Better than New
     - Bite the Bullet
     - Blood Pact
     - Bond

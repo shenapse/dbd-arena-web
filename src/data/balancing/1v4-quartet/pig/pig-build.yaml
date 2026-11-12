@@ -1,5 +1,5 @@
 killer: The Pig
-balancing: DBD Arena - 1v4 Quartet Rank v0.1
+balancing: DBD Arena - 1v4 Quartet Rank v0.2
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
 #   killer: all
@@ -20,12 +20,12 @@ killerPerks:
     # - Dragon's Grip
     - Dying Light
     - Eruption
-    - Forced Hesitation
+    # - Forced Hesitation
     - Forced Penance
     - Furtive Chase
     - Grim Embrace
     - "Hex: Crowd Control"
-    - "Hex: Pentimento"
+    # - "Hex: Pentimento"
     - "Hex: Ruin"
     - "Hex: Huntress Lullaby"
     - "Hex: The Third Seal"
@@ -75,6 +75,7 @@ survivorPerks:
     - Bond
     - Calm Spirit
     - Counterforce
+    - Dejavu
     - Detective's Hunch
     - Distortion
     - Empathy
@@ -82,9 +83,11 @@ survivorPerks:
     - Fixated
     - Flashbang
     - Head On
+    - Iron Will
     - Light-Footed
     - Lucky Star
     - No Mither
+    - Open Handed
     - Quick and Quiet
     - Repressed Alliance
     - Saboteur
