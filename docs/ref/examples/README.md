@@ -21,9 +21,25 @@ not proposed production settings.
 | Participation boundary | Mika has exactly the minimum match count and zero wins. A zero win count must remain visible. |
 | Score versus entry rating | Some ranking scores are below the entry threshold. These are separate scales; a website must not infer ineligibility from the ranking score. |
 
-The snapshot supports a substantive single-page review with a standings table,
+## Additional killer snapshots
+
+Three smaller fixtures give the symmetric 1v1 umbrella page and killer switcher
+more than one publication to show. They share the Trapper fixture's deployment,
+competition, and illustrative rules. Each has its own publication, season, board,
+and match IDs, and players keep their profile IDs across killers.
+
+| Fixture | What it adds |
+|---|---|
+| [ranking-snapshot-dbd-1v1-symmetric-wraith.json](ranking-snapshot-dbd-1v1-symmetric-wraith.json) | Four-player round robin; every player has exactly the minimum match count. Only one Echo is present, so no profile ID is needed. |
+| [ranking-snapshot-dbd-1v1-symmetric-doctor.json](ranking-snapshot-dbd-1v1-symmetric-doctor.json) | A tie for first place (the next rank is third), a player who appears only on this board, and a zero-win player with more than the minimum matches. |
+| [ranking-snapshot-dbd-1v1-symmetric-nightmare.json](ranking-snapshot-dbd-1v1-symmetric-nightmare.json) | No eligible players yet: the board has no rows, and the snapshot has no profiles or included matches. |
+
+## Limits
+
+The Trapper snapshot supports a substantive single-page review with a standings table,
 player details, match detail, and explanations of the ranking rules. It does
-not demonstrate pagination or empty standings. Per-match dates, rank movement,
+not demonstrate pagination or empty standings; the Nightmare fixture covers
+empty standings. Per-match dates, rank movement,
 and chase durations are unavailable in this contract; match IDs and list order
 do not establish chronology.
 

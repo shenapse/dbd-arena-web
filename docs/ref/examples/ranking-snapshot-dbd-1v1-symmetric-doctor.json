@@ -1,0 +1,213 @@
+{
+  "schema_version": "1.0",
+  "deployment_id": "ranking-demo",
+  "generated_at": "2026-11-20T18:00:00+09:00",
+  "publication": {
+    "publication_id": "pub-d57b",
+    "label": "The Doctor · 1v1 Rankings",
+    "description": "Fictional sample data for reviewing a Dead by Daylight symmetric 1v1 leaderboard. All included duels use The Doctor.",
+    "competition": {
+      "id": "comp-3b8e",
+      "label": "Dead by Daylight · Symmetric 1v1",
+      "description": "Two players use the same killer character and each plays both killer and survivor. Each round goes to the player with the longer chase; the first to win two rounds wins the duel."
+    },
+    "scope": [
+      {
+        "category": {
+          "id": "killer",
+          "label": "Killer",
+          "description": "Killer character used by both players in every included duel."
+        },
+        "value": {
+          "id": "doctor",
+          "label": "The Doctor",
+          "description": "Both players use The Doctor when playing killer."
+        }
+      }
+    ]
+  },
+  "season": {
+    "season_id": "season-81c6",
+    "label": "Autumn 2026",
+    "starts_at": "2026-10-01T00:00:00+09:00",
+    "ends_at": "2027-01-01T00:00:00+09:00"
+  },
+  "methodology_description": "Ranking scores describe current-season competitive performance among players eligible when this snapshot is generated. Entry ratings determine eligibility and do not directly contribute to ranking scores. In this illustrative publication, all encounters between the same unordered pair of players share a total calculation weight capped at one match-equivalent, divided equally among their encounters regardless of seat. Every encounter remains in match totals and evidence. Scores are hand-authored for this fictional preview, not calculated by a ranking model.",
+  "boards": [
+    {
+      "board_id": "board-4a0e",
+      "label": "Player rankings",
+      "description": "Eligible players competing in symmetric 1v1 duels with The Doctor this season.",
+      "score_definition": {
+        "label": "Ranking score",
+        "description": "Illustrative integer points: higher scores rank ahead within this board, and equal scores share a rank. Points are not a win percentage or an entry rating. Compare scores only within this snapshot; no comparison across killers, seasons, or refreshes is supported."
+      },
+      "eligibility": {
+        "rating": {
+          "id": "doctor-entry-rating",
+          "label": "The Doctor entry rating",
+          "description": "Entry rating specific to The Doctor in symmetric 1v1. This fictional preview uses a 0–3000 point scale where higher values indicate stronger performance. Individual entry ratings are not published."
+        },
+        "minimum_rating_value": 1200,
+        "minimum_eligible_match_count": 3,
+        "description": "At generation time, players need a Doctor entry rating of at least 1200 points and at least three current-season duels against players in the calculation-time eligible pool. Repeat encounters count toward participation. Eligibility is reevaluated on every refresh, even without new matches. These thresholds are illustrative."
+      },
+      "rows": [
+        {
+          "rank": 1,
+          "profile_id": "p-6d3c",
+          "display_score": 1340,
+          "eligible_match_count": 4,
+          "result_counts": { "wins": 3, "losses": 1 },
+          "opponent_count": 4,
+          "included_match_ids": ["m-d01", "m-d03", "m-d04", "m-d08"]
+        },
+        {
+          "rank": 1,
+          "profile_id": "p-2a5f",
+          "display_score": 1340,
+          "eligible_match_count": 4,
+          "result_counts": { "wins": 3, "losses": 1 },
+          "opponent_count": 4,
+          "included_match_ids": ["m-d01", "m-d02", "m-d05", "m-d09"]
+        },
+        {
+          "rank": 3,
+          "profile_id": "p-8f2a",
+          "display_score": 1290,
+          "eligible_match_count": 3,
+          "result_counts": { "wins": 2, "losses": 1 },
+          "opponent_count": 3,
+          "included_match_ids": ["m-d02", "m-d03", "m-d06"]
+        },
+        {
+          "rank": 4,
+          "profile_id": "p-4c7d",
+          "display_score": 1180,
+          "eligible_match_count": 3,
+          "result_counts": { "wins": 1, "losses": 2 },
+          "opponent_count": 3,
+          "included_match_ids": ["m-d04", "m-d05", "m-d07"]
+        },
+        {
+          "rank": 5,
+          "profile_id": "p-3e7a",
+          "display_score": 1010,
+          "eligible_match_count": 4,
+          "result_counts": { "wins": 0, "losses": 4 },
+          "opponent_count": 4,
+          "included_match_ids": ["m-d06", "m-d07", "m-d08", "m-d09"]
+        }
+      ]
+    }
+  ],
+  "profiles": [
+    { "profile_id": "p-6d3c", "kind": "participant", "display_name": "Echo", "group_members": null },
+    { "profile_id": "p-2a5f", "kind": "participant", "display_name": "Last Lantern at the Exit Gate", "group_members": null },
+    { "profile_id": "p-8f2a", "kind": "participant", "display_name": "夜凪", "group_members": null },
+    { "profile_id": "p-4c7d", "kind": "participant", "display_name": "Morrow", "group_members": null },
+    { "profile_id": "p-3e7a", "kind": "participant", "display_name": "Rook", "group_members": null }
+  ],
+  "result_metrics": [
+    { "id": "wins", "label": "Wins", "description": "Included duels where this player occupied the winning seat." },
+    { "id": "losses", "label": "Losses", "description": "Included duels where this player occupied the other seat. Every duel has one winner and one loser." }
+  ],
+  "public_outcomes": [
+    { "id": "decided", "label": "Decided", "description": "The best-of-three duel was decided. public_facts.winner_side_id identifies the winning seat and its player." }
+  ],
+  "side_definitions": [
+    { "id": "seat-1", "label": "Player 1", "description": "First neutral seat in this duel. It implies no advantage or role order and does not follow a player across matches." },
+    { "id": "seat-2", "label": "Player 2", "description": "Second neutral seat in this duel. It implies no advantage or role order and does not follow a player across matches." }
+  ],
+  "role_definitions": [],
+  "public_facts_schema": {
+    "schema_id": "dbd-1v1-symmetric",
+    "schema_version": "1.0",
+    "schema_path": "../schemas/dbd-1v1-symmetric-1.0.schema.json",
+    "documentation_path": "../ranking-evidence-dbd-1v1-symmetric.md",
+    "description": "Winning seat and rounds won by each seat in a best-of-three symmetric 1v1 duel. The killer character is supplied by the publication scope."
+  },
+  "included_matches": [
+    {
+      "match_id": "m-d01",
+      "sides": [
+        { "side_id": "seat-1", "participants": [{ "profile_id": "p-6d3c", "role_ids": [] }] },
+        { "side_id": "seat-2", "participants": [{ "profile_id": "p-2a5f", "role_ids": [] }] }
+      ],
+      "outcome_id": "decided",
+      "public_facts": { "winner_side_id": "seat-1", "rounds_won_by_side": { "seat-1": 2, "seat-2": 1 } }
+    },
+    {
+      "match_id": "m-d02",
+      "sides": [
+        { "side_id": "seat-1", "participants": [{ "profile_id": "p-2a5f", "role_ids": [] }] },
+        { "side_id": "seat-2", "participants": [{ "profile_id": "p-8f2a", "role_ids": [] }] }
+      ],
+      "outcome_id": "decided",
+      "public_facts": { "winner_side_id": "seat-1", "rounds_won_by_side": { "seat-1": 2, "seat-2": 0 } }
+    },
+    {
+      "match_id": "m-d03",
+      "sides": [
+        { "side_id": "seat-1", "participants": [{ "profile_id": "p-8f2a", "role_ids": [] }] },
+        { "side_id": "seat-2", "participants": [{ "profile_id": "p-6d3c", "role_ids": [] }] }
+      ],
+      "outcome_id": "decided",
+      "public_facts": { "winner_side_id": "seat-1", "rounds_won_by_side": { "seat-1": 2, "seat-2": 1 } }
+    },
+    {
+      "match_id": "m-d04",
+      "sides": [
+        { "side_id": "seat-1", "participants": [{ "profile_id": "p-4c7d", "role_ids": [] }] },
+        { "side_id": "seat-2", "participants": [{ "profile_id": "p-6d3c", "role_ids": [] }] }
+      ],
+      "outcome_id": "decided",
+      "public_facts": { "winner_side_id": "seat-2", "rounds_won_by_side": { "seat-1": 0, "seat-2": 2 } }
+    },
+    {
+      "match_id": "m-d05",
+      "sides": [
+        { "side_id": "seat-1", "participants": [{ "profile_id": "p-2a5f", "role_ids": [] }] },
+        { "side_id": "seat-2", "participants": [{ "profile_id": "p-4c7d", "role_ids": [] }] }
+      ],
+      "outcome_id": "decided",
+      "public_facts": { "winner_side_id": "seat-1", "rounds_won_by_side": { "seat-1": 2, "seat-2": 1 } }
+    },
+    {
+      "match_id": "m-d06",
+      "sides": [
+        { "side_id": "seat-1", "participants": [{ "profile_id": "p-3e7a", "role_ids": [] }] },
+        { "side_id": "seat-2", "participants": [{ "profile_id": "p-8f2a", "role_ids": [] }] }
+      ],
+      "outcome_id": "decided",
+      "public_facts": { "winner_side_id": "seat-2", "rounds_won_by_side": { "seat-1": 0, "seat-2": 2 } }
+    },
+    {
+      "match_id": "m-d07",
+      "sides": [
+        { "side_id": "seat-1", "participants": [{ "profile_id": "p-4c7d", "role_ids": [] }] },
+        { "side_id": "seat-2", "participants": [{ "profile_id": "p-3e7a", "role_ids": [] }] }
+      ],
+      "outcome_id": "decided",
+      "public_facts": { "winner_side_id": "seat-1", "rounds_won_by_side": { "seat-1": 2, "seat-2": 1 } }
+    },
+    {
+      "match_id": "m-d08",
+      "sides": [
+        { "side_id": "seat-1", "participants": [{ "profile_id": "p-6d3c", "role_ids": [] }] },
+        { "side_id": "seat-2", "participants": [{ "profile_id": "p-3e7a", "role_ids": [] }] }
+      ],
+      "outcome_id": "decided",
+      "public_facts": { "winner_side_id": "seat-1", "rounds_won_by_side": { "seat-1": 2, "seat-2": 0 } }
+    },
+    {
+      "match_id": "m-d09",
+      "sides": [
+        { "side_id": "seat-1", "participants": [{ "profile_id": "p-3e7a", "role_ids": [] }] },
+        { "side_id": "seat-2", "participants": [{ "profile_id": "p-2a5f", "role_ids": [] }] }
+      ],
+      "outcome_id": "decided",
+      "public_facts": { "winner_side_id": "seat-2", "rounds_won_by_side": { "seat-1": 1, "seat-2": 2 } }
+    }
+  ]
+}
