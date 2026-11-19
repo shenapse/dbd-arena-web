@@ -6,8 +6,10 @@
 // Each standing is a <details> element: the summary is the standings row and
 // the body lists the row's included matches from that player's perspective,
 // most recent first (dates come from played_at; unknown dates sort last).
-// It works without JavaScript. The small script below only opens a row when
-// an opponent link or a URL fragment targets it.
+// Every row is rendered; in the browser the script below adds a player search
+// and, on boards longer than one page, shows one page at a time and keeps the
+// page in the URL (?page=N). Without JavaScript the full list is shown.
+// Opponent links and URL fragments switch to the target row's page and open it.
 //
 // The hosting page supplies the heading (its title is page copy, falling back
 // to the publication label).
@@ -16,6 +18,7 @@
 // labels are written for whoever maintains the ranking, not for readers, so
 // they are only a fallback for pages that do not supply their own text.
 import { formatDate, formatTimestamp, formatWinRate, type LeaderboardView } from '../lib/ranking/snapshot';
+import { DEFAULT_PAGE_SIZE, pageParamName, searchText } from '../lib/ranking/standings-controls';
 
 interface Props {
   view: LeaderboardView;
@@ -24,9 +27,11 @@ interface Props {
   competition?: string;
   /** Reader-facing season name. Falls back to the snapshot's season label. */
   season?: string;
+  /** Rows per page. Boards with no more rows than this get no pager. */
+  pageSize?: number;
 }
 
-const { boardIntroduction } = Astro.props;
+const { boardIntroduction, pageSize = DEFAULT_PAGE_SIZE } = Astro.props;
 const { snapshot, boards, ambiguousNames } = Astro.props.view;
 const { publication, season } = snapshot;
 
@@ -42,6 +47,9 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
 ---
 
 <div class="ranking">
+  {/* Runs while the page is parsed, so rows past the first page are hidden
+      before first paint instead of flashing up until the module script runs. */}
+  <script is:inline>document.currentScript.parentElement.classList.add('ranking--js');</script>
 
   <dl class="meta-grid ranking__meta">
     <Fragment>
@@ -72,7 +80,7 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
     </Fragment>
   </dl>
 
-  {boards.map(({ board, headingId, standings }) => {
+  {boards.map(({ board, headingId, standings }, boardIndex) => {
     // Rank · Player · Score · Matches · Wins · Win rate · Opponents · disclosure marker.
     // Every count column gets the same width (sized for the longest header,
     // "Opponents") and values are centred under their headers, so the stats
@@ -98,7 +106,25 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
         {standings.length === 0 ? (
           <p>No players meet the eligibility requirements in this snapshot.</p>
         ) : (
-          <div class="standings not-content" style={`--standings-columns: ${columns}; --standings-stat-count: ${countColumns.length + 1}`}>
+          <div
+            class="board-standings not-content"
+            data-page-size={pageSize}
+            data-page-param={pageParamName(boardIndex, boards.length)}
+          >
+          <div class="standings-tools" data-tools hidden>
+            <label class="standings-search">
+              <span class="sr-only">Find a player on {board.label}</span>
+              <input
+                type="search"
+                placeholder="Find player"
+                autocomplete="off"
+                spellcheck="false"
+                data-search
+              />
+            </label>
+            <p class="standings-status" data-status aria-live="polite" />
+          </div>
+          <div class="standings" data-standings style={`--standings-columns: ${columns}; --standings-stat-count: ${countColumns.length + 1}`}>
             <div class="standings__head" aria-hidden="true">
               <span>Rank</span>
               <span>Player</span>
@@ -109,9 +135,14 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
               <span class="num">Opponents</span>
               <span />
             </div>
-            <ul class="standings__list">
-              {standings.map(({ row, profile, anchor, tied, wins, winRate, matches }) => (
-                <li id={anchor} class="standings__item">
+            <ul class="standings__list" tabindex="-1">
+              {standings.map(({ row, profile, anchor, tied, wins, winRate, matches }, rowIndex) => (
+                <li
+                  id={anchor}
+                  class="standings__item"
+                  data-search-text={searchText(profile)}
+                  data-overflow={rowIndex >= pageSize ? '' : undefined}
+                >
                   <details class="standing">
                     <summary class="standing__summary">
                       <span class="standing__rank">
@@ -210,6 +241,17 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
               ))}
             </ul>
           </div>
+          <nav class="pager" data-pager aria-label={`${board.label} pages`} hidden>
+            <button type="button" class="pager__step" data-step="-1" aria-label="Previous page">
+              <span aria-hidden="true">‹</span> Prev
+            </button>
+            <ol class="pager__pages" data-pages />
+            <span class="pager__compact" data-compact />
+            <button type="button" class="pager__step" data-step="1" aria-label="Next page">
+              Next <span aria-hidden="true">›</span>
+            </button>
+          </nav>
+          </div>
         )}
       </section>
     );
@@ -217,16 +259,188 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
 </div>
 
 <script>
-  // Open the standing a fragment points at (opponent links, shared URLs).
-  // Without JavaScript the link still scrolls to the row; it just stays closed.
-  function openTargetedStanding() {
-    const id = decodeURIComponent(location.hash.slice(1));
-    if (!id) return;
-    const details = document.getElementById(id)?.querySelector('details');
-    if (details) details.open = true;
+  // Player search and paging for the boards, and opening the standing a URL
+  // fragment points at (opponent links, shared URLs). The server renders every
+  // row; this only hides and reveals them. Without JavaScript the full list is
+  // shown and a fragment link still scrolls to its row, which stays closed.
+  // The rules (what matches, which rows a page holds, what the status line
+  // says) live in standings-controls.ts; this wires them to the DOM.
+  import {
+    matchesQuery,
+    normaliseQuery,
+    pageNumbers,
+    pageOf,
+    pageWindow,
+    parsePage,
+    statusText,
+  } from '../lib/ranking/standings-controls';
+
+  interface BoardControls {
+    root: HTMLElement;
+    items: HTMLLIElement[];
+    pageSize: number;
+    /** Query parameter holding this board's page number. */
+    param: string;
+    search: HTMLInputElement;
+    status: HTMLElement;
+    standings: HTMLElement;
+    list: HTMLElement;
+    pager: HTMLElement;
+    pages: HTMLElement;
+    compact: HTMLElement;
+    prev: HTMLButtonElement;
+    next: HTMLButtonElement;
+    /** Normalised search text; empty when not searching. */
+    query: string;
+    page: number;
   }
-  window.addEventListener('hashchange', openTargetedStanding);
-  openTargetedStanding();
+
+  const boards: BoardControls[] = [
+    ...document.querySelectorAll<HTMLElement>('.board-standings[data-page-size]'),
+  ].map((root) => {
+    const pager = root.querySelector<HTMLElement>('[data-pager]')!;
+    return {
+      root,
+      items: [...root.querySelectorAll<HTMLLIElement>('.standings__item')],
+      pageSize: Number(root.dataset.pageSize),
+      param: root.dataset.pageParam!,
+      search: root.querySelector<HTMLInputElement>('[data-search]')!,
+      status: root.querySelector<HTMLElement>('[data-status]')!,
+      standings: root.querySelector<HTMLElement>('[data-standings]')!,
+      list: root.querySelector<HTMLElement>('.standings__list')!,
+      pager,
+      pages: pager.querySelector<HTMLElement>('[data-pages]')!,
+      compact: pager.querySelector<HTMLElement>('[data-compact]')!,
+      prev: pager.querySelector<HTMLButtonElement>('[data-step="-1"]')!,
+      next: pager.querySelector<HTMLButtonElement>('[data-step="1"]')!,
+      query: '',
+      page: 1,
+    };
+  });
+
+  function render(b: BoardControls) {
+    const rows = b.items.filter((li) => matchesQuery(li.dataset.searchText!, b.query));
+    const view = pageWindow(rows.length, b.page, b.pageSize);
+    const { count } = view;
+    b.page = view.page;
+    const shown = new Set(rows.slice(view.start, view.end));
+
+    for (const li of b.items) {
+      const visible = shown.has(li);
+      // A row leaving the page closes, so it is not found open later.
+      if (!visible) li.querySelector('details')!.open = false;
+      li.hidden = !visible;
+    }
+    b.standings.hidden = rows.length === 0;
+    b.status.textContent = statusText(b.items.length, rows.length, b.query ? b.search.value : '', view);
+
+    b.pager.hidden = count === 1;
+    b.prev.disabled = b.page === 1;
+    b.next.disabled = b.page === count;
+    b.compact.textContent = `Page ${b.page} of ${count}`;
+    b.pages.replaceChildren(
+      ...pageNumbers(b.page, count).map((p) => {
+        const li = document.createElement('li');
+        if (p === null) {
+          li.className = 'pager__gap';
+          li.setAttribute('aria-hidden', 'true');
+          li.textContent = '…';
+        } else {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'pager__page';
+          button.dataset.page = String(p);
+          button.textContent = String(p);
+          button.setAttribute('aria-label', `Page ${p}`);
+          if (p === b.page) button.setAttribute('aria-current', 'page');
+          li.append(button);
+        }
+        return li;
+      }),
+    );
+  }
+
+  function pageFromUrl(b: BoardControls): number {
+    return parsePage(new URLSearchParams(location.search).get(b.param));
+  }
+
+  /** Mirror the board's page in the URL. Search results are not kept there. */
+  function writeUrl(b: BoardControls, mode: 'push' | 'replace', dropFragment = false) {
+    if (b.query) return;
+    const url = new URL(location.href);
+    if (b.page === 1) url.searchParams.delete(b.param);
+    else url.searchParams.set(b.param, String(b.page));
+    if (dropFragment) url.hash = '';
+    if (url.href === location.href) return;
+    if (mode === 'push') history.pushState(history.state, '', url);
+    else history.replaceState(history.state, '', url);
+  }
+
+  function targetedItem(): HTMLLIElement | null {
+    let id: string;
+    try {
+      id = decodeURIComponent(location.hash.slice(1));
+    } catch {
+      return null;
+    }
+    const el = id ? document.getElementById(id) : null;
+    return el instanceof HTMLLIElement && el.classList.contains('standings__item') ? el : null;
+  }
+
+  /** Show what the URL describes: the fragment's row if any, else each board's ?page. */
+  function syncFromUrl() {
+    const target = targetedItem();
+    // A target on a page that is not shown yet has not been scrolled to.
+    const needsScroll = target !== null && target.getClientRects().length === 0;
+    for (const b of boards) {
+      b.query = '';
+      b.search.value = '';
+      const index = target ? b.items.indexOf(target) : -1;
+      b.page = index >= 0 ? pageOf(index, b.pageSize) : pageFromUrl(b);
+      render(b);
+      // Records the target's page, and corrects a page number out of range.
+      writeUrl(b, 'replace');
+    }
+    if (target) {
+      target.querySelector('details')!.open = true;
+      if (needsScroll) target.scrollIntoView({ block: 'start' });
+    }
+  }
+
+  function goToPage(b: BoardControls, page: number) {
+    b.page = page;
+    render(b);
+    // A fragment naming a row of this board would put the page back on reload.
+    const target = targetedItem();
+    writeUrl(b, 'push', target !== null && b.items.includes(target));
+    // Bring the new page's first rows into view and start keyboard focus there.
+    if (b.root.getBoundingClientRect().top < 0) b.root.scrollIntoView({ block: 'start' });
+    b.list.focus({ preventScroll: true });
+  }
+
+  for (const b of boards) {
+    b.search.addEventListener('input', () => {
+      b.query = normaliseQuery(b.search.value);
+      // Clearing the search returns to the page the URL still holds.
+      b.page = b.query ? 1 : pageFromUrl(b);
+      render(b);
+    });
+    b.pager.addEventListener('click', (event) => {
+      const button = (event.target as Element).closest<HTMLButtonElement>('button');
+      if (!button || button.disabled) return;
+      if (button.dataset.step) goToPage(b, b.page + Number(button.dataset.step));
+      else if (button.dataset.page && button.dataset.page !== String(b.page)) goToPage(b, Number(button.dataset.page));
+    });
+  }
+
+  window.addEventListener('hashchange', syncFromUrl);
+  window.addEventListener('popstate', syncFromUrl);
+  syncFromUrl();
+  for (const b of boards) {
+    b.root.querySelector<HTMLElement>('[data-tools]')!.hidden = false;
+    // Hand row visibility over from the first-paint CSS to the hidden attributes.
+    b.root.dataset.ready = '';
+  }
 </script>
 
 <style>
@@ -235,8 +449,11 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
   }
 
   /* ---- Standings ---- */
-  .standings {
+  .board-standings {
     margin-top: 1.25rem;
+    container: board-standings / inline-size;
+  }
+  .standings {
     border: 1px solid var(--sl-color-gray-5);
     border-radius: 0.5rem;
     overflow: hidden;
@@ -268,6 +485,127 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
   }
   .standings__item:target .standing__summary {
     box-shadow: inset 3px 0 0 var(--sl-color-accent);
+  }
+  /* Focused after a page change so keyboard users continue from the first row. */
+  .standings__list:focus {
+    outline: none;
+  }
+  /* Until the script has paged a board, keep rows past its first page out of
+     the first paint. Without JavaScript the class is never set. */
+  .ranking--js .board-standings:not([data-ready]) .standings__item[data-overflow] {
+    display: none;
+  }
+
+  /* ---- Search and pager ---- */
+  .standings-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-bottom: 0.75rem;
+    font-size: var(--sl-text-sm);
+  }
+  .standings-search input {
+    width: min(16rem, 100%);
+    padding: 0.4rem 0.7rem;
+    font: inherit;
+    color: var(--sl-color-white);
+    background: var(--sl-color-black);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.375rem;
+  }
+  .standings-search input::placeholder {
+    color: var(--sl-color-gray-3);
+  }
+  .standings-search input:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: -1px;
+    border-color: transparent;
+  }
+  .standings-status {
+    margin: 0;
+    color: var(--sl-color-gray-2);
+    font-variant-numeric: tabular-nums;
+  }
+  .pager {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0.75rem;
+    font-size: var(--sl-text-sm);
+  }
+  .standings-tools[hidden],
+  .pager[hidden] {
+    display: none;
+  }
+  .pager__pages {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .pager :global(button) {
+    min-width: 2.25rem;
+    height: 2.25rem;
+    padding: 0 0.6rem;
+    font: inherit;
+    font-variant-numeric: tabular-nums;
+    color: var(--sl-color-gray-2);
+    background: transparent;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.375rem;
+    cursor: pointer;
+  }
+  .pager :global(button:hover:not(:disabled)) {
+    color: var(--sl-color-white);
+    background: var(--sl-color-gray-6);
+  }
+  .pager :global(button:focus-visible) {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 1px;
+  }
+  .pager :global(button[aria-current='page']) {
+    color: var(--sl-color-black);
+    background: var(--sl-color-text-accent);
+    border-color: var(--sl-color-text-accent);
+    font-weight: 700;
+    cursor: default;
+  }
+  .pager :global(button:disabled) {
+    opacity: 0.4;
+    cursor: default;
+  }
+  .pager__step {
+    white-space: nowrap;
+  }
+  .pager :global(.pager__gap) {
+    align-self: center;
+    min-width: 1.25rem;
+    text-align: center;
+    color: var(--sl-color-gray-3);
+  }
+  .pager__compact {
+    display: none;
+    padding: 0 0.75rem;
+    color: var(--sl-color-gray-2);
+    font-variant-numeric: tabular-nums;
+  }
+  /* Narrow boards: Prev · "Page 2 of 13" · Next instead of numbered buttons. */
+  @container board-standings (max-width: 30rem) {
+    .pager__pages {
+      display: none;
+    }
+    .pager__compact {
+      display: inline;
+    }
+    .standings-search,
+    .standings-search input {
+      width: 100%;
+    }
   }
   .num {
     text-align: center;
