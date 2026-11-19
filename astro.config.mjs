@@ -8,6 +8,9 @@ import { DISCORD_INVITE, DISCORD_CLOSED_MESSAGE } from './src/constants.ts';
 const SERVICE_NAME = 'DBD Arena';
 
 export default defineConfig({
+  // Browser-test builds (npm run test:e2e) add fixture pages, so they go to
+  // their own directory and never end up in a deployable dist/.
+  outDir: process.env.LEADERBOARD_TEST_FIXTURES === '1' ? './dist-test' : './dist',
   // Preserve old URLs after a page is renamed so external links/bookmarks
   // don't 404. `match-interruptions` → `match-problems-and-remakes`.
   redirects: {
