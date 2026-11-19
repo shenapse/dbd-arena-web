@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "deployment_id": "ranking-demo",
   "generated_at": "2026-11-20T18:00:00+09:00",
   "publication": {
@@ -120,6 +120,7 @@
   "included_matches": [
     {
       "match_id": "m-w01",
+      "played_at": "2026-10-05T20:30:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-4c7d", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-9e4b", "role_ids": [] }] }
@@ -129,6 +130,7 @@
     },
     {
       "match_id": "m-w02",
+      "played_at": "2026-10-12T11:30:00Z",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-1b9e", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-4c7d", "role_ids": [] }] }
@@ -138,6 +140,7 @@
     },
     {
       "match_id": "m-w03",
+      "played_at": "2026-10-19T21:45:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-4c7d", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-8f2a", "role_ids": [] }] }
@@ -147,6 +150,7 @@
     },
     {
       "match_id": "m-w04",
+      "played_at": "2026-10-26T19:10:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-9e4b", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-1b9e", "role_ids": [] }] }
@@ -156,6 +160,7 @@
     },
     {
       "match_id": "m-w05",
+      "played_at": "2026-11-04T22:00:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-8f2a", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-9e4b", "role_ids": [] }] }
@@ -165,6 +170,7 @@
     },
     {
       "match_id": "m-w06",
+      "played_at": "2026-11-11T20:25:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-1b9e", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-8f2a", "role_ids": [] }] }

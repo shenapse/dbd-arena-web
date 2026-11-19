@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "deployment_id": "ranking-demo",
   "generated_at": "2026-11-20T18:00:00+09:00",
   "publication": {
@@ -140,6 +140,7 @@
   "included_matches": [
     {
       "match_id": "m-01",
+      "played_at": "2026-10-04T20:15:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-8f2a", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-4c7d", "role_ids": [] }] }
@@ -149,6 +150,7 @@
     },
     {
       "match_id": "m-02",
+      "played_at": "2026-10-06T21:40:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-4c7d", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-8f2a", "role_ids": [] }] }
@@ -158,6 +160,7 @@
     },
     {
       "match_id": "m-03",
+      "played_at": "2026-10-11T19:05:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-8f2a", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-1b9e", "role_ids": [] }] }
@@ -167,6 +170,7 @@
     },
     {
       "match_id": "m-04",
+      "played_at": "2026-10-18T22:30:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-6d3c", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-8f2a", "role_ids": [] }] }
@@ -176,6 +180,7 @@
     },
     {
       "match_id": "m-05",
+      "played_at": "2026-10-25T20:00:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-8f2a", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-2a5f", "role_ids": [] }] }
@@ -185,6 +190,7 @@
     },
     {
       "match_id": "m-06",
+      "played_at": "2026-11-01T21:10:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-4c7d", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-1b9e", "role_ids": [] }] }
@@ -194,6 +200,7 @@
     },
     {
       "match_id": "m-07",
+      "played_at": "2026-11-03T19:45:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-4c7d", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-9e4b", "role_ids": [] }] }
@@ -203,6 +210,7 @@
     },
     {
       "match_id": "m-08",
+      "played_at": "2026-11-08T20:50:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-1b9e", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-6d3c", "role_ids": [] }] }
@@ -212,6 +220,7 @@
     },
     {
       "match_id": "m-09",
+      "played_at": "2026-11-10T22:05:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-2a5f", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-1b9e", "role_ids": [] }] }
@@ -221,6 +230,7 @@
     },
     {
       "match_id": "m-10",
+      "played_at": "2026-11-14T21:25:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-6d3c", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-2a5f", "role_ids": [] }] }
@@ -230,6 +240,7 @@
     },
     {
       "match_id": "m-11",
+      "played_at": null,
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-2a5f", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-9e4b", "role_ids": [] }] }
@@ -239,6 +250,7 @@
     },
     {
       "match_id": "m-12",
+      "played_at": "2026-11-19T20:35:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-9e4b", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-6d3c", "role_ids": [] }] }

@@ -18,6 +18,7 @@ not proposed production settings.
 | Identity and typography | Two distinct profiles are named Echo. A Japanese name and a long English name exercise font support and wrapping. Join records by profile ID. |
 | Repeat opponents | The top two players meet twice, exchange seats, and split the wins. Match counts differ from opponent counts. Both encounters remain visible despite the contribution cap. |
 | Match detail | Both 2–0 and 2–1 results appear, with winners in either seat. The Echo-versus-Echo duel also exercises navigation between identically named profiles. |
+| Match dates | Every duel carries `played_at` (envelope 1.1) except `m-11` (Mika versus Last Lantern at the Exit Gate), whose time is unknown (`null`). An undated duel must not borrow a season or generation time. |
 | Participation boundary | Mika has exactly the minimum match count and zero wins. A zero win count must remain visible. |
 | Score versus entry rating | Some ranking scores are below the entry threshold. These are separate scales; a website must not infer ineligibility from the ranking score. |
 
@@ -39,9 +40,11 @@ and match IDs, and players keep their profile IDs across killers.
 The Trapper snapshot supports a substantive single-page review with a standings table,
 player details, match detail, and explanations of the ranking rules. It does
 not demonstrate pagination or empty standings; the Nightmare fixture covers
-empty standings. Per-match dates, rank movement,
-and chase durations are unavailable in this contract; match IDs and list order
-do not establish chronology.
+empty standings. Rank movement and chase durations are unavailable in this
+contract. Match chronology comes only from `played_at`; match IDs and list
+order do not establish it. The Doctor fixture's times deliberately do not
+follow match-ID order, and one Wraith time uses `Z` instead of `+09:00`, so a
+consumer must compare instants rather than IDs or strings.
 
 For a local preview, serve this directory with its parent documentation and
 `schemas` directory so the relative evidence links resolve. For a published

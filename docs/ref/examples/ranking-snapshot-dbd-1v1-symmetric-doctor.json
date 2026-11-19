@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "deployment_id": "ranking-demo",
   "generated_at": "2026-11-20T18:00:00+09:00",
   "publication": {
@@ -130,6 +130,7 @@
   "included_matches": [
     {
       "match_id": "m-d01",
+      "played_at": "2026-10-03T21:00:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-6d3c", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-2a5f", "role_ids": [] }] }
@@ -139,6 +140,7 @@
     },
     {
       "match_id": "m-d02",
+      "played_at": "2026-10-09T20:20:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-2a5f", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-8f2a", "role_ids": [] }] }
@@ -148,6 +150,7 @@
     },
     {
       "match_id": "m-d03",
+      "played_at": "2026-10-21T22:10:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-8f2a", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-6d3c", "role_ids": [] }] }
@@ -157,6 +160,7 @@
     },
     {
       "match_id": "m-d04",
+      "played_at": "2026-10-14T19:30:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-4c7d", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-6d3c", "role_ids": [] }] }
@@ -166,6 +170,7 @@
     },
     {
       "match_id": "m-d05",
+      "played_at": "2026-11-02T20:45:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-2a5f", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-4c7d", "role_ids": [] }] }
@@ -175,6 +180,7 @@
     },
     {
       "match_id": "m-d06",
+      "played_at": "2026-10-27T21:15:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-3e7a", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-8f2a", "role_ids": [] }] }
@@ -184,6 +190,7 @@
     },
     {
       "match_id": "m-d07",
+      "played_at": "2026-11-12T19:50:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-4c7d", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-3e7a", "role_ids": [] }] }
@@ -193,6 +200,7 @@
     },
     {
       "match_id": "m-d08",
+      "played_at": "2026-11-06T22:40:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-6d3c", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-3e7a", "role_ids": [] }] }
@@ -202,6 +210,7 @@
     },
     {
       "match_id": "m-d09",
+      "played_at": "2026-11-17T20:05:00+09:00",
       "sides": [
         { "side_id": "seat-1", "participants": [{ "profile_id": "p-3e7a", "role_ids": [] }] },
         { "side_id": "seat-2", "participants": [{ "profile_id": "p-2a5f", "role_ids": [] }] }
