@@ -4,12 +4,13 @@
 // the hosting page supplies the board introduction as editorial copy.
 //
 // Each standing is a <details> element: the summary is the standings row and
-// the body lists the row's included matches from that player's perspective.
+// the body lists the row's included matches from that player's perspective,
+// most recent first (dates come from played_at; unknown dates sort last).
 // It works without JavaScript. The small script below only opens a row when
 // an opponent link or a URL fragment targets it.
 //
 // The hosting page supplies the heading: its title is the publication label.
-import { formatTimestamp, type LeaderboardView } from '../lib/ranking/snapshot';
+import { formatDate, formatTimestamp, type LeaderboardView } from '../lib/ranking/snapshot';
 
 interface Props {
   view: LeaderboardView;
@@ -137,6 +138,7 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
                           </caption>
                           <thead>
                             <tr>
+                              <th scope="col">Date</th>
                               <th scope="col">Match</th>
                               <th scope="col">Opponent</th>
                               <th scope="col">Result</th>
@@ -145,6 +147,13 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
                           <tbody>
                             {matches.map((m) => (
                               <tr>
+                                <td class="match-date">
+                                  {m.playedAt ? (
+                                    <time datetime={m.playedAt} title={formatTimestamp(m.playedAt)}>{formatDate(m.playedAt)}</time>
+                                  ) : (
+                                    <span class="match-date--unknown">Unknown</span>
+                                  )}
+                                </td>
                                 <td><code class="match-id">{m.matchId}</code></td>
                                 <td>
                                   {m.opponentAnchor ? (
@@ -157,7 +166,9 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
                                   )}
                                   {m.encounterTotal > 1 && (
                                     <span class="encounter" title="Repeat encounters share a contribution limit; see Methodology">
-                                      meeting {m.encounterIndex} of {m.encounterTotal}
+                                      {m.encounterIndex === null
+                                        ? `${m.encounterTotal} meetings`
+                                        : `meeting ${m.encounterIndex} of ${m.encounterTotal}`}
                                     </span>
                                   )}
                                 </td>
@@ -361,8 +372,14 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
-  .standing__matches td:nth-child(2) {
+  .standing__matches td:nth-child(3) {
     white-space: normal;
+  }
+  .match-date {
+    font-variant-numeric: tabular-nums;
+  }
+  .match-date--unknown {
+    color: var(--sl-color-gray-3);
   }
   .standing__matches a {
     color: var(--sl-color-text-accent);

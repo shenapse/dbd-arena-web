@@ -56,6 +56,8 @@ export interface IncludedMatchEvidence {
     participants: { profile_id: string; role_ids: string[] }[];
   }[];
   outcome_id: string;
+  /** Envelope 1.1: required key, null when unknown. Absent in 1.0 snapshots. */
+  played_at?: string | null;
   public_facts: unknown;
 }
 
@@ -102,14 +104,20 @@ const SUPPORTED_FACTS = { schemaId: 'dbd-1v1-symmetric', major: '1' } as const;
 
 export interface PlayerMatchView {
   matchId: string;
+  /** Published wall-clock time, or null when the publisher has none. */
+  playedAt: string | null;
   opponent: PublicRankingProfile;
   /** Anchor of the opponent's row on the same board, if they have one. */
   opponentAnchor: string | null;
   won: boolean;
   ownRounds: number;
   opponentRounds: number;
-  /** 1-based position among this row's duels against the same opponent. */
-  encounterIndex: number;
+  /**
+   * 1-based chronological position among this row's duels against the same
+   * opponent. Null when any of those duels has no time, because their order
+   * is then unknown.
+   */
+  encounterIndex: number | null;
   encounterTotal: number;
 }
 
@@ -170,6 +178,29 @@ function readFacts(match: IncludedMatchEvidence): DbdSymmetricFacts {
   return facts as DbdSymmetricFacts;
 }
 
+// played_at is a required key from envelope 1.1 on; a 1.0 snapshot has none,
+// which means every time is unknown (envelope §8).
+function readPlayedAt(match: IncludedMatchEvidence, envelopeVersion: string): string | null {
+  if (envelopeVersion === '1.0') return null;
+  if (!('played_at' in match)) fail(`match "${match.match_id}" is missing played_at`);
+  const playedAt = match.played_at ?? null;
+  if (playedAt !== null && (typeof playedAt !== 'string' || !TIMESTAMP.test(playedAt))) {
+    fail(`match "${match.match_id}" played_at "${playedAt}" is not a timestamp with a UTC offset`);
+  }
+  return playedAt;
+}
+
+/**
+ * Newest first by instant (offsets are honoured), matches without a time
+ * last. Equal or unknown times keep the published order.
+ */
+function byPlayedAtDescending(a: PlayerMatchView, b: PlayerMatchView): number {
+  if (a.playedAt === null || b.playedAt === null) {
+    return (a.playedAt === null ? 1 : 0) - (b.playedAt === null ? 1 : 0);
+  }
+  return Date.parse(b.playedAt) - Date.parse(a.playedAt);
+}
+
 export function loadLeaderboard(snapshot: RankingSnapshot): LeaderboardView {
   if (major(snapshot.schema_version) !== SUPPORTED_ENVELOPE_MAJOR) {
     fail(`unsupported envelope schema_version "${snapshot.schema_version}"`);
@@ -223,6 +254,7 @@ export function loadLeaderboard(snapshot: RankingSnapshot): LeaderboardView {
         const opponentId = other.participants[0].profile_id;
         return {
           matchId,
+          playedAt: readPlayedAt(match, snapshot.schema_version),
           opponent: profiles.get(opponentId) ?? fail(`match "${matchId}" references unknown profile "${opponentId}"`),
           opponentAnchor: anchorOf.get(opponentId) ?? null,
           won: facts.winner_side_id === own.side_id,
@@ -233,8 +265,13 @@ export function loadLeaderboard(snapshot: RankingSnapshot): LeaderboardView {
         } satisfies PlayerMatchView;
       });
 
+      // Show the most recent duel first. played_at is informational: it orders
+      // this evidence list only and never affects ranks (envelope §6.1).
+      views.sort(byPlayedAtDescending);
+
       // Number repeat encounters so a reader can see the same opponent twice
-      // is intentional evidence, not a duplicated record.
+      // is intentional evidence, not a duplicated record. Numbering is
+      // chronological, so it is left out when any of the duels has no time.
       const perOpponent = new Map<string, PlayerMatchView[]>();
       for (const v of views) {
         const list = perOpponent.get(v.opponent.profile_id) ?? [];
@@ -242,8 +279,9 @@ export function loadLeaderboard(snapshot: RankingSnapshot): LeaderboardView {
         perOpponent.set(v.opponent.profile_id, list);
       }
       for (const list of perOpponent.values()) {
+        const ordered = list.every((v) => v.playedAt !== null);
         list.forEach((v, i) => {
-          v.encounterIndex = i + 1;
+          v.encounterIndex = ordered ? list.length - i : null;
           v.encounterTotal = list.length;
         });
       }
@@ -270,7 +308,7 @@ export function loadLeaderboard(snapshot: RankingSnapshot): LeaderboardView {
 // in that offset, as published, instead of converting to the build machine's
 // or reader's zone.
 
-const TIMESTAMP = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::\d{2}(?:\.\d+)?)?(Z|[+-]\d{2}:\d{2})$/;
+const TIMESTAMP = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::\d{2}(?:\.\d+)?)?(Z|[+-]\d{2}:\d{2})$/i;
 const DATE_FORMAT = new Intl.DateTimeFormat('en', { dateStyle: 'medium', timeZone: 'UTC' });
 
 export function formatTimestamp(timestamp: string): string {
@@ -278,6 +316,14 @@ export function formatTimestamp(timestamp: string): string {
   if (!m) return timestamp;
   const [, y, mo, d, h, mi, offset] = m;
   const date = DATE_FORMAT.format(new Date(Date.UTC(Number(y), Number(mo) - 1, Number(d))));
-  const zone = offset === 'Z' ? 'UTC' : `UTC${offset}`;
+  const zone = offset.toUpperCase() === 'Z' ? 'UTC' : `UTC${offset}`;
   return `${date}, ${h}:${mi} (${zone})`;
+}
+
+/** Calendar date only, in the timestamp's own offset, e.g. "Oct 4, 2026". */
+export function formatDate(timestamp: string): string {
+  const m = TIMESTAMP.exec(timestamp);
+  if (!m) return timestamp;
+  const [, y, mo, d] = m;
+  return DATE_FORMAT.format(new Date(Date.UTC(Number(y), Number(mo) - 1, Number(d))));
 }
