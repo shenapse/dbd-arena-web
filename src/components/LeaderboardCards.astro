@@ -1,0 +1,188 @@
+---
+// One card per killer leaderboard on the symmetric 1v1 umbrella page: killer
+// name, season, the players ranked 3rd or better, and the number of ranked
+// players. Ties at 3rd all appear, so a card can list more than three
+// players; it never hides a player who shares a displayed rank.
+//
+// The card is the only click target and links to the killer's full board.
+// It is built as a link in the title stretched over the whole card, rather
+// than an <a> wrapping the card, so the link's accessible name stays the
+// killer name instead of the whole card's text. Nothing inside the card is a
+// separate link.
+//
+// Ranks, scores and labels are shown as published; this component adds only
+// English UI text.
+import type { PublicationEntry } from '../lib/ranking/publications';
+import type { StandingView } from '../lib/ranking/snapshot';
+
+interface Props {
+  entries: PublicationEntry[];
+}
+
+const { entries } = Astro.props;
+const TOP_RANK = 3;
+const topStandings = (standings: StandingView[]) => standings.filter((s) => s.row.rank <= TOP_RANK);
+const players = (n: number) => `${n} ranked ${n === 1 ? 'player' : 'players'}`;
+---
+
+<div class="lb-cards not-content">
+  {entries.map(({ slug, label, href, view }) => {
+    const { snapshot, boards, ambiguousNames } = view;
+    const headingId = `leaderboard-${slug}`;
+    return (
+      <article class="lb-card" aria-labelledby={headingId}>
+        <h2 id={headingId} class="lb-card__title"><a class="lb-card__link" href={href}>{label}</a></h2>
+        <p class="lb-card__season">{snapshot.season.label}</p>
+
+        {boards.map(({ board, standings }) => {
+          const top = topStandings(standings);
+          return (
+            <section class="lb-card__board">
+              {boards.length > 1 && <h3 class="lb-card__board-label">{board.label}</h3>}
+              {top.length === 0 ? (
+                <p class="lb-card__empty">No players meet the eligibility requirements yet.</p>
+              ) : (
+                <ol class="lb-card__top">
+                  {top.map(({ row, profile, tied }) => (
+                    <li class="lb-card__row">
+                      <span class="lb-card__rank">
+                        <span class="sr-only">Rank </span>{row.rank}
+                        {tied && <span class="sr-only"> (tied)</span>}
+                      </span>
+                      <span class="lb-card__name">
+                        <span class="lb-card__display-name">{profile.display_name}</span>
+                        {ambiguousNames.has(profile.display_name) && (
+                          <span class="profile-id" title="Shown because another player has the same name">{profile.profile_id}</span>
+                        )}
+                      </span>
+                      <span class="lb-card__score">
+                        <span class="sr-only">{board.score_definition.label} </span>{row.display_score}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              )}
+              <p class="lb-card__count">{players(standings.length)}</p>
+            </section>
+          );
+        })}
+      </article>
+    );
+  })}
+</div>
+
+<style>
+  .lb-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .lb-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    font-size: var(--sl-text-sm);
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+  }
+  .lb-card:hover {
+    border-color: var(--sl-color-accent);
+    background: var(--sl-color-gray-7, var(--sl-color-gray-6));
+  }
+  .lb-card__title {
+    margin: 0;
+    font-size: var(--sl-text-lg);
+    line-height: var(--sl-line-height-headings);
+  }
+  .lb-card__link {
+    color: var(--sl-color-white);
+    text-decoration: none;
+  }
+  /* Stretch the title link over the whole card. */
+  .lb-card__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+  /* Focus ring goes on the card, which is the link's visible click area. */
+  .lb-card__link:focus-visible {
+    outline: none;
+  }
+  .lb-card:has(.lb-card__link:focus-visible) {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+  .lb-card__season {
+    margin: 0.15rem 0 0;
+    color: var(--sl-color-gray-3);
+    font-size: var(--sl-text-xs);
+  }
+  .lb-card__board {
+    margin-top: 0.75rem;
+  }
+  .lb-card__board-label {
+    margin: 0 0 0.35rem;
+    font-size: var(--sl-text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--sl-color-gray-3);
+  }
+  .lb-card__top {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .lb-card__row {
+    display: grid;
+    grid-template-columns: 1.75rem minmax(0, 1fr) auto;
+    gap: 0.5rem;
+    align-items: baseline;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--sl-color-gray-6);
+  }
+  .lb-card__rank {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--sl-color-white);
+  }
+  .lb-card__name {
+    min-width: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.4rem;
+  }
+  .lb-card__display-name {
+    font-weight: 600;
+    color: var(--sl-color-white);
+    overflow-wrap: anywhere;
+  }
+  .lb-card__score {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--sl-color-white);
+  }
+  .lb-card__empty {
+    margin: 0;
+    color: var(--sl-color-gray-2);
+  }
+  .lb-card__count {
+    margin: 0.5rem 0 0;
+    color: var(--sl-color-gray-3);
+    font-size: var(--sl-text-xs);
+  }
+  .profile-id {
+    font-family: var(--sl-font-mono);
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-2);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.25rem;
+    padding: 0 0.3rem;
+    white-space: nowrap;
+  }
+</style>

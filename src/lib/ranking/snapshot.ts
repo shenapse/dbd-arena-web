@@ -1,15 +1,14 @@
-// Ranking snapshot loader for the sample leaderboard preview.
+// Ranking snapshot loader for the sample leaderboard previews.
 //
-// The snapshot is the published fixture in docs/ref/examples/. It is read as
-// is: the public contracts are docs/ref/ranking-system-data-schema.md (the
-// envelope) and docs/ref/ranking-evidence-dbd-1v1-symmetric.md (the per-match
-// facts). Nothing here recalculates the ranking. The loader only resolves
-// references and turns each row's included matches into a player-perspective
-// view. A broken reference fails the build instead of rendering a wrong page.
+// A snapshot is one published fixture in docs/ref/examples/ (collected by
+// ./publications.ts). It is read as is: the public contracts are
+// docs/ref/ranking-system-data-schema.md (the envelope) and
+// docs/ref/ranking-evidence-dbd-1v1-symmetric.md (the per-match facts).
+// Nothing here recalculates the ranking. The loader only resolves references
+// and turns each row's included matches into a player-perspective view. A
+// broken reference fails the build instead of rendering a wrong page.
 //
 // IDs are opaque (envelope §2): they are compared exactly and never parsed.
-
-import rawSnapshot from '../../../docs/ref/examples/ranking-snapshot-dbd-1v1-symmetric.json';
 
 // ---- Envelope types (ranking-system-data-schema.md) ----
 
@@ -137,7 +136,7 @@ export interface LeaderboardView {
   ambiguousNames: Set<string>;
 }
 
-function fail(message: string): never {
+export function fail(message: string): never {
   throw new Error(`[ranking snapshot] ${message}`);
 }
 
@@ -171,7 +170,7 @@ function readFacts(match: IncludedMatchEvidence): DbdSymmetricFacts {
   return facts as DbdSymmetricFacts;
 }
 
-export function loadLeaderboard(snapshot: RankingSnapshot = rawSnapshot as RankingSnapshot): LeaderboardView {
+export function loadLeaderboard(snapshot: RankingSnapshot): LeaderboardView {
   if (major(snapshot.schema_version) !== SUPPORTED_ENVELOPE_MAJOR) {
     fail(`unsupported envelope schema_version "${snapshot.schema_version}"`);
   }

@@ -1,0 +1,41 @@
+---
+// One symmetric 1v1 leaderboard per killer with a published snapshot, at
+// /preview/leaderboards/1v1-symmetric/<scope value ID>/. Unlisted (UX
+// structure §5); the killer strip and the umbrella link connect the pages.
+import type { GetStaticPaths } from 'astro';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { Aside } from '@astrojs/starlight/components';
+import LeaderboardSwitcher from '@components/LeaderboardSwitcher.astro';
+import RankingLeaderboard from '@components/RankingLeaderboard.astro';
+import { UNLISTED_PREVIEW, symmetricLeaderboards, type PublicationEntry } from '../../../../lib/ranking/publications';
+
+export const getStaticPaths = (() =>
+  symmetricLeaderboards.entries.map((entry) => ({ params: { killer: entry.slug }, props: { entry } }))) satisfies GetStaticPaths;
+
+interface Props {
+  entry: PublicationEntry;
+}
+
+const { entry } = Astro.props;
+const { publication } = entry.view.snapshot;
+const hasStandings = entry.view.boards.some((b) => b.standings.length > 0);
+---
+
+<StarlightPage
+  frontmatter={{
+    title: publication.label,
+    description: publication.description,
+    ...UNLISTED_PREVIEW,
+  }}
+>
+  <LeaderboardSwitcher entries={symmetricLeaderboards.entries} current={entry.slug} />
+
+  <Aside type="caution" title="Fictional sample data">
+    This preview renders a sample ranking snapshot in <code>docs/ref/examples/</code>.
+    Players, matches, and scores are made up, and the scores were written by hand
+    rather than calculated.
+    {hasStandings && 'Select a player to see the matches behind their standing.'}
+  </Aside>
+
+  <RankingLeaderboard view={entry.view} />
+</StarlightPage>
