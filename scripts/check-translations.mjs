@@ -49,16 +49,17 @@
  *      balancing/ subtree still contains, as a consecutive line pair, the
  *      hand-written two-line prose intro that <BalancingIntro /> replaces
  *      (1v1-symmetric and 1v4-duo have not migrated yet and are exempt).
- *   H. Body parity for per-killer balancing pages ONLY — paths matching
- *      game-modes/*\/balancing/* (excluding the `index` listing page).
- *      These pages are meant to be byte-for-byte structural clones of
- *      their English original (only the components differ), so their
- *      bodies must match after dropping the <TranslationNotice /> line and
- *      its import line, rewriting `](/ja/` -> `](/` and `](/ko/` -> `](/`,
- *      and collapsing incidental blank-line drift. This is intentionally a
- *      path PREDICATE, not a filename allow-list: every other localized
- *      page is genuinely translated prose and is expected to differ, so it
- *      is exempt from this check by not matching the predicate.
+ *   H. Structural parity for per-killer balancing pages ONLY — paths
+ *      matching game-modes/*\/balancing/* (excluding the `index` listing
+ *      page). The balancing on these pages is carried by components and
+ *      their props, images and link targets, which must match the English
+ *      original exactly; the prose around them is translated, so only its
+ *      shape is compared: heading levels and the number of paragraphs and
+ *      list items in order. The <TranslationNotice /> line and its import
+ *      are ignored, and `/ja/`, `/ko/` link prefixes are stripped. See
+ *      src/lib/docs/balancing-structure.ts. This is intentionally a path
+ *      PREDICATE, not a filename allow-list: every other localized page is
+ *      free-form translated prose and is exempt by not matching it.
  *
  * Exits 0 when all checks pass, non-zero otherwise.
  *
@@ -70,6 +71,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { parse } from 'yaml';
 import { splitLocale, normalizeDocsId, idToHref, LOCALE_PREFIXES } from '../src/lib/docs/ids.ts';
+import { balancingStructure, firstDifference } from '../src/lib/docs/balancing-structure.ts';
 
 const DOCS_DIR = path.resolve('src/content/docs');
 const NOTICES_DIR = path.join(DOCS_DIR, 'notices');
@@ -458,7 +460,7 @@ function checkNoHandwrittenMarkup() {
 }
 
 // ---------------------------------------------------------------------------
-// Check H: body parity for per-killer balancing pages only.
+// Check H: structural parity for per-killer balancing pages only.
 // ---------------------------------------------------------------------------
 
 /** game-modes/<format>/balancing/<killer> paths, excluding the balancing index listing page. */
@@ -467,33 +469,17 @@ function isBalancingKillerPath(localePath) {
   return match !== null && match[1] !== 'index';
 }
 
-/** Collapse runs of 2+ blank lines to one and trim leading/trailing blank lines. */
-function normalizeBlankRuns(text) {
-  const lines = text.split('\n');
-  const collapsed = [];
-  for (const line of lines) {
-    if (line.trim() === '' && collapsed.length > 0 && collapsed[collapsed.length - 1].trim() === '') continue;
-    collapsed.push(line);
-  }
-  return collapsed.join('\n').trim();
+/** Line number in the file of line 1 of the page body, minus one. */
+function bodyLineOffset(filePath) {
+  const raw = fs.readFileSync(filePath, 'utf8');
+  return raw.split('\n').length - readPage(filePath).body.split('\n').length;
 }
 
-function normalizeLocalizedBody(body) {
-  const withoutTranslationNotice = body
-    .split('\n')
-    .filter((line) => {
-      const trimmed = line.trim();
-      return (
-        trimmed !== "import TranslationNotice from '@components/TranslationNotice.astro';" &&
-        trimmed !== '<TranslationNotice />'
-      );
-    })
-    .join('\n');
-  const withRewrittenLinks = withoutTranslationNotice.split('](/ja/').join('](/').split('](/ko/').join('](/');
-  return normalizeBlankRuns(withRewrittenLinks);
+function describeItem(filePath, item) {
+  return item ? `line ${item.line + bodyLineOffset(filePath)} has ${JSON.stringify(item.key)}` : 'has nothing more';
 }
 
-function checkBalancingBodyParity() {
+function checkBalancingStructureParity() {
   const failures = [];
   let checked = 0;
 
@@ -504,14 +490,16 @@ function checkBalancingBodyParity() {
     if (!englishFile) continue; // already reported by check A
 
     checked += 1;
-    const { body: locBody } = readPage(page.filePath);
-    const { body: engBody } = readPage(englishFile);
+    const english = balancingStructure(readPage(englishFile).body, LOCALE_PREFIXES);
+    const localized = balancingStructure(readPage(page.filePath).body, LOCALE_PREFIXES);
+    const difference = firstDifference(english, localized);
 
-    const normLoc = normalizeLocalizedBody(locBody);
-    const normEng = normalizeBlankRuns(engBody);
-
-    if (normLoc !== normEng) {
-      failures.push(`${relDisplay(page.filePath)}: body does not match English counterpart ${relDisplay(englishFile)} after normalization`);
+    if (difference) {
+      failures.push(
+        `${relDisplay(page.filePath)}: structure differs from ${relDisplay(englishFile)}. ` +
+          `English ${describeItem(englishFile, difference.english)}; ` +
+          `translation ${describeItem(page.filePath, difference.localized)}`
+      );
     }
   }
   return { failures, checked };
@@ -522,7 +510,7 @@ function checkBalancingBodyParity() {
 // ---------------------------------------------------------------------------
 
 function main() {
-  const bodyParity = checkBalancingBodyParity();
+  const structureParity = checkBalancingStructureParity();
 
   const checks = [
     { name: 'Check A: localized page resolves to English counterpart', failures: checkResolvesToEnglish() },
@@ -533,8 +521,8 @@ function main() {
     { name: 'Check F: handle uniqueness among English pages', failures: checkHandleUniqueness() },
     { name: 'Check G: no hand-authored lifecycle/notice markup', failures: checkNoHandwrittenMarkup() },
     {
-      name: `Check H: balancing-page body parity (${bodyParity.checked} checked)`,
-      failures: bodyParity.failures,
+      name: `Check H: balancing-page structure parity (${structureParity.checked} checked)`,
+      failures: structureParity.failures,
     },
   ];
 
