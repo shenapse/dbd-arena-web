@@ -1,5 +1,5 @@
 ---
-version: "0.3"
+version: "0.4"
 doc_type: "DS"
 scope:
   in_scope:
@@ -16,7 +16,7 @@ scope:
     - publication-mechanics: "Owned by ranking-system-architecture.md"
     - website-ui-behavior: "Owned by consumers"
     - game-specific-fact-fields: "Owned by separately published public evidence schemas"
-    - concrete-json-schema-artifacts: "Implemented by schemas/ranking-snapshot-1.0.schema.json; this document stays authoritative"
+    - concrete-json-schema-artifacts: "Implemented by schemas/ranking-snapshot-1.1.schema.json (and the retained 1.0 file); this document stays authoritative"
   cross_reference_allowed:
     - DS
 ---
@@ -115,7 +115,7 @@ a board by `(deployment_id, publication_id, board_id)`.
 
 | Field | Type | Meaning / constraint |
 |---|---|---|
-| `schema_version` | string | Public envelope version in `major.minor` form. See Section 8. |
+| `schema_version` | string | Public envelope version in `major.minor` form. This document describes `1.1`. See Section 8. |
 | `deployment_id` | `PublicId` | Publisher's stable public identity namespace. |
 | `generated_at` | `Timestamp` | Time the snapshot was generated. |
 | `publication` | `PublicPublication` | Competition and scope covered by this snapshot. |
@@ -273,10 +273,19 @@ needed.
 | `match_id` | `PublicId` | Stable public match identity. |
 | `sides` | list[`PublicMatchSide`] | Non-empty. Unique by `side_id`. Public display order. |
 | `outcome_id` | `PublicId` | Resolves in `public_outcomes`. Neutral match-level outcome interpreted using its definition and public facts. |
+| `played_at` | `Timestamp` or null | Added in `1.1`; absent in `1.0`. Wall-clock time the match took place, with an explicit UTC offset. Null when the publisher has no reliable time for the match. |
 | `public_facts` | JSON object | Conforms to the snapshot's `public_facts_schema`. Contains only approved public facts. |
 
 Each record describes a current-season match included in this snapshot's ranking
-calculation. Per-match timestamps are not part of this envelope version.
+calculation.
+
+`played_at` is always present as a key. Null means the time is unknown, not that
+the match has no time. Consumers must not substitute `generated_at` or the season
+bounds for a null value. The time is informational: it does not affect ranks,
+and consumers do not use it to select or order matches for ranking. The
+published match order is not defined by `played_at`. The envelope does not
+state which moment of the match (such as start or end) the time refers to; an
+evidence schema may define that when needed.
 
 ### 6.2 `PublicMatchSide` and `PublicMatchParticipant`
 
@@ -377,8 +386,17 @@ meaning, or other incompatible consumer requirements. A minor version permits
 compatible optional additions without changing existing fields' meaning.
 Consumers must not assume support for an unknown major version. Unknown fields
 may be ignored only when permitted by the declared public schema version.
-Version `1.0` permits no envelope fields beyond those defined here. The contents
-of `public_facts` are governed by their evidence schema.
+Versions `1.0` and `1.1` permit no envelope fields beyond those defined for
+that version. The contents of `public_facts` are governed by their evidence
+schema.
+
+Version history:
+
+- `1.0`: initial envelope. Match summaries have no `played_at`.
+- `1.1`: adds `played_at` (`Timestamp` or null, required key) to
+  `IncludedMatchEvidence`. All other fields keep their meaning. A `1.1`
+  consumer should also accept `1.0` snapshots by treating `played_at` as
+  unknown. Publishers must emit `1.1` when they include `played_at`.
 
 Evidence schemas are versioned independently. Their public documentation must
 state their compatibility rules. Changing an evidence schema does not itself
@@ -392,8 +410,11 @@ independently of JSON version fields.
 ## 9. Current Limits
 
 This document defines the logical public contract. Its machine-checkable form
-for envelope version `1.0` is
-[schemas/ranking-snapshot-1.0.schema.json](schemas/ranking-snapshot-1.0.schema.json).
+for envelope version `1.1` is
+[schemas/ranking-snapshot-1.1.schema.json](schemas/ranking-snapshot-1.1.schema.json).
+The `1.0` form,
+[schemas/ranking-snapshot-1.0.schema.json](schemas/ranking-snapshot-1.0.schema.json),
+is retained unchanged for existing consumers and snapshots.
 If the two disagree, this document is authoritative.
 
 The JSON Schema checks types, requiredness, nullability, and per-field
