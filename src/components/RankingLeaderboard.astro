@@ -166,7 +166,7 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
                                     <span class="profile-id">{m.opponent.profile_id}</span>
                                   )}
                                   {m.encounterTotal > 1 && (
-                                    <span class="encounter" title="Repeat encounters share a contribution limit; see Methodology">
+                                    <span class="encounter" title="Repeat encounters share a contribution limit">
                                       {m.encounterIndex === null
                                         ? `${m.encounterTotal} meetings`
                                         : `meeting ${m.encounterIndex} of ${m.encounterTotal}`}
@@ -195,17 +195,9 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
             </ul>
           </div>
         )}
-
-        <h3>How scores work</h3>
-        <p><strong>{board.score_definition.label}.</strong> {board.score_definition.description}</p>
-        <p><strong>Eligibility.</strong> {board.eligibility.description}</p>
-        <p><strong>{board.eligibility.rating.label}.</strong> {board.eligibility.rating.description}</p>
       </section>
     );
   })}
-
-  <h2 id="methodology">Methodology</h2>
-  <p>{snapshot.methodology_description}</p>
 </div>
 
 <script>
