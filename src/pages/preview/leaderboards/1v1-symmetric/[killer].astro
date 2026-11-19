@@ -1,14 +1,20 @@
 ---
 // One symmetric 1v1 leaderboard per killer with a published snapshot, at
 // /preview/leaderboards/1v1-symmetric/<scope value ID>/. Unlisted (UX
-// structure §5); the killer strip and the umbrella link connect the pages.
+// structure §5); the killer strip and the umbrella link at the foot of the
+// page connect the pages.
 import type { GetStaticPaths } from 'astro';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import { Aside } from '@astrojs/starlight/components';
 import KillerBanner from '@components/KillerBanner.astro';
 import LeaderboardSwitcher from '@components/LeaderboardSwitcher.astro';
 import RankingLeaderboard from '@components/RankingLeaderboard.astro';
-import { UNLISTED_PREVIEW, symmetricLeaderboards, type PublicationEntry } from '../../../../lib/ranking/publications';
+import {
+  SYMMETRIC_LEADERBOARDS_PATH,
+  UNLISTED_PREVIEW,
+  symmetricLeaderboards,
+  type PublicationEntry,
+} from '../../../../lib/ranking/publications';
 
 export const getStaticPaths = (() =>
   symmetricLeaderboards.entries.map((entry) => ({ params: { killer: entry.slug }, props: { entry } }))) satisfies GetStaticPaths;
@@ -56,4 +62,6 @@ const title = copy.title ?? publication.label;
     competition={copy.competition}
     season={copy.season}
   />
+
+  <p><a href={SYMMETRIC_LEADERBOARDS_PATH}>← All symmetric 1v1 leaderboards</a></p>
 </StarlightPage>

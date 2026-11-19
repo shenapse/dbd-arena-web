@@ -4,8 +4,12 @@
 // JavaScript; the current killer is marked with aria-current. Pills wrap
 // rather than scroll so every killer stays visible on narrow screens.
 //
-// Leaderboards stay out of the sidebar (UX structure §5), so this strip and
-// the umbrella link are the way between them.
+// The first pill, "All killers", leads to the umbrella page. It sits in the
+// strip rather than above it so readers find it where they already look to
+// switch killers.
+//
+// Leaderboards stay out of the sidebar (UX structure §5), so this strip is
+// the way between them.
 import { SYMMETRIC_LEADERBOARDS_PATH, type PublicationEntry } from '../lib/ranking/publications';
 
 interface Props {
@@ -17,10 +21,10 @@ const { entries, current } = Astro.props;
 ---
 
 <nav class="lb-switcher not-content" aria-label="Killer leaderboards">
-  <a class="lb-switcher__back" href={SYMMETRIC_LEADERBOARDS_PATH}>
-    <span aria-hidden="true">←</span> All symmetric 1v1 leaderboards
-  </a>
   <ul class="lb-switcher__list">
+    <li class="lb-switcher__all">
+      <a class="lb-switcher__pill" href={SYMMETRIC_LEADERBOARDS_PATH}>All killers</a>
+    </li>
     {entries.map(({ slug, label, href }) => (
       <li>
         <a class="lb-switcher__pill" href={href} aria-current={slug === current ? 'page' : undefined}>
@@ -35,23 +39,27 @@ const { entries, current } = Astro.props;
   .lb-switcher {
     margin-block: 0.5rem 1.5rem;
   }
-  .lb-switcher__back {
-    display: inline-block;
-    font-size: var(--sl-text-sm);
-    color: var(--sl-color-gray-2);
-    text-decoration: none;
-  }
-  .lb-switcher__back:hover {
-    color: var(--sl-color-white);
-    text-decoration: underline;
-  }
   .lb-switcher__list {
     list-style: none;
-    margin: 0.75rem 0 0;
+    margin: 0;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 0.4rem;
+  }
+  .lb-switcher__all {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  /* Divider between the umbrella pill and the killer pills. */
+  .lb-switcher__all::after {
+    content: '';
+    align-self: stretch;
+    width: 1px;
+    margin-inline: 0.2rem;
+    background: var(--sl-color-gray-5);
   }
   .lb-switcher__pill {
     display: inline-block;
@@ -62,6 +70,11 @@ const { entries, current } = Astro.props;
     color: var(--sl-color-gray-2);
     text-decoration: none;
     white-space: nowrap;
+  }
+  .lb-switcher__all .lb-switcher__pill {
+    border-color: var(--sl-color-gray-4);
+    color: var(--sl-color-white);
+    font-weight: 600;
   }
   .lb-switcher__pill:hover {
     border-color: var(--sl-color-gray-3);
