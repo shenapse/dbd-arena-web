@@ -37,7 +37,7 @@
     {
       "board_id": "board-4a0e",
       "label": "Player rankings",
-      "description": "Eligible players competing in symmetric 1v1 duels with The Doctor this season.",
+      "description": "Eligible players competing in symmetric 1v1 matches with The Doctor this season.",
       "score_definition": {
         "label": "Ranking score",
         "description": "Illustrative integer points: higher scores rank ahead within this board, and equal scores share a rank. Points are not a win percentage or an entry rating. Compare scores only within this snapshot; no comparison across killers, seasons, or refreshes is supported."
