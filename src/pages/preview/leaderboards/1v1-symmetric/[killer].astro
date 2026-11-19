@@ -22,11 +22,19 @@ const { publication } = entry.view.snapshot;
 const hasStandings = entry.view.boards.some((b) => b.standings.length > 0);
 // Website copy: edit this sentence independently of snapshot descriptions.
 const boardIntroduction = `This season’s top players in 1v1 matches with ${entry.label}.`;
+// Optional website copy. The snapshot's labels are written for whoever
+// maintains the ranking, not for readers; a field left unset falls back to
+// the snapshot's label.
+const copy: { title?: string; competition?: string; season?: string } = {
+  title: `${entry.label} 1v1 Leaderboard`,
+  competition: 'DbD Arena 1v1 Symmetric',
+};
+const title = copy.title ?? publication.label;
 ---
 
 <StarlightPage
   frontmatter={{
-    title: publication.label,
+    title,
     description: publication.description,
     ...UNLISTED_PREVIEW,
   }}
@@ -42,5 +50,10 @@ const boardIntroduction = `This season’s top players in 1v1 matches with ${ent
     {hasStandings && 'Select a player to see the matches behind their standing.'}
   </Aside>
 
-  <RankingLeaderboard view={entry.view} boardIntroduction={boardIntroduction} />
+  <RankingLeaderboard
+    view={entry.view}
+    boardIntroduction={boardIntroduction}
+    competition={copy.competition}
+    season={copy.season}
+  />
 </StarlightPage>
