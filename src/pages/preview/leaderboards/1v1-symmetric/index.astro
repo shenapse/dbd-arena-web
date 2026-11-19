@@ -7,7 +7,7 @@ import { Aside } from '@astrojs/starlight/components';
 import LeaderboardCards from '@components/LeaderboardCards.astro';
 import { UNLISTED_PREVIEW, symmetricLeaderboards } from '../../../../lib/ranking/publications';
 
-const { competition, entries } = symmetricLeaderboards;
+const { entries } = symmetricLeaderboards;
 ---
 
 <StarlightPage
@@ -22,8 +22,6 @@ const { competition, entries } = symmetricLeaderboards;
     Players, matches, and scores are made up, and the scores were written by hand
     rather than calculated.
   </Aside>
-
-  <p><strong>{competition.label}.</strong> {competition.description}</p>
 
   <LeaderboardCards entries={entries} />
 </StarlightPage>
