@@ -9,17 +9,33 @@
 // It works without JavaScript. The small script below only opens a row when
 // an opponent link or a URL fragment targets it.
 //
-// The hosting page supplies the heading: its title is the publication label.
+// The hosting page supplies the heading (its title is page copy, falling back
+// to the publication label).
+//
+// The "Competition" and "Season" values are page copy too. The snapshot's
+// labels are written for whoever maintains the ranking, not for readers, so
+// they are only a fallback for pages that do not supply their own text.
 import { formatDate, formatTimestamp, formatWinRate, type LeaderboardView } from '../lib/ranking/snapshot';
 
 interface Props {
   view: LeaderboardView;
   boardIntroduction: string;
+  /** Reader-facing competition name. Falls back to the snapshot's competition label. */
+  competition?: string;
+  /** Reader-facing season name. Falls back to the snapshot's season label. */
+  season?: string;
 }
 
 const { boardIntroduction } = Astro.props;
 const { snapshot, boards, ambiguousNames } = Astro.props.view;
 const { publication, season } = snapshot;
+
+// When the page supplies its own wording, the snapshot's description no longer
+// describes what is shown, so it is not offered as a tooltip either.
+const competition = Astro.props.competition !== undefined
+  ? { label: Astro.props.competition, description: undefined }
+  : publication.competition;
+const seasonLabel = Astro.props.season ?? season.label;
 
 const showProfileId = (name: string) => ambiguousNames.has(name);
 const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
@@ -30,7 +46,7 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
   <dl class="meta-grid ranking__meta">
     <Fragment>
       <dt>Competition</dt>
-      <dd title={publication.competition.description}>{publication.competition.label}</dd>
+      <dd title={competition.description}>{competition.label}</dd>
     </Fragment>
     {publication.scope.map(({ category, value }) => (
       <Fragment>
@@ -40,7 +56,7 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
     ))}
     <Fragment>
       <dt>Season</dt>
-      <dd>{season.label}</dd>
+      <dd>{seasonLabel}</dd>
     </Fragment>
     <Fragment>
       <dt>Season window</dt>
