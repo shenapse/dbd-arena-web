@@ -1,7 +1,7 @@
 ---
 // Leaderboard rendered from a public ranking snapshot (see
-// src/lib/ranking/snapshot.ts). Every label, description, threshold, and
-// count comes from the snapshot; this component adds only English UI text.
+// src/lib/ranking/snapshot.ts). Ranking data comes from the snapshot;
+// the hosting page supplies the board introduction as editorial copy.
 //
 // Each standing is a <details> element: the summary is the standings row and
 // the body lists the row's included matches from that player's perspective.
@@ -13,8 +13,10 @@ import { formatTimestamp, type LeaderboardView } from '../lib/ranking/snapshot';
 
 interface Props {
   view: LeaderboardView;
+  boardIntroduction: string;
 }
 
+const { boardIntroduction } = Astro.props;
 const { snapshot, boards, ambiguousNames } = Astro.props.view;
 const { publication, season } = snapshot;
 
@@ -23,7 +25,6 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
 ---
 
 <div class="ranking">
-  <p>{publication.description}</p>
 
   <dl class="meta-grid ranking__meta">
     <Fragment>
@@ -65,7 +66,7 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
     return (
       <section class="ranking__board" aria-labelledby={headingId}>
         <h2 id={headingId}>{board.label}</h2>
-        <p>{board.description}</p>
+        <p>{boardIntroduction}</p>
 
         <dl class="meta-grid ranking__meta">
           <Fragment>

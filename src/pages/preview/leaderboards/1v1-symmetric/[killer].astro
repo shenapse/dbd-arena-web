@@ -19,6 +19,8 @@ interface Props {
 const { entry } = Astro.props;
 const { publication } = entry.view.snapshot;
 const hasStandings = entry.view.boards.some((b) => b.standings.length > 0);
+// Website copy: edit this sentence independently of snapshot descriptions.
+const boardIntroduction = `This season’s top players in 1v1 matches with ${entry.label}.`;
 ---
 
 <StarlightPage
@@ -37,5 +39,5 @@ const hasStandings = entry.view.boards.some((b) => b.standings.length > 0);
     {hasStandings && 'Select a player to see the matches behind their standing.'}
   </Aside>
 
-  <RankingLeaderboard view={entry.view} />
+  <RankingLeaderboard view={entry.view} boardIntroduction={boardIntroduction} />
 </StarlightPage>
