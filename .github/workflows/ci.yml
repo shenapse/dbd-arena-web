@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   check:
-    name: Type check, data check, unit tests, build
+    name: Type check, content checks, unit tests, build
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -29,6 +29,7 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run check:i18n
+      - run: npm run check:translations
       - run: npm test
       - run: npm run build
 
