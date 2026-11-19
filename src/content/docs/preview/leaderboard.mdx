@@ -1,0 +1,30 @@
+---
+title: Sample Leaderboard
+description: >-
+  Unlisted preview of a ranking leaderboard rendered from a fictional sample
+  snapshot. Not part of the site navigation.
+# Unlisted preview (UX structure §141: leaderboards stay out of navigation
+# until their publication responsibilities are defined). Not in the sidebar,
+# not searchable, not indexed, and outside prev/next pagination.
+pagefind: false
+tableOfContents: false
+prev: false
+next: false
+head:
+  - tag: meta
+    attrs:
+      name: robots
+      content: noindex
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import RankingLeaderboard from '@components/RankingLeaderboard.astro';
+
+<Aside type="caution" title="Fictional sample data">
+This preview renders the sample ranking snapshot in `docs/ref/examples/`.
+Players, matches, and scores are made up, and the scores were written by hand
+rather than calculated. Select a player to see the matches behind their
+standing.
+</Aside>
+
+<RankingLeaderboard />
