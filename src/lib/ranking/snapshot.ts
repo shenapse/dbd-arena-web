@@ -127,7 +127,10 @@ export interface StandingView {
   anchor: string;
   /** Shares its rank with another row on the board. */
   tied: boolean;
-  resultCounts: { metric: PublicDefinition; count: number }[];
+  /** Included matches this player won, counted from the match evidence. */
+  wins: number;
+  /** wins / included matches, 0–1. Null when the row has no included matches. */
+  winRate: number | null;
   matches: PlayerMatchView[];
 }
 
@@ -286,12 +289,18 @@ export function loadLeaderboard(snapshot: RankingSnapshot): LeaderboardView {
         });
       }
 
+      // Every duel has exactly one winner (evidence §3.5), so wins and the win
+      // rate follow from the evidence itself. The publication's result_metrics
+      // IDs are its own choice, so they are not used to find the win count.
+      const wins = views.filter((v) => v.won).length;
+
       return {
         row,
         profile,
         anchor: anchorOf.get(row.profile_id)!,
         tied: (rankCounts.get(row.rank) ?? 0) > 1,
-        resultCounts: snapshot.result_metrics.map((metric) => ({ metric, count: row.result_counts[metric.id] })),
+        wins,
+        winRate: views.length > 0 ? wins / views.length : null,
         matches: views,
       };
     });
@@ -318,6 +327,11 @@ export function formatTimestamp(timestamp: string): string {
   const date = DATE_FORMAT.format(new Date(Date.UTC(Number(y), Number(mo) - 1, Number(d))));
   const zone = offset.toUpperCase() === 'Z' ? 'UTC' : `UTC${offset}`;
   return `${date}, ${h}:${mi} (${zone})`;
+}
+
+/** Whole-percent win rate, e.g. "67%"; an em dash when there is none. */
+export function formatWinRate(rate: number | null): string {
+  return rate === null ? '—' : `${Math.round(rate * 100)}%`;
 }
 
 /** Calendar date only, in the timestamp's own offset, e.g. "Oct 4, 2026". */

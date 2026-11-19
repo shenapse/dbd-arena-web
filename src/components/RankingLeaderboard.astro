@@ -10,7 +10,7 @@
 // an opponent link or a URL fragment targets it.
 //
 // The hosting page supplies the heading: its title is the publication label.
-import { formatDate, formatTimestamp, type LeaderboardView } from '../lib/ranking/snapshot';
+import { formatDate, formatTimestamp, formatWinRate, type LeaderboardView } from '../lib/ranking/snapshot';
 
 interface Props {
   view: LeaderboardView;
@@ -57,12 +57,11 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
   </dl>
 
   {boards.map(({ board, headingId, standings }) => {
-    const metricCount = snapshot.result_metrics.length;
-    // Rank · Player · Score · Matches · metrics… · Opponents · disclosure marker.
+    // Rank · Player · Score · Matches · Wins · Win rate · Opponents · disclosure marker.
     // Every count column gets the same width (sized for the longest header,
     // "Opponents") and values are centred under their headers, so the stats
     // sit on an even rhythm. Below 44rem the stacked layout takes over.
-    const countColumns = Array(metricCount + 2).fill('5.5rem');
+    const countColumns = Array(4).fill('5.5rem');
     const columns = ['3.25rem', 'minmax(0, 1fr)', '7.5rem', ...countColumns, '1rem'].join(' ');
     return (
       <section class="ranking__board" aria-labelledby={headingId}>
@@ -83,18 +82,19 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
         {standings.length === 0 ? (
           <p>No players meet the eligibility requirements in this snapshot.</p>
         ) : (
-          <div class="standings not-content" style={`--standings-columns: ${columns}; --standings-stat-count: ${metricCount + 3}`}>
+          <div class="standings not-content" style={`--standings-columns: ${columns}; --standings-stat-count: ${countColumns.length + 1}`}>
             <div class="standings__head" aria-hidden="true">
               <span>Rank</span>
               <span>Player</span>
               <span class="num">{board.score_definition.label}</span>
               <span class="num">Matches</span>
-              {snapshot.result_metrics.map((m) => <span class="num" title={m.description}>{m.label}</span>)}
+              <span class="num" title="Included matches this player won">Wins</span>
+              <span class="num" title="Share of included matches this player won">Win rate</span>
               <span class="num">Opponents</span>
               <span />
             </div>
             <ul class="standings__list">
-              {standings.map(({ row, profile, anchor, tied, resultCounts, matches }) => (
+              {standings.map(({ row, profile, anchor, tied, wins, winRate, matches }) => (
                 <li id={anchor} class="standings__item">
                   <details class="standing">
                     <summary class="standing__summary">
@@ -114,11 +114,12 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
                       <span class="num">
                         <span class="cell-label">Matches</span>{row.eligible_match_count}
                       </span>
-                      {resultCounts.map(({ metric, count }) => (
-                        <span class="num">
-                          <span class="cell-label">{metric.label}</span>{count}
-                        </span>
-                      ))}
+                      <span class="num">
+                        <span class="cell-label">Wins</span>{wins}
+                      </span>
+                      <span class="num">
+                        <span class="cell-label">Win rate</span>{formatWinRate(winRate)}
+                      </span>
                       <span class="num">
                         <span class="cell-label">Opponents</span>{row.opponent_count}
                       </span>
