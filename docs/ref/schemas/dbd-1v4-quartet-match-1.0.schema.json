@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DBD 1v4 quartet match - public facts 1.0",
+  "description": "Shape of one included_matches[].public_facts object for schema_id dbd-1v4-quartet-match, version 1.0. Field meaning is defined in ranking-evidence-dbd-1v4-quartet.md; section numbers below refer to it. This schema checks fields, types, ranges, and every value rule in Section 2.2. The envelope usage profile in Section 3 needs a check that reads the whole snapshot.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["winner_side_id", "generators_remaining", "hooks", "kills"],
+  "properties": {
+    "winner_side_id": {
+      "description": "Side that won, or null for a draw. Side IDs are fixed by Section 3.2.",
+      "enum": ["killer", "survivors", null]
+    },
+    "generators_remaining": {
+      "$ref": "ranking-snapshot-1.0.schema.json#/$defs/Count",
+      "maximum": 5
+    },
+    "hooks": {
+      "$ref": "ranking-snapshot-1.0.schema.json#/$defs/Count",
+      "maximum": 12
+    },
+    "kills": {
+      "$ref": "ranking-snapshot-1.0.schema.json#/$defs/Count",
+      "maximum": 4
+    }
+  },
+  "allOf": [
+    {
+      "$comment": "hooks >= 3 * kills and kills >= hooks - 8, so each kill count allows hooks from 3*kills to min(kills + 8, 12).",
+      "oneOf": [
+        { "properties": { "kills": { "const": 0 }, "hooks": { "minimum": 0, "maximum": 8 } } },
+        { "properties": { "kills": { "const": 1 }, "hooks": { "minimum": 3, "maximum": 9 } } },
+        { "properties": { "kills": { "const": 2 }, "hooks": { "minimum": 6, "maximum": 10 } } },
+        { "properties": { "kills": { "const": 3 }, "hooks": { "minimum": 9, "maximum": 11 } } },
+        { "properties": { "kills": { "const": 4 }, "hooks": { "const": 12 } } }
+      ]
+    },
+    {
+      "$comment": "generators_remaining > 0 implies kills = 4.",
+      "if": { "properties": { "generators_remaining": { "minimum": 1 } } },
+      "then": { "properties": { "kills": { "const": 4 } } }
+    },
+    {
+      "$comment": "A survivor-side win implies generators_remaining <= 1.",
+      "if": { "properties": { "winner_side_id": { "const": "survivors" } } },
+      "then": { "properties": { "generators_remaining": { "maximum": 1 } } }
+    },
+    {
+      "$comment": "A killer-side win implies hooks >= 1.",
+      "if": { "properties": { "winner_side_id": { "const": "killer" } } },
+      "then": { "properties": { "hooks": { "minimum": 1 } } }
+    }
+  ]
+}
