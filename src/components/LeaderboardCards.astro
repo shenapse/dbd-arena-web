@@ -1,10 +1,11 @@
 ---
-// One card per killer leaderboard on the symmetric 1v1 umbrella page: the
-// killer's portrait on the left, then killer name, season, the players ranked
-// 3rd or better, and the number of ranked players. Scores are left to the
+// One card per killer leaderboard on a game mode's umbrella page: the
+// killer's portrait on the left, then killer name, season and, for each board,
+// the units ranked 3rd or better and the number of ranked units (players on
+// symmetric 1v1; killers and survivor parties on the quartet's two boards). Scores are left to the
 // full board; the card only says which killer it is and who leads. Ties at
-// 3rd all appear, so a card can list more than three players; it never hides
-// a player who shares a displayed rank.
+// 3rd all appear, so a card can list more than three rows; it never hides
+// one that shares a displayed rank.
 //
 // Portraits are the balancing tool's lore art (iconography/lore), stored as
 // src/assets/killers/portraits/<scope value ID>.webp and cropped to the
@@ -24,7 +25,7 @@
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import type { PublicationEntry } from '../lib/ranking/publications';
-import type { StandingView } from '../lib/ranking/snapshot';
+import type { StandingView, UnitNoun } from '../lib/ranking/snapshot';
 
 interface Props {
   entries: PublicationEntry[];
@@ -41,7 +42,7 @@ const portraits = new Map(
 const { entries } = Astro.props;
 const TOP_RANK = 3;
 const topStandings = (standings: StandingView[]) => standings.filter((s) => s.row.rank <= TOP_RANK);
-const players = (n: number) => `${n} ranked ${n === 1 ? 'player' : 'players'}`;
+const ranked = (n: number, unit: UnitNoun) => `${n} ranked ${n === 1 ? unit.one : unit.other}`;
 ---
 
 <div class="lb-cards not-content">
@@ -60,13 +61,13 @@ const players = (n: number) => `${n} ranked ${n === 1 ? 'player' : 'players'}`;
           <h2 id={headingId} class="lb-card__title"><a class="lb-card__link" href={href}>{label}</a></h2>
           <p class="lb-card__season">{snapshot.season.label}</p>
 
-          {boards.map(({ board, standings }) => {
+          {boards.map(({ board, standings, unit }) => {
             const top = topStandings(standings);
             return (
               <section class="lb-card__board">
                 {boards.length > 1 && <h3 class="lb-card__board-label">{board.label}</h3>}
                 {top.length === 0 ? (
-                  <p class="lb-card__empty">No players meet the eligibility requirements yet.</p>
+                  <p class="lb-card__empty">No {unit.other} meet the eligibility requirements yet.</p>
                 ) : (
                   <ol class="lb-card__top">
                     {top.map(({ row, profile, tied }) => (
@@ -78,14 +79,14 @@ const players = (n: number) => `${n} ranked ${n === 1 ? 'player' : 'players'}`;
                         <span class="lb-card__name">
                           <span class="lb-card__display-name">{profile.display_name}</span>
                           {ambiguousNames.has(profile.display_name) && (
-                            <span class="profile-id" title="Shown because another player has the same name">{profile.profile_id}</span>
+                            <span class="profile-id" title="Shown because another profile has the same name">{profile.profile_id}</span>
                           )}
                         </span>
                       </li>
                     ))}
                   </ol>
                 )}
-                <p class="lb-card__count">{players(standings.length)}</p>
+                <p class="lb-card__count">{ranked(standings.length, unit)}</p>
               </section>
             );
           })}

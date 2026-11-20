@@ -11,9 +11,19 @@ export function normaliseQuery(text: string): string {
   return text.normalize('NFKC').toLowerCase().trim();
 }
 
-/** What a standing's search matches against: display name and profile ID. */
-export function searchText(profile: { display_name: string; profile_id: string }): string {
-  return normaliseQuery(`${profile.display_name} ${profile.profile_id}`);
+interface SearchableProfile {
+  display_name: string;
+  profile_id: string;
+  group_members?: { display_name: string; profile_id: string }[] | null;
+}
+
+/**
+ * What a standing's search matches against: display name and profile ID, and
+ * for a group (a survivor party) its published members' names and IDs too.
+ */
+export function searchText(profile: SearchableProfile): string {
+  const members = (profile.group_members ?? []).map((m) => `${m.display_name} ${m.profile_id}`);
+  return normaliseQuery([`${profile.display_name} ${profile.profile_id}`, ...members].join(' '));
 }
 
 /** Substring match on normalised text. An empty query matches every row. */
@@ -75,21 +85,29 @@ export function pageNumbers(current: number, count: number): (number | null)[] {
   return out;
 }
 
-const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`;
+/** What the board's rows are, singular and plural. */
+export interface RowNoun {
+  one: string;
+  other: string;
+}
+
+const PLAYERS: RowNoun = { one: 'player', other: 'players' };
 
 /**
  * The line beside the search box.
  * @param total rows on the board
  * @param matched rows the search leaves (equal to total when not searching)
  * @param query the search box text as typed; blank when not searching
+ * @param noun what the rows are; players unless the board says otherwise
  */
-export function statusText(total: number, matched: number, query: string, view: PageWindow): string {
+export function statusText(total: number, matched: number, query: string, view: PageWindow, noun: RowNoun = PLAYERS): string {
+  const plural = (n: number) => `${n} ${n === 1 ? noun.one : noun.other}`;
   const range = `${view.start + 1}–${view.end}`;
   if (normaliseQuery(query) === '') {
-    return view.count === 1 ? plural(total, 'player') : `Showing ${range} of ${plural(total, 'player')}`;
+    return view.count === 1 ? plural(total) : `Showing ${range} of ${plural(total)}`;
   }
   const quoted = `“${query.trim()}”`;
-  if (matched === 0) return `No players match ${quoted}`;
-  return `${plural(matched, 'player')} ${matched === 1 ? 'matches' : 'match'} ${quoted}`
+  if (matched === 0) return `No ${noun.other} match ${quoted}`;
+  return `${plural(matched)} ${matched === 1 ? 'matches' : 'match'} ${quoted}`
     + (view.count > 1 ? `, showing ${range}` : '');
 }

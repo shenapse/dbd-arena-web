@@ -19,6 +19,16 @@ describe('search', () => {
     expect(normaliseQuery('　')).toBe('');
   });
 
+  it('matches a group by its members as well', () => {
+    const text = searchText({
+      display_name: 'Team Fog',
+      profile_id: 'g-8b4a',
+      group_members: [{ display_name: 'Aster', profile_id: 'p-1a4b' }],
+    });
+    expect(matchesQuery(text, normaliseQuery('aster'))).toBe(true);
+    expect(matchesQuery(text, normaliseQuery('p-1a4b'))).toBe(true);
+  });
+
   it('matches display name and profile ID', () => {
     const text = searchText({ display_name: 'Last Lantern', profile_id: 'p-2A5F' });
     expect(matchesQuery(text, normaliseQuery('lantern'))).toBe(true);
@@ -133,6 +143,13 @@ describe('statusText', () => {
 
   it('says when nothing matches', () => {
     expect(statusText(60, 0, 'zzz', pageWindow(0, 1, 25))).toBe('No players match “zzz”');
+  });
+
+  it('names the rows the board ranks', () => {
+    const parties = { one: 'survivor party', other: 'survivor parties' };
+    expect(statusText(1, 1, '', pageWindow(1, 1, 25), parties)).toBe('1 survivor party');
+    expect(statusText(60, 60, '', pageWindow(60, 2, 25), parties)).toBe('Showing 26–50 of 60 survivor parties');
+    expect(statusText(60, 0, 'zzz', pageWindow(0, 1, 25), parties)).toBe('No survivor parties match “zzz”');
   });
 
   it('treats a blank query as not searching', () => {

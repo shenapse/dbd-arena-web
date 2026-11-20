@@ -4,8 +4,17 @@
 // the hosting page supplies the board introduction as editorial copy.
 //
 // Each standing is a <details> element: the summary is the standings row and
-// the body lists the row's included matches from that player's perspective,
+// the body lists the row's included matches from that row's perspective,
 // most recent first (dates come from played_at; unknown dates sort last).
+//
+// The columns follow the snapshot's evidence contract (view.format):
+//   - symmetric 1v1: Score · Matches · Wins · Win rate · Opponents, and each
+//     duel's result with its round score;
+//   - 1v4 quartet: Score · Matches · Wins · Win rate · average generators
+//     completed · average hook stages, and each match's win, loss or draw
+//     with its generators completed and hook stages. The killer board and
+//     the survivor party board are each other's opponents, so opponent links
+//     cross between them.
 // Every row is rendered; in the browser the script below adds a player search
 // and, on boards longer than one page, shows one page at a time and keeps the
 // page in the URL (?page=N). Without JavaScript the full list is shown.
@@ -17,12 +26,21 @@
 // The "Competition" and "Season" values are page copy too. The snapshot's
 // labels are written for whoever maintains the ranking, not for readers, so
 // they are only a fallback for pages that do not supply their own text.
-import { formatDate, formatTimestamp, formatWinRate, type LeaderboardView } from '../lib/ranking/snapshot';
+import {
+  QUARTET_GENERATORS,
+  formatAverage,
+  formatDate,
+  formatTimestamp,
+  formatWinRate,
+  type LeaderboardView,
+  type MatchResult,
+} from '../lib/ranking/snapshot';
 import { DEFAULT_PAGE_SIZE, pageParamName, searchText } from '../lib/ranking/standings-controls';
 
 interface Props {
   view: LeaderboardView;
-  boardIntroduction: string;
+  /** One sentence for every board, or one per board in board order. */
+  boardIntroduction: string | string[];
   /** Reader-facing competition name. Falls back to the snapshot's competition label. */
   competition?: string;
   /** Reader-facing season name. Falls back to the snapshot's season label. */
@@ -32,7 +50,8 @@ interface Props {
 }
 
 const { boardIntroduction, pageSize = DEFAULT_PAGE_SIZE } = Astro.props;
-const { snapshot, boards, ambiguousNames } = Astro.props.view;
+const { snapshot, format, boards, ambiguousNames } = Astro.props.view;
+const quartet = format === 'quartet';
 const { publication, season } = snapshot;
 
 // When the page supplies its own wording, the snapshot's description no longer
@@ -42,8 +61,17 @@ const competition = Astro.props.competition !== undefined
   : publication.competition;
 const seasonLabel = Astro.props.season ?? season.label;
 
+const introductionFor = (boardIndex: number) =>
+  typeof boardIntroduction === 'string' ? boardIntroduction : (boardIntroduction[boardIndex] ?? '');
+
 const showProfileId = (name: string) => ambiguousNames.has(name);
 const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
+const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
+const RESULT_TEXT: Record<'symmetric' | 'quartet', Record<MatchResult, string>> = {
+  symmetric: { won: 'Won', lost: 'Lost', draw: 'Draw' },
+  quartet: { won: 'Win', lost: 'Loss', draw: 'Draw' },
+};
+const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw: '◇' };
 ---
 
 <div class="ranking">
@@ -80,18 +108,26 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
     </Fragment>
   </dl>
 
-  {boards.map(({ board, headingId, standings }, boardIndex) => {
-    // Rank · Player · Score · Matches · Wins · Win rate · Opponents · disclosure marker.
-    // Every count column gets the same width (sized for the longest header,
-    // "Opponents") and values are centred under their headers, so the stats
-    // sit on an even rhythm. Below 44rem the compact layout in the styles
-    // takes over, with Matches and Wins merged into one column.
-    const countColumns = Array(4).fill('5.5rem');
-    const columns = ['3.25rem', 'minmax(0, 1fr)', '7.5rem', ...countColumns, '1rem'].join(' ');
+  {boards.map(({ board, headingId, unit, opponentUnit, standings }, boardIndex) => {
+    // Rank · Name · Score · Matches · Wins · Win rate · then Opponents
+    // (symmetric) or Avg gens · Avg hook stages (quartet) · disclosure marker.
+    // Every count column gets the same width and values are centred under
+    // their headers, so the stats sit on an even rhythm. Below 44rem the
+    // compact layout in the styles takes over: Matches and Wins merge into one
+    // column, and on the quartet so do the two averages.
+    // The quartet has one more stat, so its headers wrap onto two lines
+    // ("Ranking / score", "Avg hook / stages") and the columns are narrower.
+    const countColumns = quartet ? Array(5).fill('4.75rem') : Array(4).fill('5.5rem');
+    const columns = ['3.25rem', 'minmax(0, 1fr)', quartet ? '5.5rem' : '7.5rem', ...countColumns, '1rem'].join(' ');
+    const narrowColumns = [
+      '1.75rem', 'minmax(0, 1fr)', '2.75rem', '3.75rem', '2.5rem', quartet ? '4.25rem' : '2.25rem', '0.6rem',
+    ].join(' ');
+    const unitLabel = capitalise(unit.one);
+    const resultText = RESULT_TEXT[format];
     return (
       <section class="ranking__board" aria-labelledby={headingId}>
         <h2 id={headingId}>{board.label}</h2>
-        <p>{boardIntroduction}</p>
+        <p>{introductionFor(boardIndex)}</p>
 
         <dl class="meta-grid ranking__meta">
           <Fragment>
@@ -99,25 +135,27 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
             <dd>At least {board.eligibility.minimum_rating_value}</dd>
           </Fragment>
           <Fragment>
-            <dt>Required matches against eligible players</dt>
+            <dt>Required matches against eligible {opponentUnit.other}</dt>
             <dd>At least {board.eligibility.minimum_eligible_match_count}</dd>
           </Fragment>
         </dl>
 
         {standings.length === 0 ? (
-          <p>No players meet the eligibility requirements in this snapshot.</p>
+          <p>No {unit.other} meet the eligibility requirements in this snapshot.</p>
         ) : (
           <div
             class="board-standings not-content"
             data-page-size={pageSize}
             data-page-param={pageParamName(boardIndex, boards.length)}
+            data-noun-one={unit.one}
+            data-noun-other={unit.other}
           >
           <div class="standings-tools" data-tools hidden>
             <label class="standings-search">
-              <span class="sr-only">Find a player on {board.label}</span>
+              <span class="sr-only">Find a {unit.one} on {board.label}</span>
               <input
                 type="search"
-                placeholder="Find player"
+                placeholder={`Find ${unit.one}`}
                 autocomplete="off"
                 spellcheck="false"
                 data-search
@@ -125,20 +163,32 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
             </label>
             <p class="standings-status" data-status aria-live="polite" />
           </div>
-          <div class="standings" data-standings style={`--standings-columns: ${columns}`}>
+          <div
+            class:list={['standings', { 'standings--quartet': quartet }]}
+            data-standings
+            style={`--standings-columns: ${columns}; --standings-columns-narrow: ${narrowColumns}`}
+          >
             <div class="standings__head" aria-hidden="true">
               <span><span class="head--wide">Rank</span><span class="head--narrow">#</span></span>
-              <span>Player</span>
+              <span>{unitLabel}</span>
               <span class="num">{board.score_definition.label}</span>
               <span class="num stat--split">Matches</span>
-              <span class="num stat--split" title="Included matches this player won">Wins</span>
-              <span class="num stat--merged" title="Included matches / matches this player won">Matches/<wbr />Wins</span>
-              <span class="num" title="Share of included matches this player won">Win rate</span>
-              <span class="num">Oppo&shy;nents</span>
+              <span class="num stat--split" title={`Included matches this ${unit.one} won`}>Wins</span>
+              <span class="num stat--merged" title={`Included matches / matches this ${unit.one} won`}>Matches/<wbr />Wins</span>
+              <span class="num" title={`Share of included matches this ${unit.one} won${quartet ? '; draws are not wins' : ''}`}>Win rate</span>
+              {quartet ? (
+                <Fragment>
+                  <span class="num stat--split" title="Average generators completed per included match">Avg gens</span>
+                  <span class="num stat--split" title="Average hook stages per included match">Avg hook stages</span>
+                  <span class="num stat--merged" title="Average generators completed / hook stages per included match">Gens/<wbr />Hooks</span>
+                </Fragment>
+              ) : (
+                <span class="num">Oppo&shy;nents</span>
+              )}
               <span />
             </div>
             <ul class="standings__list" tabindex="-1">
-              {standings.map(({ row, profile, anchor, tied, wins, winRate, matches }, rowIndex) => (
+              {standings.map(({ row, profile, anchor, tied, wins, winRate, averages, matches }, rowIndex) => (
                 <li
                   id={anchor}
                   class="standings__item"
@@ -154,7 +204,7 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
                       <span class="standing__name">
                         <span class="standing__display-name">{profile.display_name}</span>
                         {showProfileId(profile.display_name) && (
-                          <span class="profile-id" title="Shown because another player has the same name">{profile.profile_id}</span>
+                          <span class="profile-id" title={`Shown because another ${unit.one} has the same name`}>{profile.profile_id}</span>
                         )}
                       </span>
                       <span class="num standing__score">
@@ -173,9 +223,29 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
                       <span class="num">
                         <span class="cell-label">Win rate</span>{formatWinRate(winRate)}
                       </span>
-                      <span class="num">
-                        <span class="cell-label">Opponents</span>{row.opponent_count}
-                      </span>
+                      {quartet ? (
+                        <Fragment>
+                          <span class="num stat--split">
+                            <span class="cell-label">Average generators completed</span>{formatAverage(averages?.generatorsCompleted)}
+                          </span>
+                          <span class="num stat--split">
+                            <span class="cell-label">Average hook stages</span>{formatAverage(averages?.hookStages)}
+                          </span>
+                          <span class="num stat--merged">
+                            <span class="cell-label">
+                              Average {formatAverage(averages?.generatorsCompleted)} generators completed,
+                              {' '}{formatAverage(averages?.hookStages)} hook stages
+                            </span>
+                            <span aria-hidden="true">
+                              {formatAverage(averages?.generatorsCompleted)}<span class="stat__unit">G</span>/{formatAverage(averages?.hookStages)}<span class="stat__unit">H</span>
+                            </span>
+                          </span>
+                        </Fragment>
+                      ) : (
+                        <span class="num">
+                          <span class="cell-label">Opponents</span>{row.opponent_count}
+                        </span>
+                      )}
                       <span class="standing__marker" aria-hidden="true" />
                     </summary>
 
@@ -184,6 +254,12 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
                         Included matches for {profile.display_name}
                         {showProfileId(profile.display_name) && <span class="profile-id">{profile.profile_id}</span>}
                       </p>
+                      {profile.group_members && profile.group_members.length > 0 && (
+                        <p class="standing__members">
+                          <span class="standing__members-label">Members</span>
+                          {profile.group_members.map((m) => m.display_name).join(', ')}
+                        </p>
+                      )}
                       <div class="standing__table-wrap">
                         <table class="standing__matches">
                           <caption class="sr-only">
@@ -193,9 +269,15 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
                           <thead>
                             <tr>
                               <th scope="col">Date</th>
-                              <th scope="col">Match</th>
+                              {!quartet && <th scope="col">Match</th>}
                               <th scope="col">Opponent</th>
                               <th scope="col">Result</th>
+                              {quartet && (
+                                <Fragment>
+                                  <th scope="col" class="num" title={`Generators the survivors completed, of ${QUARTET_GENERATORS}`}>Gens completed</th>
+                                  <th scope="col" class="num" title="Hook stages the killer performed">Hook stages</th>
+                                </Fragment>
+                              )}
                             </tr>
                           </thead>
                           <tbody>
@@ -208,8 +290,8 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
                                     <span class="match-date--unknown">Unknown</span>
                                   )}
                                 </td>
-                                <td><code class="match-id">{m.matchId}</code></td>
-                                <td>
+                                {!quartet && <td><code class="match-id">{m.matchId}</code></td>}
+                                <td class="match-opponent">
                                   {m.opponentAnchor ? (
                                     <a href={`#${m.opponentAnchor}`}>{m.opponent.display_name}</a>
                                   ) : (
@@ -227,15 +309,25 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
                                   )}
                                 </td>
                                 <td>
-                                  <span class={`result result--${m.won ? 'won' : 'lost'}`}>
-                                    <span aria-hidden="true">{m.won ? '▲' : '▽'}</span>
-                                    {m.won ? 'Won' : 'Lost'}
+                                  <span class={`result result--${m.result}`}>
+                                    <span aria-hidden="true">{RESULT_MARK[m.result]}</span>
+                                    {resultText[m.result]}
                                   </span>
-                                  <span class="rounds">
-                                    <span class="sr-only">, {rounds(m.ownRounds)} to {m.opponentRounds}</span>
-                                    <span aria-hidden="true">{m.ownRounds}–{m.opponentRounds}</span>
-                                  </span>
+                                  {m.facts.format === 'symmetric' && (
+                                    <span class="rounds">
+                                      <span class="sr-only">, {rounds(m.facts.ownRounds)} to {m.facts.opponentRounds}</span>
+                                      <span aria-hidden="true">{m.facts.ownRounds}–{m.facts.opponentRounds}</span>
+                                    </span>
+                                  )}
                                 </td>
+                                {m.facts.format === 'quartet' && (
+                                  <Fragment>
+                                    <td class="num">
+                                      {m.facts.generatorsCompleted}<span class="of-total"><span class="sr-only"> of </span><span aria-hidden="true">/</span>{QUARTET_GENERATORS}</span>
+                                    </td>
+                                    <td class="num">{m.facts.hookStages}</td>
+                                  </Fragment>
+                                )}
                               </tr>
                             ))}
                           </tbody>
@@ -279,6 +371,7 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
     pageWindow,
     parsePage,
     statusText,
+    type RowNoun,
   } from '../lib/ranking/standings-controls';
 
   interface BoardControls {
@@ -287,6 +380,8 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
     pageSize: number;
     /** Query parameter holding this board's page number. */
     param: string;
+    /** What the rows are, for the status line. */
+    noun: RowNoun;
     search: HTMLInputElement;
     status: HTMLElement;
     standings: HTMLElement;
@@ -310,6 +405,7 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
       items: [...root.querySelectorAll<HTMLLIElement>('.standings__item')],
       pageSize: Number(root.dataset.pageSize),
       param: root.dataset.pageParam!,
+      noun: { one: root.dataset.nounOne!, other: root.dataset.nounOther! },
       search: root.querySelector<HTMLInputElement>('[data-search]')!,
       status: root.querySelector<HTMLElement>('[data-status]')!,
       standings: root.querySelector<HTMLElement>('[data-standings]')!,
@@ -338,7 +434,7 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
       li.hidden = !visible;
     }
     b.standings.hidden = rows.length === 0;
-    b.status.textContent = statusText(b.items.length, rows.length, b.query ? b.search.value : '', view);
+    b.status.textContent = statusText(b.items.length, rows.length, b.query ? b.search.value : '', view, b.noun);
 
     b.pager.hidden = count === 1;
     b.prev.disabled = b.page === 1;
@@ -620,6 +716,12 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
   .standings__head > span {
     white-space: nowrap;
   }
+  .standings--quartet .standings__head {
+    align-items: end;
+  }
+  .standings--quartet .standings__head > span {
+    white-space: normal;
+  }
   /* Matches and wins get a column each on wide boards and share one on
      narrow boards (see the container query at the end). */
   .stat--merged,
@@ -715,6 +817,18 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
     font-weight: 600;
     color: var(--sl-color-gray-2);
   }
+  .standing__members {
+    margin: -0.25rem 0 0.5rem;
+    color: var(--sl-color-gray-2);
+  }
+  .standing__members-label {
+    margin-inline-end: 0.5rem;
+    font-size: var(--sl-text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--sl-color-gray-3);
+  }
   .standing__table-wrap {
     overflow-x: auto;
   }
@@ -736,8 +850,15 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
-  .standing__matches td:nth-child(3) {
+  .standing__matches .num {
+    text-align: center;
+  }
+  .standing__matches td.match-opponent {
     white-space: normal;
+  }
+  .of-total {
+    color: var(--sl-color-gray-3);
+    font-size: 0.85em;
   }
   .match-date {
     font-variant-numeric: tabular-nums;
@@ -780,6 +901,9 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
   .result--lost {
     color: var(--sl-color-gray-3);
   }
+  .result--draw {
+    color: var(--sl-color-gray-2);
+  }
 
   /* ---- Narrow screens: one compact row per player ---- */
   /* Narrow page: the shared meta-grid sizes its label column to the longest
@@ -795,9 +919,9 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
   }
 
   /* Narrow standings (phones, or a tablet with the sidebar open): the full
-     grid would crush the Player column, so the stat columns shrink to fit
-     their values, Matches and Wins share one "5M/4W" column, and header
-     labels wrap. Every row stays on one line; only a long player name wraps.
+     grid would crush the name column, so the stat columns shrink to fit
+     their values, Matches and Wins share one "5M/4W" column (on the quartet
+     the averages share one "3.5G/7.0H" column too), and header labels wrap. Every row stays on one line; only a long player name wraps.
      Queried on the standings box itself, not the viewport, because the
      sidebar changes its width. */
   .standings {
@@ -806,8 +930,9 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
   @container standings (max-width: 44rem) {
     .standings__head,
     .standing__summary {
-      /* Rank · Player · Score · Matches/Wins · Win rate · Opponents · marker */
-      grid-template-columns: 1.75rem minmax(0, 1fr) 2.75rem 3.75rem 2.5rem 2.25rem 0.6rem;
+      /* Rank · Name · Score · Matches/Wins · Win rate · Opponents or
+         Gens/Hooks · marker; set per format on the element. */
+      grid-template-columns: var(--standings-columns-narrow);
       gap: 0.25rem;
       padding-inline: 0.5rem;
     }
@@ -845,6 +970,9 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
     .standing__matches th,
     .standing__matches td {
       padding-inline: 0.35rem;
+    }
+    .standing__matches th {
+      white-space: normal;
     }
     .encounter {
       display: block;
