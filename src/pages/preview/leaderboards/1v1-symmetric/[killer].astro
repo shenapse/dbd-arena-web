@@ -47,7 +47,7 @@ const title = copy.title ?? publication.label;
 >
   <KillerBanner slug={entry.slug} />
 
-  <LeaderboardSwitcher entries={symmetricLeaderboards.entries} current={entry.slug} />
+  <LeaderboardSwitcher group={symmetricLeaderboards} current={entry.slug} />
 
   <Aside type="caution" title="Fictional sample data">
     This preview renders a sample ranking snapshot in <code>docs/ref/examples/</code>.

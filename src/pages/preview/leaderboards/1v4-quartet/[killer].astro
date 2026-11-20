@@ -1,0 +1,72 @@
+---
+// One 1v4 quartet leaderboard per killer with a published snapshot, at
+// /preview/leaderboards/1v4-quartet/<scope value ID>/. Each page has two
+// boards: killer players, and survivor parties of four (evidence §3.6).
+// Unlisted (UX structure §5); the killer strip and the umbrella link at the
+// foot of the page connect the pages.
+import type { GetStaticPaths } from 'astro';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { Aside } from '@astrojs/starlight/components';
+import KillerBanner from '@components/KillerBanner.astro';
+import LeaderboardSwitcher from '@components/LeaderboardSwitcher.astro';
+import RankingLeaderboard from '@components/RankingLeaderboard.astro';
+import {
+  QUARTET_LEADERBOARDS_PATH,
+  UNLISTED_PREVIEW,
+  quartetLeaderboards,
+  type PublicationEntry,
+} from '../../../../lib/ranking/publications';
+
+export const getStaticPaths = (() =>
+  quartetLeaderboards.entries.map((entry) => ({ params: { killer: entry.slug }, props: { entry } }))) satisfies GetStaticPaths;
+
+interface Props {
+  entry: PublicationEntry;
+}
+
+const { entry } = Astro.props;
+const { publication } = entry.view.snapshot;
+const hasStandings = entry.view.boards.some((b) => b.standings.length > 0);
+// Website copy, one sentence per board (killer board, then survivor board):
+// edit these independently of snapshot descriptions.
+const boardIntroduction = [
+  `This season’s top killers playing ${entry.label} in 1v4 quartet matches.`,
+  `This season’s top survivor parties of four against ${entry.label} in 1v4 quartet matches.`,
+];
+// Optional website copy. The snapshot's labels are written for whoever
+// maintains the ranking, not for readers; a field left unset falls back to
+// the snapshot's label.
+const copy: { title?: string; competition?: string; season?: string } = {
+  title: `${entry.label} 1v4 Quartet Leaderboard`,
+  competition: 'DbD Arena 1v4 Quartet',
+};
+const title = copy.title ?? publication.label;
+---
+
+<StarlightPage
+  frontmatter={{
+    title,
+    description: publication.description,
+    ...UNLISTED_PREVIEW,
+  }}
+>
+  <KillerBanner slug={entry.slug} />
+
+  <LeaderboardSwitcher group={quartetLeaderboards} current={entry.slug} />
+
+  <Aside type="caution" title="Fictional sample data">
+    This preview renders a sample ranking snapshot in <code>docs/ref/examples/</code>.
+    Players, parties, matches, and scores are made up, and the scores were written by hand
+    rather than calculated.
+    {hasStandings && 'Select a killer or survivor party to see the matches behind their standing.'}
+  </Aside>
+
+  <RankingLeaderboard
+    view={entry.view}
+    boardIntroduction={boardIntroduction}
+    competition={copy.competition}
+    season={copy.season}
+  />
+
+  <p><a href={QUARTET_LEADERBOARDS_PATH}>← All 1v4 quartet leaderboards</a></p>
+</StarlightPage>

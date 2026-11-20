@@ -1,22 +1,33 @@
-// Registry of the symmetric 1v1 leaderboards shown under
-// /preview/leaderboards/1v1-symmetric/.
+// Registry of the per-killer leaderboards shown under /preview/leaderboards/.
 //
-// Every fixture named ranking-snapshot-dbd-1v1-symmetric*.json in
-// docs/ref/examples/ is one publication: one killer's leaderboard (evidence
-// §3.1: the scope is exactly one killer selection). Adding a fixture adds a
-// killer to the umbrella page and the killer switcher; no website catalog is
-// involved. Killers without a snapshot are simply absent.
+// Each game mode is one publication group with an umbrella page and one page
+// per killer:
+//   - /preview/leaderboards/1v1-symmetric/ from the fixtures named
+//     ranking-snapshot-dbd-1v1-symmetric*.json, and
+//   - /preview/leaderboards/1v4-quartet/ from those named
+//     ranking-snapshot-dbd-1v4-quartet*.json,
+// all in docs/ref/examples/. Every fixture is one publication: one killer's
+// leaderboard (both evidence contracts, §3.1: the scope is exactly one killer
+// selection). Adding a fixture adds a killer to its umbrella page and killer
+// switcher; no website catalog is involved. Killers without a snapshot are
+// simply absent.
 //
-// The publications must agree on deployment and competition, because the
-// umbrella page presents them as one competition. Anything else fails the
-// build.
+// The publications of one group must agree on deployment and competition,
+// because the umbrella page presents them as one competition. Anything else
+// fails the build.
 
 import { fail, loadLeaderboard, type LeaderboardView, type PublicDefinition, type RankingSnapshot } from './snapshot';
 
 export const SYMMETRIC_LEADERBOARDS_PATH = '/preview/leaderboards/1v1-symmetric/';
+export const QUARTET_LEADERBOARDS_PATH = '/preview/leaderboards/1v4-quartet/';
 
-const fixtures = import.meta.glob<RankingSnapshot>(
+// import.meta.glob needs literal patterns, so each group has its own call.
+const symmetricFixtures = import.meta.glob<RankingSnapshot>(
   '../../../docs/ref/examples/ranking-snapshot-dbd-1v1-symmetric*.json',
+  { eager: true, import: 'default' },
+);
+const quartetFixtures = import.meta.glob<RankingSnapshot>(
+  '../../../docs/ref/examples/ranking-snapshot-dbd-1v4-quartet*.json',
   { eager: true, import: 'default' },
 );
 
@@ -30,6 +41,8 @@ export interface PublicationEntry {
 }
 
 export interface PublicationGroup {
+  /** Umbrella page of the group. */
+  href: string;
   competition: PublicDefinition;
   entries: PublicationEntry[];
 }
@@ -38,9 +51,9 @@ export interface PublicationGroup {
 // need escaping instead of inventing a slug from it.
 const URL_SAFE_ID = /^[a-z0-9][a-z0-9-]*$/;
 
-function buildGroup(): PublicationGroup {
+function buildGroup(fixtures: Record<string, RankingSnapshot>, basePath: string, what: string): PublicationGroup {
   const snapshots = Object.values(fixtures);
-  if (snapshots.length === 0) fail('no ranking-snapshot-dbd-1v1-symmetric*.json fixtures found');
+  if (snapshots.length === 0) fail(`no ${what} fixtures found`);
 
   const [first] = snapshots;
   const competition = first.publication.competition;
@@ -68,16 +81,26 @@ function buildGroup(): PublicationGroup {
     return {
       slug: value.id,
       label: value.label,
-      href: `${SYMMETRIC_LEADERBOARDS_PATH}${value.id}/`,
+      href: `${basePath}${value.id}/`,
       view: loadLeaderboard(snapshot),
     };
   });
 
   entries.sort((a, b) => a.label.localeCompare(b.label, 'en'));
-  return { competition, entries };
+  return { href: basePath, competition, entries };
 }
 
-export const symmetricLeaderboards: PublicationGroup = buildGroup();
+export const symmetricLeaderboards: PublicationGroup = buildGroup(
+  symmetricFixtures,
+  SYMMETRIC_LEADERBOARDS_PATH,
+  'ranking-snapshot-dbd-1v1-symmetric*.json',
+);
+
+export const quartetLeaderboards: PublicationGroup = buildGroup(
+  quartetFixtures,
+  QUARTET_LEADERBOARDS_PATH,
+  'ranking-snapshot-dbd-1v4-quartet*.json',
+);
 
 /** Frontmatter shared by the unlisted preview pages (UX structure §5). */
 export const UNLISTED_PREVIEW = {

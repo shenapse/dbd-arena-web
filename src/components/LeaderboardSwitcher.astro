@@ -1,29 +1,30 @@
 ---
-// Killer tab strip for the per-killer symmetric 1v1 leaderboards. Each pill
+// Killer tab strip for the per-killer leaderboards of one game mode. Each pill
 // is a plain link to another killer's leaderboard, so switching works without
 // JavaScript; the current killer is marked with aria-current. Pills wrap
 // rather than scroll so every killer stays visible on narrow screens.
 //
-// The first pill, "All killers", leads to the umbrella page. It sits in the
+// The first pill, "All killers", leads to the game mode's umbrella page. It sits in the
 // strip rather than above it so readers find it where they already look to
 // switch killers.
 //
 // Leaderboards stay out of the sidebar (UX structure §5), so this strip is
 // the way between them.
-import { SYMMETRIC_LEADERBOARDS_PATH, type PublicationEntry } from '../lib/ranking/publications';
+import type { PublicationGroup } from '../lib/ranking/publications';
 
 interface Props {
-  entries: PublicationEntry[];
+  group: PublicationGroup;
   current: string;
 }
 
-const { entries, current } = Astro.props;
+const { group, current } = Astro.props;
+const { entries } = group;
 ---
 
 <nav class="lb-switcher not-content" aria-label="Killer leaderboards">
   <ul class="lb-switcher__list">
     <li class="lb-switcher__all">
-      <a class="lb-switcher__pill" href={SYMMETRIC_LEADERBOARDS_PATH}>All killers</a>
+      <a class="lb-switcher__pill" href={group.href}>All killers</a>
     </li>
     {entries.map(({ slug, label, href }) => (
       <li>

@@ -262,6 +262,31 @@ test.describe('several boards on one page', () => {
   });
 });
 
+// The sample 1v4 quartet snapshot (docs/ref/examples/): board 1 ranks killers,
+// board 2 survivor parties, and each is the other's opponents.
+test.describe('the 1v4 quartet leaderboard', () => {
+  const NURSE = '/preview/leaderboards/1v4-quartet/nurse/';
+
+  test('an opponent link crosses to the other board and opens the row', async ({ page }) => {
+    await page.goto(NURSE);
+    const hush = page.locator('#standing-1-1');
+    await hush.locator('summary').click();
+    await hush.getByRole('link', { name: 'Team Fog' }).first().click();
+    expect(new URL(page.url()).hash).toBe('#standing-2-1');
+    await expect(page.locator('#standing-2-1 details')).toHaveAttribute('open', '');
+    await expect(page.locator('#standing-2-1').getByText('Aster, Jun, Lark, Ren')).toBeVisible();
+  });
+
+  test('a survivor party is found by a member and counted as a party', async ({ page }) => {
+    await page.goto(NURSE);
+    const c = controls(page, 1);
+    await expect(c.status).toHaveText('3 survivor parties');
+    await c.search.fill('aster');
+    expect(await shownRows(c.board)).toEqual(['standing-2-1']);
+    await expect(c.status).toHaveText('1 survivor party matches “aster”');
+  });
+});
+
 test.describe('without JavaScript', () => {
   test.use({ javaScriptEnabled: false });
 
