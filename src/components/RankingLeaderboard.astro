@@ -664,7 +664,8 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
     background: var(--sl-color-gray-6);
   }
 
-  /* Cell labels are for screen readers on wide screens and visible on narrow ones. */
+  /* Cell labels are for screen readers only; the header row names the columns
+     on screen (it is aria-hidden, so the labels are what screen readers hear). */
   .cell-label {
     position: absolute;
     width: 1px;
@@ -764,7 +765,7 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
     color: var(--sl-color-gray-3);
   }
 
-  /* ---- Narrow screens: rank + name on top, stats as labelled chips ---- */
+  /* ---- Narrow screens: rank + name on top, a strip of stats below ---- */
   /* Narrow page: the shared meta-grid sizes its label column to the longest
      label, which is wider than a phone here. Stack label over value. */
   @media (max-width: 40rem) {
@@ -779,17 +780,30 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
 
   /* Narrow standings (phones, or a tablet with the sidebar open): the full
      grid would crush the Player column, so each row becomes rank + name on
-     top and an evenly divided strip of stats below. Queried on the standings
-     box itself, not the viewport, because the sidebar changes its width. */
+     top and an evenly divided strip of stats below. The header keeps only the
+     stat names, on the same columns as that strip, so each row shows bare
+     values that line up for comparison. Queried on the standings box itself,
+     not the viewport, because the sidebar changes its width. */
   .standings {
     container: standings / inline-size;
   }
   @container standings (max-width: 44rem) {
+    .standings__head,
+    .standing__summary {
+      grid-template-columns: repeat(var(--standings-stat-count), minmax(0, 1fr));
+    }
     .standings__head {
+      align-items: end;
+      text-transform: none;
+      letter-spacing: normal;
+    }
+    .standings__head > span {
+      white-space: normal;
+    }
+    .standings__head > span:not(.num) {
       display: none;
     }
     .standing__summary {
-      grid-template-columns: repeat(var(--standings-stat-count), minmax(0, 1fr));
       gap: 0.6rem 0.25rem;
     }
     .standing__rank {
@@ -805,22 +819,6 @@ const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
     }
     .standing__summary > .num {
       grid-row: 2;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 0.1rem;
-    }
-    .cell-label {
-      position: static;
-      width: auto;
-      height: auto;
-      clip: auto;
-      white-space: normal;
-      text-align: center;
-      font-size: var(--sl-text-xs);
-      color: var(--sl-color-gray-2);
-      font-weight: 400;
     }
     .standing__detail {
       padding-inline: 0.6rem;
