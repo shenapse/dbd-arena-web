@@ -1,0 +1,295 @@
+{
+  "schema_version": "1.1",
+  "deployment_id": "ranking-demo",
+  "generated_at": "2026-11-20T18:00:00+09:00",
+  "publication": {
+    "publication_id": "pub-2d6b",
+    "label": "The Nurse · 1v4 Quartet Rankings",
+    "description": "Fictional sample data for reviewing Dead by Daylight 1v4 quartet leaderboards. All included matches use The Nurse.",
+    "competition": {
+      "id": "comp-5a1c",
+      "label": "Dead by Daylight · 1v4 Quartet",
+      "description": "One killer player faces a survivor party that queues together as a group of four players. Each survivor party competes as one ranked unit. Matches can end in a killer win, a survivor win, or a draw."
+    },
+    "scope": [
+      {
+        "category": {
+          "id": "killer",
+          "label": "Killer",
+          "description": "Killer character used by the killer side in every included match."
+        },
+        "value": {
+          "id": "nurse",
+          "label": "The Nurse",
+          "description": "The killer side played The Nurse."
+        }
+      }
+    ]
+  },
+  "season": {
+    "season_id": "season-6b2d",
+    "label": "Autumn 2026",
+    "starts_at": "2026-10-01T00:00:00+09:00",
+    "ends_at": "2027-01-01T00:00:00+09:00"
+  },
+  "methodology_description": "Ranking scores describe current-season competitive performance among units eligible when this snapshot is generated. Entry ratings determine eligibility and do not directly contribute to ranking scores. Killers and survivor parties have separate boards; each survivor party counts as one ranked unit and one opponent. In this illustrative publication, all encounters between the same killer player and survivor party share a total calculation weight capped at one match-equivalent, divided equally among their encounters. Every encounter remains in match totals and evidence. Scores are hand-authored for this fictional preview, not calculated by a ranking model.",
+  "boards": [
+    {
+      "board_id": "board-4a8c",
+      "label": "Killer rankings",
+      "description": "Eligible individual players competing as The Nurse against survivor parties this season.",
+      "score_definition": {
+        "label": "Ranking score",
+        "description": "Illustrative integer points: higher scores rank ahead within this board, and equal scores share a rank. Points are not a win percentage or an entry rating. Compare scores only within this board and snapshot; no comparison with the survivor board, other killers, seasons, or refreshes is supported."
+      },
+      "eligibility": {
+        "rating": {
+          "id": "nurse-killer-entry-rating",
+          "label": "The Nurse killer entry rating",
+          "description": "Individual killer entry rating for playing The Nurse in 1v4 quartet. This fictional preview uses a 0–3000 point scale where higher values indicate stronger performance. Individual entry ratings are not published."
+        },
+        "minimum_rating_value": 1200,
+        "minimum_eligible_match_count": 3,
+        "description": "At generation time, killer players need a Nurse killer entry rating of at least 1200 points and at least three current-season matches against survivor parties in the calculation-time eligible pool. Repeat encounters count toward participation. Eligibility is reevaluated on every refresh, even without new matches. These thresholds are illustrative."
+      },
+      "rows": [
+        {
+          "rank": 1,
+          "profile_id": "p-7a3e",
+          "display_score": 1500,
+          "eligible_match_count": 4,
+          "result_counts": { "wins": 2, "losses": 1, "draws": 1 },
+          "opponent_count": 3,
+          "included_match_ids": ["q-01", "q-02", "q-03", "q-04"]
+        },
+        {
+          "rank": 2,
+          "profile_id": "p-5c8b",
+          "display_score": 1300,
+          "eligible_match_count": 3,
+          "result_counts": { "wins": 1, "losses": 1, "draws": 1 },
+          "opponent_count": 3,
+          "included_match_ids": ["q-05", "q-06", "q-07"]
+        },
+        {
+          "rank": 3,
+          "profile_id": "p-3d6f",
+          "display_score": 1100,
+          "eligible_match_count": 3,
+          "result_counts": { "wins": 0, "losses": 2, "draws": 1 },
+          "opponent_count": 3,
+          "included_match_ids": ["q-08", "q-09", "q-10"]
+        }
+      ]
+    },
+    {
+      "board_id": "board-9c5e",
+      "label": "Survivor party rankings",
+      "description": "Eligible parties that queue as four survivors and compete together against The Nurse this season. Each row ranks a whole party.",
+      "score_definition": {
+        "label": "Ranking score",
+        "description": "Illustrative integer points: higher scores rank ahead within this board, and equal scores share a rank. Points are not a win percentage or an entry rating. Compare scores only within this board and snapshot; no comparison with the killer board, other killers, seasons, or refreshes is supported."
+      },
+      "eligibility": {
+        "rating": {
+          "id": "nurse-survivor-entry-rating",
+          "label": "The Nurse survivor party entry rating",
+          "description": "Group entry rating for a survivor party facing The Nurse in 1v4 quartet. This fictional preview uses a 0–3000 point scale where higher values indicate stronger performance. Individual party entry ratings are not published."
+        },
+        "minimum_rating_value": 1200,
+        "minimum_eligible_match_count": 3,
+        "description": "At generation time, survivor parties need a Nurse survivor party entry rating of at least 1200 points and at least three current-season matches against killer players in the calculation-time eligible pool. Repeat encounters count toward participation. Eligibility is reevaluated on every refresh, even without new matches. These thresholds are illustrative."
+      },
+      "rows": [
+        {
+          "rank": 1,
+          "profile_id": "g-8b4a",
+          "display_score": 1520,
+          "eligible_match_count": 4,
+          "result_counts": { "wins": 3, "losses": 1, "draws": 0 },
+          "opponent_count": 3,
+          "included_match_ids": ["q-01", "q-02", "q-05", "q-08"]
+        },
+        {
+          "rank": 2,
+          "profile_id": "g-2e7c",
+          "display_score": 1280,
+          "eligible_match_count": 3,
+          "result_counts": { "wins": 1, "losses": 1, "draws": 1 },
+          "opponent_count": 3,
+          "included_match_ids": ["q-03", "q-06", "q-09"]
+        },
+        {
+          "rank": 3,
+          "profile_id": "g-6f1d",
+          "display_score": 1050,
+          "eligible_match_count": 3,
+          "result_counts": { "wins": 0, "losses": 1, "draws": 2 },
+          "opponent_count": 3,
+          "included_match_ids": ["q-04", "q-07", "q-10"]
+        }
+      ]
+    }
+  ],
+  "profiles": [
+    { "profile_id": "p-7a3e", "kind": "participant", "display_name": "Hush", "group_members": null },
+    { "profile_id": "p-5c8b", "kind": "participant", "display_name": "薄明", "group_members": null },
+    { "profile_id": "p-3d6f", "kind": "participant", "display_name": "Wisp", "group_members": null },
+    {
+      "profile_id": "g-8b4a",
+      "kind": "group",
+      "display_name": "Team Fog",
+      "group_members": [
+        { "profile_id": "p-1a4b", "display_name": "Aster" },
+        { "profile_id": "p-2b5c", "display_name": "Jun" },
+        { "profile_id": "p-3c6d", "display_name": "Lark" },
+        { "profile_id": "p-4d7e", "display_name": "Ren" }
+      ]
+    },
+    {
+      "profile_id": "g-2e7c",
+      "kind": "group",
+      "display_name": "夜明けの四人",
+      "group_members": [
+        { "profile_id": "p-5e8f", "display_name": "葵" },
+        { "profile_id": "p-6f9a", "display_name": "Sora" },
+        { "profile_id": "p-7b1c", "display_name": "Nagi" },
+        { "profile_id": "p-8c2d", "display_name": "Yuki" }
+      ]
+    },
+    {
+      "profile_id": "g-6f1d",
+      "kind": "group",
+      "display_name": "Four Lanterns at the Exit Gate",
+      "group_members": [
+        { "profile_id": "p-9d3e", "display_name": "Pip" },
+        { "profile_id": "p-1e5f", "display_name": "Vale" },
+        { "profile_id": "p-2f6a", "display_name": "Ash" },
+        { "profile_id": "p-3a7b", "display_name": "Reed" }
+      ]
+    }
+  ],
+  "result_metrics": [
+    { "id": "wins", "label": "Wins", "description": "Included matches this killer player's or survivor party's side won." },
+    { "id": "losses", "label": "Losses", "description": "Included matches the opposing side won." },
+    { "id": "draws", "label": "Draws", "description": "Included matches that ended with neither side winning." }
+  ],
+  "public_outcomes": [
+    { "id": "decided", "label": "Decided", "description": "One side won. public_facts.winner_side_id identifies the winning side." },
+    { "id": "draw", "label": "Draw", "description": "Neither side won. public_facts.winner_side_id is null." }
+  ],
+  "side_definitions": [
+    { "id": "killer", "label": "Killer", "description": "One player using The Nurse." },
+    { "id": "survivors", "label": "Survivors", "description": "One party that queues together as four survivor players and competes as a single ranked unit." }
+  ],
+  "role_definitions": [],
+  "public_facts_schema": {
+    "schema_id": "dbd-1v4-quartet-match",
+    "schema_version": "1.0",
+    "schema_path": "../schemas/dbd-1v4-quartet-match-1.0.schema.json",
+    "documentation_path": "../ranking-evidence-dbd-1v4-quartet.md",
+    "description": "Winning side or draw, generators remaining, hooks, and kills for a 1v4 quartet match. The killer character comes from publication scope. Published group members describe the generation-time roster, not a historical match lineup."
+  },
+  "included_matches": [
+    {
+      "match_id": "q-01",
+      "played_at": "2026-10-04T20:15:00+09:00",
+      "sides": [
+        { "side_id": "killer", "participants": [{ "profile_id": "p-7a3e", "role_ids": [] }] },
+        { "side_id": "survivors", "participants": [{ "profile_id": "g-8b4a", "role_ids": [] }] }
+      ],
+      "outcome_id": "decided",
+      "public_facts": { "winner_side_id": "killer", "generators_remaining": 2, "hooks": 12, "kills": 4 }
+    },
+    {
+      "match_id": "q-02",
+      "played_at": "2026-10-06T21:40:00+09:00",
+      "sides": [
+        { "side_id": "killer", "participants": [{ "profile_id": "p-7a3e", "role_ids": [] }] },
+        { "side_id": "survivors", "participants": [{ "profile_id": "g-8b4a", "role_ids": [] }] }
+      ],
+      "outcome_id": "decided",
+      "public_facts": { "winner_side_id": "survivors", "generators_remaining": 0, "hooks": 4, "kills": 1 }
+    },
+    {
+      "match_id": "q-03",
+      "played_at": "2026-10-11T19:05:00+09:00",
+      "sides": [
+        { "side_id": "killer", "participants": [{ "profile_id": "p-7a3e", "role_ids": [] }] },
+        { "side_id": "survivors", "participants": [{ "profile_id": "g-2e7c", "role_ids": [] }] }
+      ],
+      "outcome_id": "decided",
+      "public_facts": { "winner_side_id": "killer", "generators_remaining": 0, "hooks": 10, "kills": 3 }
+    },
+    {
+      "match_id": "q-04",
+      "played_at": "2026-10-18T22:30:00+09:00",
+      "sides": [
+        { "side_id": "killer", "participants": [{ "profile_id": "p-7a3e", "role_ids": [] }] },
+        { "side_id": "survivors", "participants": [{ "profile_id": "g-6f1d", "role_ids": [] }] }
+      ],
+      "outcome_id": "draw",
+      "public_facts": { "winner_side_id": null, "generators_remaining": 0, "hooks": 7, "kills": 2 }
+    },
+    {
+      "match_id": "q-05",
+      "played_at": "2026-10-25T20:00:00+09:00",
+      "sides": [
+        { "side_id": "killer", "participants": [{ "profile_id": "p-5c8b", "role_ids": [] }] },
+        { "side_id": "survivors", "participants": [{ "profile_id": "g-8b4a", "role_ids": [] }] }
+      ],
+      "outcome_id": "decided",
+      "public_facts": { "winner_side_id": "survivors", "generators_remaining": 0, "hooks": 0, "kills": 0 }
+    },
+    {
+      "match_id": "q-06",
+      "played_at": "2026-11-01T21:10:00+09:00",
+      "sides": [
+        { "side_id": "killer", "participants": [{ "profile_id": "p-5c8b", "role_ids": [] }] },
+        { "side_id": "survivors", "participants": [{ "profile_id": "g-2e7c", "role_ids": [] }] }
+      ],
+      "outcome_id": "draw",
+      "public_facts": { "winner_side_id": null, "generators_remaining": 0, "hooks": 6, "kills": 2 }
+    },
+    {
+      "match_id": "q-07",
+      "played_at": "2026-11-08T20:50:00+09:00",
+      "sides": [
+        { "side_id": "killer", "participants": [{ "profile_id": "p-5c8b", "role_ids": [] }] },
+        { "side_id": "survivors", "participants": [{ "profile_id": "g-6f1d", "role_ids": [] }] }
+      ],
+      "outcome_id": "decided",
+      "public_facts": { "winner_side_id": "killer", "generators_remaining": 5, "hooks": 12, "kills": 4 }
+    },
+    {
+      "match_id": "q-08",
+      "played_at": "2026-11-10T22:05:00+09:00",
+      "sides": [
+        { "side_id": "killer", "participants": [{ "profile_id": "p-3d6f", "role_ids": [] }] },
+        { "side_id": "survivors", "participants": [{ "profile_id": "g-8b4a", "role_ids": [] }] }
+      ],
+      "outcome_id": "decided",
+      "public_facts": { "winner_side_id": "survivors", "generators_remaining": 0, "hooks": 3, "kills": 1 }
+    },
+    {
+      "match_id": "q-09",
+      "played_at": null,
+      "sides": [
+        { "side_id": "killer", "participants": [{ "profile_id": "p-3d6f", "role_ids": [] }] },
+        { "side_id": "survivors", "participants": [{ "profile_id": "g-2e7c", "role_ids": [] }] }
+      ],
+      "outcome_id": "decided",
+      "public_facts": { "winner_side_id": "survivors", "generators_remaining": 0, "hooks": 2, "kills": 0 }
+    },
+    {
+      "match_id": "q-10",
+      "played_at": "2026-11-19T20:35:00+09:00",
+      "sides": [
+        { "side_id": "killer", "participants": [{ "profile_id": "p-3d6f", "role_ids": [] }] },
+        { "side_id": "survivors", "participants": [{ "profile_id": "g-6f1d", "role_ids": [] }] }
+      ],
+      "outcome_id": "draw",
+      "public_facts": { "winner_side_id": null, "generators_remaining": 0, "hooks": 8, "kills": 2 }
+    }
+  ]
+}

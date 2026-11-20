@@ -35,6 +35,24 @@ and match IDs, and players keep their profile IDs across killers.
 | [ranking-snapshot-dbd-1v1-symmetric-doctor.json](ranking-snapshot-dbd-1v1-symmetric-doctor.json) | A tie for first place (the next rank is third), a player who appears only on this board, and a zero-win player with more than the minimum matches. |
 | [ranking-snapshot-dbd-1v1-symmetric-nightmare.json](ranking-snapshot-dbd-1v1-symmetric-nightmare.json) | No eligible players yet: the board has no rows, and the snapshot has no profiles or included matches. |
 
+## 1v4 quartet snapshot
+
+[ranking-snapshot-dbd-1v4-quartet.json](ranking-snapshot-dbd-1v4-quartet.json)
+is a fictional Nurse publication for the 1v4 quartet umbrella page and its
+per-killer leaderboard. It follows the
+[1v4 quartet evidence contract](../ranking-evidence-dbd-1v4-quartet.md): a
+killer board of three players and a survivor board of three parties of four,
+who face each other across ten matches.
+
+| Review case | What the fixture makes visible |
+|---|---|
+| Two opposed boards | Killers and parties rank separately; each match appears on one row of each board, read from that row's side. |
+| Draws | Three matches are draws, so wins, losses and draws all appear and the win rate counts draws as not won. |
+| Match facts | Generators remaining run from 0 to 5 and hooks from 0 to 12, giving generators completed and hook stages per match. |
+| Repeat opponents | Hush meets Team Fog twice and splits the results. |
+| Match dates | `q-09` (Wisp versus 夜明けの四人) has no time (`null`). |
+| Group profiles | Each party publishes its four members; a Japanese party name and a long English one exercise wrapping. |
+
 ## Limits
 
 The Trapper snapshot supports a substantive single-page review with a standings table,
