@@ -254,6 +254,12 @@ function withAliases(name: string, aliases?: string[]): string {
   return aliases && aliases.length ? `${name} (${aliases.join(', ')})` : name;
 }
 
+/** `"<English> (<localized>)"`, `"<localized>"` with `localizedOnly`, or English when untranslated. */
+function format(english: string, t: LocalizedName | undefined, opts?: LocalizeOpts): string {
+  if (!t) return english;
+  return opts?.localizedOnly ? t.name : `${english} (${t.name})`;
+}
+
 /** Disambiguation context needed to resolve an English name to a registry slug. */
 export interface LocalizeOpts {
   /** Perk aliases (from perks.json), rendered in the always-on English cluster. */
@@ -262,6 +268,12 @@ export interface LocalizeOpts {
   killer?: string;
   /** Item namespace — type/variant/addon names live in separate slug namespaces. */
   kind?: 'type' | 'variant' | 'addon';
+  /**
+   * Non-perk domains only: render the localized name alone (`"アーティスト"`)
+   * instead of `"<English> (<localized>)"`. Falls back to English when no
+   * translation exists. For compact displays such as the overview cards.
+   */
+  localizedOnly?: boolean;
 }
 
 /**
@@ -283,7 +295,7 @@ export interface LocalizeOpts {
  *   exists, else the English name unchanged. Resolving the slug requires
  *   `opts.killer` (addon) or `opts.kind` (item); maps and offerings resolve
  *   directly by name (a killer also matches its aliases, so "Dracula" finds The Dark Lord). Without the required opt, no slug can be resolved and
- *   the English name renders unchanged.
+ *   the English name renders unchanged. *   With `opts.localizedOnly`, these render just `"<localized>"` instead.
  */
 export function localizeName(
   english: string,
@@ -305,29 +317,29 @@ export function localizeName(
       ? addonInverse.get(normalize(opts.killer) + SEP + normalize(english))
       : undefined;
     const t = slug ? table?.addon.get(slug) : undefined;
-    return t ? `${english} (${t.name})` : english;
+    return format(english, t, opts);
   }
 
   if (domain === 'map') {
     const slug = mapInverse.get(normalize(english));
     const t = slug ? table?.map.get(slug) : undefined;
-    return t ? `${english} (${t.name})` : english;
+    return format(english, t, opts);
   }
 
   if (domain === 'offering') {
     const slug = offeringInverse.get(normalize(english));
     const t = slug ? table?.offering.get(slug) : undefined;
-    return t ? `${english} (${t.name})` : english;
+    return format(english, t, opts);
   }
 
   if (domain === 'killer') {
     const slug = killerInverse.get(normalize(english));
     const t = slug ? table?.killer.get(slug) : undefined;
-    return t ? `${english} (${t.name})` : english;
+    return format(english, t, opts);
   }
 
   // domain === 'item'
   const slug = opts?.kind ? itemInverse.get(opts.kind + SEP + normalize(english)) : undefined;
   const t = slug ? table?.item.get(slug) : undefined;
-  return t ? `${english} (${t.name})` : english;
+  return format(english, t, opts);
 }

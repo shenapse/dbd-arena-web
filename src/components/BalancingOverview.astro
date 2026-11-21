@@ -12,6 +12,9 @@
 // `-conditions.yaml` is read via `tryLoadMatchConditions` (the same
 // fs/resolveMap/localizeName pipeline MatchConditions.astro uses for a single
 // killer's page) and its map/win/draw are resolved + localized for display.
+// On non-English pages the killer and map names show the localized name alone
+// ("アーティスト"), not the bilingual "Artist (アーティスト)" used elsewhere, to
+// keep the single-line card text short.
 // A row with no `conditions:` (or one naming a file that doesn't exist yet,
 // e.g. a killer whose balancing page hasn't been authored) shows only name and
 // status rather than failing the build; only a missing/misspelled `format` or
@@ -100,7 +103,7 @@ const rows: DisplayRow[] = doc.killers.map((entry) => {
         c.map,
         `BalancingOverview (format: "${format}", killer: "${entry.conditions}")`
       );
-      map = localizeName(mapEntry.name, locale, 'map');
+      map = localizeName(mapEntry.name, locale, 'map', { localizedOnly: true });
       if (c.winCondition !== undefined) {
         win = describeConditionStats(c.winCondition, t, 'matchConditions.relativeWin');
       }
@@ -117,7 +120,7 @@ const rows: DisplayRow[] = doc.killers.map((entry) => {
   return {
     entry,
     id,
-    name: localizeName(entry.name, locale, 'killer'),
+    name: localizeName(entry.name, locale, 'killer', { localizedOnly: true }),
     map,
     win,
     draw,
