@@ -143,17 +143,19 @@ const rows: DisplayRow[] = doc.killers.map((entry) => {
           )}
         </div>
         <div class="bo-card__body">
-          <h3 id={id} class="bo-card__title">
-            {href ? <a class="bo-card__link" href={href}>{name}</a> : name}
-          </h3>
-          <StatusBadge status={entry.status as 'active' | 'upcoming' | 'archived' | 'provisional'} />
+          <div class="bo-card__head">
+            <h3 id={id} class="bo-card__title" title={name}>
+              {href ? <a class="bo-card__link" href={href}>{name}</a> : name}
+            </h3>
+            <StatusBadge status={entry.status as 'active' | 'upcoming' | 'archived' | 'provisional'} />
+          </div>
           {shown.length > 0 && (
             <dl class="bo-card__facts">
               {shown.map(([label, value]) => (
-                <>
+                <div class="bo-card__fact">
                   <dt>{label}</dt>
-                  <dd>{value}</dd>
-                </>
+                  <dd title={value}>{value}</dd>
+                </div>
               ))}
             </dl>
           )}
@@ -166,12 +168,13 @@ const rows: DisplayRow[] = doc.killers.map((entry) => {
 <style>
   .bo-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr));
     gap: 0.75rem;
     margin-top: 1rem;
   }
   .bo-card {
     position: relative;
+    container: bo-card / inline-size;
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
@@ -198,6 +201,12 @@ const rows: DisplayRow[] = doc.killers.map((entry) => {
     overflow: hidden;
     border-radius: 0.5rem 0 0 0.5rem;
   }
+  /* Narrow cards (phones) give the text more room so it stays on one line. */
+  @container bo-card (max-width: 24rem) {
+    .bo-card__portrait {
+      width: 4.5rem;
+    }
+  }
   .bo-card__portrait img {
     position: absolute;
     inset: 0;
@@ -212,11 +221,29 @@ const rows: DisplayRow[] = doc.killers.map((entry) => {
     flex: 1;
     min-width: 0;
   }
+  /* Name on the left, status badge on the right, one row. Every text line in
+     the card stays on a single line; anything too long for the card is cut
+     with an ellipsis and its full text is in the element's title tooltip. */
+  .bo-card__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .bo-card__head :global(.status-badge) {
+    flex: none;
+    white-space: nowrap;
+  }
   .bo-card__title {
-    margin: 0 0 0.25rem;
+    flex: 1;
+    min-width: 0;
+    margin: 0;
     font-size: var(--sl-text-lg);
     line-height: var(--sl-line-height-headings);
     color: var(--sl-color-white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .bo-card__link {
     color: var(--sl-color-white);
@@ -237,12 +264,21 @@ const rows: DisplayRow[] = doc.killers.map((entry) => {
     outline: 2px solid var(--sl-color-accent);
     outline-offset: 2px;
   }
+  /* Each fact is its label above its value. */
   .bo-card__facts {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.2rem 0.75rem;
-    align-items: baseline;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
     margin: 0.5rem 0 0;
+  }
+  .bo-card__fact {
+    min-width: 0;
+  }
+  .bo-card__facts dt,
+  .bo-card__facts dd {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .bo-card__facts dt {
     color: var(--sl-color-gray-3);
@@ -253,6 +289,5 @@ const rows: DisplayRow[] = doc.killers.map((entry) => {
   .bo-card__facts dd {
     margin: 0;
     color: var(--sl-color-white);
-    overflow-wrap: anywhere;
   }
 </style>
