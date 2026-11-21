@@ -1,7 +1,7 @@
 # Perk allow-list example: The Blight
 
 killer: The Blight
-balancing: DBD Arena - 1v4 Quartet Rank v0.1
+balancing: DBD Arena - 1v4 Quartet Rank v1.1
 # universe is optional; defaults to every perk in dbdperks.json for each side.
 # universe:
 #   killer: all
@@ -43,13 +43,13 @@ survivorPerks:
   allow:                 # Then allow these specific perks and groups
     - Balanced Landing
     - Bite the Bullet
-    - Boil Over
     - Bond
     - Botany Knowledge
     - Champion of Light
     - Chemical Trap
     - Dead Hard
     - Decisive Strike
+    - Dejavu
     - Deliverance
     - Desperate Measures
     - Detective's Hunch
