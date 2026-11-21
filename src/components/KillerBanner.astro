@@ -22,6 +22,8 @@ const landscapes = new Map(
 );
 
 const art = landscapes.get(Astro.props.slug);
+// These compositions place the killer's head near the top edge.
+const alignTop = ['dredge', 'first', 'unknown'].includes(Astro.props.slug);
 ---
 
 {art && (
@@ -34,6 +36,7 @@ const art = landscapes.get(Astro.props.slug);
       format="webp"
       quality={80}
       loading="eager"
+      style={alignTop ? 'object-position: 50% 0%' : undefined}
     />
   </div>
 )}
