@@ -1,6 +1,6 @@
 // Pure helper for composing a `ConditionStats` (or `null`, meaning "no
-// condition defined") into a localized sentence, e.g. "4 kills with 1
-// generator(s) remaining". No Astro dependency, so this is easy to
+// condition defined") into a localized sentence, e.g. "4 kills, 1 gen(s)
+// remaining". No Astro dependency, so this is easy to
 // unit-test in isolation — the `t` lookup function is injected rather than
 // pulled from `Astro.locals.t` directly.
 import type { ConditionStats } from './types';
@@ -10,12 +10,14 @@ type ConditionKey =
   | 'matchConditions.kills'
   | 'matchConditions.gensRemaining'
   | 'matchConditions.hookStages'
+  | 'matchConditions.statSeparator'
   | 'matchConditions.relativeWin';
 
 type Translate = (key: ConditionKey) => string;
 
 /** Compose a ConditionStats (or null) into a localized sentence by looking up
- * per-stat phrase templates via `t` and joining the ones present. A `null`
+ * per-stat phrase templates via `t` and joining the ones present with the
+ * locale's `matchConditions.statSeparator` (", " in English). A `null`
  * `stats` renders as `t(nullKey)` (default: the generic "none" placeholder). */
 export function describeConditionStats(
   stats: ConditionStats | null,
@@ -31,5 +33,5 @@ export function describeConditionStats(
   if (stats.hookStages != null)
     parts.push(t('matchConditions.hookStages').replace('{n}', String(stats.hookStages)));
 
-  return parts.length > 0 ? parts.join(' ') : t('matchConditions.none');
+  return parts.length > 0 ? parts.join(t('matchConditions.statSeparator')) : t('matchConditions.none');
 }
