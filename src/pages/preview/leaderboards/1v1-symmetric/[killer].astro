@@ -1,0 +1,67 @@
+---
+// One symmetric 1v1 leaderboard per killer with a published snapshot, at
+// /preview/leaderboards/1v1-symmetric/<scope value ID>/. Unlisted (UX
+// structure §5); the killer strip and the umbrella link at the foot of the
+// page connect the pages.
+import type { GetStaticPaths } from 'astro';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { Aside } from '@astrojs/starlight/components';
+import KillerBanner from '@components/KillerBanner.astro';
+import LeaderboardSwitcher from '@components/LeaderboardSwitcher.astro';
+import RankingLeaderboard from '@components/RankingLeaderboard.astro';
+import {
+  SYMMETRIC_LEADERBOARDS_PATH,
+  UNLISTED_PREVIEW,
+  symmetricLeaderboards,
+  type PublicationEntry,
+} from '../../../../lib/ranking/publications';
+
+export const getStaticPaths = (() =>
+  symmetricLeaderboards.entries.map((entry) => ({ params: { killer: entry.slug }, props: { entry } }))) satisfies GetStaticPaths;
+
+interface Props {
+  entry: PublicationEntry;
+}
+
+const { entry } = Astro.props;
+const { publication } = entry.view.snapshot;
+const hasStandings = entry.view.boards.some((b) => b.standings.length > 0);
+// Website copy: edit this sentence independently of snapshot descriptions.
+const boardIntroduction = `This season’s top players in 1v1 matches with ${entry.label}.`;
+// Optional website copy. The snapshot's labels are written for whoever
+// maintains the ranking, not for readers; a field left unset falls back to
+// the snapshot's label.
+const copy: { title?: string; competition?: string; season?: string } = {
+  title: `${entry.label} 1v1 Leaderboard`,
+  competition: 'DbD Arena 1v1 Symmetric',
+};
+const title = copy.title ?? publication.label;
+---
+
+<StarlightPage
+  frontmatter={{
+    title,
+    description: publication.description,
+    ...UNLISTED_PREVIEW,
+  }}
+>
+  <KillerBanner slug={entry.slug} />
+
+  <LeaderboardSwitcher group={symmetricLeaderboards} current={entry.slug} />
+
+  <Aside type="caution" title="Fictional sample data">
+    This preview renders a sample ranking snapshot in <code>docs/ref/examples/</code>.
+    Players, matches, and scores are made up, and the scores were written by hand
+    rather than calculated.
+    {hasStandings && 'Select a player to see the matches behind their standing.'}
+  </Aside>
+
+  <RankingLeaderboard
+    view={entry.view}
+    boardIntroduction={boardIntroduction}
+    competition={copy.competition}
+    season={copy.season}
+  />
+
+  <p><a href={SYMMETRIC_LEADERBOARDS_PATH}>← All symmetric 1v1 leaderboards</a></p>
+</StarlightPage>

@@ -1,0 +1,28 @@
+---
+// Synthetic leaderboards for the browser tests (tests/e2e/). Built only when
+// LEADERBOARD_TEST_FIXTURES=1; otherwise this route produces no pages. See
+// tests/fixtures/leaderboard-pages.ts.
+import type { GetStaticPaths } from 'astro';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import RankingLeaderboard from '@components/RankingLeaderboard.astro';
+import { UNLISTED_PREVIEW } from '../../../lib/ranking/publications';
+import { loadLeaderboard } from '../../../lib/ranking/snapshot';
+import { FIXTURE_ENV, leaderboardFixtures, type LeaderboardFixture } from '../../../../tests/fixtures/leaderboard-pages';
+import { makeSnapshot } from '../../../../tests/fixtures/ranking-snapshot';
+
+export const getStaticPaths = (() =>
+  process.env[FIXTURE_ENV] === '1'
+    ? Object.entries(leaderboardFixtures).map(([fixture, spec]) => ({ params: { fixture }, props: { spec } }))
+    : []) satisfies GetStaticPaths;
+
+interface Props {
+  spec: LeaderboardFixture;
+}
+
+const { spec } = Astro.props;
+const view = loadLeaderboard(makeSnapshot(spec.boards));
+---
+
+<StarlightPage frontmatter={{ title: `Leaderboard fixture: ${Astro.params.fixture}`, ...UNLISTED_PREVIEW }}>
+  <RankingLeaderboard view={view} boardIntroduction="Test fixture board." pageSize={spec.pageSize} />
+</StarlightPage>

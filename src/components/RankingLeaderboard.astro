@@ -1,0 +1,1013 @@
+---
+// Leaderboard rendered from a public ranking snapshot (see
+// src/lib/ranking/snapshot.ts). Ranking data comes from the snapshot;
+// the hosting page supplies the board introduction as editorial copy.
+//
+// Each standing is a <details> element: the summary is the standings row and
+// the body lists the row's included matches from that row's perspective,
+// most recent first (dates come from played_at; unknown dates sort last).
+//
+// The columns follow the snapshot's evidence contract (view.format):
+//   - symmetric 1v1: Score · Matches · Wins · Win rate · Opponents, and each
+//     duel's result with its round score;
+//   - 1v4 quartet: Score · Matches · Wins · Win rate · average generators
+//     completed · average hook stages, and each match's win, loss or draw
+//     with its generators completed and hook stages. The killer board and
+//     the survivor party board are each other's opponents, so opponent links
+//     cross between them.
+// Every row is rendered; in the browser the script below adds a player search
+// and, on boards longer than one page, shows one page at a time and keeps the
+// page in the URL (?page=N). Without JavaScript the full list is shown.
+// Opponent links and URL fragments switch to the target row's page and open it.
+//
+// The hosting page supplies the heading (its title is page copy, falling back
+// to the publication label).
+//
+// The "Competition" and "Season" values are page copy too. The snapshot's
+// labels are written for whoever maintains the ranking, not for readers, so
+// they are only a fallback for pages that do not supply their own text.
+import {
+  QUARTET_GENERATORS,
+  formatAverage,
+  formatDate,
+  formatTimestamp,
+  formatWinRate,
+  type LeaderboardView,
+  type MatchResult,
+} from '../lib/ranking/snapshot';
+import { DEFAULT_PAGE_SIZE, pageParamName, searchText } from '../lib/ranking/standings-controls';
+
+interface Props {
+  view: LeaderboardView;
+  /** One sentence for every board, or one per board in board order. */
+  boardIntroduction: string | string[];
+  /** Reader-facing competition name. Falls back to the snapshot's competition label. */
+  competition?: string;
+  /** Reader-facing season name. Falls back to the snapshot's season label. */
+  season?: string;
+  /** Rows per page. Boards with no more rows than this get no pager. */
+  pageSize?: number;
+}
+
+const { boardIntroduction, pageSize = DEFAULT_PAGE_SIZE } = Astro.props;
+const { snapshot, format, boards, ambiguousNames } = Astro.props.view;
+const quartet = format === 'quartet';
+const { publication, season } = snapshot;
+
+// When the page supplies its own wording, the snapshot's description no longer
+// describes what is shown, so it is not offered as a tooltip either.
+const competition = Astro.props.competition !== undefined
+  ? { label: Astro.props.competition, description: undefined }
+  : publication.competition;
+const seasonLabel = Astro.props.season ?? season.label;
+
+const introductionFor = (boardIndex: number) =>
+  typeof boardIntroduction === 'string' ? boardIntroduction : (boardIntroduction[boardIndex] ?? '');
+
+const showProfileId = (name: string) => ambiguousNames.has(name);
+const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
+const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
+const RESULT_TEXT: Record<'symmetric' | 'quartet', Record<MatchResult, string>> = {
+  symmetric: { won: 'Won', lost: 'Lost', draw: 'Draw' },
+  quartet: { won: 'Win', lost: 'Loss', draw: 'Draw' },
+};
+const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw: '◇' };
+---
+
+<div class="ranking">
+  {/* Runs while the page is parsed, so rows past the first page are hidden
+      before first paint instead of flashing up until the module script runs. */}
+  <script is:inline>document.currentScript.parentElement.classList.add('ranking--js');</script>
+
+  <div class="ranking__info">
+    <h2 class="ranking__info-title">Leaderboard scope</h2>
+    <dl class="meta-grid ranking__meta">
+      <Fragment>
+        <dt>Competition</dt>
+        <dd title={competition.description}>{competition.label}</dd>
+      </Fragment>
+      {publication.scope.map(({ category, value }) => (
+        <Fragment>
+          <dt title={category.description}>{category.label}</dt>
+          <dd title={value.description}>{value.label}</dd>
+        </Fragment>
+      ))}
+      <Fragment>
+        <dt>Season</dt>
+        <dd>{seasonLabel}</dd>
+      </Fragment>
+      <Fragment>
+        <dt>Snapshot generated</dt>
+        <dd><time datetime={snapshot.generated_at}>{formatTimestamp(snapshot.generated_at)}</time></dd>
+      </Fragment>
+    </dl>
+  </div>
+
+  {boards.map(({ board, headingId, unit, opponentUnit, standings }, boardIndex) => {
+    // Rank · Name · Score · Matches · Wins · Win rate · then Opponents
+    // (symmetric) or Avg gens · Avg hook stages (quartet) · disclosure marker.
+    // Every count column gets the same width and values are centred under
+    // their headers, so the stats sit on an even rhythm. Below 44rem the
+    // compact layout in the styles takes over: Matches and Wins merge into one
+    // column, and on the quartet so do the two averages.
+    // The quartet has one more stat, so its headers wrap onto two lines
+    // ("Ranking / score", "Avg hook / stages") and the columns are narrower.
+    const countColumns = quartet ? Array(5).fill('4.75rem') : Array(4).fill('5.5rem');
+    const columns = ['3.25rem', 'minmax(0, 1fr)', quartet ? '5.5rem' : '7.5rem', ...countColumns, '1rem'].join(' ');
+    const narrowColumns = [
+      '1.75rem', 'minmax(0, 1fr)', '2.75rem', '3.75rem', '2.5rem', quartet ? '4.25rem' : '2.25rem', '0.6rem',
+    ].join(' ');
+    const unitLabel = capitalise(unit.one);
+    const resultText = RESULT_TEXT[format];
+    return (
+      <section class="ranking__board" aria-labelledby={headingId}>
+        <h2 id={headingId}>{board.label}</h2>
+        <p>{introductionFor(boardIndex)}</p>
+
+        <div class="ranking__info">
+          <h3 class="ranking__info-title">Requirement to be ranked</h3>
+          <dl class="meta-grid ranking__meta">
+            <Fragment>
+              <dt title={board.eligibility.rating.description}>Entry rating</dt>
+              <dd>At least {board.eligibility.minimum_rating_value}</dd>
+            </Fragment>
+            <Fragment>
+              <dt>Matches against ranked {opponentUnit.other}</dt>
+              <dd>At least {board.eligibility.minimum_eligible_match_count}</dd>
+            </Fragment>
+          </dl>
+        </div>
+
+        {standings.length === 0 ? (
+          <p>No {unit.other} meet the eligibility requirements in this snapshot.</p>
+        ) : (
+          <div
+            class="board-standings not-content"
+            data-page-size={pageSize}
+            data-page-param={pageParamName(boardIndex, boards.length)}
+            data-noun-one={unit.one}
+            data-noun-other={unit.other}
+          >
+          <div class="standings-tools" data-tools hidden>
+            <label class="standings-search">
+              <span class="sr-only">Find a {unit.one} on {board.label}</span>
+              <input
+                type="search"
+                placeholder={`Find ${unit.one}`}
+                autocomplete="off"
+                spellcheck="false"
+                data-search
+              />
+            </label>
+            <p class="standings-status" data-status aria-live="polite" />
+          </div>
+          <div
+            class:list={['standings', { 'standings--quartet': quartet }]}
+            data-standings
+            style={`--standings-columns: ${columns}; --standings-columns-narrow: ${narrowColumns}`}
+          >
+            <div class="standings__head" aria-hidden="true">
+              <span><span class="head--wide">Rank</span><span class="head--narrow">#</span></span>
+              <span>{unitLabel}</span>
+              <span class="num">{board.score_definition.label}</span>
+              <span class="num stat--split">Matches</span>
+              <span class="num stat--split" title={`Wins by this ${unit.one} in matches that count`}>Wins</span>
+              <span class="num stat--merged" title={`Matches that count / wins by this ${unit.one} in those matches`}>Matches/<wbr />Wins</span>
+              <span class="num" title={`Percentage of matches that count won by this ${unit.one}${quartet ? '; draws are not wins' : ''}`}>Win rate</span>
+              {quartet ? (
+                <Fragment>
+                  <span class="num stat--split" title="Average generators completed per match, using matches that count">Avg gens</span>
+                  <span class="num stat--split" title="Average hook stages per match, using matches that count">Avg hook stages</span>
+                  <span class="num stat--merged" title="Average generators completed / hook stages per match, using matches that count">Gens/<wbr />Hooks</span>
+                </Fragment>
+              ) : (
+                <span class="num">Oppo&shy;nents</span>
+              )}
+              <span />
+            </div>
+            <ul class="standings__list" tabindex="-1">
+              {standings.map(({ row, profile, anchor, tied, wins, winRate, averages, matches }, rowIndex) => (
+                <li
+                  id={anchor}
+                  class="standings__item"
+                  data-search-text={searchText(profile)}
+                  data-overflow={rowIndex >= pageSize ? '' : undefined}
+                >
+                  <details class="standing">
+                    <summary class="standing__summary">
+                      <span class="standing__rank">
+                        <span class="sr-only">Rank </span>{row.rank}
+                        {tied && <span class="sr-only"> (tied)</span>}
+                      </span>
+                      <span class="standing__name">
+                        <span class="standing__display-name">{profile.display_name}</span>
+                        {showProfileId(profile.display_name) && (
+                          <span class="profile-id" title={`Shown because another ${unit.one} has the same name`}>{profile.profile_id}</span>
+                        )}
+                      </span>
+                      <span class="num standing__score">
+                        <span class="cell-label">{board.score_definition.label}</span>{row.display_score}
+                      </span>
+                      <span class="num stat--split">
+                        <span class="cell-label">Matches</span>{row.eligible_match_count}
+                      </span>
+                      <span class="num stat--split">
+                        <span class="cell-label">Wins</span>{wins}
+                      </span>
+                      <span class="num stat--merged">
+                        <span class="cell-label">{row.eligible_match_count} matches, {wins} wins</span>
+                        <span aria-hidden="true">{row.eligible_match_count}<span class="stat__unit">M</span>/{wins}<span class="stat__unit">W</span></span>
+                      </span>
+                      <span class="num">
+                        <span class="cell-label">Win rate</span>{formatWinRate(winRate)}
+                      </span>
+                      {quartet ? (
+                        <Fragment>
+                          <span class="num stat--split">
+                            <span class="cell-label">Average generators completed</span>{formatAverage(averages?.generatorsCompleted)}
+                          </span>
+                          <span class="num stat--split">
+                            <span class="cell-label">Average hook stages</span>{formatAverage(averages?.hookStages)}
+                          </span>
+                          <span class="num stat--merged">
+                            <span class="cell-label">
+                              Average {formatAverage(averages?.generatorsCompleted)} generators completed,
+                              {' '}{formatAverage(averages?.hookStages)} hook stages
+                            </span>
+                            <span aria-hidden="true">
+                              {formatAverage(averages?.generatorsCompleted)}<span class="stat__unit">G</span>/{formatAverage(averages?.hookStages)}<span class="stat__unit">H</span>
+                            </span>
+                          </span>
+                        </Fragment>
+                      ) : (
+                        <span class="num">
+                          <span class="cell-label">Opponents</span>{row.opponent_count}
+                        </span>
+                      )}
+                      <span class="standing__marker" aria-hidden="true" />
+                    </summary>
+
+                    <div class="standing__detail">
+                      <p class="standing__detail-title">
+                        Matches that count for {profile.display_name}
+                        {showProfileId(profile.display_name) && <span class="profile-id">{profile.profile_id}</span>}
+                      </p>
+                      {profile.group_members && profile.group_members.length > 0 && (
+                        <p class="standing__members">
+                          <span class="standing__members-label">Members</span>
+                          {profile.group_members.map((m) => m.display_name).join(', ')}
+                        </p>
+                      )}
+                      <div class="standing__table-wrap">
+                        <table class="standing__matches">
+                          <caption class="sr-only">
+                            Matches that count toward the ranking for {profile.display_name}
+                            {showProfileId(profile.display_name) && ` (${profile.profile_id})`}, from their perspective
+                          </caption>
+                          <thead>
+                            <tr>
+                              <th scope="col">Date</th>
+                              <th scope="col">Opponent</th>
+                              <th scope="col">Result</th>
+                              {quartet && (
+                                <Fragment>
+                                  <th scope="col" class="num" title={`Generators the survivors completed, of ${QUARTET_GENERATORS}`}>Gens completed</th>
+                                  <th scope="col" class="num" title="Hook stages the killer performed">Hook stages</th>
+                                </Fragment>
+                              )}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {matches.map((m) => (
+                              <tr>
+                                <td class="match-date">
+                                  {m.playedAt ? (
+                                    <time datetime={m.playedAt} title={formatTimestamp(m.playedAt)}>{formatDate(m.playedAt)}</time>
+                                  ) : (
+                                    <span class="match-date--unknown">Unknown</span>
+                                  )}
+                                </td>
+                                <td class="match-opponent">
+                                  {m.opponentAnchor ? (
+                                    <a href={`#${m.opponentAnchor}`}>{m.opponent.display_name}</a>
+                                  ) : (
+                                    m.opponent.display_name
+                                  )}
+                                  {showProfileId(m.opponent.display_name) && (
+                                    <span class="profile-id">{m.opponent.profile_id}</span>
+                                  )}
+                                  {m.encounterTotal > 1 && (
+                                    <span class="encounter" title="Repeat encounters share a contribution limit">
+                                      {m.encounterIndex === null
+                                        ? `${m.encounterTotal} meetings`
+                                        : `meeting ${m.encounterIndex} of ${m.encounterTotal}`}
+                                    </span>
+                                  )}
+                                </td>
+                                <td>
+                                  <span class={`result result--${m.result}`}>
+                                    <span aria-hidden="true">{RESULT_MARK[m.result]}</span>
+                                    {resultText[m.result]}
+                                  </span>
+                                  {m.facts.format === 'symmetric' && (
+                                    <span class="rounds">
+                                      <span class="sr-only">, {rounds(m.facts.ownRounds)} to {m.facts.opponentRounds}</span>
+                                      <span aria-hidden="true">{m.facts.ownRounds}–{m.facts.opponentRounds}</span>
+                                    </span>
+                                  )}
+                                </td>
+                                {m.facts.format === 'quartet' && (
+                                  <Fragment>
+                                    <td class="num">
+                                      {m.facts.generatorsCompleted}<span class="of-total"><span class="sr-only"> of </span><span aria-hidden="true">/</span>{QUARTET_GENERATORS}</span>
+                                    </td>
+                                    <td class="num">{m.facts.hookStages}</td>
+                                  </Fragment>
+                                )}
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </details>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <nav class="pager" data-pager aria-label={`${board.label} pages`} hidden>
+            <button type="button" class="pager__step" data-step="-1" aria-label="Previous page">
+              <span aria-hidden="true">‹</span> Prev
+            </button>
+            <ol class="pager__pages" data-pages />
+            <span class="pager__compact" data-compact />
+            <button type="button" class="pager__step" data-step="1" aria-label="Next page">
+              Next <span aria-hidden="true">›</span>
+            </button>
+          </nav>
+          </div>
+        )}
+      </section>
+    );
+  })}
+</div>
+
+<script>
+  // Player search and paging for the boards, and opening the standing a URL
+  // fragment points at (opponent links, shared URLs). The server renders every
+  // row; this only hides and reveals them. Without JavaScript the full list is
+  // shown and a fragment link still scrolls to its row, which stays closed.
+  // The rules (what matches, which rows a page holds, what the status line
+  // says) live in standings-controls.ts; this wires them to the DOM.
+  import {
+    matchesQuery,
+    normaliseQuery,
+    pageNumbers,
+    pageOf,
+    pageWindow,
+    parsePage,
+    statusText,
+    type RowNoun,
+  } from '../lib/ranking/standings-controls';
+
+  interface BoardControls {
+    root: HTMLElement;
+    items: HTMLLIElement[];
+    pageSize: number;
+    /** Query parameter holding this board's page number. */
+    param: string;
+    /** What the rows are, for the status line. */
+    noun: RowNoun;
+    search: HTMLInputElement;
+    status: HTMLElement;
+    standings: HTMLElement;
+    list: HTMLElement;
+    pager: HTMLElement;
+    pages: HTMLElement;
+    compact: HTMLElement;
+    prev: HTMLButtonElement;
+    next: HTMLButtonElement;
+    /** Normalised search text; empty when not searching. */
+    query: string;
+    page: number;
+  }
+
+  const boards: BoardControls[] = [
+    ...document.querySelectorAll<HTMLElement>('.board-standings[data-page-size]'),
+  ].map((root) => {
+    const pager = root.querySelector<HTMLElement>('[data-pager]')!;
+    return {
+      root,
+      items: [...root.querySelectorAll<HTMLLIElement>('.standings__item')],
+      pageSize: Number(root.dataset.pageSize),
+      param: root.dataset.pageParam!,
+      noun: { one: root.dataset.nounOne!, other: root.dataset.nounOther! },
+      search: root.querySelector<HTMLInputElement>('[data-search]')!,
+      status: root.querySelector<HTMLElement>('[data-status]')!,
+      standings: root.querySelector<HTMLElement>('[data-standings]')!,
+      list: root.querySelector<HTMLElement>('.standings__list')!,
+      pager,
+      pages: pager.querySelector<HTMLElement>('[data-pages]')!,
+      compact: pager.querySelector<HTMLElement>('[data-compact]')!,
+      prev: pager.querySelector<HTMLButtonElement>('[data-step="-1"]')!,
+      next: pager.querySelector<HTMLButtonElement>('[data-step="1"]')!,
+      query: '',
+      page: 1,
+    };
+  });
+
+  function render(b: BoardControls) {
+    const rows = b.items.filter((li) => matchesQuery(li.dataset.searchText!, b.query));
+    const view = pageWindow(rows.length, b.page, b.pageSize);
+    const { count } = view;
+    b.page = view.page;
+    const shown = new Set(rows.slice(view.start, view.end));
+
+    for (const li of b.items) {
+      const visible = shown.has(li);
+      // A row leaving the page closes, so it is not found open later.
+      if (!visible) li.querySelector('details')!.open = false;
+      li.hidden = !visible;
+    }
+    b.standings.hidden = rows.length === 0;
+    b.status.textContent = statusText(b.items.length, rows.length, b.query ? b.search.value : '', view, b.noun);
+
+    b.pager.hidden = count === 1;
+    b.prev.disabled = b.page === 1;
+    b.next.disabled = b.page === count;
+    b.compact.textContent = `Page ${b.page} of ${count}`;
+    b.pages.replaceChildren(
+      ...pageNumbers(b.page, count).map((p) => {
+        const li = document.createElement('li');
+        if (p === null) {
+          li.className = 'pager__gap';
+          li.setAttribute('aria-hidden', 'true');
+          li.textContent = '…';
+        } else {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'pager__page';
+          button.dataset.page = String(p);
+          button.textContent = String(p);
+          button.setAttribute('aria-label', `Page ${p}`);
+          if (p === b.page) button.setAttribute('aria-current', 'page');
+          li.append(button);
+        }
+        return li;
+      }),
+    );
+  }
+
+  function pageFromUrl(b: BoardControls): number {
+    return parsePage(new URLSearchParams(location.search).get(b.param));
+  }
+
+  /** Mirror the board's page in the URL. Search results are not kept there. */
+  function writeUrl(b: BoardControls, mode: 'push' | 'replace', dropFragment = false) {
+    if (b.query) return;
+    const url = new URL(location.href);
+    if (b.page === 1) url.searchParams.delete(b.param);
+    else url.searchParams.set(b.param, String(b.page));
+    if (dropFragment) url.hash = '';
+    if (url.href === location.href) return;
+    if (mode === 'push') history.pushState(history.state, '', url);
+    else history.replaceState(history.state, '', url);
+  }
+
+  function targetedItem(): HTMLLIElement | null {
+    let id: string;
+    try {
+      id = decodeURIComponent(location.hash.slice(1));
+    } catch {
+      return null;
+    }
+    const el = id ? document.getElementById(id) : null;
+    return el instanceof HTMLLIElement && el.classList.contains('standings__item') ? el : null;
+  }
+
+  /** Show what the URL describes: the fragment's row if any, else each board's ?page. */
+  function syncFromUrl() {
+    const target = targetedItem();
+    // A target on a page that is not shown yet has not been scrolled to.
+    const needsScroll = target !== null && target.getClientRects().length === 0;
+    for (const b of boards) {
+      b.query = '';
+      b.search.value = '';
+      const index = target ? b.items.indexOf(target) : -1;
+      b.page = index >= 0 ? pageOf(index, b.pageSize) : pageFromUrl(b);
+      render(b);
+      // Records the target's page, and corrects a page number out of range.
+      writeUrl(b, 'replace');
+    }
+    if (target) {
+      target.querySelector('details')!.open = true;
+      if (needsScroll) target.scrollIntoView({ block: 'start' });
+    }
+  }
+
+  function goToPage(b: BoardControls, page: number) {
+    b.page = page;
+    render(b);
+    // A fragment naming a row of this board would put the page back on reload.
+    const target = targetedItem();
+    writeUrl(b, 'push', target !== null && b.items.includes(target));
+    // Bring the new page's first rows into view and start keyboard focus there.
+    if (b.root.getBoundingClientRect().top < 0) b.root.scrollIntoView({ block: 'start' });
+    b.list.focus({ preventScroll: true });
+  }
+
+  for (const b of boards) {
+    b.search.addEventListener('input', () => {
+      b.query = normaliseQuery(b.search.value);
+      // Clearing the search returns to the page the URL still holds.
+      b.page = b.query ? 1 : pageFromUrl(b);
+      render(b);
+    });
+    b.pager.addEventListener('click', (event) => {
+      const button = (event.target as Element).closest<HTMLButtonElement>('button');
+      if (!button || button.disabled) return;
+      if (button.dataset.step) goToPage(b, b.page + Number(button.dataset.step));
+      else if (button.dataset.page && button.dataset.page !== String(b.page)) goToPage(b, Number(button.dataset.page));
+    });
+  }
+
+  window.addEventListener('hashchange', syncFromUrl);
+  window.addEventListener('popstate', syncFromUrl);
+  syncFromUrl();
+  for (const b of boards) {
+    b.root.querySelector<HTMLElement>('[data-tools]')!.hidden = false;
+    // Hand row visibility over from the first-paint CSS to the hidden attributes.
+    b.root.dataset.ready = '';
+  }
+</script>
+
+<style>
+  .ranking__meta {
+    margin-top: 1rem;
+  }
+
+  .ranking__info {
+    margin: 1rem 0;
+    padding: 0.9rem 1rem;
+    background: var(--sl-color-gray-6);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+  }
+  .ranking__info .ranking__info-title {
+    margin: 0;
+    font-size: 1rem;
+  }
+  .ranking__info p {
+    margin: 0.25rem 0 0;
+    color: var(--sl-color-gray-3);
+    font-size: 0.9rem;
+  }
+  .ranking__info .ranking__meta {
+    margin: 0.75rem 0 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  /* ---- Standings ---- */
+  .board-standings {
+    margin-top: 1.25rem;
+    container: board-standings / inline-size;
+  }
+  .standings {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    font-size: var(--sl-text-sm);
+  }
+  .standings__head,
+  .standing__summary {
+    display: grid;
+    grid-template-columns: var(--standings-columns);
+    gap: 0.25rem;
+    align-items: center;
+    padding: 0.6rem 0.9rem;
+  }
+  .standings__head {
+    background: var(--sl-color-gray-6);
+    color: var(--sl-color-gray-2);
+    font-size: var(--sl-text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .standings__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .standings__item {
+    border-top: 1px solid var(--sl-color-gray-5);
+  }
+  .standings__item:target .standing__summary {
+    box-shadow: inset 3px 0 0 var(--sl-color-accent);
+  }
+  /* Focused after a page change so keyboard users continue from the first row. */
+  .standings__list:focus {
+    outline: none;
+  }
+  /* Until the script has paged a board, keep rows past its first page out of
+     the first paint. Without JavaScript the class is never set. */
+  .ranking--js .board-standings:not([data-ready]) .standings__item[data-overflow] {
+    display: none;
+  }
+
+  /* ---- Search and pager ---- */
+  .standings-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-bottom: 0.75rem;
+    font-size: var(--sl-text-sm);
+  }
+  .standings-search input {
+    width: min(16rem, 100%);
+    padding: 0.4rem 0.7rem;
+    font: inherit;
+    color: var(--sl-color-white);
+    background: var(--sl-color-black);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.375rem;
+  }
+  .standings-search input::placeholder {
+    color: var(--sl-color-gray-3);
+  }
+  .standings-search input:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: -1px;
+    border-color: transparent;
+  }
+  .standings-status {
+    margin: 0;
+    color: var(--sl-color-gray-2);
+    font-variant-numeric: tabular-nums;
+  }
+  .pager {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0.75rem;
+    font-size: var(--sl-text-sm);
+  }
+  .standings-tools[hidden],
+  .pager[hidden] {
+    display: none;
+  }
+  .pager__pages {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .pager :global(button) {
+    min-width: 2.25rem;
+    height: 2.25rem;
+    padding: 0 0.6rem;
+    font: inherit;
+    font-variant-numeric: tabular-nums;
+    color: var(--sl-color-gray-2);
+    background: transparent;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.375rem;
+    cursor: pointer;
+  }
+  .pager :global(button:hover:not(:disabled)) {
+    color: var(--sl-color-white);
+    background: var(--sl-color-gray-6);
+  }
+  .pager :global(button:focus-visible) {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 1px;
+  }
+  .pager :global(button[aria-current='page']) {
+    color: var(--sl-color-black);
+    background: var(--sl-color-text-accent);
+    border-color: var(--sl-color-text-accent);
+    font-weight: 700;
+    cursor: default;
+  }
+  .pager :global(button:disabled) {
+    opacity: 0.4;
+    cursor: default;
+  }
+  .pager__step {
+    white-space: nowrap;
+  }
+  .pager :global(.pager__gap) {
+    align-self: center;
+    min-width: 1.25rem;
+    text-align: center;
+    color: var(--sl-color-gray-3);
+  }
+  .pager__compact {
+    display: none;
+    padding: 0 0.75rem;
+    color: var(--sl-color-gray-2);
+    font-variant-numeric: tabular-nums;
+  }
+  /* Narrow boards: Prev · "Page 2 of 13" · Next instead of numbered buttons. */
+  @container board-standings (max-width: 30rem) {
+    .pager__pages {
+      display: none;
+    }
+    .pager__compact {
+      display: inline;
+    }
+    .standings-search,
+    .standings-search input {
+      width: 100%;
+    }
+  }
+  .num {
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .standings__head > span {
+    white-space: nowrap;
+  }
+  .standings--quartet .standings__head {
+    align-items: end;
+  }
+  .standings--quartet .standings__head > span {
+    white-space: normal;
+  }
+  /* Matches and wins get a column each on wide boards and share one on
+     narrow boards (see the container query at the end). */
+  .stat--merged,
+  .head--narrow {
+    display: none;
+  }
+  .stat__unit {
+    color: var(--sl-color-gray-3);
+    font-size: 0.85em;
+  }
+
+  .standing__summary {
+    cursor: pointer;
+    list-style: none;
+  }
+  .standing__summary::-webkit-details-marker {
+    display: none;
+  }
+  .standing__summary:hover {
+    background: var(--sl-color-gray-6);
+  }
+  .standing__summary:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: -2px;
+  }
+  .standing__rank {
+    font-weight: 700;
+    font-size: var(--sl-text-base);
+    font-variant-numeric: tabular-nums;
+    color: var(--sl-color-white);
+  }
+  .standing__name {
+    min-width: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.5rem;
+  }
+  .standing__display-name {
+    font-weight: 600;
+    color: var(--sl-color-white);
+    overflow-wrap: anywhere;
+  }
+  .standing__score {
+    font-weight: 700;
+    color: var(--sl-color-white);
+  }
+  .standing__marker::before {
+    content: '▸';
+    display: inline-block;
+    color: var(--sl-color-gray-3);
+    transition: transform 0.15s ease;
+  }
+  .standing[open] .standing__marker::before {
+    transform: rotate(90deg);
+  }
+  .standing[open] .standing__summary {
+    background: var(--sl-color-gray-6);
+  }
+
+  /* Cell labels are for screen readers only; the header row names the columns
+     on screen (it is aria-hidden, so the labels are what screen readers hear). */
+  .cell-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .profile-id {
+    font-family: var(--sl-font-mono);
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-2);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.25rem;
+    padding: 0 0.3rem;
+    margin-inline-start: 0.35rem;
+    white-space: nowrap;
+  }
+  .standing__name .profile-id {
+    margin-inline-start: 0;
+  }
+
+  /* ---- Included matches ---- */
+  /* The open row's detail sits in a recessed panel so its table reads apart
+     from the standings rows around it (page background) and from its own
+     highlighted summary (gray-6): darker than the page on the dark theme,
+     a faint gray on the light one. */
+  .standings {
+    --standing-detail-bg: hsl(224, 14%, 5.5%);
+    --standing-detail-rule: var(--sl-color-gray-6);
+    --standing-detail-shade: rgb(0 0 0 / 0.5);
+  }
+  :global([data-theme='light']) .standings {
+    --standing-detail-bg: hsl(224, 26%, 96%);
+    --standing-detail-rule: var(--sl-color-gray-5);
+    --standing-detail-shade: rgb(0 0 0 / 0.12);
+  }
+  .standing__detail {
+    padding: 0.75rem 0.9rem 1rem;
+    border-top: 1px dashed var(--sl-color-gray-5);
+    background: var(--standing-detail-bg);
+    box-shadow: inset 0 2px 4px -2px var(--standing-detail-shade);
+  }
+  .standing__detail-title {
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+    color: var(--sl-color-gray-2);
+  }
+  .standing__members {
+    margin: -0.25rem 0 0.5rem;
+    color: var(--sl-color-gray-2);
+  }
+  .standing__members-label {
+    margin-inline-end: 0.5rem;
+    font-size: var(--sl-text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--sl-color-gray-3);
+  }
+  .standing__table-wrap {
+    overflow-x: auto;
+  }
+  .standing__matches {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .standing__matches th,
+  .standing__matches td {
+    padding: 0.4rem 0.6rem;
+    text-align: start;
+    border-bottom: 1px solid var(--standing-detail-rule);
+    white-space: nowrap;
+  }
+  .standing__matches th {
+    font-size: var(--sl-text-xs);
+    font-weight: 600;
+    color: var(--sl-color-gray-3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .standing__matches .num {
+    text-align: center;
+  }
+  .standing__matches td.match-opponent {
+    white-space: normal;
+  }
+  .of-total {
+    color: var(--sl-color-gray-3);
+    font-size: 0.85em;
+  }
+  .match-date {
+    font-variant-numeric: tabular-nums;
+  }
+  .match-date--unknown {
+    color: var(--sl-color-gray-3);
+  }
+  .standing__matches a {
+    color: var(--sl-color-text-accent);
+    font-weight: 600;
+  }
+  .encounter {
+    margin-inline-start: 0.5rem;
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+    white-space: nowrap;
+  }
+  .result {
+    display: inline-flex;
+    gap: 0.3rem;
+    align-items: baseline;
+    font-weight: 600;
+  }
+  .result--won {
+    color: var(--status-active);
+  }
+  /* The shared green is tuned for dark backgrounds; darken it for contrast on white. */
+  :global([data-theme='light']) .result--won {
+    color: #1f7a45;
+  }
+  .rounds {
+    margin-inline-start: 0.5rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--sl-color-white);
+  }
+  .result--lost {
+    color: var(--sl-color-gray-3);
+  }
+  .result--draw {
+    color: var(--sl-color-gray-2);
+  }
+
+  /* ---- Narrow screens: one compact row per player ---- */
+  /* Narrow page: the shared meta-grid sizes its label column to the longest
+     label, which is wider than a phone here. Stack label over value. */
+  @media (max-width: 40rem) {
+    .ranking__meta {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0 1rem;
+    }
+    .ranking__meta dd + dt {
+      margin-top: 0.5rem;
+    }
+  }
+
+  /* Narrow standings (phones, or a tablet with the sidebar open): the full
+     grid would crush the name column, so the stat columns shrink to fit
+     their values, Matches and Wins share one "5M/4W" column (on the quartet
+     the averages share one "3.5G/7.0H" column too), and header labels wrap. Every row stays on one line; only a long player name wraps.
+     Queried on the standings box itself, not the viewport, because the
+     sidebar changes its width. */
+  .standings {
+    container: standings / inline-size;
+  }
+  @container standings (max-width: 44rem) {
+    .standings__head,
+    .standing__summary {
+      /* Rank · Name · Score · Matches/Wins · Win rate · Opponents or
+         Gens/Hooks · marker; set per format on the element. */
+      grid-template-columns: var(--standings-columns-narrow);
+      gap: 0.25rem;
+      padding-inline: 0.5rem;
+    }
+    .standings__head {
+      align-items: end;
+      font-size: 0.6875rem;
+      text-transform: none;
+      letter-spacing: normal;
+    }
+    .head--wide {
+      display: none;
+    }
+    .head--narrow {
+      display: inline;
+    }
+    .standing__rank {
+      font-size: var(--sl-text-sm);
+    }
+    .standings__head > span {
+      white-space: normal;
+      hyphens: manual;
+    }
+    .stat--split {
+      display: none;
+    }
+    .stat--merged {
+      display: block;
+    }
+    .standing__summary > .stat--merged {
+      white-space: nowrap;
+    }
+    .standing__detail {
+      padding-inline: 0.6rem;
+    }
+    .standing__matches th,
+    .standing__matches td {
+      padding-inline: 0.35rem;
+    }
+    .standing__matches th {
+      white-space: normal;
+    }
+    .encounter {
+      display: block;
+      margin-inline-start: 0;
+    }
+  }
+</style>

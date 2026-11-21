@@ -1,0 +1,27 @@
+---
+// Umbrella page for the symmetric 1v1 leaderboards: one card per killer that
+// has a published snapshot. Unlisted, like every leaderboard preview (UX
+// structure §5): not in the sidebar, not searchable, not indexed.
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { Aside } from '@astrojs/starlight/components';
+import LeaderboardCards from '@components/LeaderboardCards.astro';
+import { UNLISTED_PREVIEW, symmetricLeaderboards } from '../../../../lib/ranking/publications';
+
+const { entries } = symmetricLeaderboards;
+---
+
+<StarlightPage
+  frontmatter={{
+    title: '1v1 Symmetric Leaderboards',
+    description: 'Unlisted preview of the per-killer symmetric 1v1 leaderboards, rendered from fictional sample snapshots.',
+    ...UNLISTED_PREVIEW,
+  }}
+>
+  <Aside type="caution" title="Fictional sample data">
+    These previews render the sample ranking snapshots in <code>docs/ref/examples/</code>.
+    Players, matches, and scores are made up, and the scores were written by hand
+    rather than calculated.
+  </Aside>
+
+  <LeaderboardCards entries={entries} />
+</StarlightPage>

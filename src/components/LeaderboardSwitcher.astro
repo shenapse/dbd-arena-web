@@ -1,0 +1,94 @@
+---
+// Killer tab strip for the per-killer leaderboards of one game mode. Each pill
+// is a plain link to another killer's leaderboard, so switching works without
+// JavaScript; the current killer is marked with aria-current. Pills wrap
+// rather than scroll so every killer stays visible on narrow screens.
+//
+// The first pill, "All killers", leads to the game mode's umbrella page. It sits in the
+// strip rather than above it so readers find it where they already look to
+// switch killers.
+//
+// Leaderboards stay out of the sidebar (UX structure §5), so this strip is
+// the way between them.
+import type { PublicationGroup } from '../lib/ranking/publications';
+
+interface Props {
+  group: PublicationGroup;
+  current: string;
+}
+
+const { group, current } = Astro.props;
+const { entries } = group;
+---
+
+<nav class="lb-switcher not-content" aria-label="Killer leaderboards">
+  <ul class="lb-switcher__list">
+    <li class="lb-switcher__all">
+      <a class="lb-switcher__pill" href={group.href}>All killers</a>
+    </li>
+    {entries.map(({ slug, label, href }) => (
+      <li>
+        <a class="lb-switcher__pill" href={href} aria-current={slug === current ? 'page' : undefined}>
+          {label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .lb-switcher {
+    margin-block: 0.5rem 1.5rem;
+  }
+  .lb-switcher__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .lb-switcher__all {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  /* Divider between the umbrella pill and the killer pills. */
+  .lb-switcher__all::after {
+    content: '';
+    align-self: stretch;
+    width: 1px;
+    margin-inline: 0.2rem;
+    background: var(--sl-color-gray-5);
+  }
+  .lb-switcher__pill {
+    display: inline-block;
+    padding: 0.3rem 0.85rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 999px;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-2);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .lb-switcher__all .lb-switcher__pill {
+    border-color: var(--sl-color-gray-4);
+    color: var(--sl-color-white);
+    font-weight: 600;
+  }
+  .lb-switcher__pill:hover {
+    border-color: var(--sl-color-gray-3);
+    color: var(--sl-color-white);
+  }
+  .lb-switcher__pill[aria-current='page'] {
+    border-color: var(--sl-color-accent);
+    background: var(--sl-color-accent-low);
+    color: var(--sl-color-white);
+    font-weight: 600;
+  }
+  .lb-switcher a:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+</style>

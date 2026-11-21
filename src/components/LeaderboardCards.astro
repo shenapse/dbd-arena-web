@@ -1,0 +1,239 @@
+---
+// One card per killer leaderboard on a game mode's umbrella page: the
+// killer's portrait on the left, then killer name, season and, for each board,
+// the units ranked 3rd or better and the number of ranked units (players on
+// symmetric 1v1; killers and survivor parties on the quartet's two boards). Scores are left to the
+// full board; the card only says which killer it is and who leads. Ties at
+// 3rd all appear, so a card can list more than three rows; it never hides
+// one that shares a displayed rank.
+//
+// Portraits are the balancing tool's lore art (iconography/lore), stored as
+// src/assets/killers/portraits/<scope value ID>.webp and cropped to the
+// killer's upper body down the card's left edge. The crop covers the strip's
+// height, so the art is drawn wider than the strip (about 16rem on a quartet
+// card); `sizes` names that drawn width, not the strip's, or the browser picks
+// a file too small and upscales it. A killer without one gets an
+// empty strip, so a new snapshot never breaks the build and the cards stay
+// aligned. The portrait is decorative (alt=""): the killer name next to it
+// already says the same thing.
+//
+// The card is the only click target and links to the killer's full board.
+// It is built as a link in the title stretched over the whole card, rather
+// than an <a> wrapping the card, so the link's accessible name stays the
+// killer name instead of the whole card's text. Nothing inside the card is a
+// separate link.
+//
+// Ranks and labels are shown as published; this component adds only English
+// UI text.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import type { PublicationEntry } from '../lib/ranking/publications';
+import type { StandingView, UnitNoun } from '../lib/ranking/snapshot';
+
+interface Props {
+  entries: PublicationEntry[];
+}
+
+const portraitFiles = import.meta.glob<ImageMetadata>('../assets/killers/portraits/*.webp', {
+  eager: true,
+  import: 'default',
+});
+const portraits = new Map(
+  Object.entries(portraitFiles).map(([path, image]) => [path.split('/').pop()!.replace(/\.webp$/, ''), image]),
+);
+
+const { entries } = Astro.props;
+const TOP_RANK = 3;
+const topStandings = (standings: StandingView[]) => standings.filter((s) => s.row.rank <= TOP_RANK);
+const ranked = (n: number, unit: UnitNoun) => `${n} ranked ${n === 1 ? unit.one : unit.other}`;
+---
+
+<div class="lb-cards not-content">
+  {entries.map(({ slug, label, href, view }) => {
+    const { snapshot, boards, ambiguousNames } = view;
+    const headingId = `leaderboard-${slug}`;
+    const portrait = portraits.get(slug);
+    return (
+      <article class="lb-card" aria-labelledby={headingId}>
+        <div class="lb-card__portrait">
+          {portrait && (
+            <Image src={portrait} alt="" widths={[192, 288, 384, 512]} sizes="16rem" format="webp" quality={85} />
+          )}
+        </div>
+        <div class="lb-card__body">
+          <h2 id={headingId} class="lb-card__title"><a class="lb-card__link" href={href}>{label}</a></h2>
+          <p class="lb-card__season">{snapshot.season.label}</p>
+
+          {boards.map(({ board, standings, unit }) => {
+            const top = topStandings(standings);
+            return (
+              <section class="lb-card__board">
+                {boards.length > 1 && <h3 class="lb-card__board-label">{board.label}</h3>}
+                {top.length === 0 ? (
+                  <p class="lb-card__empty">No {unit.other} meet the eligibility requirements yet.</p>
+                ) : (
+                  <ol class="lb-card__top">
+                    {top.map(({ row, profile, tied }) => (
+                      <li class="lb-card__row">
+                        <span class="lb-card__rank">
+                          <span class="sr-only">Rank </span>{row.rank}
+                          {tied && <span class="sr-only"> (tied)</span>}
+                        </span>
+                        <span class="lb-card__name">
+                          <span class="lb-card__display-name">{profile.display_name}</span>
+                          {ambiguousNames.has(profile.display_name) && (
+                            <span class="profile-id" title="Shown because another profile has the same name">{profile.profile_id}</span>
+                          )}
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
+                )}
+                <p class="lb-card__count">{ranked(standings.length, unit)}</p>
+              </section>
+            );
+          })}
+        </div>
+      </article>
+    );
+  })}
+</div>
+
+<style>
+  .lb-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .lb-card {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    font-size: var(--sl-text-sm);
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+  }
+  .lb-card:hover {
+    border-color: var(--sl-color-accent);
+    background: var(--sl-color-gray-7, var(--sl-color-gray-6));
+  }
+  /* Full-height strip bleeding to the card's top, bottom and left edges. The
+     image is absolutely positioned so its tall art never sets the card's
+     height; the card's text does. */
+  .lb-card__portrait {
+    position: relative;
+    flex: none;
+    align-self: stretch;
+    width: 8.5rem;
+    min-height: 11rem;
+    margin: -1rem 0 -1rem -1.1rem;
+    overflow: hidden;
+    border-radius: 0.5rem 0 0 0.5rem;
+  }
+  .lb-card__portrait img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    /* Fade the cropped right edge into the card instead of a hard cut. */
+    mask-image: linear-gradient(to right, #000 70%, transparent);
+  }
+  .lb-card__body {
+    flex: 1;
+    min-width: 0;
+  }
+  .lb-card__title {
+    margin: 0;
+    font-size: var(--sl-text-lg);
+    line-height: var(--sl-line-height-headings);
+  }
+  .lb-card__link {
+    color: var(--sl-color-white);
+    text-decoration: none;
+  }
+  /* Stretch the title link over the whole card. */
+  .lb-card__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+  /* Focus ring goes on the card, which is the link's visible click area. */
+  .lb-card__link:focus-visible {
+    outline: none;
+  }
+  .lb-card:has(.lb-card__link:focus-visible) {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+  .lb-card__season {
+    margin: 0.15rem 0 0;
+    color: var(--sl-color-gray-3);
+    font-size: var(--sl-text-xs);
+  }
+  .lb-card__board {
+    margin-top: 0.75rem;
+  }
+  .lb-card__board-label {
+    margin: 0 0 0.35rem;
+    font-size: var(--sl-text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--sl-color-gray-3);
+  }
+  .lb-card__top {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .lb-card__row {
+    display: grid;
+    grid-template-columns: 1.75rem minmax(0, 1fr);
+    gap: 0.5rem;
+    align-items: baseline;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--sl-color-gray-6);
+  }
+  .lb-card__rank {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--sl-color-white);
+  }
+  .lb-card__name {
+    min-width: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.4rem;
+  }
+  .lb-card__display-name {
+    font-weight: 600;
+    color: var(--sl-color-white);
+    overflow-wrap: anywhere;
+  }
+  .lb-card__empty {
+    margin: 0;
+    color: var(--sl-color-gray-2);
+  }
+  .lb-card__count {
+    margin: 0.5rem 0 0;
+    color: var(--sl-color-gray-3);
+    font-size: var(--sl-text-xs);
+  }
+  .profile-id {
+    font-family: var(--sl-font-mono);
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-2);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.25rem;
+    padding: 0 0.3rem;
+    white-space: nowrap;
+  }
+</style>

@@ -14,3 +14,8 @@ npm-debug.log*
 
 # worktree
 worktree/
+
+# test output
+dist-test/
+test-results/
+playwright-report/
