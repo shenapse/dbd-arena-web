@@ -1,20 +1,34 @@
 ---
-// Renders a format's killer-roster overview table (Killer / Map / Win
-// condition / Draw condition / Status) on a format's balancing index page, in
-// place of a hardcoded Markdown table. Data comes from a build-time-read
-// manifest, `src/data/balancing/<format>/overview.yaml`, shaped as
-// `BalancingOverview` (src/lib/balancing/types.ts): a `killers:` list of
+// Renders a format's killer roster as a grid of cards on a format's balancing
+// index page, in place of a hardcoded Markdown table. Each card has the
+// killer's portrait down its left edge, then the killer name (a link when the
+// row has a `page`), the status badge and the killer's map, win condition and
+// draw condition. Data comes from a build-time-read manifest,
+// `src/data/balancing/<format>/overview.yaml`, shaped as `BalancingOverview`
+// (src/lib/balancing/types.ts): a `killers:` list of
 // `{ name, page?, conditions?, status }` rows.
 //
-// Each row optionally names a `conditions:` slug — if present, that killer's
+// Each row optionally names a `conditions:` slug. If present, that killer's
 // `-conditions.yaml` is read via `tryLoadMatchConditions` (the same
 // fs/resolveMap/localizeName pipeline MatchConditions.astro uses for a single
 // killer's page) and its map/win/draw are resolved + localized for display.
-// A row with no `conditions:` (or one naming a file that doesn't exist yet —
-// e.g. a killer whose balancing page hasn't been authored) renders blank
-// map/win/draw cells rather than failing the build; only a missing/misspelled
-// `format` or a missing manifest file is treated as a caller mistake and
-// throws.
+// A row with no `conditions:` (or one naming a file that doesn't exist yet,
+// e.g. a killer whose balancing page hasn't been authored) shows only name and
+// status rather than failing the build; only a missing/misspelled `format` or
+// a missing manifest file is treated as a caller mistake and throws.
+//
+// A card shows only the lines it has: the map when resolved, the win condition
+// when the file defines one, and the draw condition ONLY when it is set, that
+// is, non-null with at least one stat (quartet files carry
+// `drawCondition: { hookStages: null }`, which means "no draw" and is hidden).
+//
+// Portraits come from `portraitForKiller` (src/lib/killers/portraits.ts),
+// which maps overview names such as "Dracula" or "Wesker" to the portrait
+// files via killers.json. The portrait is decorative (alt=""): the name beside
+// it says the same thing. A killer without one gets an empty strip so cards
+// stay aligned. As in LeaderboardCards.astro, the card is the only click
+// target: a link in the title is stretched over the card, so its accessible
+// name stays the killer name.
 //
 // `page:` (when present) links the killer name to
 // `<localePrefix>/game-modes/<format>/balancing/<page>/` (format `1v1` maps to
@@ -33,6 +47,10 @@ import { resolveMap } from '../lib/balancing/resolve';
 import { localizeName } from '../lib/balancing/i18n-names';
 import { tryLoadMatchConditions } from '../lib/balancing/load-conditions';
 import type { BalancingOverview, OverviewEntry } from '../lib/balancing/types';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { portraitForKiller } from '../lib/killers/portraits';
+import { slugify } from '../lib/balancing/normalize';
 import StatusBadge from './StatusBadge.astro';
 
 interface Props {
@@ -61,16 +79,14 @@ const routeSegment = ROUTE_SEGMENT_BY_FORMAT[format] ?? format;
 
 interface DisplayRow {
   entry: OverviewEntry;
+  id: string;
+  name: string;
   map: string;
   win: string;
   draw: string;
   href: string | null;
+  portrait: ImageMetadata | undefined;
 }
-
-// Win/draw columns appear only if some killer's conditions define that key
-// (omitted = not applicable, e.g. 1v1 symmetric).
-let showWin = false;
-let showDraw = false;
 
 const rows: DisplayRow[] = doc.killers.map((entry) => {
   let map = '';
@@ -86,43 +102,157 @@ const rows: DisplayRow[] = doc.killers.map((entry) => {
       );
       map = localizeName(mapEntry.name, locale, 'map');
       if (c.winCondition !== undefined) {
-        showWin = true;
         win = describeConditionStats(c.winCondition, t, 'matchConditions.relativeWin');
       }
-      if (c.drawCondition !== undefined) {
-        showDraw = true;
-        draw = describeConditionStats(c.drawCondition, t);
+      const d = c.drawCondition;
+      if (d && (d.kills != null || d.gensRemaining != null || d.hookStages != null)) {
+        draw = describeConditionStats(d, t);
       }
     }
   }
 
   const href = entry.page ? `${prefix}/game-modes/${routeSegment}/balancing/${entry.page}/` : null;
+  const id = `balancing-${format}-${entry.page ?? slugify(entry.name)}`;
 
-  return { entry, map, win, draw, href };
+  return {
+    entry,
+    id,
+    name: localizeName(entry.name, locale, 'killer'),
+    map,
+    win,
+    draw,
+    href,
+    portrait: portraitForKiller(entry.name),
+  };
 });
 ---
 
-<table>
-  <thead>
-    <tr>
-      <th>{t('balancingOverview.killer')}</th>
-      <th>{t('matchConditions.map')}</th>
-      {showWin && <th>{t('matchConditions.winCondition')}</th>}
-      {showDraw && <th>{t('matchConditions.drawCondition')}</th>}
-      <th>{t('balancingOverview.status')}</th>
-    </tr>
-  </thead>
-  <tbody>
-    {rows.map(({ entry, map, win, draw, href }) => (
-      <tr>
-        <td>{href ? <a href={href}>{localizeName(entry.name, locale, 'killer')}</a> : localizeName(entry.name, locale, 'killer')}</td>
-        <td>{map}</td>
-        {showWin && <td>{win}</td>}
-        {showDraw && <td>{draw}</td>}
-        <td>
+<div class="bo-cards not-content">
+  {rows.map(({ entry, id, name, map, win, draw, href, portrait }) => {
+    const facts: [string, string][] = [
+      [t('matchConditions.map'), map],
+      [t('matchConditions.winCondition'), win],
+      [t('matchConditions.drawCondition'), draw],
+    ];
+    const shown = facts.filter(([, value]) => value);
+    return (
+      <article class:list={['bo-card', { 'bo-card--linked': href }]} aria-labelledby={id}>
+        <div class="bo-card__portrait">
+          {portrait && (
+            <Image src={portrait} alt="" widths={[128, 192, 256, 384]} sizes="12rem" format="webp" quality={85} />
+          )}
+        </div>
+        <div class="bo-card__body">
+          <h3 id={id} class="bo-card__title">
+            {href ? <a class="bo-card__link" href={href}>{name}</a> : name}
+          </h3>
           <StatusBadge status={entry.status as 'active' | 'upcoming' | 'archived' | 'provisional'} />
-        </td>
-      </tr>
-    ))}
-  </tbody>
-</table>
+          {shown.length > 0 && (
+            <dl class="bo-card__facts">
+              {shown.map(([label, value]) => (
+                <>
+                  <dt>{label}</dt>
+                  <dd>{value}</dd>
+                </>
+              ))}
+            </dl>
+          )}
+        </div>
+      </article>
+    );
+  })}
+</div>
+
+<style>
+  .bo-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .bo-card {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    font-size: var(--sl-text-sm);
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+  }
+  .bo-card--linked:hover {
+    border-color: var(--sl-color-accent);
+    background: var(--sl-color-gray-7, var(--sl-color-gray-6));
+  }
+  /* Full-height strip bleeding to the card's top, bottom and left edges. The
+     image is absolutely positioned so its tall art never sets the card's
+     height; the card's text does. */
+  .bo-card__portrait {
+    position: relative;
+    flex: none;
+    align-self: stretch;
+    width: 6rem;
+    min-height: 7.5rem;
+    margin: -0.75rem 0 -0.75rem -0.9rem;
+    overflow: hidden;
+    border-radius: 0.5rem 0 0 0.5rem;
+  }
+  .bo-card__portrait img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    /* Fade the cropped right edge into the card instead of a hard cut. */
+    mask-image: linear-gradient(to right, #000 70%, transparent);
+  }
+  .bo-card__body {
+    flex: 1;
+    min-width: 0;
+  }
+  .bo-card__title {
+    margin: 0 0 0.25rem;
+    font-size: var(--sl-text-lg);
+    line-height: var(--sl-line-height-headings);
+    color: var(--sl-color-white);
+  }
+  .bo-card__link {
+    color: var(--sl-color-white);
+    text-decoration: none;
+  }
+  /* Stretch the title link over the whole card. */
+  .bo-card__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+  /* Focus ring goes on the card, which is the link's visible click area. */
+  .bo-card__link:focus-visible {
+    outline: none;
+  }
+  .bo-card:has(.bo-card__link:focus-visible) {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+  .bo-card__facts {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.2rem 0.75rem;
+    align-items: baseline;
+    margin: 0.5rem 0 0;
+  }
+  .bo-card__facts dt {
+    color: var(--sl-color-gray-3);
+    font-size: var(--sl-text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .bo-card__facts dd {
+    margin: 0;
+    color: var(--sl-color-white);
+    overflow-wrap: anywhere;
+  }
+</style>

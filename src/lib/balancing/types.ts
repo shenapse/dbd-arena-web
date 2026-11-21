@@ -305,7 +305,7 @@ export interface ResolvedMapOfferings {
 
 // ---------------------------------------------------------------------------
 // <format>/overview.yaml — format-level killer roster manifest, consumed by
-// BalancingOverview.astro to render the overview table on a format's index
+// BalancingOverview.astro to render the killer cards on a format's index
 // page (in place of a hardcoded Markdown table).
 // ---------------------------------------------------------------------------
 
