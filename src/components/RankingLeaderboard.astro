@@ -269,7 +269,6 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
                           <thead>
                             <tr>
                               <th scope="col">Date</th>
-                              {!quartet && <th scope="col">Match</th>}
                               <th scope="col">Opponent</th>
                               <th scope="col">Result</th>
                               {quartet && (
@@ -290,7 +289,6 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
                                     <span class="match-date--unknown">Unknown</span>
                                   )}
                                 </td>
-                                {!quartet && <td><code class="match-id">{m.matchId}</code></td>}
                                 <td class="match-opponent">
                                   {m.opponentAnchor ? (
                                     <a href={`#${m.opponentAnchor}`}>{m.opponent.display_name}</a>
@@ -885,10 +883,6 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
   .standing__matches a {
     color: var(--sl-color-text-accent);
     font-weight: 600;
-  }
-  .match-id {
-    font-size: var(--sl-text-xs);
-    color: var(--sl-color-gray-3);
   }
   .encounter {
     margin-inline-start: 0.5rem;
