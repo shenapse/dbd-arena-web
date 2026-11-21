@@ -8,7 +8,8 @@
 // one that shares a displayed rank.
 //
 // Portraits are the balancing tool's lore art (iconography/lore), stored as
-// src/assets/killers/portraits/<scope value ID>.webp and cropped to the
+// src/assets/killers/portraits/<scope value ID>.webp (loaded by
+// src/lib/killers/portraits.ts) and cropped to the
 // killer's upper body down the card's left edge. The crop covers the strip's
 // height, so the art is drawn wider than the strip (about 16rem on a quartet
 // card); `sizes` names that drawn width, not the strip's, or the browser picks
@@ -26,21 +27,13 @@
 // Ranks and labels are shown as published; this component adds only English
 // UI text.
 import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
+import { portraits } from '../lib/killers/portraits';
 import type { PublicationEntry } from '../lib/ranking/publications';
 import type { StandingView, UnitNoun } from '../lib/ranking/snapshot';
 
 interface Props {
   entries: PublicationEntry[];
 }
-
-const portraitFiles = import.meta.glob<ImageMetadata>('../assets/killers/portraits/*.webp', {
-  eager: true,
-  import: 'default',
-});
-const portraits = new Map(
-  Object.entries(portraitFiles).map(([path, image]) => [path.split('/').pop()!.replace(/\.webp$/, ''), image]),
-);
 
 const { entries } = Astro.props;
 const TOP_RANK = 3;
