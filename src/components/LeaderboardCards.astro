@@ -9,7 +9,10 @@
 //
 // Portraits are the balancing tool's lore art (iconography/lore), stored as
 // src/assets/killers/portraits/<scope value ID>.webp and cropped to the
-// killer's upper body down the card's left edge. A killer without one gets an
+// killer's upper body down the card's left edge. The crop covers the strip's
+// height, so the art is drawn wider than the strip (about 16rem on a quartet
+// card); `sizes` names that drawn width, not the strip's, or the browser picks
+// a file too small and upscales it. A killer without one gets an
 // empty strip, so a new snapshot never breaks the build and the cards stay
 // aligned. The portrait is decorative (alt=""): the killer name next to it
 // already says the same thing.
@@ -54,7 +57,7 @@ const ranked = (n: number, unit: UnitNoun) => `${n} ranked ${n === 1 ? unit.one 
       <article class="lb-card" aria-labelledby={headingId}>
         <div class="lb-card__portrait">
           {portrait && (
-            <Image src={portrait} alt="" widths={[192, 288, 384, 512]} sizes="11rem" format="webp" quality={85} />
+            <Image src={portrait} alt="" widths={[192, 288, 384, 512]} sizes="16rem" format="webp" quality={85} />
           )}
         </div>
         <div class="lb-card__body">
