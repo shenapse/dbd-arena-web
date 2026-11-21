@@ -1,0 +1,20 @@
+---
+// Starlight MarkdownContent override: puts the killer's landscape banner at
+// the top of every per-killer balancing page, i.e. any page whose frontmatter
+// sets both `killer:` (a display name or alias such as "Dracula" or "The
+// Hillbilly") and `format:`. Doing it here rather than in each MDX file covers
+// every format and locale (including locale-fallback routes) without touching
+// the pages. Names that don't resolve via killers.json (e.g. the templates'
+// placeholder killer) and killers without art render no banner.
+import Default from '@astrojs/starlight/components/MarkdownContent.astro';
+import KillerBanner from './KillerBanner.astro';
+import { killerKey } from '../lib/killers/portraits';
+
+const { killer, format } = Astro.locals.starlightRoute.entry.data;
+const bannerKey = killer && format ? killerKey(killer) : undefined;
+---
+
+<Default>
+  {bannerKey && <KillerBanner slug={bannerKey} />}
+  <slot />
+</Default>

@@ -94,6 +94,9 @@ export default defineConfig({
       components: {
         SiteTitle: './src/components/SiteTitle.astro',
         Header: './src/components/Header.astro',
+        // Killer banner atop per-killer balancing pages. See
+        // src/components/MarkdownContent.astro.
+        MarkdownContent: './src/components/MarkdownContent.astro',
       },
       title: SERVICE_NAME,
       // Brand favicon — bold crimson "A" mark on a dark circle (public/favicon.svg).
