@@ -173,14 +173,14 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
               <span>{unitLabel}</span>
               <span class="num">{board.score_definition.label}</span>
               <span class="num stat--split">Matches</span>
-              <span class="num stat--split" title={`Included matches this ${unit.one} won`}>Wins</span>
-              <span class="num stat--merged" title={`Included matches / matches this ${unit.one} won`}>Matches/<wbr />Wins</span>
-              <span class="num" title={`Share of included matches this ${unit.one} won${quartet ? '; draws are not wins' : ''}`}>Win rate</span>
+              <span class="num stat--split" title={`Wins by this ${unit.one} in matches that count`}>Wins</span>
+              <span class="num stat--merged" title={`Matches that count / wins by this ${unit.one} in those matches`}>Matches/<wbr />Wins</span>
+              <span class="num" title={`Percentage of matches that count won by this ${unit.one}${quartet ? '; draws are not wins' : ''}`}>Win rate</span>
               {quartet ? (
                 <Fragment>
-                  <span class="num stat--split" title="Average generators completed per included match">Avg gens</span>
-                  <span class="num stat--split" title="Average hook stages per included match">Avg hook stages</span>
-                  <span class="num stat--merged" title="Average generators completed / hook stages per included match">Gens/<wbr />Hooks</span>
+                  <span class="num stat--split" title="Average generators completed per match, using matches that count">Avg gens</span>
+                  <span class="num stat--split" title="Average hook stages per match, using matches that count">Avg hook stages</span>
+                  <span class="num stat--merged" title="Average generators completed / hook stages per match, using matches that count">Gens/<wbr />Hooks</span>
                 </Fragment>
               ) : (
                 <span class="num">Oppo&shy;nents</span>
@@ -251,7 +251,7 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
 
                     <div class="standing__detail">
                       <p class="standing__detail-title">
-                        Included matches for {profile.display_name}
+                        Matches that count for {profile.display_name}
                         {showProfileId(profile.display_name) && <span class="profile-id">{profile.profile_id}</span>}
                       </p>
                       {profile.group_members && profile.group_members.length > 0 && (
@@ -263,7 +263,7 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
                       <div class="standing__table-wrap">
                         <table class="standing__matches">
                           <caption class="sr-only">
-                            Matches included in the ranking calculation for {profile.display_name}
+                            Matches that count toward the ranking for {profile.display_name}
                             {showProfileId(profile.display_name) && ` (${profile.profile_id})`}, from their perspective
                           </caption>
                           <thead>
