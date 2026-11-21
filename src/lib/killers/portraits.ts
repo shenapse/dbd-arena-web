@@ -32,11 +32,19 @@ for (const [slug, entry] of Object.entries(killersJson as Record<string, KillerE
 }
 
 /**
+ * Killer key (killers.json slug without "the-") for a display name or alias
+ * ("Dracula" -> "dark-lord", "The Nurse" -> "nurse"). Unknown names give undefined.
+ */
+export function killerKey(name: string): string | undefined {
+  const slug = slugByName.get(normalize(name)) ?? slugByName.get(normalize(`The ${name}`));
+  return slug?.replace(/^the-/, '');
+}
+
+/**
  * Portrait for a killer display name or alias ("Dracula", "Wesker", "The Nurse").
  * Unknown killers and killers without a portrait file give undefined.
  */
 export function portraitForKiller(name: string): ImageMetadata | undefined {
-  const slug = slugByName.get(normalize(name)) ?? slugByName.get(normalize(`The ${name}`));
-  if (!slug) return undefined;
-  return portraits.get(slug.replace(/^the-/, ''));
+  const key = killerKey(name);
+  return key ? portraits.get(key) : undefined;
 }
