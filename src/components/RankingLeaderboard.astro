@@ -808,9 +808,25 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
   }
 
   /* ---- Included matches ---- */
+  /* The open row's detail sits in a recessed panel so its table reads apart
+     from the standings rows around it (page background) and from its own
+     highlighted summary (gray-6): darker than the page on the dark theme,
+     a faint gray on the light one. */
+  .standings {
+    --standing-detail-bg: hsl(224, 14%, 5.5%);
+    --standing-detail-rule: var(--sl-color-gray-6);
+    --standing-detail-shade: rgb(0 0 0 / 0.5);
+  }
+  :global([data-theme='light']) .standings {
+    --standing-detail-bg: hsl(224, 26%, 96%);
+    --standing-detail-rule: var(--sl-color-gray-5);
+    --standing-detail-shade: rgb(0 0 0 / 0.12);
+  }
   .standing__detail {
     padding: 0.75rem 0.9rem 1rem;
     border-top: 1px dashed var(--sl-color-gray-5);
+    background: var(--standing-detail-bg);
+    box-shadow: inset 0 2px 4px -2px var(--standing-detail-shade);
   }
   .standing__detail-title {
     margin: 0 0 0.5rem;
@@ -840,7 +856,7 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
   .standing__matches td {
     padding: 0.4rem 0.6rem;
     text-align: start;
-    border-bottom: 1px solid var(--sl-color-gray-6);
+    border-bottom: 1px solid var(--standing-detail-rule);
     white-space: nowrap;
   }
   .standing__matches th {
