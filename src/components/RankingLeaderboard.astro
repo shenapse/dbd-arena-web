@@ -79,34 +79,29 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
       before first paint instead of flashing up until the module script runs. */}
   <script is:inline>document.currentScript.parentElement.classList.add('ranking--js');</script>
 
-  <dl class="meta-grid ranking__meta">
-    <Fragment>
-      <dt>Competition</dt>
-      <dd title={competition.description}>{competition.label}</dd>
-    </Fragment>
-    {publication.scope.map(({ category, value }) => (
+  <div class="ranking__info">
+    <h2 class="ranking__info-title">Leaderboard scope</h2>
+    <dl class="meta-grid ranking__meta">
       <Fragment>
-        <dt title={category.description}>{category.label}</dt>
-        <dd title={value.description}>{value.label}</dd>
+        <dt>Competition</dt>
+        <dd title={competition.description}>{competition.label}</dd>
       </Fragment>
-    ))}
-    <Fragment>
-      <dt>Season</dt>
-      <dd>{seasonLabel}</dd>
-    </Fragment>
-    <Fragment>
-      <dt>Season window</dt>
-      <dd>
-        <time datetime={season.starts_at}>{formatTimestamp(season.starts_at)}</time>
-        {' to '}
-        <time datetime={season.ends_at}>{formatTimestamp(season.ends_at)}</time>
-      </dd>
-    </Fragment>
-    <Fragment>
-      <dt>Snapshot generated</dt>
-      <dd><time datetime={snapshot.generated_at}>{formatTimestamp(snapshot.generated_at)}</time></dd>
-    </Fragment>
-  </dl>
+      {publication.scope.map(({ category, value }) => (
+        <Fragment>
+          <dt title={category.description}>{category.label}</dt>
+          <dd title={value.description}>{value.label}</dd>
+        </Fragment>
+      ))}
+      <Fragment>
+        <dt>Season</dt>
+        <dd>{seasonLabel}</dd>
+      </Fragment>
+      <Fragment>
+        <dt>Snapshot generated</dt>
+        <dd><time datetime={snapshot.generated_at}>{formatTimestamp(snapshot.generated_at)}</time></dd>
+      </Fragment>
+    </dl>
+  </div>
 
   {boards.map(({ board, headingId, unit, opponentUnit, standings }, boardIndex) => {
     // Rank · Name · Score · Matches · Wins · Win rate · then Opponents
@@ -129,16 +124,19 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
         <h2 id={headingId}>{board.label}</h2>
         <p>{introductionFor(boardIndex)}</p>
 
-        <dl class="meta-grid ranking__meta">
-          <Fragment>
-            <dt title={board.eligibility.rating.description}>Required {board.eligibility.rating.label}</dt>
-            <dd>At least {board.eligibility.minimum_rating_value}</dd>
-          </Fragment>
-          <Fragment>
-            <dt>Required matches against eligible {opponentUnit.other}</dt>
-            <dd>At least {board.eligibility.minimum_eligible_match_count}</dd>
-          </Fragment>
-        </dl>
+        <div class="ranking__info">
+          <h3 class="ranking__info-title">Requirement to be ranked</h3>
+          <dl class="meta-grid ranking__meta">
+            <Fragment>
+              <dt title={board.eligibility.rating.description}>Entry rating</dt>
+              <dd>At least {board.eligibility.minimum_rating_value}</dd>
+            </Fragment>
+            <Fragment>
+              <dt>Matches against ranked {opponentUnit.other}</dt>
+              <dd>At least {board.eligibility.minimum_eligible_match_count}</dd>
+            </Fragment>
+          </dl>
+        </div>
 
         {standings.length === 0 ? (
           <p>No {unit.other} meet the eligibility requirements in this snapshot.</p>
@@ -546,6 +544,29 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
 <style>
   .ranking__meta {
     margin-top: 1rem;
+  }
+
+  .ranking__info {
+    margin: 1rem 0;
+    padding: 0.9rem 1rem;
+    background: var(--sl-color-gray-6);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+  }
+  .ranking__info .ranking__info-title {
+    margin: 0;
+    font-size: 1rem;
+  }
+  .ranking__info p {
+    margin: 0.25rem 0 0;
+    color: var(--sl-color-gray-3);
+    font-size: 0.9rem;
+  }
+  .ranking__info .ranking__meta {
+    margin: 0.75rem 0 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
   }
 
   /* ---- Standings ---- */
