@@ -1,0 +1,259 @@
+{
+  "description": "Sources for landscape artwork added to complete the killer roster. Existing doctor, nightmare, trapper, and wraith images are unchanged.",
+  "retrievedOn": "2026-11-22",
+  "images": {
+    "animatronic.webp": {
+      "sourcePage": "https://deadbydaylight.com/game/characters/the-animatronic/",
+      "sourceImage": "https://deadbydaylight.com/static/9526d69604bfe63c300bafdd177f7314/691d2/DBD_KETCHUP_Resizes_WEBSITE_Keyart_1920x1080_No_Logo_FINAL_128d52e110.png",
+      "downloadImage": "https://deadbydaylight.com/static/9526d69604bfe63c300bafdd177f7314/54ac6/DBD_KETCHUP_Resizes_WEBSITE_Keyart_1920x1080_No_Logo_FINAL_128d52e110.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    "artist.jpg": {
+      "sourcePage": "https://www.altchar.com/guides/dead-by-daylight-ideal-perk-build-for-the-artist-a3RKS7I1ZLXP",
+      "sourceImage": "https://media.altchar.com/prod/images/gm_featured_image/f27f22d31bdd-the-artist-reveal-trailer-dead-by-daylight.jpg",
+      "width": 1200,
+      "height": 672
+    },
+    "blight.jpg": {
+      "sourcePage": "https://www.altchar.com/guides/dead-by-daylight-ideal-perk-build-for-the-blight-apgjy6B50vLb",
+      "sourceImage": "https://media.altchar.com/prod/images/gm_featured_image/2201971a15fe-the-blight-reveal-trailer-dead-by-daylight.jpg",
+      "width": 1200,
+      "height": 672
+    },
+    "cannibal.webp": {
+      "sourcePage": "https://deadbydaylight.com/game/characters/the-cannibal/",
+      "sourceImage": "https://deadbydaylight.com/static/e0a351d616331c1582bc90d0beae9c75/a4a52/dbd_chap5_5_leatherface_keyart_3f69da41f4.jpg",
+      "downloadImage": "https://deadbydaylight.com/static/e0a351d616331c1582bc90d0beae9c75/f83b6/dbd_chap5_5_leatherface_keyart_3f69da41f4.webp",
+      "width": 1920,
+      "height": 1200
+    },
+    "cenobite.jpg": {
+      "sourcePage": "https://wccftech.com/dead-by-daylight-hellraiser-update-skill-base-matchmaking/",
+      "sourceImage": "https://cdn.wccftech.com/wp-content/uploads/2021/09/WCCFdeadbydaylight6.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    "clown.jpg": {
+      "sourcePage": "https://www.fanatical.com/en/blog/dead-by-daylight-killers-list-meet-monsters",
+      "sourceImage": "https://images.prismic.io/fanatical/1c3d729e-4949-4335-981e-6c8bd092d452_deadbydaylightclown.jpg",
+      "width": 1377,
+      "height": 820
+    },
+    "dark-lord.webp": {
+      "sourcePage": "https://deadbydaylight.com/game/characters/dracula/",
+      "sourceImage": "https://deadbydaylight.com/static/ed2aa7b874742a315ad73c93be9d594a/bb1c4/Keyart_Resizes_WEBSITE_Keyart_1920x1080_No_Logo_FINAL_b207be389d.jpg",
+      "downloadImage": "https://deadbydaylight.com/static/ed2aa7b874742a315ad73c93be9d594a/54ac6/Keyart_Resizes_WEBSITE_Keyart_1920x1080_No_Logo_FINAL_b207be389d.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    "deathslinger.webp": {
+      "sourcePage": "https://deadbydaylight.com/game/characters/the-deathslinger/",
+      "sourceImage": "https://deadbydaylight.com/static/db1f1707099ebd527135e13b356b2cc6/bb1c4/dbd_chap15_chainsofhates_keyart_186f285197.jpg",
+      "downloadImage": "https://deadbydaylight.com/static/db1f1707099ebd527135e13b356b2cc6/54ac6/dbd_chap15_chainsofhates_keyart_186f285197.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    "demogorgon.jpg": {
+      "sourcePage": "https://wallpapersden.com/demogorgon-dead-by-daylight-4k-wallpaper/",
+      "sourceImage": "https://images.wallpapersden.com/image/download/demogorgon-dead-by-daylight-4k_bGhpaWiUmZqaraWkpJRobWllrWdma2U.jpg",
+      "width": 3840,
+      "height": 2160
+    },
+    "dredge.jpg": {
+      "sourcePage": "https://news.xbox.com/en-us/2022/06/08/dead-by-daylights-the-dredge-a-beginners-guide/",
+      "sourceImage": "https://xboxwire.thesourcemediaassets.com/sites/2/2022/06/DBD_CH24_Character_TheDredge_1920x1080-c37c7332e517e8322e41.jpg",
+      "width": 1920,
+      "height": 1080
+    },
+    "executioner.webp": {
+      "sourcePage": "https://deadbydaylight.com/game/characters/the-executioner/",
+      "sourceImage": "https://deadbydaylight.com/static/3864b475f317ea5bcffbd115f2e3bc20/a4a52/killer_pyramidhead_lore_b346a95718.jpg",
+      "downloadImage": "https://deadbydaylight.com/static/3864b475f317ea5bcffbd115f2e3bc20/f83b6/killer_pyramidhead_lore_b346a95718.webp",
+      "width": 1920,
+      "height": 1200
+    },
+    "first.jpg": {
+      "sourcePage": "https://www.pcgamer.com/games/horror/if-for-some-reason-you-cant-get-enough-of-stranger-things-vecna-you-can-now-play-as-him-in-dead-by-daylights-latest-crossover/",
+      "sourceImage": "https://cdn.mos.cms.futurecdn.net/xvWJ8wAHByMbuoSjWxC7xX.jpg",
+      "width": 1725,
+      "height": 970
+    },
+    "ghost-face.webp": {
+      "sourcePage": "https://deadbydaylight.com/game/characters/the-ghost-face/",
+      "sourceImage": "https://deadbydaylight.com/static/dd09945fdeec09efd789b1eb39efab42/a4a52/dbd_chap12_ghostface_keyart_03059329eb.jpg",
+      "downloadImage": "https://deadbydaylight.com/static/dd09945fdeec09efd789b1eb39efab42/f83b6/dbd_chap12_ghostface_keyart_03059329eb.webp",
+      "width": 1920,
+      "height": 1200
+    },
+    "ghoul.webp": {
+      "sourcePage": "https://deadbydaylight.com/game/characters/the-ghoul/",
+      "sourceImage": "https://deadbydaylight.com/static/608c0a0edc2015b855cbbee9ad54f03f/691d2/Keyart_Resizes_WEBSITE_Keyart_1920x1080_No_Logo_c4ac06ed94.png",
+      "downloadImage": "https://deadbydaylight.com/static/608c0a0edc2015b855cbbee9ad54f03f/54ac6/Keyart_Resizes_WEBSITE_Keyart_1920x1080_No_Logo_c4ac06ed94.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    "good-guy.webp": {
+      "sourcePage": "https://deadbydaylight.com/game/characters/the-good-guy-chucky/",
+      "sourceImage": "https://deadbydaylight.com/static/e774c678e9a6948ad8f358420ac8b00c/691d2/01_Static_Keyart_No_Logo_1920x1080_40bf271424.png",
+      "downloadImage": "https://deadbydaylight.com/static/e774c678e9a6948ad8f358420ac8b00c/54ac6/01_Static_Keyart_No_Logo_1920x1080_40bf271424.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    "hag.jpg": {
+      "sourcePage": "https://allmyperks.com/characters/killers/the-hag",
+      "sourceImage": "https://allmyperks.com/assets/characters/killers/killers-wallpapers/the-hag.webp",
+      "downloadImage": "https://allmyperks.com/_next/image?url=%2Fassets%2Fcharacters%2Fkillers%2Fkillers-wallpapers%2Fthe-hag.webp&w=1920&q=75",
+      "width": 1920,
+      "height": 1080
+    },
+    "hillbilly.jpg": {
+      "sourcePage": "https://www.gfinityesports.com/article/dead-by-daylight-the-hillbilly-guide-best-perks-powers-add-ons-tips",
+      "sourceImage": "https://gdm-universal-media.b-cdn.net/gfinityesports/6ad5ea1e939af300b3ea98a3cf15538c011f4a47-1706x833.jpg?width=1920",
+      "width": 1706,
+      "height": 833
+    },
+    "houndmaster.webp": {
+      "sourcePage": "https://deadbydaylight.com/game/characters/the-houndmaster/",
+      "sourceImage": "https://deadbydaylight.com/static/c35fd9901180879efc60722a51a0b15c/bb1c4/DBD_CHAPTER_GELATO_Keyart_Resizes_NEW_nologo_1920x1080_final_74f8df3bfd.jpg",
+      "downloadImage": "https://deadbydaylight.com/static/c35fd9901180879efc60722a51a0b15c/54ac6/DBD_CHAPTER_GELATO_Keyart_Resizes_NEW_nologo_1920x1080_final_74f8df3bfd.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    "huntress.jpg": {
+      "sourcePage": "https://wallpapersden.com/the-huntress-dead-by-daylight-wallpaper/5120x2879/",
+      "sourceImage": "https://images.wallpapersden.com/image/download/the-huntress-dead-by-daylight_bGhpaGaUmZqaraWkpJRqZmdlrWdtbG4.jpg",
+      "width": 5120,
+      "height": 2879
+    },
+    "knight.webp": {
+      "sourcePage": "https://www.toomuchgaming.net/blog-news/dead-by-daylight-will-start-2023-with-changes-to-survivor-ui-nurse-and-knight-tweaks",
+      "sourceImage": "https://images.squarespace-cdn.com/content/v1/56d5457d8259b57a20245e80/c63d5be1-de6c-4ab0-b578-e0a1e95b55ce/Dead-by-Daylight-Forged-in-Fog-Knight-2023.png",
+      "width": 1600,
+      "height": 900
+    },
+    "krasue.webp": {
+      "sourcePage": "https://deadbydaylight.com/game/characters/the-krasue/",
+      "sourceImage": "https://deadbydaylight.com/static/bea2cdfda612c17f9c171805d1261914/691d2/MAPLE_Keyart_Resizes_WEBSITE_Keyart_1920x1080_No_Logo_V3_3897cdddf5.png",
+      "downloadImage": "https://deadbydaylight.com/static/bea2cdfda612c17f9c171805d1261914/54ac6/MAPLE_Keyart_Resizes_WEBSITE_Keyart_1920x1080_No_Logo_V3_3897cdddf5.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    "legion.jpg": {
+      "sourcePage": "https://www.gfinityesports.com/article/dead-by-daylight-the-legion-killer-build-guide-best-perks-powers-add-ons-tips",
+      "sourceImage": "https://gdm-universal-media.b-cdn.net/gfinityesports/9e0ba88a7ea5078c424a517f03bdf07d077ac87b-1920x1080.jpg?width=1920",
+      "width": 1920,
+      "height": 1080
+    },
+    "lich.webp": {
+      "sourcePage": "https://deadbydaylight.com/game/characters/the-lich-vecna/",
+      "sourceImage": "https://deadbydaylight.com/static/a0f6e9ea32e8944ae39ccb09eb83799c/691d2/DBD_CHURROS_WEBSITE_Keyart_1920x1080_No_Logo_FINAL_b803f50929.png",
+      "downloadImage": "https://deadbydaylight.com/static/a0f6e9ea32e8944ae39ccb09eb83799c/54ac6/DBD_CHURROS_WEBSITE_Keyart_1920x1080_No_Logo_FINAL_b803f50929.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    "mastermind.jpg": {
+      "sourcePage": "https://www.altchar.com/guides/dead-by-daylight-ideal-perk-build-for-the-mastermind-aty5T0s0sNQj",
+      "sourceImage": "https://media.altchar.com/prod/images/gm_featured_image/e59a7ca28197-dead-by-daylight-reveal-trailer-the-mastermind.jpg",
+      "width": 1200,
+      "height": 672
+    },
+    "nemesis.jpg": {
+      "sourcePage": "https://www.gamersdecide.com/articles/dead-by-daylight-best-killer-addons",
+      "sourceImage": "https://www.gamersdecide.com/sites/default/files/authors/u165803/nemesis.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    "nurse.webp": {
+      "sourcePage": "https://deadbydaylight.com/game/characters/the-nurse/",
+      "sourceImage": "https://deadbydaylight.com/static/b10ef574ed0b0c017ba8ca6e33f030eb/691d2/killer_nurse_lore_119c1af29c.png",
+      "downloadImage": "https://deadbydaylight.com/static/b10ef574ed0b0c017ba8ca6e33f030eb/54ac6/killer_nurse_lore_119c1af29c.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    "oni.jpg": {
+      "sourcePage": "https://wallpapersden.com/the-oni-dead-by-daylight-kazan-yamaoka-wallpaper/5120x2879/",
+      "sourceImage": "https://images.wallpapersden.com/image/download/the-oni-dead-by-daylight-kazan-yamaoka_bGhpaWeUmZqaraWkpJRqZmdlrWdtbG4.jpg",
+      "width": 5120,
+      "height": 2879
+    },
+    "onryo.jpg": {
+      "sourcePage": "https://wccftech.com/dead-by-daylight-the-ring-chapter-release-date/",
+      "sourceImage": "https://cdn.wccftech.com/wp-content/uploads/2022/02/WCCFdeadbydaylight9.jpg",
+      "width": 1280,
+      "height": 720
+    },
+    "pig.webp": {
+      "sourcePage": "https://deadbydaylight.com/game/characters/the-pig/",
+      "sourceImage": "https://deadbydaylight.com/static/d1f71ab14718e2913ede171829cef0f1/a4a52/dbd_chap7_saw_keyart_40c5d9a1d5.jpg",
+      "downloadImage": "https://deadbydaylight.com/static/d1f71ab14718e2913ede171829cef0f1/f83b6/dbd_chap7_saw_keyart_40c5d9a1d5.webp",
+      "width": 1920,
+      "height": 1200
+    },
+    "plague.webp": {
+      "sourcePage": "https://deadbydaylight.com/game/characters/the-plague/",
+      "sourceImage": "https://deadbydaylight.com/static/654a39336892cae22f190e457e91dd37/a4a52/dbd_chap11_demiseofthefaithful_keyart_7a85d26e37.jpg",
+      "downloadImage": "https://deadbydaylight.com/static/654a39336892cae22f190e457e91dd37/f83b6/dbd_chap11_demiseofthefaithful_keyart_7a85d26e37.webp",
+      "width": 1920,
+      "height": 1200
+    },
+    "shape.jpg": {
+      "sourcePage": "https://www.turtlebeach.com/blog/dead-by-daylight-michael-myers-build",
+      "sourceImage": "https://cdn.shopify.com/s/files/1/0556/5795/5430/articles/02-halloween-key-art.png?v=1712924615",
+      "width": 1920,
+      "height": 1080
+    },
+    "singularity.jpg": {
+      "sourcePage": "https://www.altchar.com/guides/dead-by-daylight-ideal-perk-build-for-the-singularity-ahVKF5F48HWt",
+      "sourceImage": "https://media.altchar.com/prod/images/gm_featured_image/9b424d313629-dead-by-daylight-reveal-trailer-the-singularity.jpg",
+      "width": 1200,
+      "height": 672
+    },
+    "skull-merchant.webp": {
+      "sourcePage": "https://deadbydaylight.com/game/characters/skull-merchant/",
+      "sourceImage": "https://deadbydaylight.com/static/907109dd5c43d10d168f395ac6ad344d/691d2/DBD_CH_27_Web_Static_keyart_1920x1080_c81223491a.png",
+      "downloadImage": "https://deadbydaylight.com/static/907109dd5c43d10d168f395ac6ad344d/54ac6/DBD_CH_27_Web_Static_keyart_1920x1080_c81223491a.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    "slasher.webp": {
+      "sourcePage": "https://deadbydaylight.com/game/characters/the-slasher/",
+      "sourceImage": "https://deadbydaylight.com/static/c6b169c2d161f110b119805aa4d3993f/4b0d6/Sushi_Keyart_3840x2160_No_Logo_VF_ff76db93d5.jpg",
+      "downloadImage": "https://deadbydaylight.com/static/c6b169c2d161f110b119805aa4d3993f/54ac6/Sushi_Keyart_3840x2160_No_Logo_VF_ff76db93d5.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    "spirit.webp": {
+      "sourcePage": "https://deadbydaylight.com/game/characters/the-spirit/",
+      "sourceImage": "https://deadbydaylight.com/static/9bca5383049e9c299f0d5bab94ff14c9/691d2/killer_spirit_lore_3cc212cba1.png",
+      "downloadImage": "https://deadbydaylight.com/static/9bca5383049e9c299f0d5bab94ff14c9/54ac6/killer_spirit_lore_3cc212cba1.webp",
+      "width": 1920,
+      "height": 1080
+    },
+    "trickster.png": {
+      "sourcePage": "https://forums.bhvr.com/dead-by-daylight/discussion/comment/3669710",
+      "sourceImage": "https://us.v-cdn.net/6030815/uploads/SXHGBDEZ5EIF/image.png",
+      "width": 1920,
+      "height": 1080
+    },
+    "twins.jpg": {
+      "sourcePage": "https://www.turtlebeach.com/blog/dead-by-daylight-twins-build",
+      "sourceImage": "https://cdn.shopify.com/s/files/1/0556/5795/5430/articles/Dead-By-Daylight-Twins.jpg?v=1712925351",
+      "width": 1920,
+      "height": 1080
+    },
+    "unknown.jpg": {
+      "sourcePage": "https://www.pcgamer.com/dead-by-daylights-new-killer-is-an-evil-so-heinous-that-investigating-it-almost-immediately-invites-death/",
+      "sourceImage": "https://cdn.mos.cms.futurecdn.net/xyBnhWZX27avzWwuifYc86.jpg",
+      "width": 1588,
+      "height": 893
+    },
+    "xenomorph.jpg": {
+      "sourcePage": "https://deadbydaylight.com/game/characters/the-xenomorph/",
+      "sourceImage": "https://assets.deadbydaylight.com/DBD_CH_29_Screenshot_Xeno_Perk2_Final_34bfdb6a9c.jpg",
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  "selectionPreference": "Landscape artwork focused on the killer, avoiding unrelated survivors and chapter collages. Both Twins and the Houndmaster’s dog are part of their killer identity."
+}
