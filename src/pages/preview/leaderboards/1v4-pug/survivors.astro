@@ -1,0 +1,60 @@
+---
+// The overall 1v4 PUG survivor leaderboard, at
+// /preview/leaderboards/1v4-pug/survivors/: one board of individual survivors
+// across every killer character. Killer players have no board here; they
+// appear only as each match's opponent, next to the character they played
+// (ranking-evidence-dbd-1v4-pug-overall.md). Unlisted (UX structure §5); the
+// PUG umbrella page links here, and the killer strip leads on to the
+// per-killer leaderboards.
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { Aside } from '@astrojs/starlight/components';
+import LeaderboardSwitcher from '@components/LeaderboardSwitcher.astro';
+import RankingLeaderboard from '@components/RankingLeaderboard.astro';
+import {
+  PUG_LEADERBOARDS_PATH,
+  UNLISTED_PREVIEW,
+  pugLeaderboards,
+  pugSurvivorsOverall as view,
+} from '../../../../lib/ranking/publications';
+
+const { publication } = view.snapshot;
+const hasStandings = view.boards.some((b) => b.standings.length > 0);
+// Website copy for the one survivor board: edit it independently of the
+// snapshot's descriptions.
+const boardIntroduction =
+  'This season’s top survivors in 1v4 PUG matches against every killer, ranked individually whether they queued solo or in a party. A survivor’s wins are their side’s wins, not personal escapes.';
+// Optional website copy. The snapshot's labels are written for whoever
+// maintains the ranking, not for readers; a field left unset falls back to
+// the snapshot's label.
+const copy: { title?: string; competition?: string; season?: string } = {
+  title: 'Overall Survivor 1v4 PUG Leaderboard',
+  competition: 'DbD Arena 1v4 PUG',
+};
+const title = copy.title ?? publication.label;
+---
+
+<StarlightPage
+  frontmatter={{
+    title,
+    description: publication.description,
+    ...UNLISTED_PREVIEW,
+  }}
+>
+  <LeaderboardSwitcher group={pugLeaderboards} current="" />
+
+  <Aside type="caution" title="Fictional sample data">
+    This preview renders a sample ranking snapshot in <code>docs/ref/examples/</code>.
+    Players, parties, matches, and scores are made up, and the scores were written by hand
+    rather than calculated.
+    {hasStandings && 'Select a survivor to see the matches behind their standing.'}
+  </Aside>
+
+  <RankingLeaderboard
+    view={view}
+    boardIntroduction={boardIntroduction}
+    competition={copy.competition}
+    season={copy.season}
+  />
+
+  <p><a href={PUG_LEADERBOARDS_PATH}>← All 1v4 PUG leaderboards</a></p>
+</StarlightPage>

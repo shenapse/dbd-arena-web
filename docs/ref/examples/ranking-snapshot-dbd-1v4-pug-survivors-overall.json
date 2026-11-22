@@ -312,7 +312,7 @@
     "schema_version": "1.0",
     "schema_path": "../schemas/dbd-1v4-pug-overall-match-1.0.schema.json",
     "documentation_path": "../ranking-evidence-dbd-1v4-pug-overall.md",
-    "description": "Per-match killer character, winning side or draw, survivor queue parties, and explicit solo survivors for an overall survivor-only PUG publication. Killer player identities come from the match sides and public profiles."
+    "description": "Per-match killer character, winning side or draw, generators remaining, hooks, survivor queue parties, and explicit solo survivors for an overall survivor-only PUG publication. Killer player identities come from the match sides and public profiles."
   },
   "included_matches": [
     {
@@ -353,6 +353,8 @@
       "outcome_id": "decided",
       "public_facts": {
         "winner_side_id": "killer",
+        "generators_remaining": 3,
+        "hooks": 12,
         "survivor_parties": [],
         "solo_survivor_profile_ids": [
           "p-1a4b",
@@ -405,6 +407,8 @@
       "outcome_id": "decided",
       "public_facts": {
         "winner_side_id": "survivors",
+        "generators_remaining": 0,
+        "hooks": 5,
         "survivor_parties": [
           {
             "member_profile_ids": [
@@ -462,6 +466,8 @@
       "outcome_id": "draw",
       "public_facts": {
         "winner_side_id": null,
+        "generators_remaining": 1,
+        "hooks": 8,
         "survivor_parties": [
           {
             "member_profile_ids": [
@@ -522,6 +528,8 @@
       "outcome_id": "decided",
       "public_facts": {
         "winner_side_id": "killer",
+        "generators_remaining": 2,
+        "hooks": 11,
         "survivor_parties": [
           {
             "member_profile_ids": [
@@ -579,6 +587,8 @@
       "outcome_id": "decided",
       "public_facts": {
         "winner_side_id": "survivors",
+        "generators_remaining": 0,
+        "hooks": 6,
         "survivor_parties": [
           {
             "member_profile_ids": [
@@ -635,6 +645,8 @@
       "outcome_id": "decided",
       "public_facts": {
         "winner_side_id": "killer",
+        "generators_remaining": 4,
+        "hooks": 12,
         "survivor_parties": [],
         "solo_survivor_profile_ids": [
           "p-1a4b",
@@ -687,6 +699,8 @@
       "outcome_id": "draw",
       "public_facts": {
         "winner_side_id": null,
+        "generators_remaining": 0,
+        "hooks": 9,
         "survivor_parties": [
           {
             "member_profile_ids": [
@@ -747,6 +761,8 @@
       "outcome_id": "decided",
       "public_facts": {
         "winner_side_id": "survivors",
+        "generators_remaining": 0,
+        "hooks": 3,
         "survivor_parties": [
           {
             "member_profile_ids": [
@@ -803,6 +819,8 @@
       "outcome_id": "decided",
       "public_facts": {
         "winner_side_id": "killer",
+        "generators_remaining": 2,
+        "hooks": 11,
         "survivor_parties": [],
         "solo_survivor_profile_ids": [
           "p-1a4b",
@@ -855,6 +873,8 @@
       "outcome_id": "draw",
       "public_facts": {
         "winner_side_id": null,
+        "generators_remaining": 1,
+        "hooks": 8,
         "survivor_parties": [
           {
             "member_profile_ids": [
@@ -915,6 +935,8 @@
       "outcome_id": "decided",
       "public_facts": {
         "winner_side_id": "survivors",
+        "generators_remaining": 1,
+        "hooks": 4,
         "survivor_parties": [
           {
             "member_profile_ids": [
@@ -971,6 +993,8 @@
       "outcome_id": "decided",
       "public_facts": {
         "winner_side_id": "killer",
+        "generators_remaining": 3,
+        "hooks": 11,
         "survivor_parties": [],
         "solo_survivor_profile_ids": [
           "p-1a4b",
@@ -1023,6 +1047,8 @@
       "outcome_id": "draw",
       "public_facts": {
         "winner_side_id": null,
+        "generators_remaining": 0,
+        "hooks": 9,
         "survivor_parties": [
           {
             "member_profile_ids": [
@@ -1083,6 +1109,8 @@
       "outcome_id": "decided",
       "public_facts": {
         "winner_side_id": "survivors",
+        "generators_remaining": 0,
+        "hooks": 0,
         "survivor_parties": [
           {
             "member_profile_ids": [
@@ -1140,6 +1168,8 @@
       "outcome_id": "decided",
       "public_facts": {
         "winner_side_id": "killer",
+        "generators_remaining": 2,
+        "hooks": 12,
         "survivor_parties": [
           {
             "member_profile_ids": [
@@ -1197,6 +1227,8 @@
       "outcome_id": "decided",
       "public_facts": {
         "winner_side_id": "survivors",
+        "generators_remaining": 0,
+        "hooks": 4,
         "survivor_parties": [
           {
             "member_profile_ids": [
@@ -1254,6 +1286,8 @@
       "outcome_id": "decided",
       "public_facts": {
         "winner_side_id": "killer",
+        "generators_remaining": 1,
+        "hooks": 11,
         "survivor_parties": [
           {
             "member_profile_ids": [
@@ -1311,6 +1345,8 @@
       "outcome_id": "decided",
       "public_facts": {
         "winner_side_id": "survivors",
+        "generators_remaining": 0,
+        "hooks": 6,
         "survivor_parties": [
           {
             "member_profile_ids": [
@@ -1368,6 +1404,8 @@
       "outcome_id": "decided",
       "public_facts": {
         "winner_side_id": "killer",
+        "generators_remaining": 3,
+        "hooks": 12,
         "survivor_parties": [
           {
             "member_profile_ids": [
@@ -1425,6 +1463,8 @@
       "outcome_id": "decided",
       "public_facts": {
         "winner_side_id": "survivors",
+        "generators_remaining": 0,
+        "hooks": 5,
         "survivor_parties": [
           {
             "member_profile_ids": [
@@ -1482,6 +1522,8 @@
       "outcome_id": "decided",
       "public_facts": {
         "winner_side_id": "killer",
+        "generators_remaining": 0,
+        "hooks": 11,
         "survivor_parties": [
           {
             "member_profile_ids": [
@@ -1539,6 +1581,8 @@
       "outcome_id": "decided",
       "public_facts": {
         "winner_side_id": "survivors",
+        "generators_remaining": 0,
+        "hooks": 7,
         "survivor_parties": [
           {
             "member_profile_ids": [

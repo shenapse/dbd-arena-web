@@ -8,10 +8,11 @@ envelope `2.0`. Base types and identity rules belong to the
 
 ## Match facts
 
-Each `public_facts` object contains exactly four required fields:
+Each `public_facts` object contains exactly six required fields:
 
-- `winner_side_id`, `survivor_parties`, and `solo_survivor_profile_ids` use the
-  definitions and membership constraints in
+- `winner_side_id`, `generators_remaining`, `hooks`, `survivor_parties`, and
+  `solo_survivor_profile_ids` use the definitions, ranges, value rules, and
+  membership constraints in
   [PUG match facts](ranking-evidence-dbd-1v4-pug.md#match-facts). Only these
   shared fact definitions are reused; the envelope usage below is independent.
 - `killer_character` is a non-null `PublicDefinition` naming the character

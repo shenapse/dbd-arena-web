@@ -10,7 +10,10 @@
 //   - docs/ref/ranking-evidence-dbd-1v4-quartet.md (one killer against one
 //     survivor party of four), or
 //   - docs/ref/ranking-evidence-dbd-1v4-pug.md (one killer against four
-//     individually ranked survivors, who queue solo or in parties).
+//     individually ranked survivors, who queue solo or in parties), or
+//   - docs/ref/ranking-evidence-dbd-1v4-pug-overall.md (the same matches
+//     across every killer character, with a survivor board only and the
+//     character each match was played with).
 // Nothing here recalculates the ranking. The loader only resolves references
 // and turns each row's included matches into a view from that row's side. A
 // broken reference fails the build instead of rendering a wrong page.
@@ -134,17 +137,23 @@ interface DbdPugFacts {
   solo_survivor_profile_ids: string[];
 }
 
+/** ranking-evidence-dbd-1v4-pug-overall.md, "Match facts" */
+interface DbdPugOverallFacts extends DbdPugFacts {
+  killer_character: PublicDefinition;
+}
+
 const SUPPORTED_ENVELOPE_MAJORS = ['1', '2'];
 /** The extension that defines eligibility in a 2.0 snapshot. */
 const DBD_RANKING_EXTENSION = { schemaId: 'dbd-ranking', major: '1' };
 
 /** Which evidence contract a snapshot's matches follow. */
-export type LeaderboardFormat = 'symmetric' | 'quartet' | 'pug';
+export type LeaderboardFormat = 'symmetric' | 'quartet' | 'pug' | 'pug-overall';
 
 const SUPPORTED_FACTS: Record<string, { format: LeaderboardFormat; major: string }> = {
   'dbd-1v1-symmetric': { format: 'symmetric', major: '1' },
   'dbd-1v4-quartet-match': { format: 'quartet', major: '1' },
   'dbd-1v4-pug-match': { format: 'pug', major: '1' },
+  'dbd-1v4-pug-overall-match': { format: 'pug-overall', major: '1' },
 };
 
 /** Fixed side IDs of the 1v4 contracts (quartet evidence §3.2, PUG envelope usage). */
@@ -168,6 +177,11 @@ export type MatchFactsView =
       generatorsCompleted: number;
       /** Hook stages the killer performed (evidence `hooks`). */
       hookStages: number;
+      /**
+       * Killer character the killer side played. Only overall PUG matches
+       * publish one; per-killer publications name it once, in their scope.
+       */
+      killerCharacter?: PublicDefinition;
     };
 
 /** A profile as shown in a match, with its row on this page if it has one. */
@@ -257,6 +271,8 @@ export interface BoardView {
   hasTeammates: boolean;
   /** Survivors on PUG boards queue solo or in parties; show how. */
   showsQueues: boolean;
+  /** Each match names the killer character played (overall PUG). */
+  showsKillerCharacter: boolean;
   /**
    * Entry requirements, when the snapshot publishes them in a shape this
    * loader understands (envelope 1.x, or 2.0 with the DBD ranking extension).
@@ -415,6 +431,8 @@ interface FormatProfile {
   hasTeammates(boardIndex: number): boolean;
   /** Survivors queue solo or in parties. */
   showsQueues: boolean;
+  /** Matches name the killer character played. */
+  showsKillerCharacter: boolean;
   /** Repeat encounters against one opponent are numbered (they share a contribution limit). */
   numbersEncounters: boolean;
   /** Checks a match on its own; called once per match. */
@@ -447,6 +465,7 @@ const symmetricProfile: FormatProfile = {
   ownSideId: () => null,
   hasTeammates: () => false,
   showsQueues: false,
+  showsKillerCharacter: false,
   numbersEncounters: true,
   checkMatch(match) {
     if (match.sides.length !== 2 || match.sides.some((s) => s.participants.length !== 1)) {
@@ -484,14 +503,27 @@ const PUG_BOARDS = [
   { side: SIDES_1V4.survivors, kind: 'participant', unit: SURVIVOR, opponentUnit: KILLER },
 ] as const;
 
-type Board1v4 = (typeof QUARTET_BOARDS)[number] | (typeof PUG_BOARDS)[number];
+// Overall PUG envelope usage: one board, of individual survivors. Killer
+// players appear in matches only.
+const PUG_OVERALL_BOARDS = [
+  { side: SIDES_1V4.survivors, kind: 'participant', unit: SURVIVOR, opponentUnit: KILLER },
+] as const;
+
+type Board1v4 =
+  | (typeof QUARTET_BOARDS)[number]
+  | (typeof PUG_BOARDS)[number]
+  | (typeof PUG_OVERALL_BOARDS)[number];
 
 /**
  * What the quartet and PUG contracts share: the killer and survivors sides,
- * one board per side, a single killer scope, wins/losses/draws counted from
- * the row's side, and outcome IDs that consistently mean decided or draw.
+ * one board per ranked side, wins/losses/draws counted from the row's side,
+ * and outcome IDs that consistently mean decided or draw. `scoped` is whether
+ * the publication is scoped to one killer (per-killer) or covers them all
+ * (overall PUG, with an empty scope).
  */
-function oneVFourChecks(name: string, boards: readonly Board1v4[]) {
+function oneVFourChecks(name: string, boards: readonly Board1v4[], scoped = true) {
+  // A side without a board of its own is individual players (overall PUG killers).
+  const kindOf = (sideId: string) => boards.find((b) => b.side === sideId)?.kind ?? 'participant';
   // Outcome IDs are the publication's choice (quartet §3.4); learn which one
   // means "decided" and which "draw" from the matches and require them to agree.
   const outcomeOf: { decided?: string; draw?: string } = {};
@@ -501,8 +533,11 @@ function oneVFourChecks(name: string, boards: readonly Board1v4[]) {
       if (sideIds.length !== 2 || sideIds[0] !== SIDES_1V4.killer || sideIds[1] !== SIDES_1V4.survivors) {
         fail(`a ${name} snapshot defines exactly the sides "killer" and "survivors"`);
       }
-      if (snapshot.boards.length !== boards.length) fail(`a ${name} snapshot has a killer board and a survivor board`);
-      if (snapshot.publication.scope.length !== 1) fail(`a ${name} snapshot is scoped to exactly one killer`);
+      if (snapshot.boards.length !== boards.length) {
+        fail(`a ${name} snapshot has ${boards.map((b) => `a ${b.unit.one} board`).join(' and ')}`);
+      }
+      if (scoped && snapshot.publication.scope.length !== 1) fail(`a ${name} snapshot is scoped to exactly one killer`);
+      if (!scoped && snapshot.publication.scope.length !== 0) fail(`a ${name} snapshot covers every killer, so its scope is empty`);
       if (snapshot.result_metrics.length !== 3) fail(`a ${name} snapshot defines wins, losses and draws`);
     },
     boardUnits: (boardIndex: number) => boards[boardIndex],
@@ -522,7 +557,8 @@ function oneVFourChecks(name: string, boards: readonly Board1v4[]) {
       if (match.sides.length !== 2 || killer.side_id !== SIDES_1V4.killer || survivors.side_id !== SIDES_1V4.survivors) {
         fail(`${where} must list the killer side, then the survivors side`);
       }
-      for (const [side, size, kind] of [[killer, 1, boards[0].kind], [survivors, survivorCount, boards[1].kind]] as const) {
+      for (const [side, size] of [[killer, 1], [survivors, survivorCount]] as const) {
+        const kind = kindOf(side.side_id);
         const ids = side.participants.map((p) => p.profile_id);
         if (ids.length !== size || new Set(ids).size !== size) {
           fail(`${where} ${side.side_id} side must have ${size === 1 ? 'one participant' : `${size} distinct participants`}`);
@@ -547,8 +583,16 @@ function resultFor(winner: string | null, own: MatchSide): MatchResult {
   return winner === null ? 'draw' : winner === own.side_id ? 'won' : 'lost';
 }
 
-function facts1v4(facts: { generators_remaining: number; hooks: number }): MatchFactsView {
-  return { format: '1v4', generatorsCompleted: GENERATORS_1V4 - facts.generators_remaining, hookStages: facts.hooks };
+function facts1v4(
+  facts: { generators_remaining: number; hooks: number },
+  killerCharacter: PublicDefinition | null = null,
+): MatchFactsView {
+  return {
+    format: '1v4',
+    generatorsCompleted: GENERATORS_1V4 - facts.generators_remaining,
+    hookStages: facts.hooks,
+    ...(killerCharacter && { killerCharacter }),
+  };
 }
 
 function quartetProfile(): FormatProfile {
@@ -557,6 +601,7 @@ function quartetProfile(): FormatProfile {
     ...shared,
     hasTeammates: () => false,
     showsQueues: false,
+    showsKillerCharacter: false,
     numbersEncounters: true,
     checkMatch(match, profiles) {
       shared.checkSides(match, profiles, 1);
@@ -590,27 +635,77 @@ function pugQueues(facts: DbdPugFacts, self: string | null): QueueIds[] {
   ];
 }
 
+/** A PUG match from the row's side, with the character played if the facts name one. */
+function readPugMatch(
+  facts: DbdPugFacts,
+  killerCharacter: PublicDefinition | null,
+  own: MatchSide,
+  other: MatchSide,
+  self: string,
+): MatchRead {
+  const survivorRow = own.side_id === SIDES_1V4.survivors;
+  return {
+    result: resultFor(facts.winner_side_id, own),
+    facts: facts1v4(facts, killerCharacter),
+    opponents: survivorRow ? singleUnit(other) : pugQueues(facts, null),
+    teammates: survivorRow ? pugQueues(facts, self) : [],
+  };
+}
+
 function pugProfile(): FormatProfile {
   const shared = oneVFourChecks('PUG', PUG_BOARDS);
   return {
     ...shared,
     hasTeammates: (boardIndex) => PUG_BOARDS[boardIndex].side === SIDES_1V4.survivors,
     showsQueues: true,
+    showsKillerCharacter: false,
     // No repeat-encounter policy applies, and a killer meets four survivors at once.
     numbersEncounters: false,
     checkMatch(match, profiles) {
       shared.checkSides(match, profiles, SURVIVORS_1V4);
       shared.checkOutcomeId(match, readPugFacts(match).winner_side_id);
     },
+    readMatch: (match, own, other, self) => readPugMatch(readPugFacts(match), null, own, other, self),
+  };
+}
+
+const isDefinition = (value: unknown): value is PublicDefinition => {
+  const d = value as Partial<PublicDefinition> | null;
+  return !!d && typeof d === 'object' && [d.id, d.label, d.description].every((v) => typeof v === 'string' && v !== '');
+};
+
+/** PUG facts plus the killer character (overall PUG evidence, "Match facts"). */
+function readPugOverallFacts(match: IncludedMatchEvidence): DbdPugOverallFacts {
+  const facts = readPugFacts(match) as Partial<DbdPugOverallFacts>;
+  if (!isDefinition(facts.killer_character)) fail(`match "${match.match_id}" killer_character is missing or malformed`);
+  return facts as DbdPugOverallFacts;
+}
+
+function pugOverallProfile(): FormatProfile {
+  const shared = oneVFourChecks('PUG overall', PUG_OVERALL_BOARDS, false);
+  // Repeated definitions of one character ID must agree.
+  const characters = new Map<string, PublicDefinition>();
+  return {
+    ...shared,
+    hasTeammates: () => true,
+    showsQueues: true,
+    showsKillerCharacter: true,
+    // As on the per-killer PUG boards: no repeat-encounter policy applies.
+    numbersEncounters: false,
+    checkMatch(match, profiles) {
+      shared.checkSides(match, profiles, SURVIVORS_1V4);
+      const facts = readPugOverallFacts(match);
+      shared.checkOutcomeId(match, facts.winner_side_id);
+      const { id, label, description } = facts.killer_character;
+      const known = characters.get(id);
+      if (known && (known.label !== label || known.description !== description)) {
+        fail(`match "${match.match_id}" defines killer character "${id}" differently from an earlier match`);
+      }
+      characters.set(id, { id, label, description });
+    },
     readMatch(match, own, other, self) {
-      const facts = readPugFacts(match);
-      const survivorRow = own.side_id === SIDES_1V4.survivors;
-      return {
-        result: resultFor(facts.winner_side_id, own),
-        facts: facts1v4(facts),
-        opponents: survivorRow ? singleUnit(other) : pugQueues(facts, null),
-        teammates: survivorRow ? pugQueues(facts, self) : [],
-      };
+      const facts = readPugOverallFacts(match);
+      return readPugMatch(facts, facts.killer_character, own, other, self);
     },
   };
 }
@@ -619,6 +714,7 @@ const formatProfiles: Record<LeaderboardFormat, () => FormatProfile> = {
   symmetric: () => symmetricProfile,
   quartet: quartetProfile,
   pug: pugProfile,
+  'pug-overall': pugOverallProfile,
 };
 
 /**
@@ -790,6 +886,7 @@ export function loadLeaderboard(snapshot: RankingSnapshot): LeaderboardView {
       opponentUnit,
       hasTeammates: contract.hasTeammates(boardIndex),
       showsQueues: contract.showsQueues,
+      showsKillerCharacter: contract.showsKillerCharacter,
       eligibility: readEligibility(snapshot, board),
       standings,
     };

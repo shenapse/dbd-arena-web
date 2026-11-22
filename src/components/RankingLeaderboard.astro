@@ -19,6 +19,9 @@
 //     parties, so a killer's opponents and a survivor's teammates are listed
 //     by queue, each party boxed and labelled by its size. A survivor's own
 //     party is highlighted and listed first, without the survivor.
+//   - Overall PUG: one survivor board across every killer character, so each
+//     match also names the killer character played, between its date and the
+//     killer player. Killer players have no row and are not linked.
 // Every row is rendered; in the browser the script below adds a player search
 // and, on boards longer than one page, shows one page at a time and keeps the
 // page in the URL (?page=N). Without JavaScript the full list is shown.
@@ -109,7 +112,7 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
     </dl>
   </div>
 
-  {boards.map(({ board, headingId, unit, opponentUnit, hasTeammates, showsQueues, eligibility, standings }, boardIndex) => {
+  {boards.map(({ board, headingId, unit, opponentUnit, hasTeammates, showsQueues, showsKillerCharacter, eligibility, standings }, boardIndex) => {
     // Rank · Name · Score · Matches · Wins · Win rate · then Opponents
     // (symmetric) or Avg gens · Avg hook stages (1v4) · disclosure marker.
     // Every count column gets the same width and values are centred under
@@ -289,6 +292,7 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
                           <thead>
                             <tr>
                               <th scope="col">Date</th>
+                              {showsKillerCharacter && <th scope="col" title="Killer character the opponent played">Killer</th>}
                               <th scope="col">{showsQueues && !hasTeammates ? 'Opponents' : 'Opponent'}</th>
                               {hasTeammates && <th scope="col">Teammates</th>}
                               <th scope="col">Result</th>
@@ -310,6 +314,13 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
                                     <span class="match-date--unknown">Unknown</span>
                                   )}
                                 </td>
+                                {showsKillerCharacter && (
+                                  <td class="match-character">
+                                    {m.facts.format === '1v4' && m.facts.killerCharacter
+                                      ? <span title={m.facts.killerCharacter.description}>{m.facts.killerCharacter.label}</span>
+                                      : <span class="match-date--unknown">Unknown</span>}
+                                  </td>
+                                )}
                                 <td class="match-opponent">
                                   <QueueList units={m.opponents} rowName={profile.display_name} ambiguousNames={ambiguousNames} />
                                   {m.encounterTotal > 1 && (

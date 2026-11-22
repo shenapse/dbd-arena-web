@@ -99,7 +99,8 @@ do not describe whether an individual survivor escaped.
 contains one overall survivor board, six ranked survivors, two killer opponents,
 and twenty-two matches across four killer characters. `publication.scope` is
 empty. Killer players appear in match sides and public profiles; there is no
-killer board. Each match identifies its killer character in
+killer board. Each match records its generators remaining and hooks as the
+per-killer PUG sample does, and identifies its killer character in
 `public_facts.killer_character` under the
 [overall PUG evidence contract](../ranking-evidence-dbd-1v4-pug-overall.md).
 

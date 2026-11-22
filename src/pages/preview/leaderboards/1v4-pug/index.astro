@@ -2,11 +2,12 @@
 // Umbrella page for the 1v4 PUG leaderboards: one card per killer that has a
 // published snapshot, each with its killer and survivor boards. Unlisted,
 // like every leaderboard preview (UX structure §5): not in the sidebar, not
-// searchable, not indexed.
+// searchable, not indexed. A line above the cards links to the overall
+// survivor leaderboard, which covers every killer.
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import { Aside } from '@astrojs/starlight/components';
 import LeaderboardCards from '@components/LeaderboardCards.astro';
-import { UNLISTED_PREVIEW, pugLeaderboards } from '../../../../lib/ranking/publications';
+import { PUG_SURVIVORS_OVERALL_PATH, UNLISTED_PREVIEW, pugLeaderboards } from '../../../../lib/ranking/publications';
 
 const { entries } = pugLeaderboards;
 ---
@@ -23,6 +24,11 @@ const { entries } = pugLeaderboards;
     Players, parties, matches, and scores are made up, and the scores were written by hand
     rather than calculated.
   </Aside>
+
+  <p>
+    Survivors ranked across every killer are on the
+    <a href={PUG_SURVIVORS_OVERALL_PATH}>overall survivor leaderboard</a>.
+  </p>
 
   <LeaderboardCards entries={entries} />
 </StarlightPage>
