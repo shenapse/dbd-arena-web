@@ -4,7 +4,7 @@
 // JavaScript; the current killer is marked with aria-current. Pills wrap
 // rather than scroll so every killer stays visible on narrow screens.
 //
-// The first pill, "All killers", leads to the game mode's umbrella page. It sits in the
+// The first pill, "All", leads to the game mode's umbrella page. It sits in the
 // strip rather than above it so readers find it where they already look to
 // switch killers. The group's overview pages, which cover every killer (the
 // PUG's overall survivor ranking), follow it before the divider.
@@ -21,7 +21,7 @@ interface Props {
 const { group, current } = Astro.props;
 const { entries, overviews } = group;
 // The umbrella link, then the overview pages; the last of them gets the divider.
-const leading = [{ slug: null, label: 'All killers', href: group.href }, ...overviews];
+const leading = [{ slug: null, label: 'All', href: group.href }, ...overviews];
 ---
 
 <nav class="lb-switcher not-content" aria-label="Killer leaderboards">
