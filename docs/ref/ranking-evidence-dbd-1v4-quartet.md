@@ -1,5 +1,5 @@
 ---
-version: "0.2"
+version: "0.4"
 doc_type: "DS"
 scope:
   in_scope:
@@ -39,6 +39,12 @@ scope:
 
 A snapshot uses this contract when its `public_facts_schema` declares this
 `schema_id` and a supported `schema_version`. Section 7 defines compatibility.
+
+This evidence contract supports envelopes `1.0`, `1.1`, and `2.0`. Its field
+meanings and format constraints are unchanged. In `1.x`, the envelope defines
+eligibility and `eligible_match_count`. With `2.0`, the publications described
+here use the [DBD ranking extension](ranking-extension-dbd-1.0.md) to supply
+those same definitions. The base `2.0` schema alone does not define them.
 
 ### 1.2 The format
 
@@ -175,6 +181,12 @@ publication chooses the board IDs, labels, and descriptions.
 
 Each board's entry rating is specific to the scoped killer and to the board's
 side. Its `eligibility.rating` definition explains this.
+
+Killer and survivor-party thresholds are configured independently under the
+[DBD extension's per-board rules](ranking-extension-dbd-1.0.md#2-dbdeligibilityrequirements).
+A killer's minimum match count applies against eligible survivor parties; a
+survivor party's minimum applies against eligible killers. Different thresholds
+do not remove that dependence on the opposing eligible pool.
 
 ## 4. Example
 
