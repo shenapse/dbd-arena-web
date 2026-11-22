@@ -23,10 +23,10 @@ describe('quartet snapshot', () => {
   it('reads each match from the killer side, with draws and gens completed', () => {
     const hush = standing(view, 0, 'p-7a3e');
     expect(hush.matches.map((m) => [m.matchId, m.result, m.facts])).toEqual([
-      ['q-04', 'draw', { format: 'quartet', generatorsCompleted: 5, hookStages: 7 }],
-      ['q-03', 'won', { format: 'quartet', generatorsCompleted: 5, hookStages: 10 }],
-      ['q-02', 'lost', { format: 'quartet', generatorsCompleted: 5, hookStages: 4 }],
-      ['q-01', 'won', { format: 'quartet', generatorsCompleted: 3, hookStages: 12 }],
+      ['q-04', 'draw', { format: '1v4', generatorsCompleted: 5, hookStages: 7 }],
+      ['q-03', 'won', { format: '1v4', generatorsCompleted: 5, hookStages: 10 }],
+      ['q-02', 'lost', { format: '1v4', generatorsCompleted: 5, hookStages: 4 }],
+      ['q-01', 'won', { format: '1v4', generatorsCompleted: 3, hookStages: 12 }],
     ]);
     expect(hush.wins).toBe(2);
     expect(hush.winRate).toBe(0.5);
@@ -37,21 +37,22 @@ describe('quartet snapshot', () => {
     const fog = standing(view, 1, 'g-8b4a');
     const q01 = fog.matches.find((m) => m.matchId === 'q-01')!;
     expect(q01.result).toBe('lost');
-    expect(q01.opponent.profile_id).toBe('p-7a3e');
+    expect(q01.opponents.map((u) => u.members.map((m) => m.profile.profile_id))).toEqual([['p-7a3e']]);
     expect(fog.wins).toBe(3);
     expect(fog.winRate).toBe(0.75);
   });
 
   it('links each opponent to their row on the other board', () => {
     const hush = standing(view, 0, 'p-7a3e');
-    expect(hush.matches.find((m) => m.matchId === 'q-01')!.opponentAnchor).toBe('standing-2-1');
+    expect(hush.matches.find((m) => m.matchId === 'q-01')!.opponents[0].members[0].anchor).toBe('standing-2-1');
     const fog = standing(view, 1, 'g-8b4a');
-    expect(fog.matches.find((m) => m.matchId === 'q-01')!.opponentAnchor).toBe('standing-1-1');
+    expect(fog.matches.find((m) => m.matchId === 'q-01')!.opponents[0].members[0].anchor).toBe('standing-1-1');
   });
 
   it('numbers repeat encounters and leaves an undated match last', () => {
     const fog = standing(view, 1, 'g-8b4a');
-    expect(fog.matches.filter((m) => m.opponent.profile_id === 'p-7a3e').map((m) => m.encounterIndex)).toEqual([2, 1]);
+    const vsHush = fog.matches.filter((m) => m.opponents[0].members[0].profile.profile_id === 'p-7a3e');
+    expect(vsHush.map((m) => m.encounterIndex)).toEqual([2, 1]);
     const wisp = standing(view, 0, 'p-3d6f');
     expect(wisp.matches.at(-1)).toMatchObject({ matchId: 'q-09', playedAt: null });
   });

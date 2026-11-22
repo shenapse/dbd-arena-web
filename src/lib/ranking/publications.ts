@@ -5,9 +5,13 @@
 //   - /preview/leaderboards/1v1-symmetric/ from the fixtures named
 //     ranking-snapshot-dbd-1v1-symmetric*.json, and
 //   - /preview/leaderboards/1v4-quartet/ from those named
-//     ranking-snapshot-dbd-1v4-quartet*.json,
+//     ranking-snapshot-dbd-1v4-quartet*.json, and
+//   - /preview/leaderboards/1v4-pug/ from those named
+//     ranking-snapshot-dbd-1v4-pug*.json, except the overall survivor
+//     ranking (ranking-snapshot-dbd-1v4-pug-survivors-overall.json), which
+//     covers every killer and so is not a per-killer leaderboard,
 // all in docs/ref/examples/. Every fixture is one publication: one killer's
-// leaderboard (both evidence contracts, §3.1: the scope is exactly one killer
+// leaderboard (every evidence contract's scope is exactly one killer
 // selection). Adding a fixture adds a killer to its umbrella page and killer
 // switcher; no website catalog is involved. Killers without a snapshot are
 // simply absent.
@@ -20,6 +24,7 @@ import { fail, loadLeaderboard, type LeaderboardView, type PublicDefinition, typ
 
 export const SYMMETRIC_LEADERBOARDS_PATH = '/preview/leaderboards/1v1-symmetric/';
 export const QUARTET_LEADERBOARDS_PATH = '/preview/leaderboards/1v4-quartet/';
+export const PUG_LEADERBOARDS_PATH = '/preview/leaderboards/1v4-pug/';
 
 // import.meta.glob needs literal patterns, so each group has its own call.
 const symmetricFixtures = import.meta.glob<RankingSnapshot>(
@@ -28,6 +33,13 @@ const symmetricFixtures = import.meta.glob<RankingSnapshot>(
 );
 const quartetFixtures = import.meta.glob<RankingSnapshot>(
   '../../../docs/ref/examples/ranking-snapshot-dbd-1v4-quartet*.json',
+  { eager: true, import: 'default' },
+);
+const pugFixtures = import.meta.glob<RankingSnapshot>(
+  [
+    '../../../docs/ref/examples/ranking-snapshot-dbd-1v4-pug*.json',
+    '!../../../docs/ref/examples/ranking-snapshot-dbd-1v4-pug-survivors-overall.json',
+  ],
   { eager: true, import: 'default' },
 );
 
@@ -100,6 +112,12 @@ export const quartetLeaderboards: PublicationGroup = buildGroup(
   quartetFixtures,
   QUARTET_LEADERBOARDS_PATH,
   'ranking-snapshot-dbd-1v4-quartet*.json',
+);
+
+export const pugLeaderboards: PublicationGroup = buildGroup(
+  pugFixtures,
+  PUG_LEADERBOARDS_PATH,
+  'ranking-snapshot-dbd-1v4-pug*.json',
 );
 
 /** Frontmatter shared by the unlisted preview pages (UX structure §5). */

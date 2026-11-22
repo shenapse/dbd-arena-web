@@ -1,5 +1,12 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "2.0",
+  "extension_schema": {
+    "schema_id": "dbd-ranking",
+    "schema_version": "1.0",
+    "schema_path": "../schemas/dbd-ranking-1.0.schema.json",
+    "documentation_path": "../ranking-extension-dbd-1.0.md",
+    "description": "DBD ranking eligibility requirements and included eligible-match counts."
+  },
   "deployment_id": "ranking-demo",
   "generated_at": "2026-11-20T18:00:00+09:00",
   "publication": {
@@ -96,9 +103,9 @@
           "label": "The Nurse survivor party entry rating",
           "description": "Group entry rating for a survivor party facing The Nurse in 1v4 quartet. This fictional preview uses a 0–3000 point scale where higher values indicate stronger performance. Individual party entry ratings are not published."
         },
-        "minimum_rating_value": 1200,
-        "minimum_eligible_match_count": 3,
-        "description": "At generation time, survivor parties need a Nurse survivor party entry rating of at least 1200 points and at least three current-season matches against killer players in the calculation-time eligible pool. Repeat encounters count toward participation. Eligibility is reevaluated on every refresh, even without new matches. These thresholds are illustrative."
+        "minimum_rating_value": 1400,
+        "minimum_eligible_match_count": 2,
+        "description": "At generation time, survivor parties need a Nurse survivor party entry rating of at least 1400 points and at least two current-season matches against killer players in the calculation-time eligible pool. Repeat encounters count toward participation. Eligibility is reevaluated on every refresh, even without new matches. These thresholds are illustrative."
       },
       "rows": [
         {

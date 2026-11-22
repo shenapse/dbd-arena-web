@@ -1,0 +1,73 @@
+---
+// One 1v4 PUG leaderboard per killer with a published snapshot, at
+// /preview/leaderboards/1v4-pug/<scope value ID>/. Each page has two boards
+// of individual players: killers, and survivors. Survivors queue solo or in
+// parties, which each match lists, but a party never has a row of its own
+// (ranking-evidence-dbd-1v4-pug.md). Unlisted (UX structure §5); the killer
+// strip and the umbrella link at the foot of the page connect the pages.
+import type { GetStaticPaths } from 'astro';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { Aside } from '@astrojs/starlight/components';
+import KillerBanner from '@components/KillerBanner.astro';
+import LeaderboardSwitcher from '@components/LeaderboardSwitcher.astro';
+import RankingLeaderboard from '@components/RankingLeaderboard.astro';
+import {
+  PUG_LEADERBOARDS_PATH,
+  UNLISTED_PREVIEW,
+  pugLeaderboards,
+  type PublicationEntry,
+} from '../../../../lib/ranking/publications';
+
+export const getStaticPaths = (() =>
+  pugLeaderboards.entries.map((entry) => ({ params: { killer: entry.slug }, props: { entry } }))) satisfies GetStaticPaths;
+
+interface Props {
+  entry: PublicationEntry;
+}
+
+const { entry } = Astro.props;
+const { publication } = entry.view.snapshot;
+const hasStandings = entry.view.boards.some((b) => b.standings.length > 0);
+// Website copy, one sentence per board (killer board, then survivor board):
+// edit these independently of snapshot descriptions.
+const boardIntroduction = [
+  `This season’s top killers playing ${entry.label} in 1v4 PUG matches.`,
+  `This season’s top survivors against ${entry.label} in 1v4 PUG matches, ranked individually whether they queued solo or in a party. A survivor’s wins are their side’s wins, not personal escapes.`,
+];
+// Optional website copy. The snapshot's labels are written for whoever
+// maintains the ranking, not for readers; a field left unset falls back to
+// the snapshot's label.
+const copy: { title?: string; competition?: string; season?: string } = {
+  title: `${entry.label} 1v4 PUG Leaderboard`,
+  competition: 'DbD Arena 1v4 PUG',
+};
+const title = copy.title ?? publication.label;
+---
+
+<StarlightPage
+  frontmatter={{
+    title,
+    description: publication.description,
+    ...UNLISTED_PREVIEW,
+  }}
+>
+  <KillerBanner slug={entry.slug} />
+
+  <LeaderboardSwitcher group={pugLeaderboards} current={entry.slug} />
+
+  <Aside type="caution" title="Fictional sample data">
+    This preview renders a sample ranking snapshot in <code>docs/ref/examples/</code>.
+    Players, parties, matches, and scores are made up, and the scores were written by hand
+    rather than calculated.
+    {hasStandings && 'Select a killer or survivor to see the matches behind their standing.'}
+  </Aside>
+
+  <RankingLeaderboard
+    view={entry.view}
+    boardIntroduction={boardIntroduction}
+    competition={copy.competition}
+    season={copy.season}
+  />
+
+  <p><a href={PUG_LEADERBOARDS_PATH}>← All 1v4 PUG leaderboards</a></p>
+</StarlightPage>
