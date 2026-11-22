@@ -188,7 +188,7 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
                 <Fragment>
                   <span class="num stat--split" title="Average generators completed per match, using matches that count">Avg gens</span>
                   <span class="num stat--split" title="Average hook stages per match, using matches that count">Avg hook stages</span>
-                  <span class="num stat--merged" title="Average generators completed / hook stages per match, using matches that count">Gens/<wbr />Hooks</span>
+                  <span class="num stat--merged" title="Average generators completed / hook stages per match, using matches that count">Gens/<wbr />Stages</span>
                 </Fragment>
               ) : (
                 <span class="num">Oppo&shy;nents</span>
@@ -245,7 +245,7 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
                               {' '}{formatAverage(averages?.hookStages)} hook stages
                             </span>
                             <span aria-hidden="true">
-                              {formatAverage(averages?.generatorsCompleted)}<span class="stat__unit">G</span>/{formatAverage(averages?.hookStages)}<span class="stat__unit">H</span>
+                              {formatAverage(averages?.generatorsCompleted)}<span class="stat__unit">G</span>/{formatAverage(averages?.hookStages)}<span class="stat__unit">S</span>
                             </span>
                           </span>
                         </Fragment>
@@ -1006,7 +1006,7 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
   /* Narrow standings (phones, or a tablet with the sidebar open): the full
      grid would crush the name column, so the stat columns shrink to fit
      their values, Matches and Wins share one "5M/4W" column (on the 1v4 boards
-     the averages share one "3.5G/7.0H" column too), and header labels wrap. Every row stays on one line; only a long player name wraps.
+     the averages share one "3.5G/7.0S" column too), and header labels wrap. Every row stays on one line; only a long player name wraps.
      Queried on the standings box itself, not the viewport, because the
      sidebar changes its width. */
   .standings {
@@ -1016,7 +1016,7 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
     .standings__head,
     .standing__summary {
       /* Rank · Name · Score · Matches/Wins · Win rate · Opponents or
-         Gens/Hooks · marker; set per format on the element. */
+         Gens/Stages · marker; set per format on the element. */
       grid-template-columns: var(--standings-columns-narrow);
       gap: 0.25rem;
       padding-inline: 0.5rem;
