@@ -5,13 +5,14 @@
 // appear only as each match's opponent, next to the character they played
 // (ranking-evidence-dbd-1v4-pug-overall.md). Unlisted (UX structure §5); the
 // PUG umbrella page links here, and the killer strip leads on to the
-// per-killer leaderboards.
+// per-killer leaderboards, with this page's own pill marked current.
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import { Aside } from '@astrojs/starlight/components';
 import LeaderboardSwitcher from '@components/LeaderboardSwitcher.astro';
 import RankingLeaderboard from '@components/RankingLeaderboard.astro';
 import {
   PUG_LEADERBOARDS_PATH,
+  PUG_SURVIVORS_OVERALL_SEGMENT,
   UNLISTED_PREVIEW,
   pugLeaderboards,
   pugSurvivorsOverall as view,
@@ -40,7 +41,7 @@ const title = copy.title ?? publication.label;
     ...UNLISTED_PREVIEW,
   }}
 >
-  <LeaderboardSwitcher group={pugLeaderboards} current="" />
+  <LeaderboardSwitcher group={pugLeaderboards} current={PUG_SURVIVORS_OVERALL_SEGMENT} />
 
   <Aside type="caution" title="Fictional sample data">
     This preview renders a sample ranking snapshot in <code>docs/ref/examples/</code>.

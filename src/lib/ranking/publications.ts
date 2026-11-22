@@ -28,7 +28,7 @@ export const SYMMETRIC_LEADERBOARDS_PATH = '/preview/leaderboards/1v1-symmetric/
 export const QUARTET_LEADERBOARDS_PATH = '/preview/leaderboards/1v4-quartet/';
 export const PUG_LEADERBOARDS_PATH = '/preview/leaderboards/1v4-pug/';
 /** Segment of the overall PUG survivor page; no killer may use it as a slug. */
-const PUG_SURVIVORS_OVERALL_SEGMENT = 'survivors';
+export const PUG_SURVIVORS_OVERALL_SEGMENT = 'survivors';
 export const PUG_SURVIVORS_OVERALL_PATH = `${PUG_LEADERBOARDS_PATH}${PUG_SURVIVORS_OVERALL_SEGMENT}/`;
 
 // import.meta.glob needs literal patterns, so each group has its own call.
@@ -61,11 +61,21 @@ export interface PublicationEntry {
   view: LeaderboardView;
 }
 
+/** A page of the group that covers every killer, such as the overall PUG survivor ranking. */
+export interface OverviewEntry {
+  /** URL segment under the group's path; never a killer's slug. */
+  slug: string;
+  label: string;
+  href: string;
+}
+
 export interface PublicationGroup {
   /** Umbrella page of the group. */
   href: string;
   competition: PublicDefinition;
   entries: PublicationEntry[];
+  /** Pages across every killer, shown beside the umbrella link in the killer switcher. */
+  overviews: OverviewEntry[];
 }
 
 // The scope value ID becomes a URL segment as is. Reject anything that would
@@ -108,7 +118,7 @@ function buildGroup(fixtures: Record<string, RankingSnapshot>, basePath: string,
   });
 
   entries.sort((a, b) => a.label.localeCompare(b.label, 'en'));
-  return { href: basePath, competition, entries };
+  return { href: basePath, competition, entries, overviews: [] };
 }
 
 export const symmetricLeaderboards: PublicationGroup = buildGroup(
@@ -123,25 +133,28 @@ export const quartetLeaderboards: PublicationGroup = buildGroup(
   'ranking-snapshot-dbd-1v4-quartet*.json',
 );
 
-export const pugLeaderboards: PublicationGroup = buildGroup(
-  pugFixtures,
-  PUG_LEADERBOARDS_PATH,
-  'ranking-snapshot-dbd-1v4-pug*.json',
-);
+const pugPerKiller = buildGroup(pugFixtures, PUG_LEADERBOARDS_PATH, 'ranking-snapshot-dbd-1v4-pug*.json');
 
 /** Overall PUG survivor ranking across every killer, at PUG_SURVIVORS_OVERALL_PATH. */
 export const pugSurvivorsOverall: LeaderboardView = (() => {
   const [snapshot] = Object.values(pugSurvivorsOverallFixture);
   if (!snapshot) fail('no ranking-snapshot-dbd-1v4-pug-survivors-overall.json fixture found');
   const where = `publication "${snapshot.publication.publication_id}"`;
-  const [perKiller] = pugLeaderboards.entries;
+  const [perKiller] = pugPerKiller.entries;
   if (snapshot.deployment_id !== perKiller.view.snapshot.deployment_id) fail(`${where} is from a different deployment`);
-  if (snapshot.publication.competition.id !== pugLeaderboards.competition.id) fail(`${where} is from a different competition`);
-  if (pugLeaderboards.entries.some((e) => e.slug === PUG_SURVIVORS_OVERALL_SEGMENT)) {
+  if (snapshot.publication.competition.id !== pugPerKiller.competition.id) fail(`${where} is from a different competition`);
+  if (pugPerKiller.entries.some((e) => e.slug === PUG_SURVIVORS_OVERALL_SEGMENT)) {
     fail(`a PUG killer's scope value ID "${PUG_SURVIVORS_OVERALL_SEGMENT}" clashes with the overall survivor page`);
   }
   return loadLeaderboard(snapshot);
 })();
+
+export const pugLeaderboards: PublicationGroup = {
+  ...pugPerKiller,
+  overviews: [
+    { slug: PUG_SURVIVORS_OVERALL_SEGMENT, label: 'Overall survivors', href: PUG_SURVIVORS_OVERALL_PATH },
+  ],
+};
 
 /** Frontmatter shared by the unlisted preview pages (UX structure §5). */
 export const UNLISTED_PREVIEW = {
