@@ -1,6 +1,7 @@
 ---
-// One card per killer leaderboard on a game mode's umbrella page: the
-// killer's portrait on the left, then killer name, season and, for each board,
+// One card per killer leaderboard on a game mode's umbrella page (plus any
+// overview leaderboard the page adds, such as the overall PUG survivor
+// ranking): the killer's portrait on the left, then killer name, season and, for each board,
 // the units ranked 3rd or better and the number of ranked units (players on
 // symmetric 1v1; killers and survivor parties on the quartet's two boards;
 // killers and survivors on the PUG's). Scores are left to the
@@ -11,7 +12,8 @@
 // Portraits are the balancing tool's lore art (iconography/lore), stored as
 // src/assets/killers/portraits/<scope value ID>.webp (loaded by
 // src/lib/killers/portraits.ts) and cropped to the
-// killer's upper body down the card's left edge. The crop covers the strip's
+// killer's upper body down the card's left edge. An entry may bring its own
+// portrait instead (the overall survivor card shows a survivor's art). The crop covers the strip's
 // height, so the art is drawn wider than the strip (about 16rem on a quartet
 // card); `sizes` names that drawn width, not the strip's, or the browser picks
 // a file too small and upscales it. A killer without one gets an
@@ -27,13 +29,19 @@
 //
 // Ranks and labels are shown as published; this component adds only English
 // UI text.
+import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import { portraits } from '../lib/killers/portraits';
 import type { PublicationEntry } from '../lib/ranking/publications';
 import type { StandingView, UnitNoun } from '../lib/ranking/snapshot';
 
+export interface CardEntry extends PublicationEntry {
+  /** Overrides the killer portrait looked up by slug. */
+  portrait?: ImageMetadata;
+}
+
 interface Props {
-  entries: PublicationEntry[];
+  entries: CardEntry[];
 }
 
 const { entries } = Astro.props;
@@ -43,10 +51,10 @@ const ranked = (n: number, unit: UnitNoun) => `${n} ranked ${n === 1 ? unit.one 
 ---
 
 <div class="lb-cards not-content">
-  {entries.map(({ slug, label, href, view }) => {
+  {entries.map(({ slug, label, href, view, portrait: ownPortrait }) => {
     const { snapshot, boards, ambiguousNames } = view;
     const headingId = `leaderboard-${slug}`;
-    const portrait = portraits.get(slug);
+    const portrait = ownPortrait ?? portraits.get(slug);
     return (
       <article class="lb-card" aria-labelledby={headingId}>
         <div class="lb-card__portrait">
