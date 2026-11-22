@@ -4,9 +4,10 @@
 // JavaScript; the current killer is marked with aria-current. Pills wrap
 // rather than scroll so every killer stays visible on narrow screens.
 //
-// The first pill, "All killers", leads to the game mode's umbrella page. It sits in the
+// The first pill, "All", leads to the game mode's umbrella page. It sits in the
 // strip rather than above it so readers find it where they already look to
-// switch killers.
+// switch killers. The group's overview pages, which cover every killer (the
+// PUG's overall survivor ranking), follow it before the divider.
 //
 // Leaderboards stay out of the sidebar (UX structure §5), so this strip is
 // the way between them.
@@ -18,14 +19,20 @@ interface Props {
 }
 
 const { group, current } = Astro.props;
-const { entries } = group;
+const { entries, overviews } = group;
+// The umbrella link, then the overview pages; the last of them gets the divider.
+const leading = [{ slug: null, label: 'All', href: group.href }, ...overviews];
 ---
 
 <nav class="lb-switcher not-content" aria-label="Killer leaderboards">
   <ul class="lb-switcher__list">
-    <li class="lb-switcher__all">
-      <a class="lb-switcher__pill" href={group.href}>All killers</a>
-    </li>
+    {leading.map(({ slug, label, href }, i) => (
+      <li class:list={['lb-switcher__all', { 'lb-switcher__all--last': i === leading.length - 1 }]}>
+        <a class="lb-switcher__pill" href={href} aria-current={slug !== null && slug === current ? 'page' : undefined}>
+          {label}
+        </a>
+      </li>
+    ))}
     {entries.map(({ slug, label, href }) => (
       <li>
         <a class="lb-switcher__pill" href={href} aria-current={slug === current ? 'page' : undefined}>
@@ -54,8 +61,8 @@ const { entries } = group;
     align-items: center;
     gap: 0.4rem;
   }
-  /* Divider between the umbrella pill and the killer pills. */
-  .lb-switcher__all::after {
+  /* Divider between the umbrella and overview pills and the killer pills. */
+  .lb-switcher__all--last::after {
     content: '';
     align-self: stretch;
     width: 1px;

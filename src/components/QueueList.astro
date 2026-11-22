@@ -1,0 +1,122 @@
+---
+// The profiles on one side of a match, as they queued (see QueueUnit in
+// src/lib/ranking/snapshot.ts). Used by RankingLeaderboard.astro for a match's
+// opponents and, on PUG survivor boards, teammates.
+//
+// A party that queued together is one box labelled by its size ("Duo",
+// "Trio", "Full party"); a solo player, or the single unit of a symmetric or
+// quartet side, is a bare name. A survivor's own party is highlighted and,
+// since the row's own player is left out of it, its label counts them too.
+// Names link to their row on the page when they have one.
+//
+// The party styles are global so the leaderboard's legend can show a sample
+// box with the same look.
+import type { QueueUnit } from '../lib/ranking/snapshot';
+
+interface Props {
+  units: QueueUnit[];
+  /** Display name of the row whose match this is, for screen-reader wording. */
+  rowName: string;
+  /** Display names shared by several profiles; show the profile ID with them. */
+  ambiguousNames: Set<string>;
+}
+
+const { units, rowName, ambiguousNames } = Astro.props;
+
+const PARTY_LABEL: Record<number, string> = { 2: 'Duo', 3: 'Trio', 4: 'Full party' };
+const partyLabel = (size: number) => PARTY_LABEL[size] ?? `Party of ${size}`;
+const partyTitle = (u: QueueUnit) =>
+  u.own ? `Queued in a party of ${u.partySize} with ${rowName}` : `Queued together as a party of ${u.partySize}`;
+---
+
+<span class="queue">
+  {units.map((u, i) => (
+    <Fragment>
+      {i > 0 && <span class="sr-only">; </span>}
+      <span
+        class:list={['queue-unit', { 'queue-party': u.partySize !== null, 'queue-party--own': u.own }]}
+        title={u.partySize !== null ? partyTitle(u) : undefined}
+      >
+        {u.partySize !== null && (
+          <span class="queue-party__tag">
+            {partyLabel(u.partySize)}
+            {u.own && <span class="sr-only"> with {rowName}</span>}
+            <span class="sr-only">: </span>
+          </span>
+        )}
+        {u.members.map(({ profile, anchor }, j) => (
+          <span class="queue-member">
+            {j > 0 && <span class="sr-only">, </span>}
+            {anchor ? <a href={`#${anchor}`}>{profile.display_name}</a> : profile.display_name}
+            {ambiguousNames.has(profile.display_name) && <span class="profile-id">{profile.profile_id}</span>}
+          </span>
+        ))}
+      </span>
+    </Fragment>
+  ))}
+</span>
+
+<style>
+  .queue {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.3rem 0.75rem;
+  }
+  /* A party never breaks across lines, so it always reads as one box; the
+     units wrap between each other instead (the table scrolls if need be). */
+  .queue-unit {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    gap: 0.15rem 0.5rem;
+  }
+  .queue a {
+    color: var(--sl-color-text-accent);
+    font-weight: 600;
+  }
+  .queue-member {
+    white-space: nowrap;
+  }
+  .profile-id {
+    font-family: var(--sl-font-mono);
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-2);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.25rem;
+    padding: 0 0.3rem;
+    margin-inline-start: 0.35rem;
+  }
+</style>
+
+<style is:global>
+  /* A party box: shared with the legend in RankingLeaderboard.astro. */
+  .queue-party {
+    padding: 0.05rem 0.45rem 0.1rem 0.2rem;
+    border: 1px solid var(--sl-color-gray-4);
+    border-radius: 0.375rem;
+  }
+  .queue-party__tag {
+    align-self: center;
+    padding: 0 0.3rem;
+    border-radius: 0.25rem;
+    background: var(--sl-color-gray-5);
+    color: var(--sl-color-gray-1);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .queue-party--own {
+    border-color: var(--sl-color-accent);
+    background: var(--sl-color-accent-low);
+  }
+  .queue-party--own .queue-party__tag {
+    background: var(--sl-color-accent);
+    color: var(--sl-color-black);
+  }
+  :root[data-theme='light'] .queue-party--own .queue-party__tag {
+    color: var(--sl-color-white);
+  }
+</style>

@@ -10,11 +10,18 @@
 // The columns follow the snapshot's evidence contract (view.format):
 //   - symmetric 1v1: Score · Matches · Wins · Win rate · Opponents, and each
 //     duel's result with its round score;
-//   - 1v4 quartet: Score · Matches · Wins · Win rate · average generators
-//     completed · average hook stages, and each match's win, loss or draw
-//     with its generators completed and hook stages. The killer board and
-//     the survivor party board are each other's opponents, so opponent links
+//   - 1v4 quartet and PUG: Score · Matches · Wins · Win rate · average
+//     generators completed · average hook stages, and each match's win, loss
+//     or draw with its generators completed and hook stages. The killer board
+//     and the survivor board are each other's opponents, so opponent links
 //     cross between them.
+//   - PUG only: survivors are ranked individually but queue solo or in
+//     parties, so a killer's opponents and a survivor's teammates are listed
+//     by queue, each party boxed and labelled by its size. A survivor's own
+//     party is highlighted and listed first, without the survivor.
+//   - Overall PUG: one survivor board across every killer character, so each
+//     match also names the killer character played, between its date and the
+//     killer player. Killer players have no row and are not linked.
 // Every row is rendered; in the browser the script below adds a player search
 // and, on boards longer than one page, shows one page at a time and keeps the
 // page in the URL (?page=N). Without JavaScript the full list is shown.
@@ -27,7 +34,7 @@
 // labels are written for whoever maintains the ranking, not for readers, so
 // they are only a fallback for pages that do not supply their own text.
 import {
-  QUARTET_GENERATORS,
+  GENERATORS_1V4,
   formatAverage,
   formatDate,
   formatTimestamp,
@@ -36,6 +43,7 @@ import {
   type MatchResult,
 } from '../lib/ranking/snapshot';
 import { DEFAULT_PAGE_SIZE, pageParamName, searchText } from '../lib/ranking/standings-controls';
+import QueueList from './QueueList.astro';
 
 interface Props {
   view: LeaderboardView;
@@ -51,7 +59,8 @@ interface Props {
 
 const { boardIntroduction, pageSize = DEFAULT_PAGE_SIZE } = Astro.props;
 const { snapshot, format, boards, ambiguousNames } = Astro.props.view;
-const quartet = format === 'quartet';
+// Quartet and PUG share the 1v4 columns: generators and hook stages.
+const oneVFour = format !== 'symmetric';
 const { publication, season } = snapshot;
 
 // When the page supplies its own wording, the snapshot's description no longer
@@ -67,10 +76,10 @@ const introductionFor = (boardIndex: number) =>
 const showProfileId = (name: string) => ambiguousNames.has(name);
 const rounds = (n: number) => `${n} ${n === 1 ? 'round' : 'rounds'}`;
 const capitalise = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
-const RESULT_TEXT: Record<'symmetric' | 'quartet', Record<MatchResult, string>> = {
-  symmetric: { won: 'Won', lost: 'Lost', draw: 'Draw' },
-  quartet: { won: 'Win', lost: 'Loss', draw: 'Draw' },
-};
+const RESULT_TEXT: Record<MatchResult, string> = oneVFour
+  ? { won: 'Win', lost: 'Loss', draw: 'Draw' }
+  : { won: 'Won', lost: 'Lost', draw: 'Draw' };
+
 const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw: '◇' };
 ---
 
@@ -103,40 +112,41 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
     </dl>
   </div>
 
-  {boards.map(({ board, headingId, unit, opponentUnit, standings }, boardIndex) => {
+  {boards.map(({ board, headingId, unit, opponentUnit, hasTeammates, showsQueues, showsKillerCharacter, eligibility, standings }, boardIndex) => {
     // Rank · Name · Score · Matches · Wins · Win rate · then Opponents
-    // (symmetric) or Avg gens · Avg hook stages (quartet) · disclosure marker.
+    // (symmetric) or Avg gens · Avg hook stages (1v4) · disclosure marker.
     // Every count column gets the same width and values are centred under
     // their headers, so the stats sit on an even rhythm. Below 44rem the
     // compact layout in the styles takes over: Matches and Wins merge into one
-    // column, and on the quartet so do the two averages.
-    // The quartet has one more stat, so its headers wrap onto two lines
+    // column, and on the 1v4 boards so do the two averages.
+    // The 1v4 boards have one more stat, so their headers wrap onto two lines
     // ("Ranking / score", "Avg hook / stages") and the columns are narrower.
-    const countColumns = quartet ? Array(5).fill('4.75rem') : Array(4).fill('5.5rem');
-    const columns = ['3.25rem', 'minmax(0, 1fr)', quartet ? '5.5rem' : '7.5rem', ...countColumns, '1rem'].join(' ');
+    const countColumns = oneVFour ? Array(5).fill('4.75rem') : Array(4).fill('5.5rem');
+    const columns = ['3.25rem', 'minmax(0, 1fr)', oneVFour ? '5.5rem' : '7.5rem', ...countColumns, '1rem'].join(' ');
     const narrowColumns = [
-      '1.75rem', 'minmax(0, 1fr)', '2.75rem', '3.75rem', '2.5rem', quartet ? '4.25rem' : '2.25rem', '0.6rem',
+      '1.75rem', 'minmax(0, 1fr)', '2.75rem', '3.75rem', '2.5rem', oneVFour ? '4.25rem' : '2.25rem', '0.6rem',
     ].join(' ');
     const unitLabel = capitalise(unit.one);
-    const resultText = RESULT_TEXT[format];
     return (
       <section class="ranking__board" aria-labelledby={headingId}>
         <h2 id={headingId}>{board.label}</h2>
         <p>{introductionFor(boardIndex)}</p>
 
-        <div class="ranking__info">
-          <h3 class="ranking__info-title">Requirement to be ranked</h3>
-          <dl class="meta-grid ranking__meta">
-            <Fragment>
-              <dt title={board.eligibility.rating.description}>Entry rating</dt>
-              <dd>At least {board.eligibility.minimum_rating_value}</dd>
-            </Fragment>
-            <Fragment>
-              <dt>Matches against ranked {opponentUnit.other}</dt>
-              <dd>At least {board.eligibility.minimum_eligible_match_count}</dd>
-            </Fragment>
-          </dl>
-        </div>
+        {eligibility && (
+          <div class="ranking__info">
+            <h3 class="ranking__info-title">Requirement to be ranked</h3>
+            <dl class="meta-grid ranking__meta">
+              <Fragment>
+                <dt title={eligibility.rating.description}>Entry rating</dt>
+                <dd>At least {eligibility.minimum_rating_value}</dd>
+              </Fragment>
+              <Fragment>
+                <dt>Matches against ranked {opponentUnit.other}</dt>
+                <dd>At least {eligibility.minimum_eligible_match_count}</dd>
+              </Fragment>
+            </dl>
+          </div>
+        )}
 
         {standings.length === 0 ? (
           <p>No {unit.other} meet the eligibility requirements in this snapshot.</p>
@@ -162,7 +172,7 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
             <p class="standings-status" data-status aria-live="polite" />
           </div>
           <div
-            class:list={['standings', { 'standings--quartet': quartet }]}
+            class:list={['standings', { 'standings--1v4': oneVFour }]}
             data-standings
             style={`--standings-columns: ${columns}; --standings-columns-narrow: ${narrowColumns}`}
           >
@@ -173,12 +183,12 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
               <span class="num stat--split">Matches</span>
               <span class="num stat--split" title={`Wins by this ${unit.one} in matches that count`}>Wins</span>
               <span class="num stat--merged" title={`Matches that count / wins by this ${unit.one} in those matches`}>Matches/<wbr />Wins</span>
-              <span class="num" title={`Percentage of matches that count won by this ${unit.one}${quartet ? '; draws are not wins' : ''}`}>Win rate</span>
-              {quartet ? (
+              <span class="num" title={`Percentage of matches that count won by this ${unit.one}${oneVFour ? '; draws are not wins' : ''}`}>Win rate</span>
+              {oneVFour ? (
                 <Fragment>
                   <span class="num stat--split" title="Average generators completed per match, using matches that count">Avg gens</span>
                   <span class="num stat--split" title="Average hook stages per match, using matches that count">Avg hook stages</span>
-                  <span class="num stat--merged" title="Average generators completed / hook stages per match, using matches that count">Gens/<wbr />Hooks</span>
+                  <span class="num stat--merged" title="Average generators completed / hook stages per match, using matches that count">Gens/<wbr />Stages</span>
                 </Fragment>
               ) : (
                 <span class="num">Oppo&shy;nents</span>
@@ -209,19 +219,19 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
                         <span class="cell-label">{board.score_definition.label}</span>{row.display_score}
                       </span>
                       <span class="num stat--split">
-                        <span class="cell-label">Matches</span>{row.eligible_match_count}
+                        <span class="cell-label">Matches</span>{matches.length}
                       </span>
                       <span class="num stat--split">
                         <span class="cell-label">Wins</span>{wins}
                       </span>
                       <span class="num stat--merged">
-                        <span class="cell-label">{row.eligible_match_count} matches, {wins} wins</span>
-                        <span aria-hidden="true">{row.eligible_match_count}<span class="stat__unit">M</span>/{wins}<span class="stat__unit">W</span></span>
+                        <span class="cell-label">{matches.length} matches, {wins} wins</span>
+                        <span aria-hidden="true">{matches.length}<span class="stat__unit">M</span>/{wins}<span class="stat__unit">W</span></span>
                       </span>
                       <span class="num">
                         <span class="cell-label">Win rate</span>{formatWinRate(winRate)}
                       </span>
-                      {quartet ? (
+                      {oneVFour ? (
                         <Fragment>
                           <span class="num stat--split">
                             <span class="cell-label">Average generators completed</span>{formatAverage(averages?.generatorsCompleted)}
@@ -235,7 +245,7 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
                               {' '}{formatAverage(averages?.hookStages)} hook stages
                             </span>
                             <span aria-hidden="true">
-                              {formatAverage(averages?.generatorsCompleted)}<span class="stat__unit">G</span>/{formatAverage(averages?.hookStages)}<span class="stat__unit">H</span>
+                              {formatAverage(averages?.generatorsCompleted)}<span class="stat__unit">G</span>/{formatAverage(averages?.hookStages)}<span class="stat__unit">S</span>
                             </span>
                           </span>
                         </Fragment>
@@ -258,6 +268,21 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
                           {profile.group_members.map((m) => m.display_name).join(', ')}
                         </p>
                       )}
+                      {showsQueues && (
+                        <p class="standing__legend">
+                          <span class="legend-item">
+                            <span class="legend-swatch queue-party" aria-hidden="true" />
+                            Queued together as a party
+                          </span>
+                          {hasTeammates && (
+                            <span class="legend-item">
+                              <span class="legend-swatch queue-party queue-party--own" aria-hidden="true" />
+                              Queued with {profile.display_name}
+                            </span>
+                          )}
+                          <span class="legend-item">Unboxed names queued solo</span>
+                        </p>
+                      )}
                       <div class="standing__table-wrap">
                         <table class="standing__matches">
                           <caption class="sr-only">
@@ -267,11 +292,13 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
                           <thead>
                             <tr>
                               <th scope="col">Date</th>
-                              <th scope="col">Opponent</th>
+                              {showsKillerCharacter && <th scope="col" title="Killer character the opponent played">Killer</th>}
+                              <th scope="col">{showsQueues && !hasTeammates ? 'Opponents' : 'Opponent'}</th>
+                              {hasTeammates && <th scope="col">Teammates</th>}
                               <th scope="col">Result</th>
-                              {quartet && (
+                              {oneVFour && (
                                 <Fragment>
-                                  <th scope="col" class="num" title={`Generators the survivors completed, of ${QUARTET_GENERATORS}`}>Gens completed</th>
+                                  <th scope="col" class="num" title={`Generators the survivors completed, of ${GENERATORS_1V4}`}>Gens completed</th>
                                   <th scope="col" class="num" title="Hook stages the killer performed">Hook stages</th>
                                 </Fragment>
                               )}
@@ -287,15 +314,15 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
                                     <span class="match-date--unknown">Unknown</span>
                                   )}
                                 </td>
+                                {showsKillerCharacter && (
+                                  <td class="match-character">
+                                    {m.facts.format === '1v4' && m.facts.killerCharacter
+                                      ? <span title={m.facts.killerCharacter.description}>{m.facts.killerCharacter.label}</span>
+                                      : <span class="match-date--unknown">Unknown</span>}
+                                  </td>
+                                )}
                                 <td class="match-opponent">
-                                  {m.opponentAnchor ? (
-                                    <a href={`#${m.opponentAnchor}`}>{m.opponent.display_name}</a>
-                                  ) : (
-                                    m.opponent.display_name
-                                  )}
-                                  {showProfileId(m.opponent.display_name) && (
-                                    <span class="profile-id">{m.opponent.profile_id}</span>
-                                  )}
+                                  <QueueList units={m.opponents} rowName={profile.display_name} ambiguousNames={ambiguousNames} />
                                   {m.encounterTotal > 1 && (
                                     <span class="encounter" title="Repeat encounters share a contribution limit">
                                       {m.encounterIndex === null
@@ -304,10 +331,15 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
                                     </span>
                                   )}
                                 </td>
+                                {hasTeammates && (
+                                  <td class="match-teammates">
+                                    <QueueList units={m.teammates} rowName={profile.display_name} ambiguousNames={ambiguousNames} />
+                                  </td>
+                                )}
                                 <td>
                                   <span class={`result result--${m.result}`}>
                                     <span aria-hidden="true">{RESULT_MARK[m.result]}</span>
-                                    {resultText[m.result]}
+                                    {RESULT_TEXT[m.result]}
                                   </span>
                                   {m.facts.format === 'symmetric' && (
                                     <span class="rounds">
@@ -316,10 +348,10 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
                                     </span>
                                   )}
                                 </td>
-                                {m.facts.format === 'quartet' && (
+                                {m.facts.format === '1v4' && (
                                   <Fragment>
                                     <td class="num">
-                                      {m.facts.generatorsCompleted}<span class="of-total"><span class="sr-only"> of </span><span aria-hidden="true">/</span>{QUARTET_GENERATORS}</span>
+                                      {m.facts.generatorsCompleted}<span class="of-total"><span class="sr-only"> of </span><span aria-hidden="true">/</span>{GENERATORS_1V4}</span>
                                     </td>
                                     <td class="num">{m.facts.hookStages}</td>
                                   </Fragment>
@@ -735,10 +767,10 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
   .standings__head > span {
     white-space: nowrap;
   }
-  .standings--quartet .standings__head {
+  .standings--1v4 .standings__head {
     align-items: end;
   }
-  .standings--quartet .standings__head > span {
+  .standings--1v4 .standings__head > span {
     white-space: normal;
   }
   /* Matches and wins get a column each on wide boards and share one on
@@ -879,6 +911,8 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
     white-space: nowrap;
   }
   .standing__matches th {
+    /* Headers wrap ("Gens / completed") so the wider PUG rows keep every column in view. */
+    white-space: normal;
     font-size: var(--sl-text-xs);
     font-weight: 600;
     color: var(--sl-color-gray-3);
@@ -888,8 +922,28 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
   .standing__matches .num {
     text-align: center;
   }
-  .standing__matches td.match-opponent {
+  .standing__matches td.match-opponent,
+  .standing__matches td.match-teammates {
     white-space: normal;
+  }
+  .standing__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    margin: -0.25rem 0 0.5rem;
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+  }
+  .legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .legend-swatch {
+    display: inline-block;
+    width: 1.1rem;
+    height: 0.8rem;
+    padding: 0;
   }
   .of-total {
     color: var(--sl-color-gray-3);
@@ -951,8 +1005,8 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
 
   /* Narrow standings (phones, or a tablet with the sidebar open): the full
      grid would crush the name column, so the stat columns shrink to fit
-     their values, Matches and Wins share one "5M/4W" column (on the quartet
-     the averages share one "3.5G/7.0H" column too), and header labels wrap. Every row stays on one line; only a long player name wraps.
+     their values, Matches and Wins share one "5M/4W" column (on the 1v4 boards
+     the averages share one "3.5G/7.0S" column too), and header labels wrap. Every row stays on one line; only a long player name wraps.
      Queried on the standings box itself, not the viewport, because the
      sidebar changes its width. */
   .standings {
@@ -962,7 +1016,7 @@ const RESULT_MARK: Record<MatchResult, string> = { won: '▲', lost: '▽', draw
     .standings__head,
     .standing__summary {
       /* Rank · Name · Score · Matches/Wins · Win rate · Opponents or
-         Gens/Hooks · marker; set per format on the element. */
+         Gens/Stages · marker; set per format on the element. */
       grid-template-columns: var(--standings-columns-narrow);
       gap: 0.25rem;
       padding-inline: 0.5rem;

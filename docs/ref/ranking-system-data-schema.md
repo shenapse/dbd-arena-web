@@ -1,5 +1,5 @@
 ---
-version: "0.4"
+version: "0.5"
 doc_type: "DS"
 scope:
   in_scope:
@@ -16,7 +16,8 @@ scope:
     - publication-mechanics: "Owned by ranking-system-architecture.md"
     - website-ui-behavior: "Owned by consumers"
     - game-specific-fact-fields: "Owned by separately published public evidence schemas"
-    - concrete-json-schema-artifacts: "Implemented by schemas/ranking-snapshot-1.1.schema.json (and the retained 1.0 file); this document stays authoritative"
+    - eligibility-policy-and-row-extension-fields: "Owned by separately published public extension schemas"
+    - concrete-json-schema-artifacts: "Implemented by schemas/ranking-snapshot-2.0.schema.json (with retained 1.x files); this document stays authoritative"
   cross_reference_allowed:
     - DS
 ---
@@ -24,9 +25,10 @@ scope:
 # Ranking Snapshot - Public Data Schema / Dictionary
 
 > **Purpose:** Define the complete game-agnostic public contract for leaderboard
-> snapshots. An external program can interpret the envelope using this document
-> and the snapshot itself. Detailed game-specific match facts additionally use
-> the public schema and documentation identified in the snapshot.
+> snapshots. An external program can interpret the base envelope using this
+> document and the snapshot itself. Eligibility, additional row fields, and
+> detailed match facts use the public schemas and documentation identified in
+> the snapshot.
 >
 > No matchmaking schema, database, registry, catalog, or generator configuration
 > is a dependency of this public contract. Ranking owns all types defined here.
@@ -34,8 +36,8 @@ scope:
 ## 1. Overview
 
 A snapshot describes a competition, a publication scope, and a season. It
-contains ordered leaderboards, public participant and group profiles, included
-match summaries, and understandable eligibility requirements.
+contains ordered leaderboards, public participant and group profiles, and
+included match summaries. Structured eligibility information is optional.
 
 The envelope has no fixed games, characters, competitive roles, or outcome
 vocabulary. The snapshot supplies public names and explanations for these
@@ -45,7 +47,8 @@ concepts. Consumers decide how to present them.
 RankingSnapshot
   -> publication (competition and scope metadata)
   -> season
-  -> boards[] (metadata, eligibility, score definition, ordered rows)
+  -> extension_schema? (eligibility and additional row fields)
+  -> boards[] (metadata, optional eligibility, score definition, ordered rows)
        -> rows[].profile_id -> profiles[].profile_id
        -> rows[].included_match_ids[] -> included_matches[].match_id
   -> profiles[]
@@ -56,8 +59,8 @@ RankingSnapshot
 ```
 
 Consumers use published ranks and row order. They do not reconstruct eligibility
-or ranking calculations. Eligibility is evaluated when the snapshot is
-generated, including when no new matches have been played.
+or ranking calculations. The base contract does not prescribe an eligibility
+policy, its evaluation time, an entry rating, or repeated-match limits.
 
 ## 2. Common Types and Identity
 
@@ -89,12 +92,14 @@ Within a deployment:
   across seasons; a different competitive category requires a different board ID.
 - Competition IDs are deployment-scoped. Scope category IDs are scoped to a
   competition; scope value IDs are scoped to their category.
-- Metric, outcome, eligibility-rating, side, and role definition IDs are scoped
+- Metric, outcome, side, and role definition IDs are scoped
   to a publication and their respective definition kind. They retain their
   meaning across refreshes and seasons. A materially different meaning requires
   a different ID. Labels and descriptions may be corrected without changing ID.
-- Evidence schema identity is `(schema_id, schema_version)` within a deployment.
-  Published definitions for that pair are immutable.
+- Public schema identity is `(schema_id, schema_version)` within a deployment,
+  separately for extension and evidence schemas. Published definitions for that
+  pair are immutable. Extensions define scopes and stability rules for any IDs
+  they introduce.
 
 IDs are never reassigned to different entities. Display names are not IDs and
 need not be unique. Absence in a later snapshot does not invalidate an identity.
@@ -115,19 +120,20 @@ a board by `(deployment_id, publication_id, board_id)`.
 
 | Field | Type | Meaning / constraint |
 |---|---|---|
-| `schema_version` | string | Public envelope version in `major.minor` form. This document describes `1.1`. See Section 8. |
+| `schema_version` | string | Public envelope version in `major.minor` form. This document describes `2.0`. See Section 8. |
 | `deployment_id` | `PublicId` | Publisher's stable public identity namespace. |
 | `generated_at` | `Timestamp` | Time the snapshot was generated. |
 | `publication` | `PublicPublication` | Competition and scope covered by this snapshot. |
 | `season` | `PublicSeason` | Season covered by this snapshot. |
-| `methodology_description` | `PublicText` | Public explanation of ranking scores and repeated-match contribution limits. See Section 3.4. |
+| `methodology_description` | `PublicText` | Public explanation of ranking scores and applicable calculation policies. See Section 3.4. |
+| `extension_schema` | `PublicSchemaReference` | Optional. One effective public extension contract for this snapshot. Required when any board publishes `eligibility` or any row contains a field beyond Section 4.4. See Section 4.3. |
 | `boards` | list[`RankingBoard`] | Non-empty. Unique by `board_id`. List order is the public board order. |
 | `profiles` | list[`PublicRankingProfile`] | Unique by `profile_id`. Includes every profile referenced by rows and match participants. |
 | `result_metrics` | list[`PublicDefinition`] | Unique by `id`. Defines row result counts. May be empty. |
 | `public_outcomes` | list[`PublicDefinition`] | Non-empty. Unique by `id`. Defines match outcomes. |
 | `side_definitions` | list[`PublicDefinition`] | Unique by `id`. Defines the sides used in match summaries. |
 | `role_definitions` | list[`PublicDefinition`] | Unique by `id`. Defines optional competitive roles used in match summaries. |
-| `public_facts_schema` | `PublicEvidenceSchemaReference` | Public schema and documentation for every match's `public_facts`. |
+| `public_facts_schema` | `PublicSchemaReference` | Public schema and documentation for every match's `public_facts`. |
 | `included_matches` | list[`IncludedMatchEvidence`] | Unique by `match_id`. Only matches included in this snapshot's ranking calculation. |
 
 ### 3.2 `PublicPublication` and `PublicScopeSelection`
@@ -161,10 +167,11 @@ the selection. Labels are supplied as data; they are not inferred from IDs.
 
 ### 3.4 Methodology explanation
 
-`methodology_description` explains that ranking scores measure competitive
-performance among currently eligible units, independently of the rating used
-for entry requirements. It must explain how repeated encounters are limited in
-this publication, including which encounters share a limit and what is limited.
+`methodology_description` explains what ranking scores measure and the policies
+that affect their calculation. If entry requirements or repeated-match limits
+apply, it explains their relationship to the ranking score. For repeated-match
+limits, it names which encounters share a limit and what is limited. The base
+contract does not require either policy to exist.
 
 If the explanation states a numeric limit, it must name the quantity and unit
 (for example, match count or calculation weight). An opaque implementation
@@ -181,7 +188,7 @@ does not prescribe the calculation formula or require consumers to implement it.
 | `label` | `PublicText` | Human-readable board name. |
 | `description` | `PublicText` | Explains who is ranked and the competitive category. |
 | `score_definition` | `PublicScoreDefinition` | Meaning and scale of this board's displayed score. |
-| `eligibility` | `PublicEligibilityRequirements` | Entry requirements and public explanation. |
+| `eligibility` | JSON object | Optional. Structured eligibility information defined entirely by `extension_schema`. No predefined children. See Section 4.3. |
 | `rows` | list[`RankingRow`] | Authoritative ranking order. May be empty. Unique by `profile_id`. |
 
 Board metadata and rows are defined together. Consumers do not join a separate
@@ -198,20 +205,43 @@ Higher displayed scores rank ahead of lower scores within a board. Scores are
 integers. Cross-board or cross-snapshot score comparisons are not guaranteed
 unless this description explicitly supports them.
 
-### 4.3 `PublicEligibilityRequirements`
+### 4.3 Eligibility and row extensions
 
-| Field | Type | Meaning / constraint |
-|---|---|---|
-| `rating` | `PublicDefinition` | Public identity, name, and explanation of the entry rating, including the scale needed to interpret its minimum. |
-| `minimum_rating_value` | `Number` | Inclusive lower bound for the entry rating. A policy threshold, not any profile's rating. |
-| `minimum_eligible_match_count` | `Count` | Minimum current-season matches against units eligible when the snapshot is generated. |
-| `description` | `PublicText` | Explains these requirements and that eligibility is evaluated at generation time. |
+The base defines `eligibility` only as an optional, non-null JSON object. It
+defines no child fields, including no mandatory description. Absence means no
+structured eligibility information is published; it does not mean that everyone
+qualifies or that no filtering occurred. The board description can explain
+participation requirements to consumers that do not understand the extension.
 
-The rating threshold determines entry into the candidate pool. The match-count
-requirement applies against the calculation-time eligible pool. The entry
-rating does not become the ranking score. Consumers display these rules; they
-cannot independently determine eligibility from public profiles because
-individual entry-rating values are not published.
+An extension owns the child fields of `boards[].eligibility` and any additional
+fields directly on `boards[].rows[]`. These are the only envelope extension
+locations in `2.0`. Other envelope objects remain closed; `public_facts` retains
+its separate evidence contract. An extension may require eligibility and its
+own row fields, define their types and meanings, and add constraints consistent
+with the base. It must not remove, replace, or redefine base fields or weaken
+their guarantees. It must declare the fields it permits and reject undeclared
+extension fields.
+
+`eligible_match_count` is not a base field. If an extension defines it, that
+extension owns its meaning, requiredness, absence semantics, and relationships
+to eligibility and match evidence. Consumers must not infer those from its name
+or from another deployment's use of the same name.
+
+`extension_schema` is required whenever eligibility is present (even `{}`) or
+any additional row field is present. It may also be supplied without extension
+data, for example when an extension permits empty boards. Its schema validates
+the whole snapshot and composes the declared base schema by reference. One
+effective extension contract applies to the snapshot; it may compose shared
+game schemas and deployment constraints internally. Consumers do not merge
+independent extension contracts or resolve precedence. The published reference,
+not `deployment_id` or field names, identifies the contract.
+
+Validate the base envelope, then the referenced extension if present, and each
+match's evidence separately. Base validation alone does not validate extension
+contents. An unknown extension does not prevent a generic consumer from
+displaying base fields, but it must not claim full extension validation or
+interpret extension data without supporting that contract. Public artifact
+requirements are defined once in Section 6.3 and apply to both schema references.
 
 ### 4.4 `RankingRow`
 
@@ -220,7 +250,6 @@ individual entry-rating values are not published.
 | `rank` | integer | Competition rank, greater than or equal to `1`. |
 | `profile_id` | `PublicId` | Resolves in this snapshot's `profiles`. |
 | `display_score` | integer | Public ranking score interpreted using the board's `score_definition`. |
-| `eligible_match_count` | `Count` | Included current-season matches involving this profile against calculation-time eligible units. Must meet the board's minimum. |
 | `result_counts` | map[`PublicId`, `Count`] | Keys are exactly `result_metrics[].id`. Definitions explain counts from this row's perspective. |
 | `opponent_count` | `Count` | Distinct opposing profiles represented in this row's included matches. A group counts as one profile. |
 | `included_match_ids` | list[`PublicId`] | Unique IDs resolving in `included_matches`. These matches support this row's score and counts; each includes this row's profile. |
@@ -232,9 +261,10 @@ example, scores `100`, `100`, `90` have ranks `1`, `1`, `3`. Within a tie, the
 supplied row order is authoritative. Consumers do not need unrounded model
 scores or internal tie-breaking rules.
 
-`eligible_match_count` equals the number of `included_match_ids`. Contribution
-limits can reduce a match's influence without removing it from this evidence
-list. Result metrics can overlap; their counts need not sum to the match count.
+The number of `included_match_ids` is the included-match count. It does not
+imply any eligibility rule. If contribution limits apply, they can reduce a
+match's influence without removing it from this evidence list. Result metrics
+can overlap; their counts need not sum to the included-match count.
 
 ## 5. Public Profiles
 
@@ -309,15 +339,15 @@ Different sides represent opposition within the match. A row's `opponent_count`
 counts the distinct profile IDs on other sides across its `included_match_ids`.
 Profiles on the row's own side do not count as opponents.
 
-### 6.3 `PublicEvidenceSchemaReference`
+### 6.3 `PublicSchemaReference`
 
 | Field | Type | Meaning / constraint |
 |---|---|---|
-| `schema_id` | `PublicId` | Identity of the public game- or ruleset-specific evidence schema. |
-| `schema_version` | string | Non-empty public evidence schema version. |
+| `schema_id` | `PublicId` | Identity of the public extension or evidence schema in the applicable scope from Section 2.1. |
+| `schema_version` | string | Non-empty public schema version, independent of the envelope version. |
 | `schema_path` | string | Non-empty relative URL path to its JSON Schema, resolved against the snapshot URL. |
 | `documentation_path` | string | Non-empty relative URL path to its public field and meaning documentation, resolved against the snapshot URL. |
-| `description` | `PublicText` | Explains what kind of public match facts this schema describes. |
+| `description` | `PublicText` | Explains what the referenced contract describes. |
 
 Both artifacts must be published and accessible to consumers. Their contents
 are immutable for a schema identity and version; paths must not silently serve
@@ -325,11 +355,12 @@ a different version. All transitive schema references and required explanatory
 documents must also be publicly accessible and version-pinned. No artifact may
 require matchmaking schemas or private catalogs.
 
-The evidence schema defines fact types, units, allowed values, nullability,
+The referenced contract defines field types, units, allowed values, nullability,
 meaning, and any references to envelope IDs. Such references must specify their
-scope and validation rules. Metadata needed to interpret facts must be included
-in the snapshot or these public artifacts. An outcome whose meaning depends on
-a side must identify that side unambiguously through these definitions and facts.
+scope and validation rules. Metadata needed to interpret extension fields or
+facts must be included in the snapshot or these public artifacts. An outcome
+whose meaning depends on a side must identify that side unambiguously through
+the evidence definitions and facts.
 
 Consumers can display the generic summary without understanding every specific
 fact. Detailed displays require the referenced public schema and documentation.
@@ -347,10 +378,13 @@ schemas and documentation:
   to their public definitions.
 - Repeated definitions of the same public concept agree within the snapshot.
   Repeated group-member identities have consistent display names.
-- Rows satisfy the ordering, rank, match-count, and reference rules in Section 4.
+- Rows satisfy the ordering, rank, and reference rules in Section 4.
   The row's profile appears in each referenced match.
 - Season bounds are valid. Facts conform to the public evidence schema,
   including its reference rules.
+- Eligibility and additional row fields have a declared extension and conform
+  to it, including its cross-field and reference rules. Base validation cannot
+  establish conformance to an extension or evidence contract.
 - Display text satisfies the public text rules. Empty source names never weaken
   the public requirement for a usable name.
 
@@ -359,7 +393,8 @@ and match selection are publisher guarantees. Consumers need no source access
 to accept them. Public validation does not rerun the calculation or validate
 private catalog membership.
 
-The envelope and its public evidence extensions must exclude:
+The envelope, its eligibility and row extensions, and its public evidence must
+exclude:
 
 - private user or account identities, platform bindings, and in-game player IDs;
 - unfiltered database, registry, or accepted-result records;
@@ -375,10 +410,11 @@ private systems. The projection must explicitly select allowed public fields.
 ## 8. Publication and Versioning
 
 Consumers receive static snapshot JSON, the public envelope JSON Schema for its
-declared version, this documentation, and the referenced public evidence schema
-and documentation. Descriptive metadata for competition, scope, boards,
-eligibility ratings, sides, roles, result metrics, and outcomes is included in
-the snapshot. Consumers do not fetch separate catalogs for those concepts.
+declared version, this documentation, and the referenced public extension and
+evidence schemas and documentation. Descriptive metadata for competition, scope,
+boards, sides, roles, result metrics, and outcomes is included in the snapshot.
+Consumers do not fetch separate catalogs for those concepts. Extensions define
+the metadata needed to interpret their own fields.
 
 `schema_version` independently versions the public envelope in `major.minor`
 form. A major version changes for removed fields, changed types, changed field
@@ -387,8 +423,11 @@ compatible optional additions without changing existing fields' meaning.
 Consumers must not assume support for an unknown major version. Unknown fields
 may be ignored only when permitted by the declared public schema version.
 Versions `1.0` and `1.1` permit no envelope fields beyond those defined for
-that version. The contents of `public_facts` are governed by their evidence
-schema.
+that version. Version `2.0` permits only the extension locations in Section 4.3;
+generic consumers may ignore their contents. New base versions must not claim
+extension-owned field names as base fields without a compatibility review and
+an appropriate version change. The contents of `public_facts` are governed by
+their evidence schema.
 
 Version history:
 
@@ -396,11 +435,21 @@ Version history:
 - `1.1`: adds `played_at` (`Timestamp` or null, required key) to
   `IncludedMatchEvidence`. All other fields keep their meaning. A `1.1`
   consumer should also accept `1.0` snapshots by treating `played_at` as
-  unknown. Publishers must emit `1.1` when they include `played_at`.
+  unknown. Within `1.x`, publishers must emit `1.1` when they include `played_at`.
+- `2.0`: makes `eligibility` optional with no predefined children, removes
+  `eligible_match_count` and eligibility-policy rules from the base, introduces
+  `extension_schema` and explicit row extension support, and shares
+  `PublicSchemaReference` between extension and evidence references. `played_at`
+  remains required and nullable. This is a breaking change; consumers must
+  explicitly support `2.0`. The retained `1.x` schemas define their old shapes;
+  this document's current field tables apply only to `2.0`.
 
-Evidence schemas are versioned independently. Their public documentation must
-state their compatibility rules. Changing an evidence schema does not itself
-require an envelope version change if the envelope contract remains intact.
+Extension and evidence schemas are versioned independently. Their public
+documentation must state compatibility rules and supported envelope versions.
+Changing either does not itself require an envelope version change if the
+envelope contract remains intact. An extension change that alters a count's
+meaning requires its own incompatible version, even when the field name stays
+the same.
 
 Internal source or configuration schema changes do not automatically change the
 public contract. The publisher must adapt them or explicitly publish a new
@@ -410,18 +459,20 @@ independently of JSON version fields.
 ## 9. Current Limits
 
 This document defines the logical public contract. Its machine-checkable form
-for envelope version `1.1` is
-[schemas/ranking-snapshot-1.1.schema.json](schemas/ranking-snapshot-1.1.schema.json).
-The `1.0` form,
-[schemas/ranking-snapshot-1.0.schema.json](schemas/ranking-snapshot-1.0.schema.json),
-is retained unchanged for existing consumers and snapshots.
+for envelope version `2.0` is
+[schemas/ranking-snapshot-2.0.schema.json](schemas/ranking-snapshot-2.0.schema.json).
+The [1.0](schemas/ranking-snapshot-1.0.schema.json) and
+[1.1](schemas/ranking-snapshot-1.1.schema.json) forms are retained unchanged for
+existing consumers and snapshots.
 If the two disagree, this document is authoritative.
 
 The JSON Schema checks types, requiredness, nullability, and per-field
 constraints. It cannot check rules that compare values across the snapshot:
-reference resolution, uniqueness by key, row order and ranks, match counts,
-opponent counts, and season bounds. Those Section 7 checks need a validator
-that reads the whole snapshot.
+reference resolution, uniqueness by key, row order and ranks, opponent counts,
+and season bounds. Those Section 7 checks need a validator that reads the whole
+snapshot. Extensions may add further cross-field checks. The base schema checks
+that extension data has a reference; loading and validating that referenced
+contract is a separate validation step.
 
 The envelope does not define UI layouts, calculation internals, historical
 lineups, individual formation positions, or private audit access. It supports

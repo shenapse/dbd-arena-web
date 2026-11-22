@@ -1,0 +1,43 @@
+---
+// Umbrella page for the 1v4 PUG leaderboards: one card per killer that has a
+// published snapshot, each with its killer and survivor boards. Unlisted,
+// like every leaderboard preview (UX structure §5): not in the sidebar, not
+// searchable, not indexed. The overall survivor leaderboard, which covers
+// every killer, comes first as a card of its own with a survivor's portrait.
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { Aside } from '@astrojs/starlight/components';
+import LeaderboardCards, { type CardEntry } from '@components/LeaderboardCards.astro';
+import billPortrait from '../../../../assets/survivors/portraits/BillOverbeck.webp';
+import {
+  PUG_SURVIVORS_OVERALL_PATH,
+  PUG_SURVIVORS_OVERALL_SEGMENT,
+  UNLISTED_PREVIEW,
+  pugLeaderboards,
+  pugSurvivorsOverall,
+} from '../../../../lib/ranking/publications';
+
+const overall: CardEntry = {
+  slug: PUG_SURVIVORS_OVERALL_SEGMENT,
+  label: 'Overall survivors',
+  href: PUG_SURVIVORS_OVERALL_PATH,
+  view: pugSurvivorsOverall,
+  portrait: billPortrait,
+};
+const entries = [overall, ...pugLeaderboards.entries];
+---
+
+<StarlightPage
+  frontmatter={{
+    title: '1v4 PUG Leaderboards',
+    description: 'Unlisted preview of the per-killer 1v4 PUG leaderboards, rendered from fictional sample snapshots.',
+    ...UNLISTED_PREVIEW,
+  }}
+>
+  <Aside type="caution" title="Fictional sample data">
+    These previews render the sample ranking snapshots in <code>docs/ref/examples/</code>.
+    Players, parties, matches, and scores are made up, and the scores were written by hand
+    rather than calculated.
+  </Aside>
+
+  <LeaderboardCards entries={entries} />
+</StarlightPage>

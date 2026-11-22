@@ -1,0 +1,1613 @@
+{
+  "schema_version": "2.0",
+  "deployment_id": "ranking-demo",
+  "generated_at": "2026-11-22T12:00:00+09:00",
+  "publication": {
+    "publication_id": "pub-pug-survivors-overall",
+    "label": "1v4 PUG · Overall Survivor Rankings",
+    "description": "Fictional overall rankings for individual survivors across all killer characters. Killer players appear as match opponents and public profiles; only survivors have ranking rows. The entry-rating blend covers all available killer characters with equal weights.",
+    "competition": {
+      "id": "comp-pug",
+      "label": "Dead by Daylight · 1v4 PUG",
+      "description": "One killer player faces four individually ranked survivor players. Survivors may queue solo or together in parties; queue membership is recorded separately for each match."
+    },
+    "scope": []
+  },
+  "season": {
+    "season_id": "season-6b2d",
+    "label": "Autumn 2026",
+    "starts_at": "2026-10-01T00:00:00+09:00",
+    "ends_at": "2027-01-01T00:00:00+09:00"
+  },
+  "methodology_description": "This fictional preview ranks individual survivors by current-season performance across all killer characters among players eligible at generation time. Scores are hand-authored illustrations, not model output. The entry rating defined in the survivor board eligibility.rating description is an equal-weight average of survivor ratings against all available killer characters; it gates eligibility and does not directly contribute to the ranking score. The survivor gate retains a minimum of 300 blended points and more than 5 matches against eligible killer players. For this sample, an opposing killer player is eligible when their current entry rating for every killer character they use in the included matches is at least 1200 points and they have more than 10 current-season PUG matches against eligible survivors, counted across all killer characters. Each match counts once for each participant. All shown participants satisfy their applicable requirements at generation time; individual entry ratings are private and eligibility is a publisher guarantee. Killer players need no published ranking row to appear as eligible opponents. No repeat-encounter limits apply; all repeated matches remain included. Result counts describe the survivor side outcome, not personal escape. Parties describe who queued together in each match; every survivor retains an individual ranking. Opponent counts count distinct killer players, not killer characters, and the same killer player counts once even when they use several characters.",
+  "boards": [
+    {
+      "board_id": "pug-survivors-overall",
+      "label": "Overall survivor rankings",
+      "description": "Individual survivor performance across all killer characters in the current PUG season. Eligibility requires the custom blended entry rating and enough matches against eligible killer players. Party members are ranked individually.",
+      "score_definition": {
+        "label": "Ranking score",
+        "description": "Hand-authored illustrative integer points for individual survivor performance across included matches against all killer characters. Higher scores rank ahead; equal scores share a rank. This ranking score is separate from the blended entry rating and is not a win percentage. Compare only within this board and snapshot."
+      },
+      "rows": [
+        {
+          "rank": 1,
+          "profile_id": "p-1a4b",
+          "display_score": 1520,
+          "result_counts": {
+            "wins": 9,
+            "losses": 4,
+            "draws": 4
+          },
+          "opponent_count": 2,
+          "included_match_ids": [
+            "pug-overall-01",
+            "pug-overall-02",
+            "pug-overall-03",
+            "pug-overall-05",
+            "pug-overall-06",
+            "pug-overall-07",
+            "pug-overall-08",
+            "pug-overall-09",
+            "pug-overall-10",
+            "pug-overall-11",
+            "pug-overall-12",
+            "pug-overall-13",
+            "pug-overall-14",
+            "pug-overall-16",
+            "pug-overall-18",
+            "pug-overall-20",
+            "pug-overall-22"
+          ],
+          "eligible_match_count": 17
+        },
+        {
+          "rank": 2,
+          "profile_id": "p-2b5c",
+          "display_score": 1450,
+          "result_counts": {
+            "wins": 9,
+            "losses": 9,
+            "draws": 0
+          },
+          "opponent_count": 2,
+          "included_match_ids": [
+            "pug-overall-01",
+            "pug-overall-02",
+            "pug-overall-04",
+            "pug-overall-05",
+            "pug-overall-06",
+            "pug-overall-08",
+            "pug-overall-09",
+            "pug-overall-11",
+            "pug-overall-12",
+            "pug-overall-14",
+            "pug-overall-15",
+            "pug-overall-16",
+            "pug-overall-17",
+            "pug-overall-18",
+            "pug-overall-19",
+            "pug-overall-20",
+            "pug-overall-21",
+            "pug-overall-22"
+          ],
+          "eligible_match_count": 18
+        },
+        {
+          "rank": 2,
+          "profile_id": "p-3c6d",
+          "display_score": 1450,
+          "result_counts": {
+            "wins": 3,
+            "losses": 9,
+            "draws": 4
+          },
+          "opponent_count": 2,
+          "included_match_ids": [
+            "pug-overall-01",
+            "pug-overall-03",
+            "pug-overall-04",
+            "pug-overall-05",
+            "pug-overall-06",
+            "pug-overall-07",
+            "pug-overall-08",
+            "pug-overall-09",
+            "pug-overall-10",
+            "pug-overall-11",
+            "pug-overall-12",
+            "pug-overall-13",
+            "pug-overall-15",
+            "pug-overall-17",
+            "pug-overall-19",
+            "pug-overall-21"
+          ],
+          "eligible_match_count": 16
+        },
+        {
+          "rank": 4,
+          "profile_id": "p-4d7e",
+          "display_score": 1380,
+          "result_counts": {
+            "wins": 3,
+            "losses": 4,
+            "draws": 4
+          },
+          "opponent_count": 1,
+          "included_match_ids": [
+            "pug-overall-01",
+            "pug-overall-03",
+            "pug-overall-05",
+            "pug-overall-06",
+            "pug-overall-07",
+            "pug-overall-08",
+            "pug-overall-09",
+            "pug-overall-10",
+            "pug-overall-11",
+            "pug-overall-12",
+            "pug-overall-13"
+          ],
+          "eligible_match_count": 11
+        },
+        {
+          "rank": 5,
+          "profile_id": "p-5e8f",
+          "display_score": 1210,
+          "result_counts": {
+            "wins": 6,
+            "losses": 5,
+            "draws": 4
+          },
+          "opponent_count": 2,
+          "included_match_ids": [
+            "pug-overall-02",
+            "pug-overall-03",
+            "pug-overall-04",
+            "pug-overall-07",
+            "pug-overall-10",
+            "pug-overall-13",
+            "pug-overall-14",
+            "pug-overall-15",
+            "pug-overall-16",
+            "pug-overall-17",
+            "pug-overall-18",
+            "pug-overall-19",
+            "pug-overall-20",
+            "pug-overall-21",
+            "pug-overall-22"
+          ],
+          "eligible_match_count": 15
+        },
+        {
+          "rank": 6,
+          "profile_id": "p-6f9a",
+          "display_score": 1100,
+          "result_counts": {
+            "wins": 6,
+            "losses": 5,
+            "draws": 0
+          },
+          "opponent_count": 1,
+          "included_match_ids": [
+            "pug-overall-02",
+            "pug-overall-04",
+            "pug-overall-14",
+            "pug-overall-15",
+            "pug-overall-16",
+            "pug-overall-17",
+            "pug-overall-18",
+            "pug-overall-19",
+            "pug-overall-20",
+            "pug-overall-21",
+            "pug-overall-22"
+          ],
+          "eligible_match_count": 11
+        }
+      ],
+      "eligibility": {
+        "rating": {
+          "id": "pug-survivor-all-killers-equal-weight-blend-v1",
+          "label": "Overall survivor entry-rating blend",
+          "description": "Arithmetic mean of per-killer survivor entry ratings across all killer characters available in the PUG competition at snapshot generation time, with equal weight for each killer. The set covers all available killers, not only those appearing in the included matches. Each component uses the same illustrative 0–3000 point scale, so the blend also ranges from 0 to 3000 points, with higher values indicating stronger performance. Use current component ratings and compare the unrounded mean with the minimum. A rating must be available for every killer in that set; a missing component makes the player ineligible. This value gates eligibility only and is separate from the displayed ranking score. Individual component ratings and blended values are not published."
+        },
+        "minimum_rating_value": 300,
+        "minimum_eligible_match_count": 6,
+        "description": "At generation time, survivor players require the blended entry rating defined above to be at least 300 points and more than 5 current-season matches (at least 6) against eligible killer players, across all killer characters. Each match counts once, regardless of party membership or killer character. Repeated encounters count toward participation. Eligibility is reevaluated on every refresh, including without new matches. Missing blend components make a player ineligible. Opposing killer eligibility is explained in methodology_description; it does not require a published killer board."
+      }
+    }
+  ],
+  "profiles": [
+    {
+      "profile_id": "p-7a3e",
+      "kind": "participant",
+      "display_name": "Hush",
+      "group_members": null
+    },
+    {
+      "profile_id": "p-3d6f",
+      "kind": "participant",
+      "display_name": "Wisp",
+      "group_members": null
+    },
+    {
+      "profile_id": "p-1a4b",
+      "kind": "participant",
+      "display_name": "Aster",
+      "group_members": null
+    },
+    {
+      "profile_id": "p-2b5c",
+      "kind": "participant",
+      "display_name": "Jun",
+      "group_members": null
+    },
+    {
+      "profile_id": "p-3c6d",
+      "kind": "participant",
+      "display_name": "Lark",
+      "group_members": null
+    },
+    {
+      "profile_id": "p-4d7e",
+      "kind": "participant",
+      "display_name": "Ren",
+      "group_members": null
+    },
+    {
+      "profile_id": "p-5e8f",
+      "kind": "participant",
+      "display_name": "葵",
+      "group_members": null
+    },
+    {
+      "profile_id": "p-6f9a",
+      "kind": "participant",
+      "display_name": "Sora",
+      "group_members": null
+    }
+  ],
+  "result_metrics": [
+    {
+      "id": "wins",
+      "label": "Side wins",
+      "description": "Included matches in which this individual player was on the winning side; does not imply personal escape."
+    },
+    {
+      "id": "losses",
+      "label": "Side losses",
+      "description": "Included matches in which this individual player was on the losing side."
+    },
+    {
+      "id": "draws",
+      "label": "Draws",
+      "description": "Included matches in which neither side won."
+    }
+  ],
+  "public_outcomes": [
+    {
+      "id": "decided",
+      "label": "Decided",
+      "description": "One side won. public_facts.winner_side_id identifies the winning side."
+    },
+    {
+      "id": "draw",
+      "label": "Draw",
+      "description": "Neither side won. public_facts.winner_side_id is null."
+    }
+  ],
+  "side_definitions": [
+    {
+      "id": "killer",
+      "label": "Killer",
+      "description": "One individual killer player appearing as an opponent. The character they used is recorded in this match’s public_facts.killer_character."
+    },
+    {
+      "id": "survivors",
+      "label": "Survivors",
+      "description": "Four individually ranked survivor players, comprising solo entrants and/or queue parties."
+    }
+  ],
+  "role_definitions": [],
+  "public_facts_schema": {
+    "schema_id": "dbd-1v4-pug-overall-match",
+    "schema_version": "1.0",
+    "schema_path": "../schemas/dbd-1v4-pug-overall-match-1.0.schema.json",
+    "documentation_path": "../ranking-evidence-dbd-1v4-pug-overall.md",
+    "description": "Per-match killer character, winning side or draw, generators remaining, hooks, survivor queue parties, and explicit solo survivors for an overall survivor-only PUG publication. Killer player identities come from the match sides and public profiles."
+  },
+  "included_matches": [
+    {
+      "match_id": "pug-overall-01",
+      "played_at": "2026-11-01T20:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-7a3e",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-1a4b",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-2b5c",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-3c6d",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-4d7e",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "decided",
+      "public_facts": {
+        "winner_side_id": "killer",
+        "generators_remaining": 3,
+        "hooks": 12,
+        "survivor_parties": [],
+        "solo_survivor_profile_ids": [
+          "p-1a4b",
+          "p-2b5c",
+          "p-3c6d",
+          "p-4d7e"
+        ],
+        "killer_character": {
+          "id": "nurse",
+          "label": "The Nurse",
+          "description": "The killer player used The Nurse in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-02",
+      "played_at": "2026-11-02T20:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-3d6f",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-1a4b",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-2b5c",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-5e8f",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-6f9a",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "decided",
+      "public_facts": {
+        "winner_side_id": "survivors",
+        "generators_remaining": 0,
+        "hooks": 5,
+        "survivor_parties": [
+          {
+            "member_profile_ids": [
+              "p-1a4b",
+              "p-2b5c"
+            ]
+          }
+        ],
+        "solo_survivor_profile_ids": [
+          "p-5e8f",
+          "p-6f9a"
+        ],
+        "killer_character": {
+          "id": "blight",
+          "label": "The Blight",
+          "description": "The killer player used The Blight in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-03",
+      "played_at": "2026-11-03T20:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-7a3e",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-1a4b",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-3c6d",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-4d7e",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-5e8f",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "draw",
+      "public_facts": {
+        "winner_side_id": null,
+        "generators_remaining": 1,
+        "hooks": 8,
+        "survivor_parties": [
+          {
+            "member_profile_ids": [
+              "p-1a4b",
+              "p-3c6d"
+            ]
+          },
+          {
+            "member_profile_ids": [
+              "p-4d7e",
+              "p-5e8f"
+            ]
+          }
+        ],
+        "solo_survivor_profile_ids": [],
+        "killer_character": {
+          "id": "spirit",
+          "label": "The Spirit",
+          "description": "The killer player used The Spirit in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-04",
+      "played_at": "2026-11-04T20:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-3d6f",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-2b5c",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-3c6d",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-5e8f",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-6f9a",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "decided",
+      "public_facts": {
+        "winner_side_id": "killer",
+        "generators_remaining": 2,
+        "hooks": 11,
+        "survivor_parties": [
+          {
+            "member_profile_ids": [
+              "p-2b5c",
+              "p-3c6d",
+              "p-5e8f"
+            ]
+          }
+        ],
+        "solo_survivor_profile_ids": [
+          "p-6f9a"
+        ],
+        "killer_character": {
+          "id": "trapper",
+          "label": "The Trapper",
+          "description": "The killer player used The Trapper in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-05",
+      "played_at": "2026-11-05T20:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-7a3e",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-1a4b",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-2b5c",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-3c6d",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-4d7e",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "decided",
+      "public_facts": {
+        "winner_side_id": "survivors",
+        "generators_remaining": 0,
+        "hooks": 6,
+        "survivor_parties": [
+          {
+            "member_profile_ids": [
+              "p-1a4b",
+              "p-2b5c",
+              "p-3c6d",
+              "p-4d7e"
+            ]
+          }
+        ],
+        "solo_survivor_profile_ids": [],
+        "killer_character": {
+          "id": "nurse",
+          "label": "The Nurse",
+          "description": "The killer player used The Nurse in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-06",
+      "played_at": "2026-11-06T10:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-7a3e",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-1a4b",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-2b5c",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-3c6d",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-4d7e",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "decided",
+      "public_facts": {
+        "winner_side_id": "killer",
+        "generators_remaining": 4,
+        "hooks": 12,
+        "survivor_parties": [],
+        "solo_survivor_profile_ids": [
+          "p-1a4b",
+          "p-2b5c",
+          "p-3c6d",
+          "p-4d7e"
+        ],
+        "killer_character": {
+          "id": "blight",
+          "label": "The Blight",
+          "description": "The killer player used The Blight in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-07",
+      "played_at": "2026-11-07T10:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-7a3e",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-1a4b",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-3c6d",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-4d7e",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-5e8f",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "draw",
+      "public_facts": {
+        "winner_side_id": null,
+        "generators_remaining": 0,
+        "hooks": 9,
+        "survivor_parties": [
+          {
+            "member_profile_ids": [
+              "p-1a4b",
+              "p-3c6d"
+            ]
+          },
+          {
+            "member_profile_ids": [
+              "p-4d7e",
+              "p-5e8f"
+            ]
+          }
+        ],
+        "solo_survivor_profile_ids": [],
+        "killer_character": {
+          "id": "spirit",
+          "label": "The Spirit",
+          "description": "The killer player used The Spirit in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-08",
+      "played_at": "2026-11-08T10:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-7a3e",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-1a4b",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-2b5c",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-3c6d",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-4d7e",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "decided",
+      "public_facts": {
+        "winner_side_id": "survivors",
+        "generators_remaining": 0,
+        "hooks": 3,
+        "survivor_parties": [
+          {
+            "member_profile_ids": [
+              "p-1a4b",
+              "p-2b5c",
+              "p-3c6d",
+              "p-4d7e"
+            ]
+          }
+        ],
+        "solo_survivor_profile_ids": [],
+        "killer_character": {
+          "id": "trapper",
+          "label": "The Trapper",
+          "description": "The killer player used The Trapper in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-09",
+      "played_at": "2026-11-09T10:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-7a3e",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-1a4b",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-2b5c",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-3c6d",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-4d7e",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "decided",
+      "public_facts": {
+        "winner_side_id": "killer",
+        "generators_remaining": 2,
+        "hooks": 11,
+        "survivor_parties": [],
+        "solo_survivor_profile_ids": [
+          "p-1a4b",
+          "p-2b5c",
+          "p-3c6d",
+          "p-4d7e"
+        ],
+        "killer_character": {
+          "id": "nurse",
+          "label": "The Nurse",
+          "description": "The killer player used The Nurse in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-10",
+      "played_at": "2026-11-10T10:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-7a3e",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-1a4b",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-3c6d",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-4d7e",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-5e8f",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "draw",
+      "public_facts": {
+        "winner_side_id": null,
+        "generators_remaining": 1,
+        "hooks": 8,
+        "survivor_parties": [
+          {
+            "member_profile_ids": [
+              "p-1a4b",
+              "p-3c6d"
+            ]
+          },
+          {
+            "member_profile_ids": [
+              "p-4d7e",
+              "p-5e8f"
+            ]
+          }
+        ],
+        "solo_survivor_profile_ids": [],
+        "killer_character": {
+          "id": "blight",
+          "label": "The Blight",
+          "description": "The killer player used The Blight in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-11",
+      "played_at": "2026-11-11T10:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-7a3e",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-1a4b",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-2b5c",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-3c6d",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-4d7e",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "decided",
+      "public_facts": {
+        "winner_side_id": "survivors",
+        "generators_remaining": 1,
+        "hooks": 4,
+        "survivor_parties": [
+          {
+            "member_profile_ids": [
+              "p-1a4b",
+              "p-2b5c",
+              "p-3c6d",
+              "p-4d7e"
+            ]
+          }
+        ],
+        "solo_survivor_profile_ids": [],
+        "killer_character": {
+          "id": "spirit",
+          "label": "The Spirit",
+          "description": "The killer player used The Spirit in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-12",
+      "played_at": "2026-11-12T10:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-7a3e",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-1a4b",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-2b5c",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-3c6d",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-4d7e",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "decided",
+      "public_facts": {
+        "winner_side_id": "killer",
+        "generators_remaining": 3,
+        "hooks": 11,
+        "survivor_parties": [],
+        "solo_survivor_profile_ids": [
+          "p-1a4b",
+          "p-2b5c",
+          "p-3c6d",
+          "p-4d7e"
+        ],
+        "killer_character": {
+          "id": "trapper",
+          "label": "The Trapper",
+          "description": "The killer player used The Trapper in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-13",
+      "played_at": "2026-11-13T10:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-7a3e",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-1a4b",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-3c6d",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-4d7e",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-5e8f",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "draw",
+      "public_facts": {
+        "winner_side_id": null,
+        "generators_remaining": 0,
+        "hooks": 9,
+        "survivor_parties": [
+          {
+            "member_profile_ids": [
+              "p-1a4b",
+              "p-3c6d"
+            ]
+          },
+          {
+            "member_profile_ids": [
+              "p-4d7e",
+              "p-5e8f"
+            ]
+          }
+        ],
+        "solo_survivor_profile_ids": [],
+        "killer_character": {
+          "id": "nurse",
+          "label": "The Nurse",
+          "description": "The killer player used The Nurse in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-14",
+      "played_at": "2026-11-14T10:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-3d6f",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-1a4b",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-2b5c",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-5e8f",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-6f9a",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "decided",
+      "public_facts": {
+        "winner_side_id": "survivors",
+        "generators_remaining": 0,
+        "hooks": 0,
+        "survivor_parties": [
+          {
+            "member_profile_ids": [
+              "p-1a4b",
+              "p-2b5c"
+            ]
+          }
+        ],
+        "solo_survivor_profile_ids": [
+          "p-5e8f",
+          "p-6f9a"
+        ],
+        "killer_character": {
+          "id": "blight",
+          "label": "The Blight",
+          "description": "The killer player used The Blight in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-15",
+      "played_at": "2026-11-15T10:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-3d6f",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-2b5c",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-3c6d",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-5e8f",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-6f9a",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "decided",
+      "public_facts": {
+        "winner_side_id": "killer",
+        "generators_remaining": 2,
+        "hooks": 12,
+        "survivor_parties": [
+          {
+            "member_profile_ids": [
+              "p-2b5c",
+              "p-3c6d",
+              "p-5e8f"
+            ]
+          }
+        ],
+        "solo_survivor_profile_ids": [
+          "p-6f9a"
+        ],
+        "killer_character": {
+          "id": "spirit",
+          "label": "The Spirit",
+          "description": "The killer player used The Spirit in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-16",
+      "played_at": "2026-11-16T10:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-3d6f",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-1a4b",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-2b5c",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-5e8f",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-6f9a",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "decided",
+      "public_facts": {
+        "winner_side_id": "survivors",
+        "generators_remaining": 0,
+        "hooks": 4,
+        "survivor_parties": [
+          {
+            "member_profile_ids": [
+              "p-1a4b",
+              "p-2b5c"
+            ]
+          }
+        ],
+        "solo_survivor_profile_ids": [
+          "p-5e8f",
+          "p-6f9a"
+        ],
+        "killer_character": {
+          "id": "trapper",
+          "label": "The Trapper",
+          "description": "The killer player used The Trapper in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-17",
+      "played_at": "2026-11-17T10:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-3d6f",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-2b5c",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-3c6d",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-5e8f",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-6f9a",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "decided",
+      "public_facts": {
+        "winner_side_id": "killer",
+        "generators_remaining": 1,
+        "hooks": 11,
+        "survivor_parties": [
+          {
+            "member_profile_ids": [
+              "p-2b5c",
+              "p-3c6d",
+              "p-5e8f"
+            ]
+          }
+        ],
+        "solo_survivor_profile_ids": [
+          "p-6f9a"
+        ],
+        "killer_character": {
+          "id": "nurse",
+          "label": "The Nurse",
+          "description": "The killer player used The Nurse in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-18",
+      "played_at": "2026-11-18T10:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-3d6f",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-1a4b",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-2b5c",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-5e8f",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-6f9a",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "decided",
+      "public_facts": {
+        "winner_side_id": "survivors",
+        "generators_remaining": 0,
+        "hooks": 6,
+        "survivor_parties": [
+          {
+            "member_profile_ids": [
+              "p-1a4b",
+              "p-2b5c"
+            ]
+          }
+        ],
+        "solo_survivor_profile_ids": [
+          "p-5e8f",
+          "p-6f9a"
+        ],
+        "killer_character": {
+          "id": "blight",
+          "label": "The Blight",
+          "description": "The killer player used The Blight in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-19",
+      "played_at": "2026-11-19T10:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-3d6f",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-2b5c",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-3c6d",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-5e8f",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-6f9a",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "decided",
+      "public_facts": {
+        "winner_side_id": "killer",
+        "generators_remaining": 3,
+        "hooks": 12,
+        "survivor_parties": [
+          {
+            "member_profile_ids": [
+              "p-2b5c",
+              "p-3c6d",
+              "p-5e8f"
+            ]
+          }
+        ],
+        "solo_survivor_profile_ids": [
+          "p-6f9a"
+        ],
+        "killer_character": {
+          "id": "spirit",
+          "label": "The Spirit",
+          "description": "The killer player used The Spirit in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-20",
+      "played_at": "2026-11-20T10:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-3d6f",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-1a4b",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-2b5c",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-5e8f",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-6f9a",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "decided",
+      "public_facts": {
+        "winner_side_id": "survivors",
+        "generators_remaining": 0,
+        "hooks": 5,
+        "survivor_parties": [
+          {
+            "member_profile_ids": [
+              "p-1a4b",
+              "p-2b5c"
+            ]
+          }
+        ],
+        "solo_survivor_profile_ids": [
+          "p-5e8f",
+          "p-6f9a"
+        ],
+        "killer_character": {
+          "id": "trapper",
+          "label": "The Trapper",
+          "description": "The killer player used The Trapper in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-21",
+      "played_at": "2026-11-21T10:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-3d6f",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-2b5c",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-3c6d",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-5e8f",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-6f9a",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "decided",
+      "public_facts": {
+        "winner_side_id": "killer",
+        "generators_remaining": 0,
+        "hooks": 11,
+        "survivor_parties": [
+          {
+            "member_profile_ids": [
+              "p-2b5c",
+              "p-3c6d",
+              "p-5e8f"
+            ]
+          }
+        ],
+        "solo_survivor_profile_ids": [
+          "p-6f9a"
+        ],
+        "killer_character": {
+          "id": "nurse",
+          "label": "The Nurse",
+          "description": "The killer player used The Nurse in this match."
+        }
+      }
+    },
+    {
+      "match_id": "pug-overall-22",
+      "played_at": "2026-11-22T10:00:00+09:00",
+      "sides": [
+        {
+          "side_id": "killer",
+          "participants": [
+            {
+              "profile_id": "p-3d6f",
+              "role_ids": []
+            }
+          ]
+        },
+        {
+          "side_id": "survivors",
+          "participants": [
+            {
+              "profile_id": "p-1a4b",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-2b5c",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-5e8f",
+              "role_ids": []
+            },
+            {
+              "profile_id": "p-6f9a",
+              "role_ids": []
+            }
+          ]
+        }
+      ],
+      "outcome_id": "decided",
+      "public_facts": {
+        "winner_side_id": "survivors",
+        "generators_remaining": 0,
+        "hooks": 7,
+        "survivor_parties": [
+          {
+            "member_profile_ids": [
+              "p-1a4b",
+              "p-2b5c"
+            ]
+          }
+        ],
+        "solo_survivor_profile_ids": [
+          "p-5e8f",
+          "p-6f9a"
+        ],
+        "killer_character": {
+          "id": "blight",
+          "label": "The Blight",
+          "description": "The killer player used The Blight in this match."
+        }
+      }
+    }
+  ],
+  "extension_schema": {
+    "schema_id": "dbd-ranking",
+    "schema_version": "1.0",
+    "schema_path": "../schemas/dbd-ranking-1.0.schema.json",
+    "documentation_path": "../ranking-extension-dbd-1.0.md",
+    "description": "DBD ranking eligibility requirements and included eligible-match counts."
+  }
+}
