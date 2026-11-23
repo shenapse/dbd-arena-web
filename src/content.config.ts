@@ -43,9 +43,6 @@ export const collections = {
         translatedVersion: z.string().optional(),
         translationDate: z.string().optional(),
         authoritativeSource: z.string().optional(),
-        // Notice classification.
-        type: z.string().optional(),
-        date: z.string().optional(),
       }).superRefine((data, ctx) => {
         const hasStatus = data.status !== undefined;
         const hasChangeHistory = (data.changeHistory?.length ?? 0) > 0;
@@ -70,7 +67,7 @@ export const collections = {
 
         // Rule 2 (UX §5.3): version/effectiveDate are derived from the newest
         // changeHistory entry on lifecycle pages, not declared directly.
-        // Non-lifecycle records (e.g. notices) may still carry a bare `version`.
+        // Non-lifecycle pages may still carry a bare `version`.
         if (hasStatus && data.version !== undefined) {
           ctx.addIssue({
             code: 'custom',
