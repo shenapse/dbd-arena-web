@@ -389,25 +389,6 @@ export default defineConfig({
             },
           ],
         },
-        {
-          label: 'Help',
-          translations: { ja: 'ヘルプ' },
-          items: [
-            { label: 'Help', translations: { ja: 'ヘルプ' }, slug: 'help' },
-            { label: 'FAQ', translations: { ja: 'よくある質問' }, slug: 'help/faq' },
-            { label: 'Account and Group', translations: { ja: 'アカウントとグループ' }, slug: 'help/account-and-group' },
-            { label: 'Queue and Readiness', translations: { ja: 'キューと準備状態' }, slug: 'help/queue-and-readiness' },
-            // { label: 'Result and Dispute', translations: { ja: '結果と異議申し立て' }, slug: 'help/result-and-dispute' },
-          ],
-        },
-        {
-          label: 'Notices',
-          translations: { ja: 'お知らせ' },
-          items: [
-            { label: 'Notices', translations: { ja: 'お知らせ' }, slug: 'notices' },
-            { label: 'Website launch', translations: { ja: 'Website 公開' }, slug: 'notices/2026-06-15-launch' },
-          ],
-        },
         { label: 'About This Service', translations: { ja: 'このサービスについて' }, slug: 'about' },
         { label: 'Join Discord', translations: { ja: 'Discord に参加' }, link: DISCORD_INVITE, attrs: { target: '_blank' } },
       ],
