@@ -25,10 +25,7 @@
  *      date per version. Only `note` may differ.
  *   D. Every English page with a `status` key has a non-empty
  *      changeHistory, no version/effectiveDate key, every entry's date is a
- *      valid YYYY-MM-DD, and entries are ordered newest-first. Pages under
- *      src/content/docs/notices/ are notice records, not lifecycle pages,
- *      and are skipped (see notices/2026-06-15-launch.md, which keeps a
- *      bare `version` with no `status`).
+ *      valid YYYY-MM-DD, and entries are ordered newest-first.
  *   E. The set of top-level directories under src/content/docs/ that
  *      mirror content living elsewhere in the tree (i.e. are locale
  *      directories) equals LOCALE_PREFIXES from src/lib/docs/ids.ts. This
@@ -74,7 +71,6 @@ import { splitLocale, normalizeDocsId, idToHref, LOCALE_PREFIXES } from '../src/
 import { balancingStructure, firstDifference } from '../src/lib/docs/balancing-structure.ts';
 
 const DOCS_DIR = path.resolve('src/content/docs');
-const NOTICES_DIR = path.join(DOCS_DIR, 'notices');
 
 const FORBIDDEN_LOCALIZED_KEYS = [
   'status',
@@ -258,8 +254,6 @@ function isValidIsoDate(value) {
 function checkEnglishLifecycleIntegrity() {
   const failures = [];
   for (const [, filePath] of englishById) {
-    if (filePath.startsWith(NOTICES_DIR + path.sep)) continue;
-
     const { frontmatter } = readPage(filePath);
     if (!Object.prototype.hasOwnProperty.call(frontmatter, 'status')) continue;
 
