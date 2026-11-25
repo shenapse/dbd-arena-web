@@ -7,10 +7,11 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "generate:perks": "dbd-perk-sheet --asset-root ${DBD_BALANCING_TOOL_ROOT:-../../../balancing-tool}",
-    "generate:addons": "dbd-addon-sheet --asset-root ${DBD_BALANCING_TOOL_ROOT:-../../../balancing-tool}",
-    "generate:items": "dbd-item-sheet --asset-root ${DBD_BALANCING_TOOL_ROOT:-../../../balancing-tool}",
-    "generate:build-sheet": "dbd-build-sheet --asset-root ${DBD_BALANCING_TOOL_ROOT:-../../../balancing-tool}",
+    "sheet": "scripts/dbd-sheet.sh",
+    "generate:perks": "scripts/dbd-sheet.sh perks",
+    "generate:addons": "scripts/dbd-sheet.sh addons",
+    "generate:items": "scripts/dbd-sheet.sh items",
+    "generate:build-sheet": "scripts/dbd-sheet.sh builds",
     "check:i18n": "node scripts/check-dbd-data.mjs",
     "check:translations": "node scripts/check-translations.mjs",
     "preview": "astro preview",
@@ -30,11 +31,5 @@
     "typescript": "^6.0.3",
     "vitest": "^5.1.1",
     "yaml": "^2.9.0"
-  },
-  "optionalDependencies": {
-    "dbd-addon-sheet-generator": "file:../../../balancing-tool/utilities/addon-sheet-generator",
-    "dbd-build-sheet-generator": "file:../../../balancing-tool/utilities/build-sheet-generator",
-    "dbd-item-sheet-generator": "file:../../../balancing-tool/utilities/item-sheet-generator",
-    "dbd-perk-sheet-generator": "file:../../../balancing-tool/utilities/perk-sheet-generator"
   }
 }
