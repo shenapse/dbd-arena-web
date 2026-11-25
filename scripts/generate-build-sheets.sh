@@ -2,8 +2,9 @@
 #
 # generate-build-sheets.sh
 #
-# Wraps the dbd-perk-sheet / dbd-addon-sheet / dbd-item-sheet / dbd-build-sheet
-# CLIs (see public/images/builds/README.md) to bulk-regenerate
+# Wraps the perks / addons / items / builds commands of the dbd-sheet CLI, run
+# from its Docker image via scripts/dbd-sheet.sh (see
+# public/images/builds/README.md), to bulk-regenerate
 # build-restriction sheet PNGs from the per-killer *-build.yaml source files
 # under src/data/balancing/<format>/<killer>/, writing them to
 # public/images/builds/<format>/<killer>/ by default.
@@ -23,15 +24,11 @@
 
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 SRC_BASE="$REPO_ROOT/src/data/balancing"
 OUT_BASE="$REPO_ROOT/public/images/builds"
-ASSET_ROOT="${DBD_BALANCING_TOOL_ROOT:-$REPO_ROOT/../../../balancing-tool}"
 
-PERK_BIN="$REPO_ROOT/node_modules/.bin/dbd-perk-sheet"
-ADDON_BIN="$REPO_ROOT/node_modules/.bin/dbd-addon-sheet"
-ITEM_BIN="$REPO_ROOT/node_modules/.bin/dbd-item-sheet"
-BUILD_SHEET_BIN="$REPO_ROOT/node_modules/.bin/dbd-build-sheet"
+SHEET="$REPO_ROOT/scripts/dbd-sheet.sh"
 
 VALID_FORMATS=(1v4-quartet 1v4-duo 1v1)
 VALID_TYPES=(perks addons items build-sheet)
@@ -40,7 +37,6 @@ FORMAT="1v4-quartet"
 KILLER_ARG="all"
 TYPE_ARG="all"
 OUT_OVERRIDE=""
-PRESET_PATH=""
 DRY_RUN=false
 
 print_usage() {
@@ -49,8 +45,9 @@ Usage: scripts/generate-build-sheets.sh [options]
 
 Regenerates build-restriction sheet PNGs (killer/survivor perks, killer
 add-ons, survivor items, and picked-loadout build sheets) from the source
-YAML under src/data/balancing/, wrapping the dbd-perk-sheet /
-dbd-addon-sheet / dbd-item-sheet / dbd-build-sheet CLIs.
+YAML under src/data/balancing/, wrapping the perks / addons / items /
+builds commands of the dbd-sheet CLI (run from its Docker image via
+scripts/dbd-sheet.sh).
 
 Options:
   --format <fmt>        1v4-quartet | 1v4-duo | 1v1   (default: 1v4-quartet)
@@ -65,16 +62,13 @@ Options:
                          killer/survivor loadout (not an allow-list) from the
                          optional <slug>-killer-build.yaml /
                          <slug>-survivors-build.yaml files instead of
-                         <slug>-build.yaml, and does not accept --preset.
+                         <slug>-build.yaml.
                                                          (default: all)
   --out <dir>            Override the output directory for every unit
                          processed (default per killer:
                          public/images/builds/<format>/<killer>).
                          WARNING: combined with --killer all, every killer's
                          output is written into this SAME directory.
-  --preset <path>        Pass-through --preset to the perks/addons/items
-                         generator CLIs. Ignored for --type build-sheet
-                         (dbd-build-sheet has no --preset flag).
   --dry-run              Print the commands that would run, without running
                          them.
   -h, --help              Show this help.
@@ -97,9 +91,9 @@ Examples:
   scripts/generate-build-sheets.sh --killer blight --type build-sheet
 
 Env:
-  DBD_BALANCING_TOOL_ROOT   Path to the balancing-tool checkout (default:
-                             ../../../balancing-tool relative to the repo
-                             root).
+  DBD_SHEET_IMAGE   Generator image (default:
+                    ghcr.io/shenapse/dbd-balancing-sheet-generator:main).
+                    See scripts/dbd-sheet.sh.
 
 A failed run is safe to re-run: each generator call fully overwrites its
 target files, so regeneration is idempotent — this holds for build-sheet
@@ -186,16 +180,12 @@ resolve_killers() {
 
 run_type() {
   local type="$1" yaml="$2" out_dir="$3"
-  local bin
   case "$type" in
-    perks)  bin="$PERK_BIN" ;;
-    addons) bin="$ADDON_BIN" ;;
-    items)  bin="$ITEM_BIN" ;;
+    perks|addons|items) ;;
     *) die "internal error: unknown type '$type'" ;;
   esac
 
-  local cmd=("$bin" "$yaml" --asset-root "$ASSET_ROOT" --out "$out_dir")
-  [[ -n "$PRESET_PATH" ]] && cmd+=(--preset "$PRESET_PATH")
+  local cmd=("$SHEET" "$type" "$yaml" --out "$out_dir")
 
   echo "==> $type: $(basename "$yaml") -> $out_dir"
   if [[ "$DRY_RUN" == true ]]; then
@@ -207,12 +197,11 @@ run_type() {
   fi
 }
 
-# Runs dbd-build-sheet for one unit. Unlike run_type, this type:
+# Runs `dbd-sheet builds` for one unit. Unlike run_type, this type:
 #   - takes up to two OPTIONAL source files (killer-build/survivors-build)
 #     passed together as multiple positional args to a single invocation,
 #   - auto-adds --rules pointing at the unit's existing <slug>-build.yaml
 #     restriction file, if that file exists,
-#   - never receives --preset (dbd-build-sheet has no such flag),
 #   - treats "neither source file exists" as a skip whenever resolving every
 #     killer (--killer all), or whenever build-sheet was only pulled in via
 #     an (implicit or explicit) --type all, but as a hard die() when the
@@ -242,7 +231,7 @@ run_build_sheet() {
     fi
   fi
 
-  local cmd=("$BUILD_SHEET_BIN" "${existing[@]}" --asset-root "$ASSET_ROOT" --out "$out_dir")
+  local cmd=("$SHEET" builds "${existing[@]}" --out "$out_dir")
   if [[ -f "$restriction_yaml" ]]; then
     cmd+=(--rules "$restriction_yaml")
   fi
@@ -274,9 +263,6 @@ while [[ $# -gt 0 ]]; do
     --out)
       [[ $# -ge 2 ]] || die "--out requires a value"
       OUT_OVERRIDE="$2"; shift 2 ;;
-    --preset)
-      [[ $# -ge 2 ]] || die "--preset requires a value"
-      PRESET_PATH="$2"; shift 2 ;;
     --dry-run)
       DRY_RUN=true; shift ;;
     -h|--help)
@@ -316,17 +302,9 @@ for t in "${type_items[@]}"; do
   fi
 done
 
-if [[ ! -d "$ASSET_ROOT" ]]; then
-  echo "Warning: asset root '$ASSET_ROOT' does not exist." >&2
-  echo "Set DBD_BALANCING_TOOL_ROOT to your balancing-tool checkout, or ensure" >&2
-  echo "../../../balancing-tool exists relative to the repo root. Continuing —" >&2
-  echo "the underlying CLI will report the missing files it needs." >&2
+if [[ "$DRY_RUN" != true ]] && ! command -v docker >/dev/null 2>&1; then
+  die "docker not found — the sheets are rendered by the Docker image of balancing-sheet-generator (see scripts/dbd-sheet.sh)."
 fi
-
-for bin_var in PERK_BIN ADDON_BIN ITEM_BIN BUILD_SHEET_BIN; do
-  bin_path="${!bin_var}"
-  [[ -x "$bin_path" ]] || die "$bin_path not found — did you run 'npm install'? (dbd-*-sheet CLIs, including dbd-build-sheet-generator, are optionalDependencies from the balancing-tool repo)"
-done
 
 # --- main ----------------------------------------------------------------
 

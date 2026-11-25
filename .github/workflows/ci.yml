@@ -24,8 +24,6 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      # The dbd-*-sheet-generator optional dependencies point at a sibling
-      # balancing-tool checkout that CI does not have; npm skips them.
       - run: npm ci
       - run: npm run check
       - run: npm run check:i18n
