@@ -12,7 +12,7 @@
 # sheet from a single <slug>-build.yaml restriction file. The fourth type,
 # build-sheet, is different in kind: it renders one specific, already-picked
 # killer/survivor loadout (not an allow-list) from the optional
-# <slug>-killer-builds.yaml / <slug>-survivor-builds.yaml source files, and
+# <slug>-killer-build.yaml / <slug>-survivors-build.yaml source files, and
 # — when the unit's <slug>-build.yaml restriction file exists — cross-
 # validates that loadout against it automatically.
 #
@@ -63,8 +63,8 @@ Options:
                          survivor-perks images in a single call — they cannot
                          be split. 'build-sheet' renders a specific picked
                          killer/survivor loadout (not an allow-list) from the
-                         optional <slug>-killer-builds.yaml /
-                         <slug>-survivor-builds.yaml files instead of
+                         optional <slug>-killer-build.yaml /
+                         <slug>-survivors-build.yaml files instead of
                          <slug>-build.yaml, and does not accept --preset.
                                                          (default: all)
   --out <dir>            Override the output directory for every unit
@@ -92,8 +92,8 @@ Examples:
   # 1v1 base build, all sheet types
   scripts/generate-build-sheets.sh --format 1v1
 
-  # Blight's picked-loadout build sheet (killer-builds.yaml and/or
-  # survivor-builds.yaml, cross-validated against blight-build.yaml if present)
+  # Blight's picked-loadout build sheet (killer-build.yaml and/or
+  # survivors-build.yaml, cross-validated against blight-build.yaml if present)
   scripts/generate-build-sheets.sh --killer blight --type build-sheet
 
 Env:
@@ -142,16 +142,16 @@ yaml_path_for() {
 
 # Unlike yaml_path_for (one mandatory <slug>-build.yaml allow-list), the
 # build-sheet type has up to two independent, OPTIONAL source files per unit:
-# a killer-builds.yaml and a survivor-builds.yaml. Prints both candidate
+# a killer-build.yaml and a survivors-build.yaml. Prints both candidate
 # paths (whether or not they exist) — callers check existence themselves.
 build_sheet_files_for() {
   local fmt="$1" slug="$2"
   if [[ "$fmt" == "1v1" ]]; then
-    echo "$SRC_BASE/1v1/base/base-killer-builds.yaml"
-    echo "$SRC_BASE/1v1/base/base-survivor-builds.yaml"
+    echo "$SRC_BASE/1v1/base/base-killer-build.yaml"
+    echo "$SRC_BASE/1v1/base/base-survivors-build.yaml"
   else
-    echo "$SRC_BASE/$fmt/$slug/${slug}-killer-builds.yaml"
-    echo "$SRC_BASE/$fmt/$slug/${slug}-survivor-builds.yaml"
+    echo "$SRC_BASE/$fmt/$slug/${slug}-killer-build.yaml"
+    echo "$SRC_BASE/$fmt/$slug/${slug}-survivors-build.yaml"
   fi
 }
 
@@ -208,7 +208,7 @@ run_type() {
 }
 
 # Runs dbd-build-sheet for one unit. Unlike run_type, this type:
-#   - takes up to two OPTIONAL source files (killer-builds/survivor-builds)
+#   - takes up to two OPTIONAL source files (killer-build/survivors-build)
 #     passed together as multiple positional args to a single invocation,
 #   - auto-adds --rules pointing at the unit's existing <slug>-build.yaml
 #     restriction file, if that file exists,
@@ -237,7 +237,7 @@ run_build_sheet() {
       expected2="$(build_sheet_files_for "$fmt" "$slug" | sed -n '2p')"
       die "No build-sheet source found for '$slug'. Expected one or both of: $expected1, $expected2"
     else
-      echo "==> build-sheet: $slug: no *-killer-builds.yaml or *-survivor-builds.yaml, skipping"
+      echo "==> build-sheet: $slug: no *-killer-build.yaml or *-survivors-build.yaml, skipping"
       return 0
     fi
   fi
